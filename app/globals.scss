@@ -1,0 +1,31 @@
+@import url('https://fonts.googleapis.com/css2?family=Birthstone&family=Domine:wght@400;500;600;700&family=Questrial&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --body-text: 'Questrial', sans-serif;
+  --title-text: 'Domine', sans-serif;
+  --logo-text: 'Birthstone', sans-serif;
+
+  --bg-color: #fdfaf8;
+  --main-color: #f2e3d6;
+  --primary-text-color: #000;
+  --secondary-text-color: #38525c;
+  --accent-color: #ebfbfe;
+}
+
+body {
+  background-color: var(--bg-color);
+}
+li {
+  list-style: none;
+}
+
+a {
+  text-decoration: none;
+  color: #000;
+}

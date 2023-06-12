@@ -1,0 +1,36 @@
+.main {
+  margin: 20px;
+
+  .heroSection {
+    height: 95vh;
+    background-image: url(../public/images/hero.jpg);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border-radius: 30px;
+
+    h1 {
+      font-family: var(--title-text);
+      font-size: 4rem;
+      width: 700px;
+      text-align: center;
+    }
+
+    p {
+      margin-top: 16px;
+      line-height: 1.5;
+      font-size: 1.5rem;
+    }
+
+    .heroLink {
+      margin-top: 40px;
+      padding: 16px 80px;
+      border: 1px solid var(--main-color);
+      border-radius: 40px;
+    }
+  }
+}

@@ -1,0 +1,65 @@
+.navigationBar {
+  position: absolute;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0px 30px;
+
+  .left {
+    display: flex;
+    align-items: center;
+    gap: 50px;
+
+    .navLinks {
+      display: flex;
+      gap: 20px;
+
+      .navList {
+        font-size: 0.9rem;
+        text-transform: uppercase;
+        color: var(--secondary-text-color);
+      }
+    }
+  }
+
+  .right {
+    display: flex;
+    gap: 20px;
+
+    .searchBar {
+      width: 300px;
+      border: 1px solid var(--main-color);
+      border-radius: 40px;
+      padding-left: 16px;
+    }
+
+    .loginButton {
+      padding: 6px 40px;
+      border: 0.8px solid var(--main-color);
+      border-radius: 40px;
+      background-color: var(--main-color);
+      color: var(--secondary-text-color);
+    }
+  }
+}
+
+.logo {
+  font-family: var(--logo-text);
+  font-size: 2.5rem;
+  color: var(--secondary-text-color);
+}
+
+.footer {
+  background-color: var(--main-color);
+  height: 70px;
+  padding: 0px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  div {
+    display: flex;
+    gap: 30px;
+  }
+}
