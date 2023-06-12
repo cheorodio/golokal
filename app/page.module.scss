@@ -61,6 +61,17 @@
     }
   }
 
+  @keyframes floatup {
+    0% {
+      transform: translateY(40px);
+      visibility: visible;
+    }
+    100% {
+      transform: translateY(0);
+      visibility: visible;
+    }
+  }
+
   // ABOUT SECTION ///////////////////////////////////////
   .aboutSection {
     padding: 50px 0px;
@@ -74,6 +85,7 @@
       gap: 20px;
       align-items: center;
       justify-content: center;
+      padding: 50px;
 
       .highlights {
         grid-column: 2 / 3;
@@ -118,7 +130,7 @@
           flex-direction: column;
           gap: 8px;
           flex: 1;
-          border-right: 1px solid var(--main-color);
+          border-right: 1px solid black;
           padding: 8px;
 
           &:nth-child(3) {
@@ -166,15 +178,133 @@
       }
     }
   }
+  // DISCOVER SECTION ////////////////////////////////
+  .discoverSection {
+    display: flex;
+    flex-direction: column;
 
-  @keyframes floatup {
-    0% {
-      transform: translateY(40px);
-      visibility: visible;
+    @media screen and (min-width: $tablet) {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      gap: 40px;
+      padding: 50px;
     }
-    100% {
-      transform: translateY(0);
-      visibility: visible;
+
+    .imageContainer {
+      @media screen and (min-width: $tablet) {
+        width: 40%;
+      }
+    }
+
+    .discoverImage {
+      width: 100%;
+      height: 350px;
+      border-radius: 400px 400px 0px 0px;
+
+      @media screen and (min-width: $tablet) {
+        width: 100%;
+        height: 300px;
+      }
+    }
+
+    .textContainer {
+      text-align: center;
+
+      @media screen and (min-width: $tablet) {
+        text-align: start;
+        width: 60%;
+      }
+
+      h2 {
+        margin-top: 16px;
+        font-size: 1.15rem;
+        font-family: var(--title-text);
+
+        @media screen and (min-width: $tablet) {
+          font-size: 1.5rem;
+        }
+
+        @media screen and (min-width: $laptop) {
+          font-size: 1.75rem;
+        }
+      }
+
+      p {
+        margin: 16px 0px 20px;
+        font-size: 0.8rem;
+
+        @media screen and (min-width: $tablet) {
+          font-size: 1rem;
+        }
+
+        @media screen and (min-width: $laptop) {
+          font-size: 1.25rem;
+        }
+      }
+
+      .discoverButton {
+        padding: 6px 20px;
+        border: 1px solid var(--main-color);
+        border-radius: 30px;
+      }
+    }
+  }
+
+  .statistics {
+    margin: 50px 0px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+
+    @media screen and (min-width: $tablet) {
+      padding: 50px;
+    }
+
+    .potteryImage {
+      width: 100%;
+      height: 150px;
+      border-radius: 20px;
+
+      @media screen and (min-width: $tablet) {
+        height: 300px;
+      }
+
+      @media screen and (min-width: $laptop) {
+        height: 400px;
+      }
+    }
+
+    .information {
+      display: flex;
+      flex-direction: column;
+      text-align: center;
+      gap: 20px;
+
+      h3 {
+        font-size: 1.5rem;
+        font-family: var(--title-text);
+
+        @media screen and (min-width: $laptop) {
+          font-size: 2rem;
+        }
+      }
+
+      @media screen and (min-width: $tablet) {
+        justify-content: center;
+        flex-direction: row;
+        gap: 0px;
+
+        div {
+          border-right: 1px solid black;
+          text-align: center;
+          padding: 0px 16px;
+
+          &:nth-child(4) {
+            border: none;
+          }
+        }
+      }
     }
   }
 }
