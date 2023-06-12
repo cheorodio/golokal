@@ -1,6 +1,6 @@
 import Image from 'next/image';
 import Link from 'next/link';
-import discoverHeader from '../public/images/discoverHeader.jpg';
+// import discoverHeader from '../public/images/discoverHeader.jpg';
 import connect from '../public/images/icons/connect.png';
 import discover from '../public/images/icons/discover.png';
 import explore from '../public/images/icons/explore.png';
@@ -9,7 +9,7 @@ import styles from './page.module.scss';
 
 export default function Home() {
   return (
-    <main className={styles.main}>
+    <main>
       <section className={styles.heroSection}>
         <h1>Embrace the artistry of your community </h1>
         <p>and support your local vendors and small businesses</p>
@@ -73,7 +73,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section className={styles.discoverSection}>
+      {/* <section className={styles.discoverSection}>
         <div className={styles.imageContainer}>
           <Image
             className={styles.discoverImage}
@@ -92,7 +92,7 @@ export default function Home() {
             explore now
           </Link>
         </div>
-      </section>
+      </section> */}
 
       <section className={styles.statistics}>
         <Image
