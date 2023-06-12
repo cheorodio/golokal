@@ -20,6 +20,10 @@
         text-transform: uppercase;
         color: var(--secondary-text-color);
       }
+
+      @media (max-width: 900px) {
+        display: none;
+      }
     }
   }
 
@@ -41,6 +45,25 @@
       background-color: var(--main-color);
       color: var(--secondary-text-color);
     }
+
+    @media (max-width: 900px) {
+      display: none;
+    }
+  }
+}
+
+.menuButton {
+  display: none;
+  border: none;
+  background: transparent;
+
+  .hamburgerIcon,
+  .closeIcon {
+    font-size: 2rem;
+  }
+
+  @media (max-width: 900px) {
+    display: block;
   }
 }
 
