@@ -1,6 +1,9 @@
-.main {
-  margin: 20px;
+@import './queries.module';
 
+.main {
+  margin: 10px;
+
+  // HERO SECTION ///////////////////////////////////////
   .heroSection {
     height: 95vh;
     background-image: url(../public/images/hero.jpg);
@@ -12,18 +15,41 @@
     align-items: center;
     justify-content: center;
     border-radius: 30px;
+    text-align: center;
+    padding: 0px 16px;
+
+    h1,
+    p,
+    .heroLink {
+      animation: floatup 2s ease-in-out;
+      visibility: hidden;
+      animation-fill-mode: forwards;
+    }
 
     h1 {
       font-family: var(--title-text);
-      font-size: 4rem;
-      width: 700px;
-      text-align: center;
+      font-size: 1.7rem;
+
+      @media screen and (min-width: $tablet) {
+        font-size: 2.5rem;
+        width: 550px;
+      }
+
+      @media screen and (min-width: $laptop) {
+        font-size: 2.5rem;
+        width: 550px;
+      }
+
+      @media screen and (min-width: $desktop) {
+        font-size: 3rem;
+        width: 550px;
+      }
     }
 
     p {
       margin-top: 16px;
       line-height: 1.5;
-      font-size: 1.5rem;
+      font-size: 1rem;
     }
 
     .heroLink {
@@ -31,6 +57,124 @@
       padding: 16px 80px;
       border: 1px solid var(--main-color);
       border-radius: 40px;
+      background-color: var(--bg-color);
+    }
+  }
+
+  // ABOUT SECTION ///////////////////////////////////////
+  .aboutSection {
+    padding: 50px 0px;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+
+    @media screen and (min-width: $tablet) {
+      display: grid;
+      grid-template-columns: 0.75fr 2.25fr;
+      gap: 20px;
+      align-items: center;
+      justify-content: center;
+
+      .highlights {
+        grid-column: 2 / 3;
+        grid-row: 2 / 3;
+      }
+    }
+
+    h2 {
+      font-family: var(--title-text);
+      font-size: 1.5rem;
+    }
+
+    .introduction {
+      margin-top: 16px;
+      font-size: 0.9rem;
+      line-height: 1.75;
+
+      @media screen and (min-width: $laptop) {
+        font-size: 1.5rem;
+        line-height: 1.25;
+        text-align: start;
+      }
+    }
+
+    .highlights {
+      padding-top: 50px;
+      display: flex;
+      flex-direction: column;
+
+      @media screen and (min-width: $tablet) {
+        padding-top: 20px;
+        flex-direction: row;
+        gap: 16px;
+        text-align: start;
+      }
+
+      div {
+        margin-top: 16px;
+
+        @media screen and (min-width: $tablet) {
+          display: flex;
+          flex-direction: column;
+          gap: 8px;
+          flex: 1;
+          border-right: 1px solid var(--main-color);
+          padding: 8px;
+
+          &:nth-child(3) {
+            border: none;
+          }
+
+          .iconHidden {
+            display: none;
+          }
+
+          h6 {
+            font-size: 0.5rem;
+          }
+
+          h4 {
+            display: none;
+          }
+
+          p {
+            font-size: 0.8rem;
+          }
+        }
+
+        @media screen and (min-width: $laptop) {
+          display: flex;
+          flex-direction: column;
+          gap: 8px;
+
+          .iconHidden {
+            display: none;
+          }
+
+          h6 {
+            font-size: 1rem;
+          }
+
+          h4 {
+            display: none;
+          }
+
+          p {
+            font-size: 1rem;
+          }
+        }
+      }
+    }
+  }
+
+  @keyframes floatup {
+    0% {
+      transform: translateY(40px);
+      visibility: visible;
+    }
+    100% {
+      transform: translateY(0);
+      visibility: visible;
     }
   }
 }
