@@ -1,4 +1,4 @@
-import styles from './styles/pages.module.scss';
+import styles from './styles/rootPages.module.scss';
 
 export const metadata = {
   title: 'Not Found',

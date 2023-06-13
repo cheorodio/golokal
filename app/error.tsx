@@ -1,5 +1,5 @@
 'use client';
-import styles from './styles/pages.module.scss';
+import styles from './styles/rootPages.module.scss';
 
 export default function RootError() {
   return (
