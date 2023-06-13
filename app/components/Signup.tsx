@@ -1,8 +1,9 @@
-import '../styles/Login.module.scss';
 import { useState } from 'react';
-import styles from '../styles/Login.module.scss';
+import styles from '../styles/login.module.scss';
 
-export default function Signup(props) {
+export default function Signup(props: {
+  onformSwitch: (arg0: string) => void;
+}) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPass, setConfirmPass] = useState('');
@@ -53,12 +54,6 @@ export default function Signup(props) {
           className={styles.signupInput}
           required
         />
-        {/* <div className="signup-reminder">
-          <div className="reminder">
-            <input type="checkbox" className="login-checkbox" />{' '}
-            <p className="terms">I agree to terms and conditions.</p>
-          </div>
-        </div> */}
         <button className={styles.loginSubmit}>Sign Up</button>
       </form>
     </div>

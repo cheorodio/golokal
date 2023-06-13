@@ -4,14 +4,14 @@ import Link from 'next/link';
 import { useState } from 'react';
 import { CgClose } from 'react-icons/cg';
 import { RxHamburgerMenu } from 'react-icons/rx';
-import styles from '../styles/NavFooter.module.scss';
+import styles from '../styles/navFooter.module.scss';
 import LoginModal from './LoginModal';
 
 const links = [
   { id: 1, title: 'Home', link: '/' },
-  { id: 2, title: 'Discover', link: '/' },
-  { id: 3, title: 'Vendors', link: '/' },
-  { id: 4, title: 'About', link: '/' },
+  { id: 2, title: 'Discover', link: '/discover' },
+  { id: 3, title: 'Vendors', link: '/vendors' },
+  { id: 4, title: 'About', link: '/about' },
 ];
 
 export default function NavBar() {
@@ -21,7 +21,7 @@ export default function NavBar() {
   return (
     <header className={styles.navigationBar}>
       <div className={styles.left}>
-        <Link href="/#" className={styles.logo}>
+        <Link href="/" className={styles.logo}>
           GoLokal
         </Link>
 

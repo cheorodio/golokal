@@ -9,7 +9,7 @@ import styles from './styles/homepage.module.scss';
 
 export default function Home() {
   return (
-    <main className={styles.main}>
+    <main>
       <section className={styles.heroSection}>
         <h1>Embrace the artistry of your community </h1>
         <p>and support your local vendors and small businesses</p>

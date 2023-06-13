@@ -6,7 +6,7 @@ import NavBar from './components/NavBar';
 const inter = Inter({ subsets: ['latin'] });
 
 export const metadata = {
-  title: 'GoLokal',
+  title: 'GoLokal - handmade products',
   description: 'Supporting local vendors and small businesses',
 };
 

@@ -1,8 +1,8 @@
 'use client';
 import { useState } from 'react';
-import styles from '../styles/Login.module.scss';
+import styles from '../styles/login.module.scss';
 
-export default function Login(props) {
+export default function Login(props: { onformSwitch: (arg0: string) => void }) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
