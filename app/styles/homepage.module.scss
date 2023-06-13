@@ -2,8 +2,8 @@
 
 // HERO SECTION ///////////////////////////////////////
 .heroSection {
-  height: 97vh;
-  background-image: url(../public/images/hero.jpg);
+  height: 90vh;
+  background-image: url(../../public/images/hero.jpg);
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
@@ -13,6 +13,7 @@
   justify-content: center;
   text-align: center;
   padding: 0px 16px;
+  position: relative;
 
   @media screen and (min-width: $tablet) {
     margin: 10px 10px 0px;

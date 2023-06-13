@@ -5,11 +5,11 @@ import connect from '../public/images/icons/connect.png';
 import discover from '../public/images/icons/discover.png';
 import explore from '../public/images/icons/explore.png';
 import statistic from '../public/images/statistic.jpg';
-import styles from './page.module.scss';
+import styles from './styles/homepage.module.scss';
 
 export default function Home() {
   return (
-    <main>
+    <main className={styles.main}>
       <section className={styles.heroSection}>
         <h1>Embrace the artistry of your community </h1>
         <p>and support your local vendors and small businesses</p>

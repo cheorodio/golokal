@@ -1,0 +1,142 @@
+.closeModalButton {
+  font-size: 1.6rem;
+  position: absolute;
+  top: 20%;
+  left: 65%;
+  color: var(--secondary-text-color);
+  z-index: 10;
+  background-color: transparent;
+  border: none;
+}
+
+.loginContainer,
+.signupContainer {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  height: 500px;
+  width: 500px;
+  background-color: #fff;
+  box-shadow: 10px 20px 20px 5px rgba(0, 0, 0, 0.2);
+  border-radius: 10px;
+  padding: 2.5rem 2rem;
+  z-index: 9;
+
+  .toggleButtons {
+    display: flex;
+    justify-content: center;
+    background-color: #fff;
+    position: relative;
+    border: 0.5px solid var(--secondary-text-color);
+    border-radius: 10px;
+
+    .logInToggleButton,
+    .signUpToggleButton {
+      position: absolute;
+      background-color: var(--accent-color);
+      width: 50%;
+      height: 100%;
+      transition: 0.5s;
+      border-radius: 7px;
+      font-size: 1.2rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 0.5px solid var(--secondary-text-color);
+      z-index: 3;
+    }
+
+    .logInToggleButton {
+      top: 0;
+      left: 0;
+    }
+
+    .signUpToggleButton {
+      top: 0;
+      left: 50%;
+    }
+
+    .toggleButton {
+      cursor: pointer;
+      width: 100%;
+      height: 50px;
+      border-radius: 7px;
+      font-family: var(--title-font);
+      font-size: 1.2rem;
+      position: relative;
+      border: 1px solid var(--primary-color);
+      background-color: #fff;
+    }
+
+    .loginButton {
+      border-radius: 7px 0px 0px 7px;
+      border-width: 1px 0px 1px 1px;
+    }
+
+    .toggleSignup {
+      border-radius: 0px 7px 7px 0px;
+      border-width: 1px 1px 1px 0px;
+    }
+  }
+
+  .loginForm {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    width: 100%;
+    padding: 24px 0px;
+
+    label {
+      font-size: 0.8rem;
+      font-family: var(--body-font);
+      margin-bottom: 8px;
+    }
+
+    .loginInput,
+    .signupInput {
+      width: 100%;
+      height: 50px;
+      background-color: #fff;
+      border-radius: 5px;
+      margin-bottom: 1rem;
+      font-size: 1.2rem;
+      color: var(--primary-color);
+      border: 0.5px solid var(--secondary-text-color);
+    }
+
+    .loginSubmit {
+      font-size: 1.4rem;
+      color: #fff;
+      text-transform: uppercase;
+      width: 100%;
+      height: 50px;
+      border: none;
+      background-color: var(--secondary-text-color);
+      border-radius: 5px;
+      margin-top: 16px;
+      cursor: pointer;
+
+      &:hover {
+        border: 1px solid var(--secondary-text-color);
+        background-color: #fff;
+        color: var(--secondary-text-color);
+      }
+    }
+
+    .signupSubmit {
+      margin-top: 105px;
+    }
+  }
+}
+
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(3px);
+  z-index: 3;
+}
