@@ -7,6 +7,11 @@ export default function Signup(props: {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPass, setConfirmPass] = useState('');
+  const [passwordShown, setPasswordShown] = useState(false);
+
+  const togglePassword = () => {
+    setPasswordShown(!passwordShown);
+  };
 
   return (
     <div className={styles.signupContainer}>
@@ -28,7 +33,9 @@ export default function Signup(props: {
         id="signup"
         className={styles.loginForm}
       >
-        <label htmlFor="email">Email Address</label>
+        <label htmlFor="email">
+          Email Address <span>*</span>
+        </label>
         <input
           id="email"
           value={email}
@@ -38,22 +45,43 @@ export default function Signup(props: {
           required
         />
 
-        <label htmlFor="password">Password</label>
-        <input
-          value={password}
-          id="password"
-          onChange={(event) => setPassword(event.currentTarget.value)}
-          className={styles.signupInput}
-          required
-        />
-        <label htmlFor="confirm-password">Confirm Password</label>
-        <input
-          value={confirmPass}
-          id="confirm-password"
-          onChange={(event) => setConfirmPass(event.currentTarget.value)}
-          className={styles.signupInput}
-          required
-        />
+        <label htmlFor="password">
+          Password <span>*</span>
+        </label>
+        <div>
+          <input
+            id="password"
+            type={passwordShown ? 'text' : 'password'}
+            value={password}
+            onChange={(event) => setPassword(event.target.value)}
+            className={styles.passwordInput}
+            required
+          />
+          <button
+            onClick={togglePassword}
+            className={styles.showPasswordButton}
+          >
+            show
+          </button>
+        </div>
+        <label htmlFor="confirm-password">
+          Confirm Password <span>*</span>
+        </label>
+        <div>
+          <input
+            value={confirmPass}
+            id="confirm-password"
+            onChange={(event) => setConfirmPass(event.currentTarget.value)}
+            className={styles.signupInput}
+            required
+          />
+          <button
+            onClick={togglePassword}
+            className={styles.showPasswordButton}
+          >
+            show
+          </button>
+        </div>
         <button className={styles.loginSubmit}>Sign Up</button>
       </form>
     </div>

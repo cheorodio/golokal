@@ -5,6 +5,11 @@ import styles from '../styles/login.module.scss';
 export default function Login(props: { onformSwitch: (arg0: string) => void }) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [passwordShown, setPasswordShown] = useState(false);
+
+  const togglePassword = () => {
+    setPasswordShown(!passwordShown);
+  };
 
   return (
     <div className={styles.loginContainer}>
@@ -26,7 +31,9 @@ export default function Login(props: { onformSwitch: (arg0: string) => void }) {
         id="login"
         className={styles.loginForm}
       >
-        <label htmlFor="email">Email Address</label>
+        <label htmlFor="email">
+          Email Address <span>*</span>
+        </label>
         <input
           id="email"
           value={email}
@@ -34,15 +41,25 @@ export default function Login(props: { onformSwitch: (arg0: string) => void }) {
           className={styles.loginInput}
           required
         />
-        <label htmlFor="password">Password</label>
-        <input
-          id="password"
-          type="password"
-          value={password}
-          onChange={(event) => setPassword(event.target.value)}
-          className={styles.loginInput}
-          required
-        />
+        <label htmlFor="password">
+          Password <span>*</span>
+        </label>
+        <div>
+          <input
+            id="password"
+            type={passwordShown ? 'text' : 'password'}
+            value={password}
+            onChange={(event) => setPassword(event.target.value)}
+            className={styles.passwordInput}
+            required
+          />
+          <button
+            onClick={togglePassword}
+            className={styles.showPasswordButton}
+          >
+            show
+          </button>
+        </div>
 
         <button className={`${styles.loginSubmit} ${styles.signupSubmit}`}>
           Log in

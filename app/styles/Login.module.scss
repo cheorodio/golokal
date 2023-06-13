@@ -20,7 +20,7 @@
   background-color: #fff;
   box-shadow: 10px 20px 20px 5px rgba(0, 0, 0, 0.2);
   border-radius: 10px;
-  padding: 20px 16px;
+  padding: 50px 16px 30px;
   z-index: 9;
 
   .toggleButtons {
@@ -91,6 +91,10 @@
       font-size: 0.8rem;
       font-family: var(--body-font);
       margin-bottom: 8px;
+
+      span {
+        color: red;
+      }
     }
 
     .loginInput,
@@ -103,6 +107,33 @@
       font-size: 1.2rem;
       color: var(--primary-color);
       border: 0.5px solid var(--secondary-text-color);
+    }
+
+    div {
+      position: relative;
+      height: 50px;
+      .passwordInput {
+        width: 100%;
+        height: 100%;
+        background-color: #fff;
+        border-radius: 5px;
+        margin-bottom: 16px;
+        font-size: 1.2rem;
+        color: var(--primary-color);
+        border: 0.5px solid var(--secondary-text-color);
+      }
+      .showPasswordButton {
+        position: absolute;
+        top: 50%;
+        right: 1%;
+        transform: translate(0%, -50%);
+        font-size: 0.5rem;
+        border: none;
+        background: transparent;
+        color: var(--secondary-text-color);
+        text-transform: uppercase;
+        cursor: pointer;
+      }
     }
 
     .loginSubmit {
