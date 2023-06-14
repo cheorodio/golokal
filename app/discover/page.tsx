@@ -1,27 +1,37 @@
 import Image from 'next/image';
 import Link from 'next/link';
-import { products } from '../../database/products';
+// import { AiOutlineHeart, AiOutlineStar, AiTwotoneShop } from 'react-icons/ai';
+import { vendors } from '../../database/vendors';
 import styles from '../styles/discoverPage.module.scss';
 
 export default function DiscoverPage() {
   return (
     <main className={styles.discoverSection}>
-      <h1>Products</h1>
+      <h1>Discover local vendors</h1>
       <div className={styles.productsContainer}>
-        {products.map((product) => {
+        {vendors.map((vendor) => {
           return (
             <div
-              key={`product-div-${product.id}`}
-              className={styles.productContainer}
+              key={`product-div-${vendor.id}`}
+              className={styles.vendorContainer}
             >
-              <Link href="/">{product.company_name}</Link>
-              <Link href="/">
-                <Image
-                  src={`/images/products/${product.name}.jpg`}
-                  alt={product.alt}
-                  width={200}
-                  height={200}
-                />
+              <Image
+                className={styles.vendorImage}
+                src={`/images/products/${vendor.name}.jpg`}
+                alt=""
+                width={280}
+                height={300}
+              />
+              <div>
+                <p className={styles.vendorName}>{vendor.name}</p>
+                <p className={styles.vendorShop}>{vendor.shopName}</p>
+              </div>
+              <p className={styles.vendorBio}>{vendor.bio}</p>
+              <Link
+                href="/"
+                className={styles.visitVendorLink}
+              >
+                visit profile
               </Link>
             </div>
           );
