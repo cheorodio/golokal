@@ -72,7 +72,7 @@ export default function Signup(props: {
             value={confirmPass}
             id="confirm-password"
             onChange={(event) => setConfirmPass(event.currentTarget.value)}
-            className={styles.signupInput}
+            className={styles.passwordInput}
             required
           />
           <button

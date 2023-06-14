@@ -10,8 +10,7 @@ import LoginModal from './LoginModal';
 const links = [
   { id: 1, title: 'Home', link: '/' },
   { id: 2, title: 'Discover', link: '/discover' },
-  { id: 3, title: 'Vendors', link: '/vendors' },
-  { id: 4, title: 'About', link: '/about' },
+  { id: 3, title: 'About', link: '/about' },
 ];
 
 export default function NavBar() {
@@ -37,7 +36,7 @@ export default function NavBar() {
       </div>
 
       <div className={styles.right}>
-        <input className={styles.searchBar} placeholder="Search..." />
+        {/* <input className={styles.searchBar} placeholder="Search..." /> */}
         {/* LOGIN BUTTON */}
         <button
           className={styles.loginButton}
