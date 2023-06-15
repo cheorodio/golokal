@@ -8,6 +8,7 @@ const inter = Inter({ subsets: ['latin'] });
 export const metadata = {
   title: 'GoLokal - handmade products',
   description: 'Supporting local vendors and small businesses',
+  manifest: '/manifest.json',
 };
 
 export default function RootLayout({
