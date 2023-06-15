@@ -1,22 +1,19 @@
 'use client';
-
 import Link from 'next/link';
 import { useState } from 'react';
 import { CgClose } from 'react-icons/cg';
 import { RxHamburgerMenu } from 'react-icons/rx';
-import styles from '../styles/navFooter.module.scss';
-import LoginModal from './LoginModal';
+import styles from './navFooter.module.scss';
 
 const links = [
   { id: 1, title: 'Home', link: '/' },
-  { id: 2, title: 'Discover', link: '/pages/discover' },
-  { id: 3, title: 'About', link: '/pages/about' },
-  { id: 4, title: 'Blog', link: '/pages/blog' },
+  { id: 2, title: 'Discover', link: '/discover' },
+  { id: 3, title: 'About', link: '/about' },
+  { id: 4, title: 'Blog', link: '/blog' },
 ];
 
 export default function NavBar() {
   const [navbarOpen, setNavbarOpen] = useState(true);
-  const [openModal, setOpenModal] = useState(false);
 
   return (
     <header className={styles.navigationBar}>
@@ -37,16 +34,9 @@ export default function NavBar() {
       </div>
 
       <div className={styles.right}>
-        {/* <input className={styles.searchBar} placeholder="Search..." /> */}
-        {/* LOGIN BUTTON */}
-        <button
-          className={styles.loginButton}
-          onClick={() => {
-            setOpenModal(true);
-          }}
-        >
+        <Link href="/login" className={styles.loginButton}>
           login
-        </button>
+        </Link>
       </div>
 
       {/* MOBILE HAMBURGER NAV */}
@@ -60,9 +50,6 @@ export default function NavBar() {
           <CgClose className={styles.closeIcon} />
         )}
       </button>
-
-      {/* LOGIN MODAL */}
-      {openModal && <LoginModal closeModal={setOpenModal} />}
     </header>
   );
 }

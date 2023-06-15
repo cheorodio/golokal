@@ -1,10 +1,12 @@
 'use client';
 import Image from 'next/image';
+import Link from 'next/link';
 import { useState } from 'react';
-import loginImage from '../../public/images/hero.jpg';
-import styles from '../styles/login.module.scss';
+import { IoClose } from 'react-icons/io5';
+import loginImage from '../../../public/images/hero.jpg';
+import styles from './login.module.scss';
 
-export default function Login(props: { onformSwitch: (arg0: string) => void }) {
+export default function LoginForm() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [passwordShown, setPasswordShown] = useState(false);
@@ -28,6 +30,9 @@ export default function Login(props: { onformSwitch: (arg0: string) => void }) {
         <p>
           login to your account to connect with your favourite local vendors
         </p>
+        <Link href="/" className={styles.closeModalButton}>
+          <IoClose />
+        </Link>
 
         <form
           onSubmit={(event) => event.preventDefault()}
@@ -71,12 +76,7 @@ export default function Login(props: { onformSwitch: (arg0: string) => void }) {
         <div className={styles.signupContainer}>
           <p>
             Don't have an account yet?
-            <button
-              className={styles.registerButton}
-              onClick={() => props.onformSwitch('signup')}
-            >
-              Register here
-            </button>
+            <Link href="/register">Register here</Link>
           </p>
         </div>
       </div>

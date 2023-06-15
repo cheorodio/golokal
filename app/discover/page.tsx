@@ -1,7 +1,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
-import { getVendors } from '../../../database/vendors';
-import styles from '../../styles/discoverPage.module.scss';
+import { getVendors } from '../../database/vendors';
+import styles from './discoverPage.module.scss';
 
 export default async function DiscoverPage() {
   const vendors = await getVendors();

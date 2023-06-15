@@ -1,19 +1,25 @@
+'use client';
 import Image from 'next/image';
+import Link from 'next/link';
 import { useState } from 'react';
-import loginImage from '../../public/images/hero.jpg';
-import styles from '../styles/register.module.scss';
+import { IoClose } from 'react-icons/io5';
+import loginImage from '../../../public/images/hero.jpg';
+import styles from './register.module.scss';
 
-export default function Signup(props: {
-  onformSwitch: (arg0: string) => void;
-}) {
+export default function RegisterPage() {
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPass, setConfirmPass] = useState('');
   const [passwordShown, setPasswordShown] = useState(false);
+  const [confirmPasswordShown, setConfirmPasswordShown] = useState(false);
 
   const togglePassword = () => {
     setPasswordShown(!passwordShown);
+  };
+
+  const toggleConfirmPassword = () => {
+    setConfirmPasswordShown(!confirmPasswordShown);
   };
 
   return (
@@ -32,6 +38,9 @@ export default function Signup(props: {
           GoLokal is a platform connecting you with local vendors and small
           businesses. Create an account to get started.
         </p>
+        <Link href="/" className={styles.closeModalButton}>
+          <IoClose />
+        </Link>
 
         <form
           onSubmit={(event) => event.preventDefault()}
@@ -84,38 +93,36 @@ export default function Signup(props: {
           </div>
 
           <div>
-            <label htmlFor="password">
+            <label htmlFor="confirmPassd">
               Confirm Password <span>*</span>
             </label>
             <div>
               <input
-                id="password"
-                type={passwordShown ? 'text' : 'password'}
+                id="confirmPass"
+                type={confirmPasswordShown ? 'text' : 'password'}
                 value={confirmPass}
                 onChange={(event) => setConfirmPass(event.currentTarget.value)}
                 required
               />
               <button
-                onClick={togglePassword}
+                onClick={toggleConfirmPassword}
                 className={styles.showPasswordButton}
               >
                 show
               </button>
             </div>
           </div>
-
-          <button className={styles.registerSubmit}>Register</button>
+          <button className={styles.registerSubmit} onClick={() => {}}>
+            Register
+          </button>
         </form>
 
         <div className={styles.loginContainer}>
           <p>
             Already have an account?
-            <button
-              className={styles.loginButton}
-              onClick={() => props.onformSwitch('login')}
-            >
+            <Link href="/login" className={styles.loginButton}>
               Login here
-            </button>
+            </Link>
           </p>
         </div>
       </div>
