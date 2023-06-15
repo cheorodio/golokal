@@ -9,8 +9,9 @@ import LoginModal from './LoginModal';
 
 const links = [
   { id: 1, title: 'Home', link: '/' },
-  { id: 2, title: 'Discover', link: '/discover' },
-  { id: 3, title: 'About', link: '/about' },
+  { id: 2, title: 'Discover', link: '/pages/discover' },
+  { id: 3, title: 'About', link: '/pages/about' },
+  { id: 4, title: 'Blog', link: '/pages/blog' },
 ];
 
 export default function NavBar() {

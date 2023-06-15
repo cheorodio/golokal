@@ -1,8 +1,8 @@
 // import Image from 'next/image';
 
 import { notFound } from 'next/navigation';
-import { getVendorById } from '../../../database/vendors';
-import styles from '../../styles/vendorPage.module.scss';
+import { getVendorById } from '../../../../database/vendors';
+import styles from '../../../styles/vendorPage.module.scss';
 
 export const dynamic = 'force-dynamic';
 
