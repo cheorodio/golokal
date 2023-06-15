@@ -1,15 +1,4 @@
-.closeModalButton {
-  font-size: 1.6rem;
-  position: absolute;
-  top: 17%;
-  right: 21%;
-  color: var(--secondary-text-color);
-  z-index: 10;
-  background-color: transparent;
-  border: none;
-}
-
-.loginContainer {
+.registerContainer {
   position: absolute;
   top: 50%;
   left: 50%;
@@ -32,9 +21,9 @@
     }
   }
 
-  .loginFormSide {
+  .registerFormSide {
     flex: 1;
-    padding: 80px 40px;
+    padding: 40px;
     display: flex;
     flex-direction: column;
 
@@ -46,46 +35,48 @@
     p {
       margin-bottom: 30px;
       padding-left: 16px;
+      font-size: 0.8rem;
     }
 
-    .loginForm {
+    .registerForm {
       display: flex;
       flex-direction: column;
-      gap: 8px;
-
-      label {
-        font-size: 0.8rem;
-        text-transform: uppercase;
-
-        span {
-          color: rgb(207, 55, 55);
-        }
-      }
-
-      .passwordLabel {
-        margin-top: 16px;
-      }
-
-      .loginInput,
-      .passwordInput {
-        width: 100%;
-        height: 40px;
-      }
+      gap: 16px;
 
       div {
-        position: relative;
+        display: flex;
+        flex-direction: column;
 
-        .showPasswordButton {
-          background-color: transparent;
-          border: none;
-          position: absolute;
-          top: 50%;
-          right: 1%;
-          transform: translate(0%, -50%);
+        label {
+          font-size: 0.8rem;
+          text-transform: uppercase;
+
+          span {
+            color: rgb(207, 55, 55);
+          }
+        }
+
+        input {
+          width: 100%;
+          height: 35px;
+        }
+
+        div {
+          position: relative;
+
+          .showPasswordButton {
+            position: absolute;
+            top: 50%;
+            right: 1%;
+            transform: translate(0%, -50%);
+            background-color: transparent;
+            border: none;
+            font-size: 0.8rem;
+          }
         }
       }
 
-      .loginSubmit {
+      .registerSubmit {
         height: 40px;
         width: 100%;
         background-color: var(--secondary-text-color);
@@ -105,7 +96,7 @@
       }
     }
 
-    .signupContainer {
+    .loginContainer {
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -113,7 +104,7 @@
       margin-top: 20px;
       font-size: 0.8rem;
 
-      .registerButton {
+      .loginButton {
         background-color: transparent;
         border: none;
         padding-left: 8px;
@@ -122,16 +113,4 @@
       }
     }
   }
-}
-
-.overlay {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.5);
-  backdrop-filter: blur(3px);
-  z-index: 3;
-  overflow: hidden;
 }

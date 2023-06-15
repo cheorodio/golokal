@@ -1,5 +1,7 @@
 'use client';
+import Image from 'next/image';
 import { useState } from 'react';
+import loginImage from '../../public/images/hero.jpg';
 import styles from '../styles/login.module.scss';
 
 export default function Login(props: { onformSwitch: (arg0: string) => void }) {
@@ -13,58 +15,71 @@ export default function Login(props: { onformSwitch: (arg0: string) => void }) {
 
   return (
     <div className={styles.loginContainer}>
-      <div className={styles.toggleButtons}>
-        <div className={styles.logInToggleButton}>Log in</div>
-        <button className={`${styles.toggleButton} ${styles.loginButton}`}>
-          Log in
-        </button>
-        <button
-          onClick={() => props.onformSwitch('signup')}
-          className={`${styles.toggleButton} ${styles.toggleSignup}`}
-        >
-          Sign up
-        </button>
+      <div className={styles.imageSide}>
+        <Image
+          src={loginImage}
+          alt="Image of handmade pottery"
+          className={styles.loginImage}
+        />
       </div>
 
-      <form
-        onSubmit={(event) => event.preventDefault()}
-        id="login"
-        className={styles.loginForm}
-      >
-        <label htmlFor="email">
-          Email Address <span>*</span>
-        </label>
-        <input
-          id="email"
-          value={email}
-          onChange={(event) => setEmail(event.currentTarget.value)}
-          className={styles.loginInput}
-          required
-        />
-        <label htmlFor="password">
-          Password <span>*</span>
-        </label>
-        <div>
+      <div className={styles.loginFormSide}>
+        <h1>Welcome back</h1>
+        <p>
+          login to your account to connect with your favourite local vendors
+        </p>
+
+        <form
+          onSubmit={(event) => event.preventDefault()}
+          id="login"
+          className={styles.loginForm}
+        >
+          <label htmlFor="email">
+            Username <span>*</span>
+          </label>
           <input
-            id="password"
-            type={passwordShown ? 'text' : 'password'}
-            value={password}
-            onChange={(event) => setPassword(event.target.value)}
-            className={styles.passwordInput}
+            id="email"
+            value={email}
+            onChange={(event) => setEmail(event.currentTarget.value)}
+            className={styles.loginInput}
             required
           />
-          <button
-            onClick={togglePassword}
-            className={styles.showPasswordButton}
-          >
-            show
-          </button>
-        </div>
 
-        <button className={`${styles.loginSubmit} ${styles.signupSubmit}`}>
-          Log in
-        </button>
-      </form>
+          <label htmlFor="password" className={styles.passwordLabel}>
+            Password <span>*</span>
+          </label>
+          <div>
+            <input
+              id="password"
+              type={passwordShown ? 'text' : 'password'}
+              value={password}
+              onChange={(event) => setPassword(event.currentTarget.value)}
+              className={styles.passwordInput}
+              required
+            />
+            <button
+              onClick={togglePassword}
+              className={styles.showPasswordButton}
+            >
+              show
+            </button>
+          </div>
+
+          <button className={styles.loginSubmit}>Log in</button>
+        </form>
+
+        <div className={styles.signupContainer}>
+          <p>
+            Don't have an account yet?
+            <button
+              className={styles.registerButton}
+              onClick={() => props.onformSwitch('signup')}
+            >
+              Register here
+            </button>
+          </p>
+        </div>
+      </div>
     </div>
   );
 }
