@@ -1,27 +1,20 @@
-export const vendors = [
-  {
-    id: 1,
-    name: 'Lisa',
-    shopName: 'vidaShop',
-    bio: 'This is a quick intro about Lisa and products that she makes. This is a quick intro about Lisa and products that she makes. This is a quick intro about Lisa and products that she makes. This is a quick intro about Lisa and products that she makes. This is a quick intro about Lisa and products that she makes. ',
-    alt: 'akjhdjka',
-  },
-  {
-    id: 2,
-    name: 'Tony',
-    shopName: 'the_soap_company',
-    bio: 'This is a quick intro about Lisa and products that she makes. This is a quick intro about Lisa and products that she makes. This is a quick intro about Lisa and products that she makes. This is a quick intro about Lisa and products that she makes. This is a quick intro about Lisa and products that she makes. ',
-  },
-  {
-    id: 3,
-    name: 'Liz',
-    shopName: 'lumaShop',
-    bio: 'This is a quick intro about Lisa and products that she makes. This is a quick intro about Lisa and products that she makes. This is a quick intro about Lisa and products that she makes. This is a quick intro about Lisa and products that she makes. This is a quick intro about Lisa and products that she makes. ',
-  },
-  {
-    id: 4,
-    name: 'Kate',
-    shopName: 'company_name',
-    bio: 'This is a quick intro about Lisa and products that she makes. This is a quick intro about Lisa and products that she makes. This is a quick intro about Lisa and products that she makes. This is a quick intro about Lisa and products that she makes. This is a quick intro about Lisa and products that she makes. ',
-  },
-];
+import { cache } from 'react';
+import { Vendors } from '../migrations/1686775216-createVendorTable';
+import { sql } from './connect';
+
+export const getVendors = cache(async () => {
+  const vendors1 = await sql<Vendors[]>`
+  SELECT * FROM vendors;`;
+  return vendors1;
+});
+
+export const getVendorById = cache(async (id: number) => {
+  const vendors = await sql<Vendors[]>`
+  SELECT
+    *
+  FROM
+    vendors
+  WHERE
+    id = ${id}`;
+  return vendors[0];
+});
