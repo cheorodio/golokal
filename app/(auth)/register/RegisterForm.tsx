@@ -10,16 +10,10 @@ export default function RegisterPage() {
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [confirmPass, setConfirmPass] = useState('');
   const [passwordShown, setPasswordShown] = useState(false);
-  const [confirmPasswordShown, setConfirmPasswordShown] = useState(false);
 
   const togglePassword = () => {
     setPasswordShown(!passwordShown);
-  };
-
-  const toggleConfirmPassword = () => {
-    setConfirmPasswordShown(!confirmPasswordShown);
   };
 
   return (
@@ -44,7 +38,6 @@ export default function RegisterPage() {
 
         <form
           onSubmit={(event) => event.preventDefault()}
-          id="login"
           className={styles.registerForm}
         >
           <div>
@@ -91,28 +84,19 @@ export default function RegisterPage() {
               </button>
             </div>
           </div>
-
-          <div>
-            <label htmlFor="confirmPassd">
-              Confirm Password <span>*</span>
-            </label>
-            <div>
-              <input
-                id="confirmPass"
-                type={confirmPasswordShown ? 'text' : 'password'}
-                value={confirmPass}
-                onChange={(event) => setConfirmPass(event.currentTarget.value)}
-                required
-              />
-              <button
-                onClick={toggleConfirmPassword}
-                className={styles.showPasswordButton}
-              >
-                show
-              </button>
-            </div>
-          </div>
-          <button className={styles.registerSubmit} onClick={() => {}}>
+          <button
+            className={styles.registerSubmit}
+            onClick={async () => {
+              await fetch('/api/register', {
+                method: 'POST',
+                body: JSON.stringify({
+                  username,
+                  email,
+                  password,
+                }),
+              });
+            }}
+          >
             Register
           </button>
         </form>

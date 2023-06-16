@@ -12,12 +12,12 @@ export default async function DiscoverPage() {
         {vendors.map((vendor) => {
           return (
             <div
-              key={`product-div-${vendor.id}`}
+              key={`vendor-div-${vendor.id}`}
               className={styles.vendorContainer}
             >
               <Image
                 className={styles.vendorImage}
-                src={`/images/products/${vendor.name}.jpg`}
+                src={`/images/vendors/${vendor.name}.jpg`}
                 alt=""
                 width={280}
                 height={300}
@@ -27,7 +27,10 @@ export default async function DiscoverPage() {
                 <p className={styles.vendorShop}>{vendor.shopName}</p>
               </div>
               <p className={styles.vendorBio}>{vendor.bio}</p>
-              <Link href="/" className={styles.visitVendorLink}>
+              <Link
+                href={`/discover/${vendor.name}`}
+                className={styles.visitVendorLink}
+              >
                 visit profile
               </Link>
             </div>

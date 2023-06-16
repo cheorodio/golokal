@@ -5,6 +5,7 @@ export type Vendors = {
   name: string;
   shopName: string;
   bio: string;
+  website: string;
 };
 
 export async function up(sql: Sql) {

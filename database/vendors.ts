@@ -8,13 +8,13 @@ export const getVendors = cache(async () => {
   return vendors1;
 });
 
-export const getVendorById = cache(async (id: number) => {
+export const getVendorById = cache(async (name: string) => {
   const vendors = await sql<Vendors[]>`
   SELECT
     *
   FROM
     vendors
   WHERE
-    id = ${id}`;
+    name = ${name}`;
   return vendors[0];
 });
