@@ -11,11 +11,11 @@ export const metadata = {
   manifest: '/manifest.json',
 };
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+type LayoutProps = {
+  children: string;
+};
+
+export default function RootLayout({ children }: LayoutProps) {
   return (
     <html lang="en">
       <head>

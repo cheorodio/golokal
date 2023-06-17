@@ -2,7 +2,8 @@
 
 // HERO SECTION ///////////////////////////////////////
 .heroSection {
-  height: 90vh;
+  height: 100vh;
+  width: 100vw;
   background-image: url(../../public/images/hero.jpg);
   background-position: center;
   background-repeat: no-repeat;
@@ -10,14 +11,13 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  padding-top: 150px;
   text-align: center;
-  padding: 0px 16px;
-  position: relative;
+  // justify-content: center;
 
   @media screen and (min-width: $tablet) {
-    margin: 0px 10px;
-    border-radius: 30px;
+    padding: 0px;
+    justify-content: center;
   }
 
   h1,
@@ -30,7 +30,8 @@
 
   h1 {
     font-family: var(--title-text);
-    font-size: 1.7rem;
+    font-size: 2.25rem;
+    width: 450px;
 
     @media screen and (min-width: $tablet) {
       font-size: 2.5rem;
@@ -56,10 +57,10 @@
 
   .heroLink {
     margin-top: 40px;
-    padding: 16px 80px;
-    border: 1px solid var(--main-color);
+    padding: 10px 80px;
     border-radius: 40px;
-    background-color: var(--bg-color);
+    border: 1px solid var(--secondary-text-color);
+    // background-color: var(--bg-color);
   }
 }
 
@@ -74,118 +75,141 @@
   }
 }
 
-// ABOUT SECTION ///////////////////////////////////////
+// IN BETWEEN ///////
+
+// SECOND SECTION /////////////////
 .aboutSection {
-  padding: 50px 0px;
-  display: flex;
-  flex-direction: column;
-  text-align: center;
+  position: relative;
+  padding: 50px 20px;
 
   @media screen and (min-width: $tablet) {
-    display: grid;
-    grid-template-columns: 0.75fr 2.25fr;
-    gap: 20px;
-    align-items: center;
-    justify-content: center;
-    padding: 50px 50px 0px;
-    text-align: start;
-
-    .highlights {
-      grid-column: 2 / 3;
-      grid-row: 2 / 3;
-    }
+    padding: 50px 80px;
   }
 
-  h2 {
-    font-family: var(--title-text);
-    font-size: 1.5rem;
-
-    @media screen and (min-width: $laptop) {
-      font-size: 2.5rem;
-      text-align: start;
-    }
-  }
-
-  .introduction {
-    margin-top: 16px;
-    font-size: 0.9rem;
-    line-height: 1.75;
-
-    @media screen and (min-width: $laptop) {
-      font-size: 1.5rem;
-      line-height: 1.25;
-      text-align: start;
-    }
-  }
-
-  .highlights {
-    padding-top: 50px;
-    display: flex;
-    flex-direction: column;
-
-    @media screen and (min-width: $tablet) {
-      padding-top: 20px;
-      flex-direction: row;
-      gap: 16px;
-      text-align: start;
-    }
-
-    div {
-      margin-top: 16px;
-
-      @media screen and (min-width: $tablet) {
-        display: flex;
-        flex-direction: column;
-        gap: 8px;
-        flex: 1;
-        border-right: 0.5px solid black;
-        padding: 8px;
-
-        &:nth-child(3) {
-          border: none;
-        }
-
-        .iconHidden {
-          display: none;
-        }
-
-        h6 {
-          font-size: 0.5rem;
-        }
-
-        h4 {
-          display: none;
-        }
-
-        p {
-          font-size: 0.8rem;
-        }
-      }
-
-      @media screen and (min-width: $laptop) {
-        display: flex;
-        flex-direction: column;
-        gap: 8px;
-
-        .iconHidden {
-          display: none;
-        }
-
-        h6 {
-          font-size: 1rem;
-        }
-
-        h4 {
-          display: none;
-        }
-
-        p {
-          font-size: 1rem;
-        }
-      }
-    }
+  .inBetween {
+    background-color: var(--bg-color);
+    width: 100%;
+    height: 100px;
+    border-radius: 50px 50px 0px 0px;
+    position: absolute;
+    top: 0%;
+    left: 50%;
+    transform: translate(-50%, -50%);
   }
 }
+
+// ABOUT SECTION ///////////////////////////////////////
+// .aboutSection {
+//   padding: 50px;
+//   display: flex;
+//   flex-direction: column;
+//   text-align: center;
+
+//   @media screen and (min-width: $tablet) {
+//     display: grid;
+//     grid-template-columns: 0.75fr 2.25fr;
+//     gap: 20px;
+//     align-items: center;
+//     justify-content: center;
+//     // padding: 50px 50px 0px;
+//     text-align: start;
+
+//     .highlights {
+//       grid-column: 2 / 3;
+//       grid-row: 2 / 3;
+//     }
+//   }
+
+//   h2 {
+//     font-family: var(--title-text);
+//     font-size: 1.5rem;
+
+//     @media screen and (min-width: $laptop) {
+//       font-size: 2.5rem;
+//       text-align: start;
+//     }
+//   }
+
+//   .introduction {
+//     margin-top: 16px;
+//     font-size: 0.9rem;
+//     line-height: 1.75;
+
+//     @media screen and (min-width: $laptop) {
+//       font-size: 1.5rem;
+//       line-height: 1.25;
+//       text-align: start;
+//     }
+//   }
+
+//   .highlights {
+//     padding-top: 50px;
+//     display: flex;
+//     flex-direction: column;
+
+//     @media screen and (min-width: $tablet) {
+//       padding-top: 20px;
+//       flex-direction: row;
+//       gap: 16px;
+//       text-align: start;
+//     }
+
+//     div {
+//       margin-top: 16px;
+
+//       @media screen and (min-width: $tablet) {
+//         display: flex;
+//         flex-direction: column;
+//         gap: 8px;
+//         flex: 1;
+//         border-right: 0.5px solid black;
+//         padding: 8px;
+
+//         &:nth-child(3) {
+//           border: none;
+//         }
+
+//         .iconHidden {
+//           display: none;
+//         }
+
+//         h6 {
+//           font-size: 0.5rem;
+//         }
+
+//         h4 {
+//           display: none;
+//         }
+
+//         p {
+//           font-size: 0.8rem;
+//         }
+//       }
+
+//       @media screen and (min-width: $laptop) {
+//         display: flex;
+//         flex-direction: column;
+//         gap: 8px;
+
+//         .iconHidden {
+//           display: none;
+//         }
+
+//         h6 {
+//           font-size: 1rem;
+//         }
+
+//         h4 {
+//           display: none;
+//         }
+
+//         p {
+//           font-size: 1rem;
+//         }
+//       }
+//     }
+//   }
+// }
 
 // DISCOVER SECTION ////////////////////////////////
 // .discoverSection {
@@ -271,7 +295,7 @@
 // }
 // STATICTICS ///////////////
 .statistics {
-  margin: 50px 0px;
+  // margin: 50px 0px;
   display: flex;
   flex-direction: column;
   gap: 20px;

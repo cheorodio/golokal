@@ -17,27 +17,35 @@ export default function NavBar() {
 
   return (
     <header className={styles.navigationBar}>
-      <div className={styles.left}>
-        <Link href="/" className={styles.logo}>
-          GoLokal
-        </Link>
-
-        <nav>
-          <ul className={styles.navLinks}>
-            {links.map(({ id, title, link }) => (
-              <Link href={link} key={`key-${id}`}>
-                <li className={styles.navList}>{title}</li>
-              </Link>
-            ))}
-          </ul>
-        </nav>
-      </div>
+      <Link href="/" className={styles.logo}>
+        golokal
+      </Link>
+      <nav>
+        <ul className={styles.navLinks}>
+          {links.map(({ id, title, link }) => (
+            <Link href={link} key={`key-${id}`}>
+              <li className={styles.navList}>{title}</li>
+            </Link>
+          ))}
+        </ul>
+      </nav>
 
       <div className={styles.right}>
         <Link href="/login" className={styles.loginButton}>
-          login
+          Get Started
         </Link>
+        {/* <button
+          className={styles.loginButton}
+          onClick={() => {
+            setOpenModal(true);
+          }}
+        >
+          login
+        </button> */}
       </div>
+
+      {/* LOGIN MODAL */}
+      {/* {openModal && <LoginModal closeModal={setOpenModal} />} */}
 
       {/* MOBILE HAMBURGER NAV */}
       <button

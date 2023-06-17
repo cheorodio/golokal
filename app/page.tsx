@@ -4,7 +4,7 @@ import Link from 'next/link';
 import connect from '../public/images/icons/connect.png';
 import discover from '../public/images/icons/discover.png';
 import explore from '../public/images/icons/explore.png';
-import statistic from '../public/images/statistic.jpg';
+// import statistic from '../public/images/statistic.jpg';
 import styles from './styles/homepage.module.scss';
 
 export default function Home() {
@@ -18,6 +18,16 @@ export default function Home() {
         </Link>
       </section>
 
+      <section className={styles.aboutSection}>
+        <div className={styles.inBetween} />
+        <h2>
+          GoLokal is your ultimate destination for local and handmade products.
+          We are passionate about supporting artisans, craftsmen, and local
+          businesses, and our platform serves as a virtual marketplace to
+          showcase their unique creations.
+        </h2>
+      </section>
+      {/*
       <section className={styles.aboutSection}>
         <h2>Who are we?</h2>
         <p className={styles.introduction}>
@@ -71,7 +81,7 @@ export default function Home() {
             </p>
           </div>
         </div>
-      </section>
+      </section> */}
 
       {/* <section className={styles.discoverSection}>
         <div className={styles.imageContainer}>
@@ -93,7 +103,7 @@ export default function Home() {
           </Link>
         </div>
       </section> */}
-
+      {/*
       <section className={styles.statistics}>
         <Image
           className={styles.potteryImage}
@@ -118,7 +128,7 @@ export default function Home() {
             <p>registered users</p>
           </div>
         </div>
-      </section>
+      </section> */}
     </main>
   );
 }
