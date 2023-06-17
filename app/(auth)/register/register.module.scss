@@ -1,150 +1,118 @@
-.overlay {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.5);
-  backdrop-filter: blur(3px);
-  z-index: 3;
-  overflow: hidden;
-}
-
-.registerPage {
-  height: 90vh;
-  background-image: url('./../../../public/images/hero.jpg');
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
-  border-radius: 30px;
-  margin: 0px 10px 10px 10px;
-}
-
-.registerContainer {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  height: 550px;
-  width: 850px;
-  background-color: white;
-  border-radius: 10px;
-  z-index: 4;
+.loginContainer {
+  height: 100vh;
   display: flex;
 
-  .imageSide {
-    flex: 1;
-    padding: 10px;
-
-    .loginImage {
-      width: 100%;
-      height: 100%;
-      border-radius: 5px;
-    }
-  }
-
-  .registerFormSide {
-    flex: 1;
-    padding: 40px;
+  .loginFormSide {
+    width: 40%;
+    padding: 160px 80px 80px;
     display: flex;
     flex-direction: column;
-    position: relative;
+    justify-content: space-between;
+    gap: 20px;
 
-    .closeModalButton {
-      position: absolute;
-      top: 3%;
-      right: 3%;
-      font-size: 2rem;
-    }
-
-    h1 {
-      margin-bottom: 8px;
-      font-family: var(--title-text);
-    }
-
-    p {
-      margin-bottom: 30px;
-      padding-left: 16px;
-      font-size: 0.8rem;
-    }
-
-    .registerForm {
+    .form {
       display: flex;
       flex-direction: column;
-      gap: 16px;
+      gap: 40px;
 
-      div {
+      .greeting {
         display: flex;
         flex-direction: column;
+        gap: 16px;
 
-        label {
-          font-size: 0.8rem;
-          text-transform: uppercase;
-
-          span {
-            color: rgb(207, 55, 55);
-          }
+        h1 {
+          font-family: var(--title-text);
         }
+      }
 
-        input {
-          width: 100%;
-          height: 35px;
-        }
+      .loginForm {
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
 
         div {
-          position: relative;
+          display: flex;
+          flex-direction: column;
+          gap: 8px;
 
-          .showPasswordButton {
-            position: absolute;
-            top: 50%;
-            right: 1%;
-            transform: translate(0%, -50%);
-            background-color: transparent;
-            border: none;
+          label {
             font-size: 0.8rem;
+
+            span {
+              color: rgb(207, 55, 55);
+            }
+          }
+
+          input {
+            width: 100%;
+            height: 40px;
+          }
+
+          div {
+            position: relative;
+
+            .showPasswordButton {
+              background-color: transparent;
+              border: none;
+              position: absolute;
+              top: 50%;
+              right: 2%;
+              transform: translate(0%, -50%);
+              cursor: pointer;
+            }
           }
         }
-      }
 
-      .registerSubmit {
-        height: 40px;
-        width: 100%;
-        background-color: var(--secondary-text-color);
-        border: none;
-        color: white;
-        border-radius: 5px;
-        margin-top: 24px;
-        text-transform: uppercase;
-        letter-spacing: 1.5px;
-
-        &:hover {
-          border: 1px solid var(--secondary-text-color);
-          background-color: white;
+        .loginSubmit {
+          height: 40px;
+          width: 100%;
+          background-color: var(--main-color);
+          border: none;
           color: var(--secondary-text-color);
-          cursor: pointer;
-        }
-      }
+          border-radius: 5px;
+          margin-top: 24px;
+          text-transform: uppercase;
+          letter-spacing: 1.5px;
 
-      .error {
-        color: rebeccapurple;
+          &:hover {
+            border: 1px solid var(--secondary-text-color);
+            background-color: white;
+            color: var(--secondary-text-color);
+            cursor: pointer;
+          }
+        }
+
+        .error {
+          color: rgb(207, 55, 55);
+          font-size: 0.8rem;
+        }
       }
     }
 
-    .loginContainer {
+    .signupContainer {
       display: flex;
       flex-direction: column;
       align-items: center;
-      justify-content: center;
-      margin-top: 20px;
+      justify-content: flex-end;
+      // margin-top: 80px;
       font-size: 0.8rem;
 
-      .loginButton {
+      .registerLink {
         background-color: transparent;
         border: none;
         padding-left: 8px;
         text-decoration: underline;
         cursor: pointer;
       }
+    }
+  }
+
+  .imageSide {
+    width: 60%;
+
+    .loginImage {
+      height: 100%;
+      width: 100%;
     }
   }
 }

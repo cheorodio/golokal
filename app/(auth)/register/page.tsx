@@ -1,11 +1,10 @@
+import RegisterForm from './Register';
 import styles from './register.module.scss';
-import RegisterForm from './RegisterForm';
 
 export default function RegisterPage() {
   return (
-    <main className={styles.registerPage}>
+    <main className={styles.loginPage}>
       <RegisterForm />
-      <div className={styles.overlay} />
     </main>
   );
 }
