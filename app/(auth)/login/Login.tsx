@@ -5,7 +5,7 @@ import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import loginImage from '../../../public/images/login.jpg';
 import { LoginResponseBodyPost } from '../../api/(auth)/login/route';
-import styles from './login.module.scss';
+import styles from '../../styles/loginPage.module.scss';
 
 export default function LoginForm() {
   const [username, setUsername] = useState('');

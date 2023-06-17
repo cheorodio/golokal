@@ -5,7 +5,7 @@ import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import loginImage from '../../../public/images/login.jpg';
 import { RegisterResponseBodyPost } from '../../api/(auth)/register/route';
-import styles from './register.module.scss';
+import styles from '../../styles/loginPage.module.scss';
 
 export default function RegisterPage() {
   const [username, setUsername] = useState('');

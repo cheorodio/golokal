@@ -24,7 +24,7 @@ export default function NavBar() {
         <ul className={styles.navLinks}>
           {links.map(({ id, title, link }) => (
             <Link href={link} key={`key-${id}`}>
-              <li className={styles.navList}>{title}</li>
+              <li>{title}</li>
             </Link>
           ))}
         </ul>
