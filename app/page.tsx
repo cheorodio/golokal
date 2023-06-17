@@ -1,10 +1,9 @@
 import Image from 'next/image';
 import Link from 'next/link';
-// import discoverHeader from '../public/images/discoverHeader.jpg';
+import about from '../public/images/about.jpg';
 import connect from '../public/images/icons/connect.png';
 import discover from '../public/images/icons/discover.png';
 import explore from '../public/images/icons/explore.png';
-// import statistic from '../public/images/statistic.jpg';
 import styles from './styles/homepage.module.scss';
 
 export default function Home() {
@@ -20,12 +19,45 @@ export default function Home() {
 
       <section className={styles.aboutSection}>
         <div className={styles.inBetween} />
-        <h2>
-          GoLokal is your ultimate destination for local and handmade products.
-          We are passionate about supporting artisans, craftsmen, and local
-          businesses, and our platform serves as a virtual marketplace to
-          showcase their unique creations.
-        </h2>
+        <div className={styles.aboutInfo}>
+          <h2 className={styles.aboutTitle}>
+            The ultimate destination for local and handmade products.
+          </h2>
+          <p className={styles.aboutDescription}>
+            At golokal, we are passionate about supporting artisans, craftsmen,
+            and local businesses, and our platform serves as a virtual
+            marketplace to showcase their unique creations.
+          </p>
+        </div>
+
+        <div className={styles.imageSection}>
+          <Image
+            src={about}
+            alt="A woman wearing a pair of handmade earrings"
+            width={400}
+            height={400}
+            className={styles.aboutImage}
+          />
+        </div>
+
+        <div className={styles.moreInfoSection}>
+          <div className={styles.iconsSection}>
+            <Image className={styles.icon} src={explore} alt="explore icon" />
+            <p>Explore curated collection of local and handmade products.</p>
+          </div>
+          <div className={styles.iconsSection}>
+            <Image className={styles.icon} src={discover} alt="discover icon" />
+
+            <p>
+              {' '}
+              Discover the stories and talents of local artisans and craftsmen.
+            </p>
+          </div>
+          <div className={styles.iconsSection}>
+            <Image className={styles.icon} src={connect} alt="connect icon" />
+            <p> Connect with a community of like-minded individuals.</p>
+          </div>
+        </div>
       </section>
       {/*
       <section className={styles.aboutSection}>
@@ -60,9 +92,10 @@ export default function Home() {
               alt="discover icon"
             />
             <p>
-              Discover the stories and talents of local artisans and craftsmen
-              who pour their passion into creating each handmade item,
-              empowering them to thrive and preserve their traditional skills.
+              Connect with a vibrant community of like-minded individuals who
+              share your love for locally made goods. Engage in discussions,
+              attend events, and collaborate with fellow enthusiasts and
+              artisans.
             </p>
           </div>
           <div>

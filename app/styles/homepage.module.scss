@@ -13,7 +13,6 @@
   align-items: center;
   padding-top: 150px;
   text-align: center;
-  // justify-content: center;
 
   @media screen and (min-width: $tablet) {
     padding: 0px;
@@ -60,7 +59,6 @@
     padding: 10px 80px;
     border-radius: 40px;
     border: 1px solid var(--secondary-text-color);
-    // background-color: var(--bg-color);
   }
 }
 
@@ -75,15 +73,113 @@
   }
 }
 
-// IN BETWEEN ///////
-
-// SECOND SECTION /////////////////
+// ABOUT SECTION /////////////////
 .aboutSection {
   position: relative;
   padding: 50px 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 40px;
 
   @media screen and (min-width: $tablet) {
     padding: 50px 80px;
+    flex-direction: row;
+    gap: 10px;
+
+    display: grid;
+    grid-template-columns: 1.75fr 1.25fr;
+    grid-template-rows: 2fr 1fr;
+  }
+
+  .aboutInfo {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    gap: 16px;
+
+    @media screen and (min-width: $tablet) {
+      grid-column: 1/2;
+      grid-row: 1/2;
+      text-align: start;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .aboutTitle {
+      font-size: 1.75rem;
+      font-family: var(--title-text);
+
+      @media screen and (min-width: $tablet) {
+        font-size: 3rem;
+      }
+    }
+
+    .aboutDescription {
+      font-size: 1rem;
+
+      @media screen and (min-width: $tablet) {
+        font-size: 1.25rem;
+        line-height: 1.25;
+      }
+    }
+  }
+
+  .imageSection {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    @media screen and (min-width: $tablet) {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      grid-column: 2/3;
+      grid-row: 1/3;
+    }
+    .aboutImage {
+      border-radius: 10px;
+
+      @media screen and (min-width: $tablet) {
+        height: 450px;
+        width: 450px;
+      }
+    }
+  }
+
+  .moreInfoSection {
+    @media screen and (min-width: $tablet) {
+      display: flex;
+
+      .iconsSection {
+        flex: 1;
+        // border-right: 0.5px solid black;
+        padding: 8px;
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+        align-items: center;
+        text-align: center;
+
+        &:nth-child(3) {
+          border: none;
+        }
+
+        .icon {
+          height: 40px;
+          width: 40px;
+        }
+
+        h6 {
+          font-size: 1rem;
+        }
+
+        p {
+          font-size: 0.9rem;
+        }
+      }
+    }
   }
 
   .inBetween {
