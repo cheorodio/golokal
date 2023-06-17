@@ -103,7 +103,7 @@ export default function RegisterPage() {
               className={styles.loginSubmit}
               onClick={async () => await register()}
             >
-              Log in
+              Register
             </button>
             {error !== '' && <div className={styles.error}>{error}</div>}
           </form>
