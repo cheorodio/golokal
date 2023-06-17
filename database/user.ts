@@ -11,6 +11,11 @@ export type UserWithPasswordHash = {
 export type User = {
   id: number;
   username: string;
+};
+
+type CreateUser = {
+  id: number;
+  username: string;
   email: string;
 };
 
@@ -29,12 +34,11 @@ export const getUserByUsername = cache(async (username: string) => {
   const [user] = await sql<User[]>`
 SELECT
   id,
-  username,
-  email
+  username
 FROM
   users
 WHERE
-  users.username = ${username}`;
+  users.username = ${username.toLowerCase()}`;
   return user;
 });
 
@@ -42,7 +46,7 @@ WHERE
 export const createUser = cache(
   async (username: string, email: string, passwordHash: string) => {
     console.log(passwordHash);
-    const [user] = await sql<User[]>`
+    const [user] = await sql<CreateUser[]>`
     INSERT INTO users
       (username, email, password_hash)
     VALUES
