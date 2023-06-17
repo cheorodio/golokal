@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { useState } from 'react';
 import { IoClose } from 'react-icons/io5';
 import loginImage from '../../../public/images/hero.jpg';
+import { RegisterResponseBodyPost } from '../../api/(auth)/register/route';
 import styles from './register.module.scss';
 
 export default function RegisterPage() {
@@ -11,10 +12,30 @@ export default function RegisterPage() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [passwordShown, setPasswordShown] = useState(false);
+  const [error, setError] = useState();
 
   const togglePassword = () => {
     setPasswordShown(!passwordShown);
   };
+
+  async function register() {
+    const response = await fetch('/api/register', {
+      method: 'POST',
+      body: JSON.stringify({
+        username,
+        email,
+        password,
+      }),
+    });
+
+    const data: RegisterResponseBodyPost = await response.json();
+
+    if ('error' in data) {
+      setError(data.error);
+      console.log(data.error);
+      return;
+    }
+  }
 
   return (
     <div className={styles.registerContainer}>
@@ -60,7 +81,6 @@ export default function RegisterPage() {
               id="email"
               value={email}
               onChange={(event) => setEmail(event.currentTarget.value)}
-              required
             />
           </div>
 
@@ -74,7 +94,6 @@ export default function RegisterPage() {
                 type={passwordShown ? 'text' : 'password'}
                 value={password}
                 onChange={(event) => setPassword(event.currentTarget.value)}
-                required
               />
               <button
                 onClick={togglePassword}
@@ -86,19 +105,11 @@ export default function RegisterPage() {
           </div>
           <button
             className={styles.registerSubmit}
-            onClick={async () => {
-              await fetch('/api/register', {
-                method: 'POST',
-                body: JSON.stringify({
-                  username,
-                  email,
-                  password,
-                }),
-              });
-            }}
+            onClick={async () => await register()}
           >
             Register
           </button>
+          {error !== '' && <div className={styles.error}>{error}</div>}
         </form>
 
         <div className={styles.loginContainer}>

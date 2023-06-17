@@ -4,12 +4,32 @@ import Link from 'next/link';
 import { useState } from 'react';
 import { IoClose } from 'react-icons/io5';
 import loginImage from '../../../public/images/hero.jpg';
+import { LoginResponseBodyPost } from '../../api/(auth)/login/route';
 import styles from './login.module.scss';
 
 export default function LoginForm() {
-  const [email, setEmail] = useState('');
+  const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [passwordShown, setPasswordShown] = useState(false);
+  const [error, setError] = useState<string>();
+
+  async function login() {
+    const response = await fetch('/api/login', {
+      method: 'POST',
+      body: JSON.stringify({
+        username,
+        password,
+      }),
+    });
+
+    const data: LoginResponseBodyPost = await response.json();
+
+    if ('error' in data) {
+      setError(data.error);
+      console.log(data.error);
+      return;
+    }
+  }
 
   const togglePassword = () => {
     setPasswordShown(!passwordShown);
@@ -39,13 +59,13 @@ export default function LoginForm() {
           id="login"
           className={styles.loginForm}
         >
-          <label htmlFor="email">
+          <label htmlFor="username">
             Username <span>*</span>
           </label>
           <input
-            id="email"
-            value={email}
-            onChange={(event) => setEmail(event.currentTarget.value)}
+            id="username"
+            value={username}
+            onChange={(event) => setUsername(event.currentTarget.value)}
             className={styles.loginInput}
             required
           />
@@ -70,7 +90,13 @@ export default function LoginForm() {
             </button>
           </div>
 
-          <button className={styles.loginSubmit}>Log in</button>
+          <button
+            className={styles.loginSubmit}
+            onClick={async () => await login()}
+          >
+            Log in
+          </button>
+          {error !== '' && <div className={styles.error}>{error}</div>}
         </form>
 
         <div className={styles.signupContainer}>
