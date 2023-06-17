@@ -13,14 +13,16 @@ const links = [
 ];
 
 export default function NavBar() {
-  const [navbarOpen, setNavbarOpen] = useState(true);
+  const [menuOpen, setMenuOpen] = useState(false);
+  const toggleMenu = () => setMenuOpen((prev) => !prev);
 
   return (
     <header className={styles.navigationBar}>
       <Link href="/" className={styles.logo}>
         golokal
       </Link>
-      <nav>
+
+      <nav className={`${styles.nav} ${menuOpen ? styles[`navOpen`] : {}}`}>
         <ul className={styles.navLinks}>
           {links.map(({ id, title, link }) => (
             <Link href={link} key={`key-${id}`}>
@@ -28,35 +30,15 @@ export default function NavBar() {
             </Link>
           ))}
         </ul>
+        <div className={styles.right}>
+          <Link href="/login" className={styles.loginButton}>
+            Get Started
+          </Link>
+        </div>
       </nav>
 
-      <div className={styles.right}>
-        <Link href="/login" className={styles.loginButton}>
-          Get Started
-        </Link>
-        {/* <button
-          className={styles.loginButton}
-          onClick={() => {
-            setOpenModal(true);
-          }}
-        >
-          login
-        </button> */}
-      </div>
-
-      {/* LOGIN MODAL */}
-      {/* {openModal && <LoginModal closeModal={setOpenModal} />} */}
-
-      {/* MOBILE HAMBURGER NAV */}
-      <button
-        className={styles.menuButton}
-        onClick={() => setNavbarOpen((prev) => !prev)}
-      >
-        {navbarOpen ? (
-          <RxHamburgerMenu className={styles.hamburgerIcon} />
-        ) : (
-          <CgClose className={styles.closeIcon} />
-        )}
+      <button onClick={toggleMenu} className={styles.hamburgerIcon}>
+        {!menuOpen ? <RxHamburgerMenu /> : <CgClose />}
       </button>
     </header>
   );

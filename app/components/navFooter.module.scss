@@ -6,140 +6,113 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 20px;
+  padding: 20px 80px;
   flex: 1;
 
-  @media screen and (min-width: $tablet) {
-    padding: 20px 80px;
+  @media screen and (max-width: $tablet) {
+    padding: 20px;
   }
 
   .logo {
     display: flex;
     gap: 20px;
-    width: 20%;
     font-family: var(--title-text);
     text-transform: uppercase;
   }
 
-  nav {
-    display: none;
+  .nav {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: transparent;
 
-    @media screen and (min-width: $tablet) {
-      display: block;
-      width: 60%;
+    @media screen and (max-width: $tablet) {
+      position: fixed;
+      flex-direction: column;
+      background-color: white;
+      top: 0;
+      right: -100%;
+      width: 50%;
+      height: 100vh;
+      z-index: 3;
+      display: flex;
+      align-items: flex-start;
+      justify-content: flex-start;
+      padding: 80px 0px 0px 50px;
+
+      &Open {
+        transition: 0.2s ease right;
+        right: 0;
+      }
     }
 
     .navLinks {
-      @media screen and (min-width: $tablet) {
-        display: flex;
-        justify-content: center;
-        gap: 24px;
+      display: flex;
+      justify-content: center;
+      gap: 24px;
+      border-right: 1.5px solid black;
+      padding-right: 20px;
+
+      @media screen and (max-width: $tablet) {
+        flex-direction: column;
+        border: none;
+        font-size: 1.5rem;
+        border-bottom: 1.5px solid black;
+        padding-bottom: 20px;
       }
     }
-  }
 
-  .right {
-    display: none;
-
-    @media screen and (min-width: $tablet) {
-      width: 20%;
+    .right {
       display: flex;
       justify-content: flex-end;
+      padding-left: 20px;
+
+      @media screen and (max-width: $tablet) {
+        padding: 0px;
+      }
+
+      .loginButton {
+        display: flex;
+
+        @media screen and (max-width: $tablet) {
+          padding-top: 20px;
+          font-size: 1rem;
+          text-transform: uppercase;
+        }
+      }
+    }
+  }
+
+  .hamburgerIcon {
+    display: none;
+
+    @media screen and (max-width: $tablet) {
+      display: block;
+      background: transparent;
+      border: none;
+      cursor: pointer;
+      z-index: 4;
+      font-size: 1.5rem;
     }
 
-    .loginButton {
-      display: none;
-
-      @media screen and (min-width: $tablet) {
-        display: flex;
-        padding: 8px 30px;
-        border-radius: 30px;
-        background-color: var(--main-color);
+    div {
+      @media screen and (max-width: $tablet) {
+        width: 20px;
+        height: 2px;
+        background: black;
+        margin: 4px;
+        transition: 0.3s ease-in;
       }
     }
   }
 }
 
-// .navigationBar {
-//   position: absolute;
-//   width: 100%;
-//   z-index: 2;
-
-//   nav {
-//     display: flex;
-//     align-items: center;
-//     justify-content: space-between;
-//     margin: 20px 50px;
-//     padding: 0px 20px;
-//     border-radius: 50px;
-//     background-color: #ffffffa3;
-
-//     .left {
-//       display: flex;
-//       align-items: center;
-//       gap: 50px;
-
-//       .logo {
-//         font-size: 2rem;
-//         font-family: var(--logo-text);
-//         color: var(--secondary-text-color);
-//       }
-
-//       .navLinks {
-//         display: flex;
-//         gap: 20px;
-
-//         .navList {
-//           font-size: 0.9rem;
-//           text-transform: uppercase;
-//           color: var(--secondary-text-color);
-//         }
-
-//         @media (max-width: 900px) {
-//           display: none;
-//         }
-//       }
-//     }
-
-//     .right {
-//       display: flex;
-//       gap: 20px;
-
-//       .loginButton {
-//         // padding: 6px 30px;
-//         // border-radius: 10px;
-//         // background-color: var(--accent-color);
-//         color: var(--secondary-text-color);
-//         cursor: pointer;
-//         text-transform: uppercase;
-//         // letter-spacing: 1.5px;
-//       }
-
-//       @media (max-width: 900px) {
-//         display: none;
-//       }
-//     }
-//   }
-// }
-
-.menuButton {
-  display: none;
-  border: none;
-  background: transparent;
-
-  .hamburgerIcon,
-  .closeIcon {
-    font-size: 2rem;
-  }
-
-  @media (max-width: 900px) {
-    display: block;
-  }
-}
+// FOOTER /////////////////////
 
 .footer {
-  height: 70px;
-  padding: 0px 20px;
+  height: 150px;
+  background-color: rgba(0, 0, 255, 0.178);
+  padding: 0px 80px;
   display: flex;
   align-items: center;
   justify-content: space-between;
