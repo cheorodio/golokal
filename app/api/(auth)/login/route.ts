@@ -1,5 +1,6 @@
 import crypto from 'node:crypto';
 import bcrypt from 'bcrypt';
+import { cookies } from 'next/dist/client/components/headers';
 import { NextRequest, NextResponse } from 'next/server';
 import { z } from 'zod';
 import { creaateSession } from '../../../../database/sessions';
@@ -7,6 +8,7 @@ import {
   getUserWithPasswordHashByUsername,
   User,
 } from '../../../../database/user';
+import { secureCookieOptions } from '../../../util/cookies';
 
 type Error = {
   error: string;
@@ -88,15 +90,33 @@ export async function POST(
   // 4. Create a token
   const token = crypto.randomBytes(100).toString('base64');
   // 5. Create session record
-  const session = creaateSession(token, userWithPasswordHash.id);
+  const session = await creaateSession(token, userWithPasswordHash.id);
 
-  console.log(session);
+  if (!session) {
+    return NextResponse.json(
+      {
+        error: 'Error creating the new session',
+      },
+      { status: 500 },
+    );
+  }
+
   // 6. Send new cookie in the headders
-
-  return NextResponse.json({
-    user: {
-      username: userWithPasswordHash.username,
-      id: userWithPasswordHash.id,
-    },
+  cookies().set({
+    name: 'sessionToken',
+    value: session.token,
+    ...secureCookieOptions,
   });
+
+  return NextResponse.json(
+    {
+      user: {
+        username: userWithPasswordHash.username,
+        id: userWithPasswordHash.id,
+      },
+    },
+    {
+      status: 200,
+    },
+  );
 }
