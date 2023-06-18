@@ -1,8 +1,11 @@
 'use client';
+
+import { Route } from 'next';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
+import { RxEyeClosed, RxEyeOpen } from 'react-icons/rx';
 import loginImage from '../../../public/images/login.jpg';
 import { LoginResponseBodyPost } from '../../api/(auth)/login/route';
 import styles from '../../styles/loginPage.module.scss';
@@ -34,7 +37,8 @@ export default function LoginForm(props: Props) {
       return;
     }
     router.push(
-      getSafeReturnToPath(props.returnTo) || `/profile/${data.user.username}`,
+      getSafeReturnToPath(props.returnTo) ||
+        (`/profile/${data.user.username}` as Route),
     );
     router.refresh();
   }
@@ -86,7 +90,7 @@ export default function LoginForm(props: Props) {
                   onClick={togglePassword}
                   className={styles.showPasswordButton}
                 >
-                  show
+                  {passwordShown ? <RxEyeClosed /> : <RxEyeOpen />}
                 </button>
               </div>
             </div>

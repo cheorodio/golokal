@@ -3,6 +3,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
+import { RxEyeClosed, RxEyeOpen } from 'react-icons/rx';
 import loginImage from '../../../public/images/login.jpg';
 import { RegisterResponseBodyPost } from '../../api/(auth)/register/route';
 import styles from '../../styles/loginPage.module.scss';
@@ -94,7 +95,7 @@ export default function RegisterPage() {
                   onClick={togglePassword}
                   className={styles.showPasswordButton}
                 >
-                  show
+                  {passwordShown ? <RxEyeClosed /> : <RxEyeOpen />}
                 </button>
               </div>
             </div>
