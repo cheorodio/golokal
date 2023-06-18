@@ -111,11 +111,12 @@
 
 .footer {
   height: 150px;
-  background-color: rgba(0, 0, 255, 0.178);
-  padding: 0px 80px;
+  // background-color: rgba(0, 0, 255, 0.178);
+  margin: 0px 80px;
   display: flex;
   align-items: center;
   justify-content: space-between;
+  border-top: 1px solid black;
 
   div {
     display: flex;
