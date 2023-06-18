@@ -37,7 +37,7 @@ export default function RegisterPage() {
       return;
     }
     console.log(data.user);
-    router.push(`/profile/${data.user.username}`);
+    router.push(`/${data.user.username}`);
     router.refresh();
   }
 

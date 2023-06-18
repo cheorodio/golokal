@@ -29,11 +29,11 @@ export async function POST(
 ): Promise<NextResponse<LoginResponseBodyPost>> {
   const body = await request.json();
 
-  // get credentials from the body
+  // 1. get credentials from the body
   // console.log(body);
   const result = userSchema.safeParse(body);
 
-  // verify the user data and check that the name is not taken
+  // 2. verify the user data and check that the name is not taken
   if (!result.success) {
     return NextResponse.json(
       {
@@ -43,7 +43,7 @@ export async function POST(
     );
   }
 
-  // verify if the user credentials
+  // 3. verify if the user credentials
   const userWithPasswordHash = await getUserWithPasswordHashByUsername(
     result.data.username,
   );
@@ -85,13 +85,13 @@ export async function POST(
 
   // After authenticating user:
 
-  // 1. Create a token
+  // 4. Create a token
   const token = crypto.randomBytes(100).toString('base64');
-  // 2. Create session record
+  // 5. Create session record
   const session = creaateSession(token, userWithPasswordHash.id);
 
   console.log(session);
-  // 3. Send new cookie in the headders
+  // 6. Send new cookie in the headders
 
   return NextResponse.json({
     user: {
