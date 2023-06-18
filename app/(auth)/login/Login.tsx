@@ -6,8 +6,11 @@ import { useState } from 'react';
 import loginImage from '../../../public/images/login.jpg';
 import { LoginResponseBodyPost } from '../../api/(auth)/login/route';
 import styles from '../../styles/loginPage.module.scss';
+import { getSafeReturnToPath } from '../../util/validation';
 
-export default function LoginForm() {
+type Props = { returnTo?: string };
+
+export default function LoginForm(props: Props) {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [passwordShown, setPasswordShown] = useState(false);
@@ -27,9 +30,15 @@ export default function LoginForm() {
 
     if ('error' in data) {
       setError(data.error);
+      return;
     }
 
     if ('user' in data) {
+      const returnTo = getSafeReturnToPath(props.returnTo);
+      if (returnTo) {
+        router.push(returnTo);
+        return;
+      }
       router.push(`/profile/${data.user.username}`);
       router.refresh();
     }
