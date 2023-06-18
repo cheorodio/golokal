@@ -1,3 +1,4 @@
+import crypto from 'node:crypto';
 import bcrypt from 'bcrypt';
 import { NextRequest, NextResponse } from 'next/server';
 import { z } from 'zod';
@@ -81,26 +82,18 @@ export async function POST(
     );
   }
 
+  // After authenticating user:
+
+  // 1. Create a token
+  const token = crypto.randomBytes(100).toString('base64');
+  // 2. Create session record
+
+  // 3. Send new cookie in the headders
+
   return NextResponse.json({
     user: {
       username: userWithPasswordHash.username,
       id: userWithPasswordHash.id,
     },
   });
-
-  // // store credentials in the DB
-  // // const newUser = await createUser(result.data.username, passwordHash);
-
-  // if (!newUser) {
-  //   // zod send you details about the error
-  //   // console.log(result.error);
-  //   return NextResponse.json(
-  //     {
-  //       error: 'Error creating the new user',
-  //     },
-  //     { status: 500 },
-  //   );
-  // }
-
-  // return NextResponse.json({ user: newUser });
 }
