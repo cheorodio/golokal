@@ -37,7 +37,7 @@ export default function NavBar() {
             Get Started
           </Link>
         </div>
-        <div className={styles.logout}>
+        <div>
           <LogoutButton />
         </div>
       </nav>
