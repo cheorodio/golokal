@@ -1,10 +1,9 @@
 'use client';
-import { cookies } from 'next/headers';
+
 import Link from 'next/link';
 import { useState } from 'react';
 import { CgClose } from 'react-icons/cg';
 import { RxHamburgerMenu } from 'react-icons/rx';
-import LogoutButton from './LogoutButton';
 import styles from './navFooter.module.scss';
 
 const links = [
@@ -19,12 +18,8 @@ export default function NavBar() {
   const toggleMenu = () => setMenuOpen((prev) => !prev);
 
   return (
-    <header className={styles.navigationBar}>
-      <Link href="/" className={styles.logo}>
-        golokal
-      </Link>
-
-      <nav className={`${styles.nav} ${menuOpen ? styles[`navOpen`] : {}}`}>
+    <>
+      <div className={`${styles.nav} ${menuOpen ? styles[`navOpen`] : {}}`}>
         <ul className={styles.navLinks}>
           {links.map(({ id, title, link }) => (
             <Link href={link} key={`key-${id}`}>
@@ -32,19 +27,11 @@ export default function NavBar() {
             </Link>
           ))}
         </ul>
-        <div className={styles.right}>
-          <Link href="/login" className={styles.loginButton}>
-            Get Started
-          </Link>
-        </div>
-        <div>
-          <LogoutButton />
-        </div>
-      </nav>
+      </div>
 
       <button onClick={toggleMenu} className={styles.hamburgerIcon}>
         {!menuOpen ? <RxHamburgerMenu /> : <CgClose />}
       </button>
-    </header>
+    </>
   );
 }
