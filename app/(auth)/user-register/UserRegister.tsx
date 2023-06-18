@@ -5,9 +5,9 @@ import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { HiOutlineArrowNarrowLeft } from 'react-icons/hi';
 import { RxEyeClosed, RxEyeOpen } from 'react-icons/rx';
-import loginImage from '../../../../public/images/login.jpg';
-import { RegisterResponseBodyPost } from '../../../api/(auth)/register/route';
-import styles from '../../../styles/loginPage.module.scss';
+import loginImage from '../../../public/images/login.jpg';
+import { RegisterResponseBodyPost } from '../../api/(auth)/register/route';
+import styles from '../../styles/loginPage.module.scss';
 
 export default function UserRegisterForm() {
   const [username, setUsername] = useState('');

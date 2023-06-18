@@ -1,7 +1,9 @@
 import { cookies } from 'next/headers';
 import { redirect } from 'next/navigation';
-import { getValidSessionByToken } from '../../../../database/sessions';
-import VendorRegisterForm from './VendorRegister';
+// import VendorRegisterForm from './VendorRegister';
+import { getValidSessionByToken } from '../../../database/sessions';
+// import { getValidSessionByToken } from '../../../database/sessions';
+import UserRegisterForm from './UserRegister';
 
 type Props = { searchParams: { returnTo?: string | string[] } };
 
@@ -18,7 +20,7 @@ export default async function RegisterPage({ searchParams }: Props) {
 
   return (
     <main>
-      <VendorRegisterForm returnTo={searchParams.returnTo} />
+      <UserRegisterForm returnTo={searchParams.returnTo} />
     </main>
   );
 }
