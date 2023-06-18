@@ -5,6 +5,7 @@ const nextConfig = withPWA({
   dest: 'public',
   experimental: {
     typedRoutes: true,
+    serverActions: true,
   },
 });
 
