@@ -1,8 +1,10 @@
 'use client';
+import { cookies } from 'next/headers';
 import Link from 'next/link';
 import { useState } from 'react';
 import { CgClose } from 'react-icons/cg';
 import { RxHamburgerMenu } from 'react-icons/rx';
+import LogoutButton from './LogoutButton';
 import styles from './navFooter.module.scss';
 
 const links = [
@@ -34,6 +36,9 @@ export default function NavBar() {
           <Link href="/login" className={styles.loginButton}>
             Get Started
           </Link>
+        </div>
+        <div className={styles.logout}>
+          <LogoutButton />
         </div>
       </nav>
 
