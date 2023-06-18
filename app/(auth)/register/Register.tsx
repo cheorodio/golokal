@@ -8,7 +8,7 @@ import loginImage from '../../../public/images/login.jpg';
 import { RegisterResponseBodyPost } from '../../api/(auth)/register/route';
 import styles from '../../styles/loginPage.module.scss';
 
-export default function RegisterPage() {
+export default function RegisterForm() {
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');

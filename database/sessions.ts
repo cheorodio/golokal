@@ -28,3 +28,34 @@ export const creaateSession = cache(async (token: string, userId: number) => {
 
   return session;
 });
+
+export const deleteSessionByToken = cache(async (token: string) => {
+  const [session] = await sql<{ id: number; token: string }[]>`
+    DELETE FROM
+      sessions
+    WHERE
+      sessions.token = ${token}
+    RETURNING
+      id,
+      token
+  `;
+
+  return session;
+});
+
+export const getValidSessionByToken = cache(async (token: string) => {
+  // Get the session if match the token AND is not expired
+  const [session] = await sql<{ id: number; token: string }[]>`
+    SELECT
+      sessions.id,
+      sessions.token
+    FROM
+      sessions
+    WHERE
+      sessions.token = ${token}
+    AND
+      sessions.expiry_timestamp > now()
+  `;
+
+  return session;
+});
