@@ -1,5 +1,6 @@
 import { notFound } from 'next/navigation';
-import { getUserByUsername } from '../../../database/user';
+import { getUserByUsername } from '../../../database/users';
+import styles from '../../styles/profilePage.module.scss';
 
 type Props = {
   params: { username: string };
@@ -11,5 +12,5 @@ export default async function UserProfilePage({ params }: Props) {
   if (!user) {
     notFound();
   }
-  return <div>welcome back {user.username}</div>;
+  return <div className={styles.profilePage}>welcome back {user.username}</div>;
 }

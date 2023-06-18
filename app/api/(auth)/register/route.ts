@@ -3,8 +3,12 @@ import bcrypt from 'bcrypt';
 import { cookies } from 'next/headers';
 import { NextRequest, NextResponse } from 'next/server';
 import { z } from 'zod';
-import { creaateSession } from '../../../../database/sessions';
-import { createUser, getUserByUsername, User } from '../../../../database/user';
+import { createSession } from '../../../../database/sessions';
+import {
+  createUser,
+  getUserByUsername,
+  User,
+} from '../../../../database/users';
 import { secureCookieOptions } from '../../../util/cookies';
 
 type Error = {
@@ -80,7 +84,7 @@ export async function POST(
   const token = crypto.randomBytes(100).toString('base64');
   // 6. Create the session record
 
-  const session = await creaateSession(token, newUser.id);
+  const session = await createSession(token, newUser.id);
 
   if (!session) {
     return NextResponse.json(

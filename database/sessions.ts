@@ -11,7 +11,7 @@ export const deleteExpiredSessions = cache(async () => {
   `;
 });
 
-export const creaateSession = cache(async (token: string, userId: number) => {
+export const createSession = cache(async (token: string, userId: number) => {
   const [session] = await sql<Session[]>`
     INSERT INTO sessions
       (token, user_id)

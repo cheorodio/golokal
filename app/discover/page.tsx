@@ -1,15 +1,15 @@
-import Image from 'next/image';
-import Link from 'next/link';
-import { getVendors } from '../../database/vendors';
+// import Image from 'next/image';
+// import Link from 'next/link';
+// import { getVendors } from '../../database/vendors';
 import styles from './discoverPage.module.scss';
 
 export default async function DiscoverPage() {
-  const vendors = await getVendors();
+  // const vendors = await getVendors();
   return (
     <main className={styles.discoverSection}>
       <h1>Discover local vendors</h1>
       <div className={styles.productsContainer}>
-        {vendors.map((vendor) => {
+        {/* {vendors.map((vendor) => {
           return (
             <div
               key={`vendor-div-${vendor.id}`}
@@ -35,7 +35,7 @@ export default async function DiscoverPage() {
               </Link>
             </div>
           );
-        })}
+        })} */}
       </div>
     </main>
   );

@@ -3,11 +3,9 @@ import bcrypt from 'bcrypt';
 import { cookies } from 'next/dist/client/components/headers';
 import { NextRequest, NextResponse } from 'next/server';
 import { z } from 'zod';
-import { creaateSession } from '../../../../database/sessions';
-import {
-  getUserWithPasswordHashByUsername,
-  User,
-} from '../../../../database/user';
+import { createSession } from '../../../../database/sessions';
+import { getUserWithPasswordHashByUsername } from '../../../../database/users';
+import { User } from '../../../../migrations/1686845726-createUsers';
 import { secureCookieOptions } from '../../../util/cookies';
 
 type Error = {
@@ -90,7 +88,7 @@ export async function POST(
   // 4. Create a token
   const token = crypto.randomBytes(100).toString('base64');
   // 5. Create session record
-  const session = await creaateSession(token, userWithPasswordHash.id);
+  const session = await createSession(token, userWithPasswordHash.id);
 
   if (!session) {
     return NextResponse.json(
