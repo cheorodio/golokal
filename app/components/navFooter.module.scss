@@ -2,9 +2,6 @@
 
 .navigation {
   display: flex;
-  div {
-    padding-left: 10px;
-  }
 }
 
 .logoutButton {
@@ -22,31 +19,29 @@
   padding: 20px 80px;
   flex: 1;
 
-  @media screen and (max-width: $tablet) {
-    padding: 20px;
+  div {
+    display: flex;
+    gap: 10px;
   }
 
-  .logo {
-    display: flex;
-    gap: 20px;
-    font-family: var(--title-text);
-    text-transform: uppercase;
+  @media screen and (max-width: $tablet) {
+    padding: 20px;
   }
 
   .nav {
     display: flex;
     align-items: center;
-    justify-content: center;
     background-color: transparent;
+    width: 30%;
 
     @media screen and (max-width: $tablet) {
       position: fixed;
       flex-direction: column;
       background-color: white;
-      top: 0;
-      right: -100%;
-      width: 50%;
+      left: -100%;
+      top: 0%;
       height: 100vh;
+      width: 50%;
       z-index: 3;
       display: flex;
       align-items: flex-start;
@@ -54,58 +49,74 @@
       padding: 80px 0px 0px 50px;
 
       &Open {
-        transition: 0.2s ease right;
-        right: 0;
+        transition: 0.5s ease-in-out;
+        left: 0;
       }
     }
 
     .navLinks {
       display: flex;
       justify-content: center;
-      gap: 24px;
-      border-right: 1.5px solid black;
-      padding-right: 20px;
+      gap: 20px;
 
       @media screen and (max-width: $tablet) {
         flex-direction: column;
         border: none;
         font-size: 1.5rem;
-        border-bottom: 1.5px solid black;
-        padding-bottom: 20px;
       }
     }
 
-    .right {
-      display: flex;
-      justify-content: flex-end;
-      padding-left: 20px;
+    // .right {
+    //   display: flex;
+    //   justify-content: flex-end;
+    //   padding-left: 20px;
 
-      @media screen and (max-width: $tablet) {
-        padding: 0px;
-      }
+    //   @media screen and (max-width: $tablet) {
+    //     padding: 0px;
+    //   }
 
-      .loginButton {
-        display: flex;
+    //   .loginButton {
+    //     display: flex;
 
-        @media screen and (max-width: $tablet) {
-          padding-top: 20px;
-          font-size: 1rem;
-          text-transform: uppercase;
-        }
-      }
-    }
+    //     @media screen and (max-width: $tablet) {
+    //       padding-top: 20px;
+    //       font-size: 1rem;
+    //       text-transform: uppercase;
+    //     }
+    //   }
+    // }
   }
 
+  .logo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--title-text);
+    text-transform: uppercase;
+    width: 40%;
+    font-size: 1.25rem;
+  }
+
+  .loginButton {
+    width: 30%;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+  }
+
+  // mobile menu
   .hamburgerIcon {
     display: none;
 
     @media screen and (max-width: $tablet) {
-      display: block;
+      display: flex;
       background: transparent;
       border: none;
       cursor: pointer;
       z-index: 4;
       font-size: 1.5rem;
+      width: 30%;
+      align-items: flex-start;
     }
 
     div {

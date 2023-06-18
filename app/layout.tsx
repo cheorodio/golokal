@@ -2,6 +2,7 @@ import './globals.scss';
 import { Inter } from 'next/font/google';
 import { cookies } from 'next/headers';
 import Link from 'next/link';
+import { RiAccountPinCircleLine } from 'react-icons/ri';
 import { getUserBySessionToken } from '../database/users';
 import { logout } from './(auth)/logout/actions';
 import Footer from './components/Footer';
@@ -36,20 +37,21 @@ export default async function RootLayout({ children }: LayoutProps) {
       </head>
       <body className={inter.className}>
         <nav className={styles.navigationBar}>
+          <NavBar />
           <div className={styles.logo}>
             <Link href="/">golokal</Link>
           </div>
-          <div className={styles.navigation}>
-            <NavBar />
-            <div>
-              {user ? (
-                <div>
-                  <LogoutButton logout={logout} />
-                </div>
-              ) : (
-                <Link href="/login">Get Started</Link>
-              )}
-            </div>
+          <div className={styles.loginButton}>
+            {user ? (
+              <div>
+                <LogoutButton logout={logout} />
+              </div>
+            ) : (
+              <Link href="/login">
+                {/* <RiAccountPinCircleLine /> */}
+                login
+              </Link>
+            )}
           </div>
         </nav>
         {children}
