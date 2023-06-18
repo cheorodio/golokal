@@ -1,20 +1,56 @@
 import { cache } from 'react';
-import { Vendors } from '../migrations/1686775216-createVendorTable';
+import { Vendor } from '../migrations/1687100213-createVendors';
 import { sql } from './connect';
 
-export const getVendors = cache(async () => {
-  const vendors1 = await sql<Vendors[]>`
-  SELECT * FROM vendors;`;
-  return vendors1;
+export type VendorWithPasswordHash = Vendor & {
+  passwordHash: string;
+};
+
+export const getVendorWithPasswordHashByUsername = cache(
+  async (username: string) => {
+    const [vendor] = await sql<VendorWithPasswordHash[]>`
+SELECT * FROM
+  vendors
+WHERE
+  vendors.username = ${username}`;
+    return vendor;
+  },
+);
+
+export const getVendorByUsername = cache(async (username: string) => {
+  const [vendor] = await sql<Vendor[]>`
+SELECT
+  id,
+  username,
+  shopname,
+  email
+FROM
+  vendors
+WHERE
+  vendors.username = ${username.toLowerCase()}`;
+  return vendor;
 });
 
-export const getVendorById = cache(async (name: string) => {
-  const vendors = await sql<Vendors[]>`
-  SELECT
-    *
-  FROM
-    vendors
-  WHERE
-    name = ${name}`;
-  return vendors[0];
-});
+// creating new users
+export const createVendor = cache(
+  async (
+    username: string,
+    shopname: string,
+    email: string,
+    passwordHash: string,
+  ) => {
+    const [vendor] = await sql<Vendor[]>`
+    INSERT INTO vendors
+      (username, shopname, email, password_hash)
+    VALUES
+      (${username.toLowerCase()}, ${shopname}, ${email}, ${passwordHash})
+    RETURNING
+      id,
+      shopname,
+      email,
+      username
+ `;
+
+    return vendor;
+  },
+);
