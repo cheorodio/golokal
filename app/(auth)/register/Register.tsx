@@ -33,12 +33,11 @@ export default function RegisterPage() {
 
     if ('error' in data) {
       setError(data.error);
+      return;
     }
-
-    if ('user' in data) {
-      router.push(`/profile/${data.user.username}`);
-      router.refresh();
-    }
+    console.log(data.user);
+    router.push(`/profile/${data.user.username}`);
+    router.refresh();
   }
 
   return (

@@ -30,18 +30,13 @@ export default function LoginForm(props: Props) {
 
     if ('error' in data) {
       setError(data.error);
+      console.log(data.error);
       return;
     }
-
-    if ('user' in data) {
-      const returnTo = getSafeReturnToPath(props.returnTo);
-      if (returnTo) {
-        router.push(returnTo);
-        return;
-      }
-      router.push(`/profile/${data.user.username}`);
-      router.refresh();
-    }
+    router.push(
+      getSafeReturnToPath(props.returnTo) || `/profile/${data.user.username}`,
+    );
+    router.refresh();
   }
 
   const togglePassword = () => {
