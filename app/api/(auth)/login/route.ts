@@ -2,6 +2,7 @@ import crypto from 'node:crypto';
 import bcrypt from 'bcrypt';
 import { NextRequest, NextResponse } from 'next/server';
 import { z } from 'zod';
+import { creaateSession } from '../../../../database/sessions';
 import {
   getUserWithPasswordHashByUsername,
   User,
@@ -87,7 +88,9 @@ export async function POST(
   // 1. Create a token
   const token = crypto.randomBytes(100).toString('base64');
   // 2. Create session record
+  const session = creaateSession(token, userWithPasswordHash.id);
 
+  console.log(session);
   // 3. Send new cookie in the headders
 
   return NextResponse.json({
