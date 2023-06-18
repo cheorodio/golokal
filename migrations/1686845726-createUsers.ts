@@ -4,7 +4,7 @@ export type User = {
   id: number;
   username: string;
   email: string;
-  password_hash: string;
+  // password_hash: string;
 };
 
 export async function up(sql: Sql) {
