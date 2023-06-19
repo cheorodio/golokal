@@ -1,5 +1,6 @@
 'use client';
 
+import { Route } from 'next';
 import { useRouter } from 'next/navigation';
 import styles from '../styles/navFooter.module.scss';
 
@@ -15,6 +16,7 @@ export function LogoutButton(props: Props) {
         formAction={async () => {
           await props.logout();
           router.refresh();
+          router.push('/' as Route);
         }}
         className={styles.logoutButton}
       >
