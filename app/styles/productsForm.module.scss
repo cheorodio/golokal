@@ -1,0 +1,42 @@
+.addProductsForm {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--main-color);
+  margin-bottom: 50px;
+  padding: 30px;
+  border-radius: 5px;
+  gap: 20px;
+  width: 700px;
+
+  h3 {
+    font-family: var(--title-text);
+  }
+
+  form {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    width: 100%;
+
+    input {
+      width: 100%;
+      height: 40px;
+      border: none;
+      padding-left: 6px;
+    }
+
+    textarea {
+      width: 100%;
+      height: 60px;
+      border: none;
+      padding-left: 6px;
+      font-family: var(--body-text);
+    }
+
+    .createProductButton {
+      height: 40px;
+    }
+  }
+}
