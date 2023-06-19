@@ -42,16 +42,25 @@ export default async function RootLayout({ children }: LayoutProps) {
             <Link href="/">golokal</Link>
           </div>
           <div className={styles.loginButton}>
-            {user ? (
+            <Link href="/login" className={styles.dropdownButton}>
+              <RiAccountPinCircleLine />
+            </Link>
+            <div className={styles.dropdownOptions}>
               <div>
-                <LogoutButton logout={logout} />
+                {user ? (
+                  <div>
+                    {/* <div>Hello, {user.username}</div> */}
+                    <div>Profile</div>
+                    <LogoutButton logout={logout} />
+                  </div>
+                ) : (
+                  <>
+                    <Link href="/login">login</Link>
+                    <Link href="/register">register</Link>
+                  </>
+                )}
               </div>
-            ) : (
-              <Link href="/login">
-                {/* <RiAccountPinCircleLine /> */}
-                login
-              </Link>
-            )}
+            </div>
           </div>
         </nav>
         {children}

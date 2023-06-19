@@ -8,6 +8,7 @@
   background: transparent;
   border: none;
   font-size: 1rem;
+  cursor: pointer;
 }
 
 .navigationBar {
@@ -37,11 +38,11 @@
     @media screen and (max-width: $tablet) {
       position: fixed;
       flex-direction: column;
-      background-color: white;
-      left: -100%;
+      background: linear-gradient(to right, white, rgba(255, 255, 255, 0.732));
+      left: -200%;
       top: 0%;
       height: 100vh;
-      width: 50%;
+      width: 100vh;
       z-index: 3;
       display: flex;
       align-items: flex-start;
@@ -65,26 +66,6 @@
         font-size: 1.5rem;
       }
     }
-
-    // .right {
-    //   display: flex;
-    //   justify-content: flex-end;
-    //   padding-left: 20px;
-
-    //   @media screen and (max-width: $tablet) {
-    //     padding: 0px;
-    //   }
-
-    //   .loginButton {
-    //     display: flex;
-
-    //     @media screen and (max-width: $tablet) {
-    //       padding-top: 20px;
-    //       font-size: 1rem;
-    //       text-transform: uppercase;
-    //     }
-    //   }
-    // }
   }
 
   .logo {
@@ -102,6 +83,39 @@
     display: flex;
     justify-content: flex-end;
     align-items: center;
+    position: relative;
+
+    .dropdownButton {
+      background: transparent;
+      border: none;
+      font-size: 1.25rem;
+      cursor: pointer;
+    }
+
+    .dropdownOptions {
+      display: none;
+      position: absolute;
+      top: 100%;
+      right: 0;
+      width: 100px;
+
+      border-radius: 5px;
+      box-shadow: 1px 1px 10px 6px rgba(0, 0, 0, 0.1);
+      z-index: 6;
+
+      div {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 16px;
+        width: 100%;
+      }
+    }
+    &:hover .dropdownOptions {
+      display: block;
+      padding: 20px 0px;
+    }
   }
 
   // mobile menu
@@ -135,7 +149,6 @@
 
 .footer {
   height: 150px;
-  // background-color: rgba(0, 0, 255, 0.178);
   margin: 0px 80px;
   display: flex;
   align-items: center;
