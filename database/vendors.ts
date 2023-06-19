@@ -54,3 +54,23 @@ export const createVendor = cache(
     return vendor;
   },
 );
+
+export const getVendorBySessionToken = cache(async (token: string) => {
+  const [vendor] = await sql<Vendor[]>`
+  SELECT
+    vendors.id,
+    vendors.username,
+    vendors.shopname,
+    vendors.email
+  FROM
+    vendors
+  INNER JOIN
+    sessions ON (
+      sessions.token = ${token} AND
+      sessions.vendor_id = vendors.id AND
+      sessions.expiry_timestamp > now()
+    )
+  `;
+
+  return vendor;
+});

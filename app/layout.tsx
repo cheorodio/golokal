@@ -4,6 +4,7 @@ import { cookies } from 'next/headers';
 import Link from 'next/link';
 import { RiAccountPinCircleLine } from 'react-icons/ri';
 import { getUserBySessionToken } from '../database/users';
+import { getVendorBySessionToken } from '../database/vendors';
 import { logout } from './(auth)/logout/actions';
 import Footer from './components/Footer';
 import { LogoutButton } from './components/LogoutButton';
@@ -30,6 +31,10 @@ export default async function RootLayout({ children }: LayoutProps) {
     ? undefined
     : await getUserBySessionToken(sessionToken.value);
 
+  const vendor = !sessionToken?.value
+    ? undefined
+    : await getVendorBySessionToken(sessionToken.value);
+
   return (
     <html lang="en">
       <head>
@@ -47,11 +52,11 @@ export default async function RootLayout({ children }: LayoutProps) {
             </Link>
             <div className={styles.dropdownOptions}>
               <div>
-                {user ? (
-                  <div>
+                {user || vendor ? (
+                  <>
                     <div>Profile</div>
                     <LogoutButton logout={logout} />
-                  </div>
+                  </>
                 ) : (
                   <>
                     <Link href="/login">login</Link>
