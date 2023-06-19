@@ -1,11 +1,24 @@
-import Link from 'next/link';
-import styles from '../../styles/loginPage.module.scss';
+import { cookies } from 'next/headers';
+import { redirect } from 'next/navigation';
+import { getValidSessionByToken } from '../../../database/sessions';
+import RegisterForm from './Register';
 
-export default function RegisterPage() {
+type Props = { searchParams: { returnTo?: string | string[] } };
+
+export default async function RegisterPage({ searchParams }: Props) {
+  // redirect if the user is logged in
+  // 1. check if the sessionToken cookie exists
+  const sessionTokenCookie = cookies().get('sessionToken');
+  // 2. check if the sessionToken has a valid session
+  const session =
+    sessionTokenCookie &&
+    (await getValidSessionByToken(sessionTokenCookie.value));
+  // either redirect or render the login form
+  if (session) redirect('/');
+
   return (
-    <div className={styles.registerOption}>
-      <Link href="/user-register">Register as a user</Link>
-      <Link href="/vendor-register">Register as a vendor</Link>
-    </div>
+    <main>
+      <RegisterForm returnTo={searchParams.returnTo} />
+    </main>
   );
 }

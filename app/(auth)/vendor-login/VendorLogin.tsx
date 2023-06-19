@@ -1,62 +1,60 @@
 'use client';
+
+import { Route } from 'next';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
-import { HiOutlineArrowNarrowLeft } from 'react-icons/hi';
 import { RxEyeClosed, RxEyeOpen } from 'react-icons/rx';
 import loginImage from '../../../public/images/login.jpg';
-import { RegisterResponseBodyPost } from '../../api/(auth)/register/route';
+import { LoginResponseBodyPost } from '../../api/(auth)/login/route';
 import styles from '../../styles/loginPage.module.scss';
+import { getSafeReturnToPath } from '../../util/validation';
 
-export default function VendorRegisterForm() {
+type Props = { returnTo?: string };
+
+export default function LoginForm(props: Props) {
   const [username, setUsername] = useState('');
-  const [shopName, setShopName] = useState('');
-  const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [passwordShown, setPasswordShown] = useState(false);
   const [error, setError] = useState<string>();
   const router = useRouter();
 
-  const togglePassword = () => {
-    setPasswordShown(!passwordShown);
-  };
-
-  async function register() {
-    const response = await fetch('/api/register', {
+  async function login() {
+    const response = await fetch('/api/login', {
       method: 'POST',
       body: JSON.stringify({
         username,
-        email,
         password,
       }),
     });
 
-    const data: RegisterResponseBodyPost = await response.json();
+    const data: LoginResponseBodyPost = await response.json();
 
     if ('error' in data) {
       setError(data.error);
+      console.log(data.error);
       return;
     }
-    console.log(data.user);
-    router.push(`/${data.user.username}`);
+    router.push(
+      getSafeReturnToPath(props.returnTo) ||
+        (`/${data.user.username}` as Route),
+    );
     router.refresh();
   }
+
+  const togglePassword = () => {
+    setPasswordShown(!passwordShown);
+  };
 
   return (
     <div className={styles.loginContainer}>
       <div className={styles.loginFormSide}>
         <div className={styles.form}>
           <div className={styles.greeting}>
-            <Link href="/register" className={styles.returnLink}>
-              {' '}
-              <HiOutlineArrowNarrowLeft />
-              Go back
-            </Link>
-            <h1>Welcome</h1>
+            <h1>Welcome back</h1>
             <p>
-              You are registering as a vendor. Create an account now to join
-              over 100 other vendors on the platform.
+              Login to your account to connect with your favourite local vendors
             </p>
           </div>
 
@@ -67,7 +65,7 @@ export default function VendorRegisterForm() {
           >
             <div>
               <label htmlFor="username">
-                Username <span>*</span>
+                Shopname <span>*</span>
               </label>
               <input
                 id="username"
@@ -77,31 +75,10 @@ export default function VendorRegisterForm() {
             </div>
 
             <div>
-              <label htmlFor="shopName">
-                Shop name <span>*</span>
-              </label>
-              <input
-                id="shopName"
-                value={shopName}
-                onChange={(event) => setShopName(event.currentTarget.value)}
-              />
-            </div>
-
-            <div>
-              <label htmlFor="email">
-                Email <span>*</span>
-              </label>
-              <input
-                id="email"
-                value={email}
-                onChange={(event) => setEmail(event.currentTarget.value)}
-              />
-            </div>
-
-            <div>
               <label htmlFor="password">
                 Password <span>*</span>
               </label>
+
               <div>
                 <input
                   id="password"
@@ -119,9 +96,9 @@ export default function VendorRegisterForm() {
             </div>
             <button
               className={styles.loginSubmit}
-              onClick={async () => await register()}
+              onClick={async () => await login()}
             >
-              Register
+              Log in
             </button>
             {error !== '' && <div className={styles.error}>{error}</div>}
           </form>
@@ -129,9 +106,9 @@ export default function VendorRegisterForm() {
 
         <div className={styles.signupContainer}>
           <p>
-            Already have an account?
-            <Link href="/login" className={styles.registerLink}>
-              Login here
+            Don't have an account yet?
+            <Link href="/register" className={styles.registerLink}>
+              Register here
             </Link>
           </p>
         </div>
