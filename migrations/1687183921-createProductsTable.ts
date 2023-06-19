@@ -6,7 +6,7 @@ export type Product = {
   productType: string;
   category: string;
   description: string;
-  vendorId: number;
+  // vendorId: number;
 };
 
 export async function up(sql: Sql) {
@@ -16,8 +16,8 @@ export async function up(sql: Sql) {
       name varchar(30) NOT NULL,
       product_type varchar(30) NOT NULL,
       category varchar(40) NOT NULL,
-      description varchar(200) NOT NULL,
-      vendor_id integer REFERENCES vendors (id)
+      description varchar(200) NOT NULL
+      -- vendor_id integer REFERENCES vendors (id)
     )
   `;
 }
