@@ -1,5 +1,5 @@
 import { cache } from 'react';
-import { Session } from '../migrations/1687078261-createSessions';
+import { Session } from '../migrations/1687165581-createSessions';
 import { sql } from './connect';
 
 export const deleteExpiredSessions = cache(async () => {
@@ -19,8 +19,24 @@ export const createSession = cache(async (token: string, userId: number) => {
       (${token}, ${userId})
     RETURNING
       id,
-      token,
-      user_id
+      token
+    `;
+
+  // delete all expired sessions
+  await deleteExpiredSessions();
+
+  return session;
+});
+
+export const createVendorSession = cache(async (token: string, vendorId: number) => {
+  const [session] = await sql<Session[]>`
+    INSERT INTO sessions
+      (token, vendor_id)
+    VALUES
+      (${token}, ${vendorId})
+    RETURNING
+      id,
+      token
     `;
 
   // delete all expired sessions
