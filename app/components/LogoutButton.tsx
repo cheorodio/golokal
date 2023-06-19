@@ -1,7 +1,7 @@
 'use client';
 
 import { useRouter } from 'next/navigation';
-import styles from './navFooter.module.scss';
+import styles from '../styles/navFooter.module.scss';
 
 type Props = {
   logout: () => void;

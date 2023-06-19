@@ -8,7 +8,7 @@ import { logout } from './(auth)/logout/actions';
 import Footer from './components/Footer';
 import { LogoutButton } from './components/LogoutButton';
 import NavBar from './components/NavBar';
-import styles from './components/navFooter.module.scss';
+import styles from './styles/navFooter.module.scss';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -49,7 +49,6 @@ export default async function RootLayout({ children }: LayoutProps) {
               <div>
                 {user ? (
                   <div>
-                    {/* <div>Hello, {user.username}</div> */}
                     <div>Profile</div>
                     <LogoutButton logout={logout} />
                   </div>

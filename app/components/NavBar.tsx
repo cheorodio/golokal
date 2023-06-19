@@ -4,7 +4,7 @@ import Link from 'next/link';
 import { useState } from 'react';
 import { CgClose } from 'react-icons/cg';
 import { RxHamburgerMenu } from 'react-icons/rx';
-import styles from './navFooter.module.scss';
+import styles from '../styles/navFooter.module.scss';
 
 const links = [
   { id: 1, title: 'Home', link: '/' },
