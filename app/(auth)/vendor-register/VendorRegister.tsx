@@ -1,62 +1,63 @@
 'use client';
-
-import { Route } from 'next';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
+import { HiOutlineArrowNarrowLeft } from 'react-icons/hi';
 import { RxEyeClosed, RxEyeOpen } from 'react-icons/rx';
 import loginImage from '../../../public/images/login.jpg';
-import { LoginResponseBodyPost } from '../../api/(auth)/login/route';
+import { RegisterResponseBodyPost } from '../../api/(auth)/vendor-register/route';
 import styles from '../../styles/loginPage.module.scss';
-import { getSafeReturnToPath } from '../../util/validation';
 
-type Props = { returnTo?: string };
-
-export default function LoginForm(props: Props) {
+export default function RegisterForm() {
   const [username, setUsername] = useState('');
   const [shopname, setShopname] = useState('');
+  const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [passwordShown, setPasswordShown] = useState(false);
   const [error, setError] = useState<string>();
   const router = useRouter();
 
-  async function login() {
-    const response = await fetch('/api/login', {
+  const togglePassword = () => {
+    setPasswordShown(!passwordShown);
+  };
+
+  async function register() {
+    const response = await fetch('/api/vendor-register', {
       method: 'POST',
       body: JSON.stringify({
         username,
         shopname,
+        email,
         password,
       }),
     });
 
-    const data: LoginResponseBodyPost = await response.json();
+    const data: RegisterResponseBodyPost = await response.json();
 
     if ('error' in data) {
       setError(data.error);
-      console.log(data.error);
       return;
     }
-    router.push(
-      getSafeReturnToPath(props.returnTo) ||
-        (`/${data.user.username}` as Route),
-    );
+    console.log(data.vendor);
+    router.push(`/${data.vendor.username}`);
     router.refresh();
   }
-
-  const togglePassword = () => {
-    setPasswordShown(!passwordShown);
-  };
 
   return (
     <div className={styles.loginContainer}>
       <div className={styles.loginFormSide}>
         <div className={styles.form}>
           <div className={styles.greeting}>
-            <h1>Welcome back</h1>
+            <Link href="/register" className={styles.returnLink}>
+              {' '}
+              <HiOutlineArrowNarrowLeft />
+              Go back
+            </Link>
+            <h1>Welcome</h1>
             <p>
-              Login to your account to connect with your favourite local vendors
+              GoLokal is a platform connecting you with local vendors. Create an
+              account to get started.
             </p>
           </div>
 
@@ -88,10 +89,20 @@ export default function LoginForm(props: Props) {
             </div>
 
             <div>
+              <label htmlFor="email">
+                Email <span>*</span>
+              </label>
+              <input
+                id="email"
+                value={email}
+                onChange={(event) => setEmail(event.currentTarget.value)}
+              />
+            </div>
+
+            <div>
               <label htmlFor="password">
                 Password <span>*</span>
               </label>
-
               <div>
                 <input
                   id="password"
@@ -109,9 +120,9 @@ export default function LoginForm(props: Props) {
             </div>
             <button
               className={styles.loginSubmit}
-              onClick={async () => await login()}
+              onClick={async () => await register()}
             >
-              Log in
+              Register
             </button>
             {error !== '' && <div className={styles.error}>{error}</div>}
           </form>
@@ -119,9 +130,9 @@ export default function LoginForm(props: Props) {
 
         <div className={styles.signupContainer}>
           <p>
-            Don't have an account yet?
-            <Link href="/register" className={styles.registerLink}>
-              Register here
+            Already have an account?
+            <Link href="/login" className={styles.registerLink}>
+              Login here
             </Link>
           </p>
         </div>
