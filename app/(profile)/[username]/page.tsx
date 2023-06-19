@@ -22,10 +22,11 @@ export default async function UserProfilePage({ params }: Props) {
         <div className={styles.moreInfo}>
           <h1>{user.username}</h1>
           <p>
-            Information about this person. Information about this person.
-            Information about this person. Information about this person.
-            Information about this person. Information about this person.
-            Information about this person. Information about this person.{' '}
+            Bio from this person. Bio from this person. Bio from this person.
+            Bio from this person. Bio from this person. Bio from this person.
+            Bio from this person. Bio from this person. Bio from this person.
+            Bio from this person. Bio from this person. Bio from this person.
+            Bio from this person. Bio from this person.
           </p>
         </div>
       </div>
