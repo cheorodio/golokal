@@ -4,8 +4,8 @@ import { cookies } from 'next/dist/client/components/headers';
 import { NextRequest, NextResponse } from 'next/server';
 import { z } from 'zod';
 import { createVendorSession } from '../../../../database/sessions';
-import { getUserWithPasswordHashByUsername } from '../../../../database/users';
-import { User } from '../../../../migrations/1686845726-createUsers';
+import { getVendorWithPasswordHashByUsername } from '../../../../database/vendors';
+import { Vendor } from '../../../../migrations/1687100213-createVendors';
 import { secureCookieOptions } from '../../../util/cookies';
 
 type Error = {
@@ -14,12 +14,12 @@ type Error = {
 
 export type LoginResponseBodyPost =
   | {
-      user: User;
+      vendor: Vendor;
     }
   | Error;
 
 //  z object to validate user data
-const userSchema = z.object({
+const vendorSchema = z.object({
   username: z.string().min(1),
   password: z.string().min(1),
 });
@@ -31,7 +31,7 @@ export async function POST(
 
   // 1. get credentials from the body
   // console.log(body);
-  const result = userSchema.safeParse(body);
+  const result = vendorSchema.safeParse(body);
 
   // 2. verify the user data and check that the name is not taken
   if (!result.success) {
@@ -44,14 +44,14 @@ export async function POST(
   }
 
   // 3. verify if the user credentials
-  const userWithPasswordHash = await getUserWithPasswordHashByUsername(
+  const vendorWithPasswordHash = await getVendorWithPasswordHashByUsername(
     result.data.username,
   );
 
   // check userWithPasswordHash
   // console.log('userWithPassHash', userWithPasswordHash);
 
-  if (!userWithPasswordHash) {
+  if (!vendorWithPasswordHash) {
     return NextResponse.json(
       {
         error: 'User or password not valid!',
@@ -63,7 +63,7 @@ export async function POST(
   // hash the password
   const isPasswordValid = await bcrypt.compare(
     result.data.password,
-    userWithPasswordHash.passwordHash,
+    vendorWithPasswordHash.passwordHash,
   );
 
   // check if valid
@@ -88,7 +88,7 @@ export async function POST(
   // 4. Create a token
   const token = crypto.randomBytes(100).toString('base64');
   // 5. Create session record
-  const session = await createVendorSession(token, userWithPasswordHash.id);
+  const session = await createVendorSession(token, vendorWithPasswordHash.id);
 
   if (!session) {
     return NextResponse.json(
@@ -108,9 +108,9 @@ export async function POST(
 
   return NextResponse.json(
     {
-      user: {
-        username: userWithPasswordHash.username,
-        id: userWithPasswordHash.id,
+      vendor: {
+        username: vendorWithPasswordHash.username,
+        id: vendorWithPasswordHash.id,
       },
     },
     {

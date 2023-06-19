@@ -3,7 +3,7 @@ import bcrypt from 'bcrypt';
 import { cookies } from 'next/headers';
 import { NextRequest, NextResponse } from 'next/server';
 import { z } from 'zod';
-import { createSession } from '../../../../database/sessions';
+import { createVendorSession } from '../../../../database/sessions';
 import {
   createVendor,
   getVendorByUsername,
@@ -11,16 +11,10 @@ import {
 import { Vendor } from '../../../../migrations/1687100213-createVendors';
 import { secureCookieOptions } from '../../../util/cookies';
 
-// import {
-//   createUser,
-//   getUserByUsername,
-//   User,
-// } from '../../../../database/users';
-
 type Error = {
   error: string;
 };
-export type RegisterResponseBodyPost =
+export type VendorRegisterResponseBodyPost =
   | {
       vendor: Vendor;
     }
@@ -36,7 +30,7 @@ const vendorSchema = z.object({
 
 export async function POST(
   request: NextRequest,
-): Promise<NextResponse<RegisterResponseBodyPost>> {
+): Promise<NextResponse<VendorRegisterResponseBodyPost>> {
   const body = await request.json();
 
   // get credentials from the body
@@ -92,7 +86,7 @@ export async function POST(
   const token = crypto.randomBytes(100).toString('base64');
   // 6. Create the session record
 
-  const session = await createSession(token, newVendor.id);
+  const session = await createVendorSession(token, newVendor.id);
 
   if (!session) {
     return NextResponse.json(
@@ -110,5 +104,5 @@ export async function POST(
     ...secureCookieOptions,
   });
 
-  return NextResponse.json({ user: newVendor });
+  return NextResponse.json({ vendor: newVendor });
 }

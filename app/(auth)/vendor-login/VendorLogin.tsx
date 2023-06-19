@@ -7,7 +7,7 @@ import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { RxEyeClosed, RxEyeOpen } from 'react-icons/rx';
 import loginImage from '../../../public/images/login.jpg';
-import { LoginResponseBodyPost } from '../../api/(auth)/login/route';
+import { LoginResponseBodyPost } from '../../api/(auth)/vendorLogin/route';
 import styles from '../../styles/loginPage.module.scss';
 import { getSafeReturnToPath } from '../../util/validation';
 
@@ -22,7 +22,7 @@ export default function LoginForm(props: Props) {
   const router = useRouter();
 
   async function login() {
-    const response = await fetch('/api/login', {
+    const response = await fetch('/api/vendorLogin', {
       method: 'POST',
       body: JSON.stringify({
         username,
@@ -40,7 +40,7 @@ export default function LoginForm(props: Props) {
     }
     router.push(
       getSafeReturnToPath(props.returnTo) ||
-        (`/${data.user.username}` as Route),
+        (`/shop/${data.vendor.username}` as Route),
     );
     router.refresh();
   }

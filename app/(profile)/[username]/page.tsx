@@ -12,5 +12,5 @@ export default async function UserProfilePage({ params }: Props) {
   if (!user) {
     notFound();
   }
-  return <div className={styles.profilePage}>welcome back {user.username}</div>;
+  return <div className={styles.profilePage}>Hello {user.username}</div>;
 }

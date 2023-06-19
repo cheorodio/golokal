@@ -6,7 +6,7 @@ import { useState } from 'react';
 import { HiOutlineArrowNarrowLeft } from 'react-icons/hi';
 import { RxEyeClosed, RxEyeOpen } from 'react-icons/rx';
 import loginImage from '../../../public/images/login.jpg';
-import { RegisterResponseBodyPost } from '../../api/(auth)/vendor-register/route';
+import { VendorRegisterResponseBodyPost } from '../../api/(auth)/vendorRegister/route';
 import styles from '../../styles/loginPage.module.scss';
 
 export default function RegisterForm() {
@@ -23,7 +23,7 @@ export default function RegisterForm() {
   };
 
   async function register() {
-    const response = await fetch('/api/vendor-register', {
+    const response = await fetch('/api/vendorRegister', {
       method: 'POST',
       body: JSON.stringify({
         username,
@@ -33,14 +33,14 @@ export default function RegisterForm() {
       }),
     });
 
-    const data: RegisterResponseBodyPost = await response.json();
+    const data: VendorRegisterResponseBodyPost = await response.json();
 
     if ('error' in data) {
       setError(data.error);
       return;
     }
     console.log(data.vendor);
-    router.push(`/${data.vendor.username}`);
+    router.push(`/shop/${data.vendor.username}`);
     router.refresh();
   }
 
