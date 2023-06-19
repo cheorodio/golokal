@@ -1,4 +1,5 @@
 import { notFound } from 'next/navigation';
+import { AiOutlineCamera } from 'react-icons/ai';
 import { getUserByUsername } from '../../../database/users';
 import styles from '../../styles/profilePage.module.scss';
 
@@ -12,5 +13,36 @@ export default async function UserProfilePage({ params }: Props) {
   if (!user) {
     notFound();
   }
-  return <div className={styles.profilePage}>Hello {user.username}</div>;
+  return (
+    <main className={styles.profilePage}>
+      <div className={styles.profileInfo}>
+        <div className={styles.imageBox}>
+          <AiOutlineCamera />
+        </div>
+        <div className={styles.moreInfo}>
+          <h1>{user.username}</h1>
+          <p>
+            Information about this person. Information about this person.
+            Information about this person. Information about this person.
+            Information about this person. Information about this person.
+            Information about this person. Information about this person.{' '}
+          </p>
+        </div>
+      </div>
+      <div className={styles.followingVendors}>
+        <h2>Favourite vendors</h2>
+        <div className={styles.favouriteContainer}>
+          <div />
+          <div />
+          <div />
+          <div />
+          <div />
+          <div />
+          <div />
+          <div />
+          <div />
+        </div>
+      </div>
+    </main>
+  );
 }
