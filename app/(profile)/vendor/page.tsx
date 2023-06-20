@@ -1,9 +1,9 @@
 import Link from 'next/link';
 import { AiOutlineCamera } from 'react-icons/ai';
-import { getVendors } from '../../database/vendors';
-import styles from '../styles/vendorsPage.module.scss';
+import { getVendors } from '../../../database/vendors';
+import styles from '../../styles/DiscoverVendorsPage.module.scss';
 
-export default async function DiscoverPage() {
+export default async function DiscoverVendorsPage() {
   const vendors = await getVendors();
   return (
     <main className={styles.discoverSection}>

@@ -6,7 +6,7 @@ import { getProducts } from '../../../database/products';
 import { getValidSessionByToken } from '../../../database/sessions';
 import { getVendorByUsername } from '../../../database/vendors';
 import styles from '../../styles/shopPage.module.scss';
-import AddProducts from './AddProducts';
+import AddProducts from './DisplayProducts';
 import ProductsForm from './ProductsForm';
 
 type Props = {

@@ -2,13 +2,13 @@
 
 import { useState } from 'react';
 import { Product } from '../../../migrations/1687183921-createProductsTable';
-import styles from '../../styles/shopPage.module.scss';
+import styles from '../../styles/VendorProfilePage.module.scss';
 
 type Props = {
   products: Product[];
 };
 
-export default function AddProducts({ products }: Props) {
+export default function DisplayProducts({ products }: Props) {
   const [productList, setProductList] = useState(products);
   return (
     <div className={styles.productCardsContainer}>

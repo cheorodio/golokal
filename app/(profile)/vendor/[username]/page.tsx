@@ -1,16 +1,16 @@
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { AiOutlineCamera } from 'react-icons/ai';
-import { getProducts } from '../../../database/products';
-import { getVendorByUsername } from '../../../database/vendors';
-import AddProducts from '../../admin/[username]/AddProducts';
-import styles from '../../styles/shopPage.module.scss';
+import { getProducts } from '../../../../database/products';
+import { getVendorByUsername } from '../../../../database/vendors';
+import DisplayProducts from '../../../admin/[username]/DisplayProducts';
+import styles from '../../../styles/VendorProfilePage.module.scss';
 
 type Props = {
   params: { username: string };
 };
 
-export default async function UserProfilePage({ params }: Props) {
+export default async function VendorProfilePage({ params }: Props) {
   const vendor = await getVendorByUsername(params.username);
 
   if (!vendor) {
@@ -44,7 +44,7 @@ export default async function UserProfilePage({ params }: Props) {
         <div className={styles.productsFeed}>
           <h2>Products Feed</h2>
           <div className={styles.productsContainer}>
-            <AddProducts products={products} />
+            <DisplayProducts products={products} />
           </div>
         </div>
       </div>
