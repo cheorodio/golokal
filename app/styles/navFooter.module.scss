@@ -110,6 +110,39 @@
         justify-content: center;
         gap: 16px;
         width: 100%;
+        z-index: 3;
+
+        .loginButton {
+          cursor: pointer;
+
+          .loginDropdown {
+            z-index: 3;
+          }
+          .loginOptions {
+            display: none;
+            position: absolute;
+            top: -100%;
+            right: 50%;
+            width: 180px;
+
+            div {
+              display: flex;
+              flex-direction: column;
+              // padding-right: 50px;
+              // align-items: center;
+              // justify-content: center;
+              gap: 16px;
+              width: 100%;
+              cursor: pointer;
+            }
+          }
+
+          &:hover .loginOptions {
+            display: block;
+            padding: 20px 0px;
+          }
+          // }
+        }
       }
     }
     &:hover .dropdownOptions {

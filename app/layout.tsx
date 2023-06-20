@@ -47,7 +47,7 @@ export default async function RootLayout({ children }: LayoutProps) {
             <Link href="/">golokal</Link>
           </div>
           <div className={styles.loginButton}>
-            <Link href="/login" className={styles.dropdownButton}>
+            <Link href="/" className={styles.dropdownButton}>
               <RiAccountPinCircleLine />
             </Link>
             <div className={styles.dropdownOptions}>
@@ -59,8 +59,25 @@ export default async function RootLayout({ children }: LayoutProps) {
                   </>
                 ) : (
                   <>
-                    <Link href="/login">login</Link>
-                    <Link href="/register">register</Link>
+                    <div className={styles.loginButton}>
+                      <p className={styles.loginDropdown}>login</p>
+                      <div className={styles.loginOptions}>
+                        <div>
+                          <Link href="/user-login">User login</Link>
+                          <Link href="/vendor-login">Vendor login</Link>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div className={styles.loginButton}>
+                      <p className={styles.loginDropdown}>register</p>
+                      <div className={styles.loginOptions}>
+                        <div>
+                          <Link href="/user-register">User register</Link>
+                          <Link href="/vendor-register">Vendor register</Link>
+                        </div>
+                      </div>
+                    </div>
                   </>
                 )}
               </div>
