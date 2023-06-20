@@ -35,11 +35,11 @@ WHERE
 // creating new users
 export const createUser = cache(
   async (
-    firstName: string | null,
+    firstName: string,
     username: string,
     email: string,
     passwordHash: string,
-    bio: string | null,
+    bio: string,
   ) => {
     console.log(passwordHash);
     const [user] = await sql<User[]>`

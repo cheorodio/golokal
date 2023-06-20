@@ -83,13 +83,13 @@ WHERE
 // creating new vendors
 export const createVendor = cache(
   async (
-    firstName: string | null,
+    firstName: string,
     username: string,
     shopname: string,
     email: string,
     passwordHash: string,
-    websiteLink: string | null,
-    bio: string | null,
+    websiteLink: string,
+    bio: string,
   ) => {
     const [vendor] = await sql<Vendor[]>`
     INSERT INTO vendors
