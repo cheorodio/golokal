@@ -32,7 +32,7 @@ export default async function DiscoverPage() {
                 </p>
               </div>
               <Link
-                href={`/discover/${vendor.username}`}
+                href={`/discover/${vendor.shopname}`}
                 className={styles.visitVendorLink}
               >
                 visit profile
