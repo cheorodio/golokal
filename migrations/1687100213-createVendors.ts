@@ -2,12 +2,12 @@ import { Sql } from 'postgres';
 
 export type Vendor = {
   id: number;
-  firstName: string | null;
+  firstName: string;
   username: string;
   shopname: string;
   email: string;
-  websiteLink: string | null;
-  bio: string | null;
+  websiteLink: string;
+  bio: string;
 };
 
 export async function up(sql: Sql) {

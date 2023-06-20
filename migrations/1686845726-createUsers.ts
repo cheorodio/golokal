@@ -2,10 +2,10 @@ import { Sql } from 'postgres';
 
 export type User = {
   id: number;
-  firstName: string | null;
+  firstName: string;
   username: string;
   email: string;
-  bio: string | null;
+  bio: string;
 };
 
 export async function up(sql: Sql) {
