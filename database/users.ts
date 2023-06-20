@@ -23,8 +23,7 @@ SELECT
   id,
   first_name,
   username,
-  email,
-  bio
+  email
 FROM
   users
 WHERE
@@ -34,25 +33,17 @@ WHERE
 
 // creating new users
 export const createUser = cache(
-  async (
-    firstName: string,
-    username: string,
-    email: string,
-    passwordHash: string,
-    bio: string,
-  ) => {
-    console.log(passwordHash);
+  async (firstName: string, username: string, email: string, passwordHash: string) => {
     const [user] = await sql<User[]>`
     INSERT INTO users
-      (first_name, username, email, password_hash, bio)
+      (first_name, username, email, password_hash)
     VALUES
-      (${firstName}, ${username.toLowerCase()}, ${email}, ${passwordHash}, ${bio})
+      (${firstName}, ${username.toLowerCase()}, ${email}, ${passwordHash})
     RETURNING
       id,
       first_name,
       username,
-      email,
-      bio
+      email
  `;
 
     return user;
@@ -65,8 +56,7 @@ export const getUserBySessionToken = cache(async (token: string) => {
     users.id,
     users.first_name,
     users.username,
-    users.email,
-    users.bio
+    users.email
   FROM
     users
   INNER JOIN

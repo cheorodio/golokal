@@ -6,8 +6,8 @@ export type Vendor = {
   username: string;
   shopname: string;
   email: string;
-  websiteLink: string;
-  bio: string;
+  // websiteLink: string;
+  // bio: string;
 };
 
 export async function up(sql: Sql) {
@@ -15,7 +15,7 @@ export async function up(sql: Sql) {
   await sql`
     CREATE TABLE vendors (
       id integer PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
-      first_name varchar(80),
+      first_name varchar(80) NOT NULL,
       username varchar(80) NOT NULL,
       shopname varchar(80) NOT NULL,
       email varchar(80) NOT NULL,

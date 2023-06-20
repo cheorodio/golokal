@@ -5,7 +5,7 @@ export type User = {
   firstName: string;
   username: string;
   email: string;
-  bio: string;
+  // bio: string;
 };
 
 export async function up(sql: Sql) {
@@ -13,7 +13,7 @@ export async function up(sql: Sql) {
   await sql`
     CREATE TABLE users (
       id integer PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
-      first_name varchar(80),
+      first_name varchar(80) NOT NULL,
       username varchar(80) NOT NULL,
       email varchar(80) NOT NULL,
       password_hash varchar(80) NOT NULL,

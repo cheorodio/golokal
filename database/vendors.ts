@@ -70,9 +70,7 @@ SELECT
   first_name,
   username,
   shopname,
-  email,
-  website_link,
-  bio
+  email
 FROM
   vendors
 WHERE
@@ -88,22 +86,18 @@ export const createVendor = cache(
     shopname: string,
     email: string,
     passwordHash: string,
-    websiteLink: string,
-    bio: string,
   ) => {
     const [vendor] = await sql<Vendor[]>`
     INSERT INTO vendors
-      (first_name, username, shopname, email, password_hash, website_link, bio)
+      (first_name, username, shopname, email, password_hash)
     VALUES
-      (${firstName}, ${username.toLowerCase()}, ${shopname}, ${email}, ${passwordHash}, ${websiteLink}, ${bio})
+      (${firstName}, ${username.toLowerCase()}, ${shopname}, ${email}, ${passwordHash})
     RETURNING
       id,
       first_name,
       shopname,
       email,
-      username,
-      website_link,
-      bio
+      username
  `;
     return vendor;
   },
@@ -130,9 +124,7 @@ export const getVendorBySessionToken = cache(async (token: string) => {
     vendors.first_name,
     vendors.username,
     vendors.shopname,
-    vendors.email,
-    vendors.website_link,
-    vendors.bio
+    vendors.email
   FROM
     vendors
   INNER JOIN
