@@ -1,4 +1,4 @@
-import styles from '../styles/blogPage.module.scss';
+import styles from '../../styles/BlogPage.module.scss';
 
 export default function BlogPage() {
   return (
