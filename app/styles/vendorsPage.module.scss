@@ -48,12 +48,13 @@
         display: flex;
         align-items: center;
         justify-content: space-between;
+        padding: 0px 8px;
 
-        .vendorName {
+        .vendorShop {
           font-size: 1.25rem;
         }
 
-        .vendorShop {
+        .vendorName {
           font-size: 0.8rem;
         }
       }
@@ -61,6 +62,7 @@
       .vendorBio {
         font-size: 1rem;
         height: 110px;
+        padding: 0px 8px;
       }
 
       .visitVendorLink {
