@@ -40,7 +40,7 @@ export default function RegisterForm() {
       return;
     }
     console.log(data.vendor);
-    router.push(`/shop/${data.vendor.username}`);
+    router.push(`/admin/${data.vendor.username}`);
     router.refresh();
   }
 

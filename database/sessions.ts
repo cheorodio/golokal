@@ -24,12 +24,12 @@ export const createSession = cache(async (token: string, userId: number) => {
 
   // delete all expired sessions
   await deleteExpiredSessions();
-
   return session;
 });
 
-export const createVendorSession = cache(async (token: string, vendorId: number) => {
-  const [session] = await sql<Session[]>`
+export const createVendorSession = cache(
+  async (token: string, vendorId: number) => {
+    const [session] = await sql<Session[]>`
     INSERT INTO sessions
       (token, vendor_id)
     VALUES
@@ -38,12 +38,10 @@ export const createVendorSession = cache(async (token: string, vendorId: number)
       id,
       token
     `;
-
-  // delete all expired sessions
-  await deleteExpiredSessions();
-
-  return session;
-});
+    await deleteExpiredSessions();
+    return session;
+  },
+);
 
 export const deleteSessionByToken = cache(async (token: string) => {
   const [session] = await sql<{ id: number; token: string }[]>`

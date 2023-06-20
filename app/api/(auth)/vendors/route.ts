@@ -1,30 +1,29 @@
 import { cookies } from 'next/headers';
 import { NextRequest, NextResponse } from 'next/server';
 import { z } from 'zod';
-import {
-  createProduct,
-  getProductsWithLimitAndOffsetBySessionToken,
-} from '../../../../database/products';
 import { getValidSessionByToken } from '../../../../database/sessions';
-import { Product } from '../../../../migrations/1687183921-createProductsTable';
+import {
+  createVendor,
+  getVendorsWithLimitAndOffsetBySessionToken,
+} from '../../../../database/vendors';
+import { Vendor } from '../../../../migrations/1687100213-createVendors';
 
 export type Error = {
   error: string;
 };
 
-type ProductsResponseBodyGet = { product: Product[] } | Error;
-type ProductsResponseBodyPost = { product: Product } | Error;
+type VendorsResponseBodyGet = { vendor: Vendor[] } | Error;
+type VendorResponseBodyPost = { vendor: Vendor } | Error;
 
-const productSchema = z.object({
-  name: z.string(),
-  productType: z.string(),
-  category: z.string(),
-  description: z.string(),
+const vendorSchema = z.object({
+  username: z.string(),
+  shopname: z.string(),
+  email: z.string(),
 });
 
 export async function GET(
   request: NextRequest,
-): Promise<NextResponse<ProductsResponseBodyGet>> {
+): Promise<NextResponse<VendorsResponseBodyGet>> {
   const { searchParams } = new URL(request.url);
 
   // 1. get the token from the cookie
@@ -38,7 +37,7 @@ export async function GET(
   if (!session) {
     return NextResponse.json(
       {
-        error: 'Unauthorized',
+        error: 'session token is not valid',
       },
       { status: 401 },
     );
@@ -56,23 +55,23 @@ export async function GET(
     );
   }
 
-  // query the database to get all the products only if a valid session token is passed
-  const products = await getProductsWithLimitAndOffsetBySessionToken(
+  // query the database to get all the vendor only if a valid session token is passed
+  const vendors = await getVendorsWithLimitAndOffsetBySessionToken(
     limit,
     offset,
     sessionTokenCookie.value,
   );
 
-  return NextResponse.json({ products: products });
+  return NextResponse.json({ vendors: vendors });
 }
 
 export async function POST(
   request: NextRequest,
-): Promise<NextResponse<ProductsResponseBodyPost>> {
+): Promise<NextResponse<VendorResponseBodyPost>> {
   const body = await request.json();
 
   // zod please verify the body matches my schema
-  const result = productSchema.safeParse(body);
+  const result = vendorSchema.safeParse(body);
 
   if (!result.success) {
     // zod send you details about the error
@@ -83,15 +82,14 @@ export async function POST(
       { status: 400 },
     );
   }
-  // query the database to get all the products
-  const product = await createProduct(
-    result.data.name,
-    result.data.productType,
-    result.data.category,
-    result.data.description,
+  // query the database to get all the vendors
+  const vendor = await createVendor(
+    result.data.username,
+    result.data.shopname,
+    result.data.email,
   );
 
-  if (!product) {
+  if (!vendor) {
     // zod send you details about the error
     return NextResponse.json(
       {
@@ -102,6 +100,6 @@ export async function POST(
   }
 
   return NextResponse.json({
-    product: product,
+    vendor: vendor,
   });
 }

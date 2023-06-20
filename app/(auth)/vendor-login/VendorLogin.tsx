@@ -40,7 +40,7 @@ export default function LoginForm(props: Props) {
     }
     router.push(
       getSafeReturnToPath(props.returnTo) ||
-        (`/shop/${data.vendor.username}` as Route),
+        (`/admin/${data.vendor.username}` as Route),
     );
     router.refresh();
   }

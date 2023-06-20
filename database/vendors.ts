@@ -6,6 +6,52 @@ export type VendorWithPasswordHash = Vendor & {
   passwordHash: string;
 };
 
+export const getVendors = cache(async () => {
+  const vendors = await sql<VendorWithPasswordHash[]>`
+    SELECT
+      *
+    FROM
+      vendors
+ `;
+  return vendors;
+});
+
+export const getVendorsWithLimitAndOffset = cache(
+  async (limit: number, offset: number) => {
+    const vendors = await sql<VendorWithPasswordHash[]>`
+      SELECT
+        *
+      FROM
+        vendors
+      LIMIT ${limit}
+      OFFSET ${offset}
+    `;
+
+    return vendors;
+  },
+);
+
+export const getVendorsWithLimitAndOffsetBySessionToken = cache(
+  async (limit: number, offset: number, token: string) => {
+    const vendors = await sql<VendorWithPasswordHash[]>`
+      SELECT
+        vendors.*
+      FROM
+        vendors
+      INNER JOIN
+        sessions ON (
+          sessions.token = ${token} AND
+          sessions.expiry_timestamp > now()
+          -- sessions.vendor_id = products.vendor_id
+        )
+      LIMIT ${limit}
+      OFFSET ${offset}
+    `;
+
+    return vendors;
+  },
+);
+
 export const getVendorWithPasswordHashByUsername = cache(
   async (username: string) => {
     const [vendor] = await sql<VendorWithPasswordHash[]>`
@@ -31,7 +77,7 @@ WHERE
   return vendor;
 });
 
-// creating new users
+// creating new vendors
 export const createVendor = cache(
   async (
     username: string,
@@ -50,7 +96,6 @@ export const createVendor = cache(
       email,
       username
  `;
-
     return vendor;
   },
 );

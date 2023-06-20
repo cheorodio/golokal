@@ -1,13 +1,10 @@
-import { cookies } from 'next/headers';
 import Link from 'next/link';
-import { notFound, redirect } from 'next/navigation';
+import { notFound } from 'next/navigation';
 import { AiOutlineCamera } from 'react-icons/ai';
 import { getProducts } from '../../../database/products';
-import { getValidSessionByToken } from '../../../database/sessions';
 import { getVendorByUsername } from '../../../database/vendors';
+import AddProducts from '../../admin/[username]/AddProducts';
 import styles from '../../styles/shopPage.module.scss';
-import AddProducts from './AddProducts';
-import ProductsForm from './ProductsForm';
 
 type Props = {
   params: { username: string };
@@ -19,14 +16,6 @@ export default async function UserProfilePage({ params }: Props) {
   if (!vendor) {
     notFound();
   }
-
-  const sessionTokenCookie = cookies().get('sessionToken');
-
-  const session =
-    sessionTokenCookie &&
-    (await getValidSessionByToken(sessionTokenCookie.value));
-
-  if (!session) redirect(`/login?returnTo=/shop/${vendor.username}`);
   const products = await getProducts();
 
   return (
@@ -58,9 +47,6 @@ export default async function UserProfilePage({ params }: Props) {
             <AddProducts products={products} />
           </div>
         </div>
-      </div>
-      <div className={styles.addProducts}>
-        <ProductsForm products={products} />
       </div>
     </main>
   );
