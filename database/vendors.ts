@@ -35,7 +35,8 @@ WHERE
   },
 );
 
-export const getVendorByUsername = cache(async (username: string) => {
+// dynamic routing to individual vendor page
+export const getVendorByShopname = cache(async (shopname: string) => {
   const [vendor] = await sql<Vendor[]>`
 SELECT
   id,
@@ -45,6 +46,21 @@ SELECT
   email,
   website_link,
   bio
+FROM
+  vendors
+WHERE
+  vendors.shopname = ${shopname.toLowerCase()}`;
+  return vendor;
+});
+
+// Registering a vendor account
+export const getVendorByUsername = cache(async (username: string) => {
+  const [vendor] = await sql<CreateVendor[]>`
+SELECT
+  id,
+  username,
+  shopname,
+  email
 FROM
   vendors
 WHERE
