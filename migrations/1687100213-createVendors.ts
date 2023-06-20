@@ -2,12 +2,12 @@ import { Sql } from 'postgres';
 
 export type Vendor = {
   id: number;
-  name: string;
+  firstName: string | null;
   username: string;
   shopname: string;
   email: string;
-  websiteLink: string;
-  bio: string;
+  websiteLink: string | null;
+  bio: string | null;
 };
 
 export async function up(sql: Sql) {
@@ -15,7 +15,7 @@ export async function up(sql: Sql) {
   await sql`
     CREATE TABLE vendors (
       id integer PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
-      name varchar(80),
+      first_name varchar(80),
       username varchar(80) NOT NULL,
       shopname varchar(80) NOT NULL,
       email varchar(80) NOT NULL,

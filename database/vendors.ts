@@ -67,7 +67,7 @@ export const getVendorByUsername = cache(async (username: string) => {
   const [vendor] = await sql<Vendor[]>`
 SELECT
   id,
-  name,
+  first_name,
   username,
   shopname,
   email,
@@ -83,22 +83,22 @@ WHERE
 // creating new vendors
 export const createVendor = cache(
   async (
-    name: string,
+    firstName: string | null,
     username: string,
     shopname: string,
     email: string,
     passwordHash: string,
-    websiteLink: string,
-    bio: string,
+    websiteLink: string | null,
+    bio: string | null,
   ) => {
     const [vendor] = await sql<Vendor[]>`
     INSERT INTO vendors
-      (name, username, shopname, email, password_hash, website_link, bio)
+      (first_name, username, shopname, email, password_hash, website_link, bio)
     VALUES
-      (${name} ${username.toLowerCase()}, ${shopname}, ${email}, ${passwordHash}, ${websiteLink}, ${bio})
+      (${firstName}, ${username.toLowerCase()}, ${shopname}, ${email}, ${passwordHash}, ${websiteLink}, ${bio})
     RETURNING
       id,
-      name,
+      first_name,
       shopname,
       email,
       username,
@@ -110,11 +110,11 @@ export const createVendor = cache(
 );
 
 export const updateVendorById = cache(
-  async (id: number, name: string, websiteLink: string, bio: string) => {
+  async (id: number, firstName: string, websiteLink: string, bio: string) => {
     await sql`
       UPDATE vendors
       SET
-      name = ${name},
+      first_name = ${firstName},
       website_link = ${websiteLink},
       bio = ${bio}
       WHERE
@@ -127,7 +127,7 @@ export const getVendorBySessionToken = cache(async (token: string) => {
   const [vendor] = await sql<Vendor[]>`
   SELECT
     vendors.id,
-    vendors.name,
+    vendors.first_name,
     vendors.username,
     vendors.shopname,
     vendors.email,
