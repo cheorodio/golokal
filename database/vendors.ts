@@ -70,6 +70,7 @@ SELECT
   username,
   shopname,
   email,
+  website_link,
   bio
 FROM
   vendors
@@ -85,18 +86,20 @@ export const createVendor = cache(
     shopname: string,
     email: string,
     passwordHash: string,
+    websiteLink: string,
     bio: string,
   ) => {
     const [vendor] = await sql<Vendor[]>`
     INSERT INTO vendors
-      (username, shopname, email, password_hash, bio)
+      (username, shopname, email, password_hash, website_link, bio)
     VALUES
-      (${username.toLowerCase()}, ${shopname}, ${email}, ${passwordHash}, ${bio})
+      (${username.toLowerCase()}, ${shopname}, ${email}, ${passwordHash}, ${websiteLink}, ${bio})
     RETURNING
       id,
       shopname,
       email,
       username,
+      website_link,
       bio
  `;
     return vendor;
@@ -123,6 +126,7 @@ export const getVendorBySessionToken = cache(async (token: string) => {
     vendors.username,
     vendors.shopname,
     vendors.email,
+    vendors.website_link,
     vendors.bio
   FROM
     vendors
