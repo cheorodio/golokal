@@ -1,11 +1,7 @@
 import { cookies } from 'next/headers';
 import { NextRequest, NextResponse } from 'next/server';
-import { z } from 'zod';
 import { getValidSessionByToken } from '../../../../database/sessions';
-import {
-  createVendor,
-  getVendorsWithLimitAndOffsetBySessionToken,
-} from '../../../../database/vendors';
+import { getVendorsWithLimitAndOffsetBySessionToken } from '../../../../database/vendors';
 import { Vendor } from '../../../../migrations/1687100213-createVendors';
 
 export type Error = {
@@ -13,13 +9,6 @@ export type Error = {
 };
 
 type VendorsResponseBodyGet = { vendor: Vendor[] } | Error;
-type VendorResponseBodyPost = { vendor: Vendor } | Error;
-
-const vendorSchema = z.object({
-  username: z.string(),
-  shopname: z.string(),
-  email: z.string(),
-});
 
 export async function GET(
   request: NextRequest,
@@ -63,43 +52,4 @@ export async function GET(
   );
 
   return NextResponse.json({ vendors: vendors });
-}
-
-export async function POST(
-  request: NextRequest,
-): Promise<NextResponse<VendorResponseBodyPost>> {
-  const body = await request.json();
-
-  // zod please verify the body matches my schema
-  const result = vendorSchema.safeParse(body);
-
-  if (!result.success) {
-    // zod send you details about the error
-    return NextResponse.json(
-      {
-        error: 'The data is incomplete',
-      },
-      { status: 400 },
-    );
-  }
-  // query the database to get all the vendors
-  const vendor = await createVendor(
-    result.data.username,
-    result.data.shopname,
-    result.data.email,
-  );
-
-  if (!vendor) {
-    // zod send you details about the error
-    return NextResponse.json(
-      {
-        error: 'Error creating the new animal',
-      },
-      { status: 500 },
-    );
-  }
-
-  return NextResponse.json({
-    vendor: vendor,
-  });
 }
