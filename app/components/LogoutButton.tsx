@@ -15,8 +15,8 @@ export function LogoutButton(props: Props) {
       <button
         formAction={async () => {
           await props.logout();
-          router.refresh();
           router.push('/' as Route);
+          router.refresh();
         }}
         className={styles.logoutButton}
       >
