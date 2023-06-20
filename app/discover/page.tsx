@@ -22,7 +22,7 @@ export default async function DiscoverPage() {
                 <p className={styles.vendorName}>{vendor.username}</p>
                 <p className={styles.vendorShop}>{vendor.shopname}</p>
               </div>
-              <div className={styles.vendorInfo}>
+              <div>
                 <p>
                   This is a brief intro about this vendor and products that they
                   sell. Click the link below to visit their profile. This is
