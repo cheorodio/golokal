@@ -1,15 +1,25 @@
+@import './queries.module';
+
 .shopPage {
-  height: 100vh;
   display: flex;
-  padding: 100px 80px 80px;
+  flex-direction: column;
+  padding: 100px 20px 80px;
+  gap: 20px;
+
+  @media screen and (min-width: $tablet) {
+    padding: 100px 80px 80px;
+    flex-direction: row;
+  }
 
   .shopInfo {
-    width: 30%;
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 20px;
     gap: 16px;
+
+    @media screen and (min-width: $tablet) {
+      width: 30%;
+    }
 
     .imageBox {
       height: 300px;
@@ -58,11 +68,14 @@
   }
 
   .productsFeed {
-    width: 70%;
+    width: 100%;
     display: flex;
     flex-direction: column;
     gap: 16px;
-    padding: 20px;
+
+    @media screen and (min-width: $tablet) {
+      width: 70%;
+    }
 
     h2 {
       font-family: var(--title-text);
@@ -75,8 +88,12 @@
 
       .productCardsContainer {
         display: grid;
-        grid-template-columns: repeat(4, 1fr);
+        grid-template-columns: repeat(1, 1fr);
         gap: 20px;
+
+        @media screen and (min-width: $tablet) {
+          grid-template-columns: repeat(4, 1fr);
+        }
 
         .productCard {
           width: 100%;
