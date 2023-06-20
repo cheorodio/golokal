@@ -62,7 +62,7 @@ export const getUserBySessionToken = cache(async (token: string) => {
     users.id,
     users.username,
     users.email,
-    users.bio,
+    users.bio
   FROM
     users
   INNER JOIN

@@ -123,7 +123,7 @@ export const getVendorBySessionToken = cache(async (token: string) => {
     vendors.username,
     vendors.shopname,
     vendors.email,
-    vendors.bio,
+    vendors.bio
   FROM
     vendors
   INNER JOIN
