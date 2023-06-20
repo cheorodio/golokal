@@ -2,10 +2,10 @@ import { Sql } from 'postgres';
 
 export type User = {
   id: number;
-  firstName: string;
   username: string;
   email: string;
-  // bio: string;
+  firstName: string;
+  bio: string;
 };
 
 export async function up(sql: Sql) {
@@ -13,10 +13,10 @@ export async function up(sql: Sql) {
   await sql`
     CREATE TABLE users (
       id integer PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
-      first_name varchar(80) NOT NULL,
       username varchar(80) NOT NULL,
       email varchar(80) NOT NULL,
       password_hash varchar(80) NOT NULL,
+      first_name varchar(80),
       bio varchar(500)
     )
   `;
