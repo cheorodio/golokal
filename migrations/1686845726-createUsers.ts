@@ -4,6 +4,7 @@ export type User = {
   id: number;
   username: string;
   email: string;
+  bio: string;
   // password_hash: string;
 };
 
@@ -14,6 +15,7 @@ export async function up(sql: Sql) {
       id integer PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
       username varchar(80) NOT NULL,
       email varchar(80) NOT NULL,
+      bio varchar(500) NOT NULL,
       password_hash varchar(80) NOT NULL
     )
   `;
