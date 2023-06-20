@@ -36,22 +36,22 @@ WHERE
 );
 
 // dynamic routing to individual vendor page
-export const getVendorByShopname = cache(async (shopname: string) => {
-  const [vendor] = await sql<Vendor[]>`
-SELECT
-  id,
-  first_name,
-  username,
-  shopname,
-  email,
-  website_link,
-  bio
-FROM
-  vendors
-WHERE
-  vendors.shopname = ${shopname.toLowerCase()}`;
-  return vendor;
-});
+// export const getVendorByShopname = cache(async (shopname: string) => {
+//   const [vendor] = await sql<Vendor[]>`
+// SELECT
+//   id,
+//   first_name,
+//   username,
+//   shopname,
+//   email,
+//   website_link,
+//   bio
+// FROM
+//   vendors
+// WHERE
+//   vendors.shopname = ${shopname.toLowerCase().replaceAll(' ', '')}`;
+//   return vendor;
+// });
 
 // Registering a vendor account
 export const getVendorByUsername = cache(async (username: string) => {
