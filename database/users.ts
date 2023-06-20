@@ -21,6 +21,7 @@ export const getUserByUsername = cache(async (username: string) => {
   const [user] = await sql<User[]>`
 SELECT
   id,
+  name,
   username,
   email,
   bio
@@ -34,6 +35,7 @@ WHERE
 // creating new users
 export const createUser = cache(
   async (
+    name: string,
     username: string,
     email: string,
     passwordHash: string,
@@ -42,11 +44,12 @@ export const createUser = cache(
     console.log(passwordHash);
     const [user] = await sql<User[]>`
     INSERT INTO users
-      (username, email, password_hash, bio)
+      (name, username, email, password_hash, bio)
     VALUES
-      (${username.toLowerCase()}, ${email}, ${passwordHash}, ${bio})
+      (${name}, ${username.toLowerCase()}, ${email}, ${passwordHash}, ${bio})
     RETURNING
       id,
+      name,
       username,
       email,
       bio
@@ -60,6 +63,7 @@ export const getUserBySessionToken = cache(async (token: string) => {
   const [user] = await sql<User[]>`
   SELECT
     users.id,
+    users.name,
     users.username,
     users.email,
     users.bio
