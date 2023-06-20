@@ -6,6 +6,13 @@ export type VendorWithPasswordHash = Vendor & {
   passwordHash: string;
 };
 
+type CreateVendor = {
+  id: number;
+  username: string;
+  shopname: string;
+  email: string;
+};
+
 export const getVendors = cache(async () => {
   const vendors = await sql<VendorWithPasswordHash[]>`
     SELECT
@@ -16,20 +23,34 @@ export const getVendors = cache(async () => {
   return vendors;
 });
 
-export const getVendorsWithLimitAndOffset = cache(
-  async (limit: number, offset: number) => {
-    const vendors = await sql<VendorWithPasswordHash[]>`
-      SELECT
-        *
-      FROM
-        vendors
-      LIMIT ${limit}
-      OFFSET ${offset}
-    `;
-
-    return vendors;
+export const getVendorWithPasswordHashByUsername = cache(
+  async (username: string) => {
+    const [vendor] = await sql<VendorWithPasswordHash[]>`
+SELECT * FROM
+  vendors
+WHERE
+  vendors.username = ${username.toLowerCase()}
+`;
+    return vendor;
   },
 );
+
+export const getVendorByUsername = cache(async (username: string) => {
+  const [vendor] = await sql<Vendor[]>`
+SELECT
+  id,
+  first_name,
+  username,
+  shopname,
+  email,
+  website_link,
+  bio
+FROM
+  vendors
+WHERE
+  vendors.username = ${username.toLowerCase()}`;
+  return vendor;
+});
 
 export const getVendorsWithLimitAndOffsetBySessionToken = cache(
   async (limit: number, offset: number, token: string) => {
@@ -52,76 +73,33 @@ export const getVendorsWithLimitAndOffsetBySessionToken = cache(
   },
 );
 
-export const getVendorWithPasswordHashByUsername = cache(
-  async (username: string) => {
-    const [vendor] = await sql<VendorWithPasswordHash[]>`
-SELECT * FROM
-  vendors
-WHERE
-  vendors.username = ${username}`;
-    return vendor;
-  },
-);
-
-export const getVendorByUsername = cache(async (username: string) => {
-  const [vendor] = await sql<Vendor[]>`
-SELECT
-  id,
-  first_name,
-  username,
-  shopname,
-  email
-FROM
-  vendors
-WHERE
-  vendors.username = ${username.toLowerCase()}`;
-  return vendor;
-});
-
 // creating new vendors
 export const createVendor = cache(
   async (
-    firstName: string,
     username: string,
     shopname: string,
     email: string,
     passwordHash: string,
   ) => {
-    const [vendor] = await sql<Vendor[]>`
+    const [vendor] = await sql<CreateVendor[]>`
     INSERT INTO vendors
-      (first_name, username, shopname, email, password_hash)
+      (username, shopname, email, password_hash)
     VALUES
-      (${firstName}, ${username.toLowerCase()}, ${shopname}, ${email}, ${passwordHash})
+      (${username.toLowerCase()}, ${shopname}, ${email}, ${passwordHash})
     RETURNING
       id,
-      first_name,
+      username,
       shopname,
-      email,
-      username
+      email
  `;
     return vendor;
   },
 );
 
-export const updateVendorById = cache(
-  async (id: number, firstName: string, websiteLink: string, bio: string) => {
-    await sql`
-      UPDATE vendors
-      SET
-      first_name = ${firstName},
-      website_link = ${websiteLink},
-      bio = ${bio}
-      WHERE
-        id = ${id};
-    `;
-  },
-);
-
 export const getVendorBySessionToken = cache(async (token: string) => {
-  const [vendor] = await sql<Vendor[]>`
+  const [vendor] = await sql<CreateVendor[]>`
   SELECT
     vendors.id,
-    vendors.first_name,
     vendors.username,
     vendors.shopname,
     vendors.email

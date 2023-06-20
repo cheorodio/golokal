@@ -6,6 +6,12 @@ export type UserWithPasswordHash = User & {
   passwordHash: string;
 };
 
+type CreateUser = {
+  id: number;
+  username: string;
+  email: string;
+};
+
 export const getUserWithPasswordHashByUsername = cache(
   async (username: string) => {
     const [user] = await sql<UserWithPasswordHash[]>`
@@ -21,9 +27,10 @@ export const getUserByUsername = cache(async (username: string) => {
   const [user] = await sql<User[]>`
 SELECT
   id,
-  first_name,
   username,
-  email
+  email,
+  first_name,
+  bio
 FROM
   users
 WHERE
@@ -33,28 +40,25 @@ WHERE
 
 // creating new users
 export const createUser = cache(
-  async (firstName: string, username: string, email: string, passwordHash: string) => {
-    const [user] = await sql<User[]>`
+  async (username: string, email: string, passwordHash: string) => {
+    const [user] = await sql<CreateUser[]>`
     INSERT INTO users
-      (first_name, username, email, password_hash)
+      ( username, email, password_hash)
     VALUES
-      (${firstName}, ${username.toLowerCase()}, ${email}, ${passwordHash})
+      (${username.toLowerCase()}, ${email}, ${passwordHash})
     RETURNING
       id,
-      first_name,
       username,
       email
  `;
-
     return user;
   },
 );
 
 export const getUserBySessionToken = cache(async (token: string) => {
-  const [user] = await sql<User[]>`
+  const [user] = await sql<CreateUser[]>`
   SELECT
     users.id,
-    users.first_name,
     users.username,
     users.email
   FROM
