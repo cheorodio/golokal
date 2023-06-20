@@ -3,7 +3,7 @@ import Link from 'next/link';
 import { notFound, redirect } from 'next/navigation';
 import { AiOutlineCamera } from 'react-icons/ai';
 import { getProducts } from '../../../database/products';
-import { getValidVendorSessionByToken } from '../../../database/sessions';
+import { getValidSessionByToken } from '../../../database/sessions';
 import { getVendorByUsername } from '../../../database/vendors';
 import styles from '../../styles/shopPage.module.scss';
 import AddProducts from './AddProducts';
@@ -23,7 +23,7 @@ export default async function UserProfilePage({ params }: Props) {
   const sessionTokenCookie = cookies().get('sessionToken');
   const session =
     sessionTokenCookie &&
-    (await getValidVendorSessionByToken(sessionTokenCookie.value));
+    (await getValidSessionByToken(sessionTokenCookie.value));
 
   if (!session) redirect(`/login?returnTo=/shop/${vendor.username}`);
 
