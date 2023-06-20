@@ -1,0 +1,68 @@
+@import './../styles/queries.module';
+
+.discoverSection {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 50px 0px;
+
+  .productsContainer {
+    display: grid;
+    flex-direction: column;
+    gap: 20px;
+    padding: 0px 20px;
+
+    @media screen and (min-width: $tablet) {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 30px;
+    }
+    @media screen and (max-width: $laptop) {
+      grid-template-columns: repeat(3, 1fr);
+      gap: 30px;
+    }
+    @media screen and (min-width: $laptop) {
+      grid-template-columns: repeat(4, 1fr);
+      gap: 50px;
+      padding: 0px 50px;
+    }
+
+    .vendorContainer {
+      display: flex;
+      flex-direction: column;
+      border-radius: 10px;
+      gap: 16px;
+
+      .vendorImage {
+        width: 100%;
+        border-radius: 10px 10px 0px 0px;
+      }
+
+      div {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        .vendorName {
+          font-size: 1.25rem;
+        }
+
+        .vendorShop {
+          font-size: 0.8rem;
+        }
+      }
+
+      .vendorBio {
+        font-size: 1rem;
+        height: 110px;
+      }
+
+      .visitVendorLink {
+        background-color: var(--main-color);
+        border-radius: 0px 0px 10px 10px;
+        width: 100%;
+        padding: 8px 0px;
+        text-align: center;
+      }
+    }
+  }
+}
