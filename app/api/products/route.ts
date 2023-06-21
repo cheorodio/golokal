@@ -17,7 +17,6 @@ type ProductsResponseBodyPost = { product: Product } | Error;
 
 const productSchema = z.object({
   name: z.string(),
-  productType: z.string(),
   category: z.string(),
   description: z.string(),
 });
@@ -66,6 +65,8 @@ export async function GET(
   return NextResponse.json({ products: products });
 }
 
+// CREATING PRODUCTS //////////////////////////////////
+
 export async function POST(
   request: NextRequest,
 ): Promise<NextResponse<ProductsResponseBodyPost>> {
@@ -84,24 +85,23 @@ export async function POST(
     );
   }
   // query the database to get all the products
-  const product = await createProduct(
+  const newProduct = await createProduct(
     result.data.name,
-    result.data.productType,
     result.data.category,
     result.data.description,
   );
 
-  if (!product) {
+  if (!newProduct) {
     // zod send you details about the error
     return NextResponse.json(
       {
-        error: 'Error creating the new animal',
+        error: 'Error creating new product',
       },
       { status: 500 },
     );
   }
 
   return NextResponse.json({
-    product: product,
+    product: newProduct,
   });
 }
