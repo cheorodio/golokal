@@ -15,7 +15,7 @@ export async function up(sql: Sql) {
       id integer PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
       name varchar(30),
       description varchar(500),
-      website_url varchar(30),
+      website_url varchar(80),
       location varchar(40),
       shop_image_id integer
     )
