@@ -2,6 +2,7 @@ import './globals.scss';
 import { Inter } from 'next/font/google';
 import { cookies } from 'next/headers';
 import Link from 'next/link';
+import { FiArrowUpRight } from 'react-icons/fi';
 import { RiAccountPinCircleLine } from 'react-icons/ri';
 import { getUserBySessionToken } from '../database/users';
 import { getVendorBySessionToken } from '../database/vendors';
@@ -54,31 +55,40 @@ export default async function RootLayout({ children }: LayoutProps) {
               <div>
                 {user || vendor ? (
                   <>
-                    <div>Profile</div>
+                    <div>profile</div>
                     <LogoutButton logout={logout} />
                   </>
                 ) : (
                   <>
-                    <div className={styles.loginButton}>
-                      <p className={styles.loginDropdown}>login</p>
-                      <div className={styles.loginOptions}>
-                        <div>
-                          <Link href="/user-login">User login</Link>
-                          <Link href="/vendor-login">Vendor login</Link>
-                        </div>
-                      </div>
-                    </div>
-
-                    <div className={styles.loginButton}>
-                      <p className={styles.loginDropdown}>register</p>
-                      <div className={styles.loginOptions}>
-                        <div>
-                          <Link href="/user-register">User register</Link>
-                          <Link href="/vendor-register">Vendor register</Link>
-                        </div>
-                      </div>
+                    <Link href="/login">login</Link>
+                    <Link href="/register">register</Link>
+                    <div>
+                      <Link href="/vendor-login">
+                        Vendors <FiArrowUpRight />
+                      </Link>
                     </div>
                   </>
+                  // <>
+                  //   <div className={styles.loginButton}>
+                  //     <p className={styles.loginDropdown}>login</p>
+                  //     <div className={styles.loginOptions}>
+                  //       <div>
+                  //         <Link href="/user-login">User login</Link>
+                  //         <Link href="/vendor-login">Vendor login</Link>
+                  //       </div>
+                  //     </div>
+                  //   </div>
+
+                  //   <div className={styles.loginButton}>
+                  //     <p className={styles.loginDropdown}>register</p>
+                  //     <div className={styles.loginOptions}>
+                  //       <div>
+                  //         <Link href="/user-register">User register</Link>
+                  //         <Link href="/vendor-register">Vendor register</Link>
+                  //       </div>
+                  //     </div>
+                  //   </div>
+                  // </>
                 )}
               </div>
             </div>
