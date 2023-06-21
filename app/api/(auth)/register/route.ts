@@ -5,15 +5,15 @@ import { NextRequest, NextResponse } from 'next/server';
 import { z } from 'zod';
 import { createSession } from '../../../../database/sessions';
 import { createUser, getUserByUsername } from '../../../../database/users';
-import { User } from '../../../../migrations/1686845726-createUsers';
 import { secureCookieOptions } from '../../../util/cookies';
 
 type Error = {
   error: string;
 };
+
 export type RegisterResponseBodyPost =
   | {
-      user: User;
+      user: { username: string; id: number };
     }
   | Error;
 
