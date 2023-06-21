@@ -1,20 +1,26 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { z } from 'zod';
 import { createShop } from '../../../database/shops';
-import { Shop } from '../../../migrations/1687353857-createTableShops';
 
 export type Error = {
   error: string;
 };
 
-type ShopsResponseBodyPost = { shops: Shop[] } | Error;
+export type ShopsResponseBodyPost =
+  | {
+      shops: {
+        id: number;
+        name: string;
+        description: string;
+        location: string;
+      };
+    }
+  | Error;
 
 const shopSchema = z.object({
   name: z.string(),
   description: z.string(),
-  websiteUrl: z.string().optional(),
   location: z.string(),
-  shopImageId: z.number(),
 });
 
 export async function POST(
@@ -27,7 +33,6 @@ export async function POST(
 
   if (!result.success) {
     // zod send you details about the error
-    // console.log(result.error);
     return NextResponse.json(
       {
         error: 'The data is incomplete',
@@ -35,7 +40,7 @@ export async function POST(
       { status: 400 },
     );
   }
-  // query the database to get all the animals
+  // query the database to get all the shops
   const shop = await createShop(
     result.data.name,
     result.data.description,
@@ -44,7 +49,6 @@ export async function POST(
 
   if (!shop) {
     // zod send you details about the error
-    // console.log(result.error);
     return NextResponse.json(
       {
         error: 'Error creating the new shop',
