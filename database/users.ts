@@ -40,7 +40,7 @@ export const createUser = cache(
     INSERT INTO users
       (username, email, password_hash)
     VALUES
-      (${username}, ${email}, ${passwordHash})
+      (${username.toLowerCase()}, ${email}, ${passwordHash})
     RETURNING
       id,
       username,
