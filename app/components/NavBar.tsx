@@ -8,7 +8,7 @@ import styles from '../styles/navFooter.module.scss';
 
 const links = [
   { id: 1, title: 'Home', link: '/' },
-  { id: 2, title: 'Vendors', link: '/vendor' },
+  { id: 2, title: 'Vendors', link: '/shop' },
   { id: 3, title: 'About', link: '/about' },
   { id: 4, title: 'Blog', link: '/blog' },
 ];
