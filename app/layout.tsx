@@ -2,10 +2,8 @@ import './globals.scss';
 import { Inter } from 'next/font/google';
 import { cookies } from 'next/headers';
 import Link from 'next/link';
-import { FiArrowUpRight } from 'react-icons/fi';
 import { RiAccountPinCircleLine } from 'react-icons/ri';
 import { getUserBySessionToken } from '../database/users';
-import { getVendorBySessionToken } from '../database/vendors';
 import { logout } from './(auth)/logout/actions';
 import Footer from './components/Footer';
 import { LogoutButton } from './components/LogoutButton';
@@ -32,10 +30,6 @@ export default async function RootLayout({ children }: LayoutProps) {
     ? undefined
     : await getUserBySessionToken(sessionToken.value);
 
-  const vendor = !sessionToken?.value
-    ? undefined
-    : await getVendorBySessionToken(sessionToken.value);
-
   return (
     <html lang="en">
       <head>
@@ -53,42 +47,16 @@ export default async function RootLayout({ children }: LayoutProps) {
             </Link>
             <div className={styles.dropdownOptions}>
               <div>
-                {user || vendor ? (
+                {user ? (
                   <>
-                    <div>profile</div>
+                    <div>{user.username}</div>
                     <LogoutButton logout={logout} />
                   </>
                 ) : (
                   <>
                     <Link href="/login">login</Link>
                     <Link href="/register">register</Link>
-                    <div>
-                      <Link href="/vendor-login">
-                        Vendors <FiArrowUpRight />
-                      </Link>
-                    </div>
                   </>
-                  // <>
-                  //   <div className={styles.loginButton}>
-                  //     <p className={styles.loginDropdown}>login</p>
-                  //     <div className={styles.loginOptions}>
-                  //       <div>
-                  //         <Link href="/user-login">User login</Link>
-                  //         <Link href="/vendor-login">Vendor login</Link>
-                  //       </div>
-                  //     </div>
-                  //   </div>
-
-                  //   <div className={styles.loginButton}>
-                  //     <p className={styles.loginDropdown}>register</p>
-                  //     <div className={styles.loginOptions}>
-                  //       <div>
-                  //         <Link href="/user-register">User register</Link>
-                  //         <Link href="/vendor-register">Vendor register</Link>
-                  //       </div>
-                  //     </div>
-                  //   </div>
-                  // </>
                 )}
               </div>
             </div>
