@@ -85,6 +85,18 @@ export const getUserByUsername = cache(async (username: string) => {
   return user;
 });
 
+export const getUserById = cache(async (id: number) => {
+  const [user] = await sql<UserWithPasswordHash[]>`
+    SELECT
+      *
+    FROM
+      users
+    WHERE
+      id = ${id}
+  `;
+  return user;
+});
+
 // //////////////////////////////////////////////////////////
 // get all the user only if a valid session token is passed
 export const getUsersWithLimitAndOffsetBySessionToken = cache(
