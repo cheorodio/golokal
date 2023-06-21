@@ -8,6 +8,7 @@ export type Vendor = {
   firstName: string;
   websiteLink: string;
   bio: string;
+  image: string;
 };
 
 export async function up(sql: Sql) {
@@ -21,7 +22,8 @@ export async function up(sql: Sql) {
       password_hash varchar(80) NOT NULL,
       first_name varchar(80),
       website_link varchar(80),
-      bio varchar(500)
+      bio varchar(500),
+      image varchar(500)
     )
   `;
 }
