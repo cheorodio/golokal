@@ -5,15 +5,14 @@ import { AiOutlineCamera } from 'react-icons/ai';
 import { getProducts } from '../../../database/products';
 import { getValidSessionByToken } from '../../../database/sessions';
 import { getVendorByUsername } from '../../../database/vendors';
-import styles from '../../styles/shopPage.module.scss';
-import AddProducts from './DisplayProducts';
+import styles from '../../styles/VendorProfilePage.module.scss';
 import ProductsForm from './ProductsForm';
 
 type Props = {
   params: { username: string };
 };
 
-export default async function UserProfilePage({ params }: Props) {
+export default async function VendorProfilePage({ params }: Props) {
   const vendor = await getVendorByUsername(params.username);
   if (!vendor) {
     notFound();
@@ -42,20 +41,27 @@ export default async function UserProfilePage({ params }: Props) {
               <button className={styles.followButton}>follow</button>
             </div>
             <Link href="/">www.shopname.com</Link>
-            <p className={styles.shopBio}>
-              Information about this shop and their products. Information about
-              this shop and their products. Information about this shop and
-              their products. Information about this shop and their products.
-              Information about this shop and their products. Information about
-              this shop and their products. Information about this shop and
-              their products. Information about this shop and their products.
-            </p>
+            <p className={styles.shopBio}>{vendor.bio}</p>
           </div>
         </div>
         <div className={styles.productsFeed}>
           <h2>Products Feed</h2>
           <div className={styles.productsContainer}>
-            <AddProducts products={products} />
+            {/* <AddProducts products={products} /> */}
+            <div className={styles.productCardsContainer}>
+              {products.map((product) => {
+                return (
+                  <div
+                    key={`product-div-${product.id}`}
+                    className={styles.productCard}
+                  >
+                    <h1>{product.name}</h1>
+                    <p>{product.category}</p>
+                    <p>{product.description}</p>
+                  </div>
+                );
+              })}
+            </div>
           </div>
         </div>
       </div>

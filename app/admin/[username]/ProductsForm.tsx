@@ -12,7 +12,6 @@ type Props = {
 export default function ProductsForm({ products }: Props) {
   const [productList, setProductList] = useState(products);
   const [nameInput, setNameInput] = useState('');
-  const [productTypeInput, setProductTypeInput] = useState('');
   const [categoryInput, setCategoryInput] = useState('');
   const [descriptionInput, setDescriptionInput] = useState('');
   const router = useRouter();
@@ -22,7 +21,6 @@ export default function ProductsForm({ products }: Props) {
       method: 'POST',
       body: JSON.stringify({
         name: nameInput,
-        productType: productTypeInput,
         category: categoryInput,
         description: descriptionInput,
       }),
@@ -44,14 +42,6 @@ export default function ProductsForm({ products }: Props) {
             placeholder="Name"
             value={nameInput}
             onChange={(event) => setNameInput(event.currentTarget.value)}
-          />
-        </label>
-
-        <label>
-          <input
-            placeholder="Product Type"
-            value={productTypeInput}
-            onChange={(event) => setProductTypeInput(event.currentTarget.value)}
           />
         </label>
 

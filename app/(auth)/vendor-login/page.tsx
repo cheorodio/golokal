@@ -1,24 +1,11 @@
-import { cookies } from 'next/headers';
-import { redirect } from 'next/navigation';
-import { getValidSessionByToken } from '../../../database/sessions';
-import LoginForm from './VendorLogin';
+import Link from 'next/link';
+import styles from '../../styles/loginPage.module.scss';
 
-type Props = { searchParams: { returnTo?: string | string[] } };
-
-export default async function LoginPage({ searchParams }: Props) {
-  // redirect if the user is logged in
-  // 1. check if the sessionToken cookie exists
-  const sessionTokenCookie = cookies().get('sessionToken');
-  // 2. check if the sessionToken has a valid session
-  const session =
-    sessionTokenCookie &&
-    (await getValidSessionByToken(sessionTokenCookie.value));
-  // either redirect or render the login form
-  if (session) redirect('/');
-
+export default function VendorRegistrationPage() {
   return (
-    <main>
-      <LoginForm returnTo={searchParams.returnTo} />
-    </main>
+    <div className={styles.vendorLoginOptionPage}>
+      <Link href="/vendor-login/login">Login here</Link>
+      <Link href="/vendor-login/register">Register here</Link>
+    </div>
   );
 }

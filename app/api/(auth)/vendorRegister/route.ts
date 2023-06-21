@@ -6,7 +6,7 @@ import { z } from 'zod';
 import { createVendorSession } from '../../../../database/sessions';
 import {
   createVendor,
-  getVendorByUsername,
+  verifyVendorByUsername,
 } from '../../../../database/vendors';
 import { Vendor } from '../../../../migrations/1687100213-createVendors';
 import { secureCookieOptions } from '../../../util/cookies';
@@ -49,7 +49,7 @@ export async function POST(
 
   // verify if the user is already taken
   // console.log(await getUserByUsername(result.data.username));
-  if (await getVendorByUsername(result.data.username)) {
+  if (await verifyVendorByUsername(result.data.username)) {
     return NextResponse.json(
       {
         error: 'Username is taken',
@@ -60,7 +60,7 @@ export async function POST(
 
   // hash the password
   const passwordHash = await bcrypt.hash(result.data.password, 10);
-  // console.log(passwordHash, result.data.password);
+
   // store credentials in the DB
   const newVendor = await createVendor(
     result.data.username,

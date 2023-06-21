@@ -1,11 +1,11 @@
 import { cookies } from 'next/headers';
 import { redirect } from 'next/navigation';
-import { getValidSessionByToken } from '../../../database/sessions';
-import RegisterForm from './VendorRegister';
+import { getValidSessionByToken } from '../../../../database/sessions';
+import LoginForm from './VendorLogin';
 
 type Props = { searchParams: { returnTo?: string | string[] } };
 
-export default async function VendorRegisterPage({ searchParams }: Props) {
+export default async function LoginPage({ searchParams }: Props) {
   // redirect if the user is logged in
   // 1. check if the sessionToken cookie exists
   const sessionTokenCookie = cookies().get('sessionToken');
@@ -18,7 +18,7 @@ export default async function VendorRegisterPage({ searchParams }: Props) {
 
   return (
     <main>
-      <RegisterForm returnTo={searchParams.returnTo} />
+      <LoginForm returnTo={searchParams.returnTo} />
     </main>
   );
 }
