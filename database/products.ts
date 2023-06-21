@@ -1,5 +1,5 @@
 import { cache } from 'react';
-import { Product } from '../migrations/1687183921-createProductsTable';
+import { Product } from '../migrations/1687338175-createProducts';
 import { sql } from './connect';
 
 export const getProducts = cache(async () => {
@@ -10,21 +10,22 @@ export const getProducts = cache(async () => {
   return products;
 });
 
-export const getProductsByVendorId = cache(async (id: number) => {
-  const productsFromVendor = await sql<Product[]>`
-  SELECT
-    products.id,
-    products.name,
-    products.category,
-    products.description
-  FROM
-    products
-  WHERE
-    products.vendor_id = ${id}
-  `;
+// export const getProductsByVendorId = cache(async (id: number) => {
+//   const productsFromVendor = await sql<Product[]>`
+//   SELECT
+//     products.id,
+//     products.name,
+//     products.category,
+//     products.description,
+//     products.image
+//   FROM
+//     products
+//   WHERE
+//     products.vendor_id = ${id}
+//   `;
 
-  return productsFromVendor;
-});
+//   return productsFromVendor;
+// });
 
 export const getProductsWithLimitAndOffset = cache(
   async (limit: number, offset: number) => {
@@ -62,6 +63,7 @@ export const getProductsWithLimitAndOffsetBySessionToken = cache(
   },
 );
 
+// GETTING PRODUCTS
 export const getProductsById = cache(async (id: number) => {
   const [product] = await sql<Product[]>`
     SELECT
@@ -74,21 +76,59 @@ export const getProductsById = cache(async (id: number) => {
   return product;
 });
 
+// CREATING PRODUCTS /////////////////////
 export const createProduct = cache(
   async (
     name: string,
     category: string,
     description: string,
-    // vendorId: number,
+    image: string,
   ) => {
-    const [product] = await sql<Product[]>`
+    const [productToCreate] = await sql<Product[]>`
       INSERT INTO products
-        (name, category, description)
+        (name, category, description, image)
       VALUES
-        (${name}, ${category}, ${description})
+        (${name}, ${category}, ${description}, ${image})
       RETURNING *
     `;
 
-    return product;
+    return productToCreate;
   },
 );
+
+// EDITING PRODUCTS /////////////////////
+export const updateProductById = cache(
+  async (
+    id: number,
+    name: string,
+    category: string,
+    description: string,
+    image: string,
+  ) => {
+    const [productToEdit] = await sql<Product[]>`
+      UPDATE products
+      SET
+        name = ${name},
+        category = ${category},
+        description = ${description},
+        image = ${image}
+      WHERE
+        id = ${id}
+        RETURNING *
+    `;
+
+    return productToEdit;
+  },
+);
+
+// DELETING PRODUCTS ////////////////
+export const deleteProductsById = cache(async (id: number) => {
+  const [productsToDelete] = await sql<Product[]>`
+    DELETE FROM
+      products
+    WHERE
+      id = ${id}
+    RETURNING *
+  `;
+  return productsToDelete;
+});

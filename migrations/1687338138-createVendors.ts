@@ -5,10 +5,10 @@ export type Vendor = {
   username: string;
   shopname: string;
   email: string;
-  firstName: string;
-  websiteLink: string;
-  bio: string;
-  image: string;
+  firstName: string | null;
+  websiteLink: string | null;
+  bio: string | null;
+  image: string | null;
 };
 
 export async function up(sql: Sql) {

@@ -6,7 +6,7 @@ import {
   getProductsWithLimitAndOffsetBySessionToken,
 } from '../../../database/products';
 import { getValidSessionByToken } from '../../../database/sessions';
-import { Product } from '../../../migrations/1687183921-createProductsTable';
+import { Product } from '../../../migrations/1687338175-createProducts';
 
 export type Error = {
   error: string;
@@ -19,8 +19,10 @@ const productSchema = z.object({
   name: z.string(),
   category: z.string(),
   description: z.string(),
+  image: z.string(),
 });
 
+// get all the products
 export async function GET(
   request: NextRequest,
 ): Promise<NextResponse<ProductsResponseBodyGet>> {
@@ -66,7 +68,6 @@ export async function GET(
 }
 
 // CREATING PRODUCTS //////////////////////////////////
-
 export async function POST(
   request: NextRequest,
 ): Promise<NextResponse<ProductsResponseBodyPost>> {
@@ -89,6 +90,7 @@ export async function POST(
     result.data.name,
     result.data.category,
     result.data.description,
+    result.data.image,
   );
 
   if (!newProduct) {

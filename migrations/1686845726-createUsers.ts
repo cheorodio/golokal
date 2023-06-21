@@ -4,8 +4,8 @@ export type User = {
   id: number;
   username: string;
   email: string;
-  firstName: string;
-  bio: string;
+  firstName: string | null;
+  bio: string | null;
 };
 
 export async function up(sql: Sql) {
