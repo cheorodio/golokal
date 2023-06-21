@@ -10,6 +10,22 @@ export const getProducts = cache(async () => {
   return products;
 });
 
+export const getProductsByVendorId = cache(async (id: number) => {
+  const productsFromVendor = await sql<Product[]>`
+  SELECT
+    products.id,
+    products.name,
+    products.category,
+    products.description
+  FROM
+    products
+  WHERE
+    products.vendor_id = ${id}
+  `;
+
+  return productsFromVendor;
+});
+
 export const getProductsWithLimitAndOffset = cache(
   async (limit: number, offset: number) => {
     const products = await sql<Product[]>`
@@ -61,16 +77,15 @@ export const getProductsById = cache(async (id: number) => {
 export const createProduct = cache(
   async (
     name: string,
-    productType: string,
     category: string,
     description: string,
     // vendorId: number,
   ) => {
     const [product] = await sql<Product[]>`
       INSERT INTO products
-        (name, product_type, category, description)
+        (name, category, description)
       VALUES
-        (${name}, ${productType}, ${category}, ${description})
+        (${name}, ${category}, ${description})
       RETURNING *
     `;
 
