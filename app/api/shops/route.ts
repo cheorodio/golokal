@@ -12,11 +12,7 @@ export type Error = {
 
 export type CreateShopResponseBodyPost =
   | {
-      shops: {
-        id: number;
-        username: number;
-        name: string;
-      };
+      shop: { username: string; name: string };
     }
   | Error;
 
@@ -37,7 +33,7 @@ export async function POST(
   if (!result.success) {
     return NextResponse.json(
       {
-        error: 'shop usernamr or name is missing',
+        error: 'shop username or name is missing',
       },
       { status: 400 },
     );
@@ -48,21 +44,17 @@ export async function POST(
   if (await getShopByUsername(result.data.username)) {
     return NextResponse.json(
       {
-        error: 'Username is taken',
+        error: 'shop username is taken',
       },
       { status: 406 },
     );
   }
 
-  // hash the password
-  // const passwordHash = await bcrypt.hash(result.data.password, 10);
-  // console.log(passwordHash, result.data.password);
   // store credentials in the DB
-  const newShop = await createShop(result.data.username);
+  const newShop = await createShop(result.data.username, result.data.name);
 
   if (!newShop) {
     // zod send you details about the error
-    // console.log(result.error);
     return NextResponse.json(
       {
         error: 'Error creating the new shop',
@@ -72,7 +64,6 @@ export async function POST(
   }
 
   // We are sure the user is authenticated
-
   // 5. Create a token
   const token = crypto.randomBytes(100).toString('base64');
   // 6. Create the session record
