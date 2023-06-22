@@ -21,6 +21,10 @@
     gap: 16px;
     width: 100%;
 
+    @media screen and (min-width: $tablet) {
+      width: 60%;
+    }
+
     .imageBox {
       height: 200px;
       width: 40%;
@@ -32,7 +36,7 @@
       border: 0.1px solid var(--main-color);
 
       @media screen and (min-width: $tablet) {
-        width: 20%;
+        width: 30%;
       }
     }
 
@@ -44,7 +48,7 @@
       width: 60%;
 
       @media screen and (min-width: $tablet) {
-        width: 80%;
+        width: 70%;
       }
     }
   }
