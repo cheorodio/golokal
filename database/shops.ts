@@ -6,6 +6,8 @@ type CreateShop = {
   id: number;
   username: string;
   name: string;
+  description: string;
+  location: string;
 };
 
 type ShopName = {
@@ -53,19 +55,28 @@ WHERE
 });
 
 // 2. create the shop
-export const createShop = cache(async (username: string, name: string) => {
-  const [shop] = await sql<CreateShop[]>`
+export const createShop = cache(
+  async (
+    username: string,
+    name: string,
+    description: string,
+    location: string,
+  ) => {
+    const [shop] = await sql<CreateShop[]>`
     INSERT INTO shops
-      (username, name)
+      (username, name, description, location)
     VALUES
-      (${username}, ${name})
+      (${username}, ${name}, ${description}, ${location})
     RETURNING
       id,
       username,
-      name
+      name,
+      description,
+      location
  `;
-  return shop;
-});
+    return shop;
+  },
+);
 
 // GETTING SHOP ///////////////////////////////////////////////
 export const getShopById = cache(async (id: number) => {

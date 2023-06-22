@@ -12,13 +12,20 @@ export type Error = {
 
 export type CreateShopResponseBodyPost =
   | {
-      shop: { username: string; name: string };
+      shop: {
+        username: string;
+        name: string;
+        description: string;
+        location: string;
+      };
     }
   | Error;
 
 const shopSchema = z.object({
   username: z.string().min(1),
   name: z.string().min(1),
+  description: z.string().min(1),
+  location: z.string().min(1),
 });
 
 export async function POST(
@@ -51,7 +58,12 @@ export async function POST(
   }
 
   // store credentials in the DB
-  const newShop = await createShop(result.data.username, result.data.name);
+  const newShop = await createShop(
+    result.data.username,
+    result.data.name,
+    result.data.description,
+    result.data.location,
+  );
 
   if (!newShop) {
     // zod send you details about the error
