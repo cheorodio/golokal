@@ -1,7 +1,7 @@
 import { notFound } from 'next/navigation';
 import { AiOutlineCamera } from 'react-icons/ai';
-import { getUserByUsername } from '../../../database/users';
-import styles from '../../styles/profilePage.module.scss';
+import { getUserByUsername } from '../../database/users';
+import styles from '../styles/profilePage.module.scss';
 
 type Props = {
   params: { username: string };

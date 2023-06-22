@@ -9,6 +9,7 @@ type ShopResponseBodyPut = { shop: Shop } | Error;
 
 const shopSchema = z.object({
   name: z.string(),
+  username: z.string(),
   description: z.string(),
   websiteUrl: z.string(),
   location: z.string(),
@@ -76,6 +77,7 @@ export async function PUT(
   const shop = await updateShopById(
     shopId,
     result.data.name,
+    result.data.username,
     result.data.description,
     result.data.websiteUrl,
     result.data.location,
