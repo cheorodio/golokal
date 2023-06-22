@@ -2,7 +2,8 @@ import './globals.scss';
 import { Inter } from 'next/font/google';
 import { cookies } from 'next/headers';
 import Link from 'next/link';
-import { BsFillPersonFill } from 'react-icons/bs';
+import { BiLogIn } from 'react-icons/bi';
+import { BsFillPersonFill, BsPersonPlus } from 'react-icons/bs';
 import { CgLogOut } from 'react-icons/cg';
 import { MdShoppingBasket } from 'react-icons/md';
 import { RiAccountPinCircleLine } from 'react-icons/ri';
@@ -45,9 +46,16 @@ export default async function RootLayout({ children }: LayoutProps) {
             <Link href="/">golokal</Link>
           </div>
           <div className={styles.loginButton}>
-            <Link href="/" className={styles.dropdownButton}>
+            {user ? (
+              <Link
+                href={`/${user.username}`}
+                className={styles.dropdownButton}
+              >
+                <RiAccountPinCircleLine />
+              </Link>
+            ) : (
               <RiAccountPinCircleLine />
-            </Link>
+            )}
             <div className={styles.dropdownOptions}>
               <div className={styles.dropdownLink}>
                 {user ? (
@@ -55,9 +63,7 @@ export default async function RootLayout({ children }: LayoutProps) {
                     <div className={styles.profile}>
                       <div className={styles.username}>
                         <BsFillPersonFill />
-                        <p>
-                          Hello <span>{user.username}</span>
-                        </p>
+                        <Link href={`/${user.username}`}>My profile</Link>
                       </div>
                       <div className={styles.createShop}>
                         <MdShoppingBasket />
@@ -70,10 +76,16 @@ export default async function RootLayout({ children }: LayoutProps) {
                     </div>
                   </>
                 ) : (
-                  <>
-                    <Link href="/login">Login</Link>
-                    <Link href="/register">Register</Link>
-                  </>
+                  <div className={styles.loginButtons}>
+                    <div className={styles.loginButton}>
+                      <BiLogIn />
+                      <Link href="/login">Login</Link>
+                    </div>
+                    <div className={styles.registerButton}>
+                      <BsPersonPlus />
+                      <Link href="/register">Register</Link>
+                    </div>
+                  </div>
                 )}
               </div>
             </div>
