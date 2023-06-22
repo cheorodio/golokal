@@ -6,7 +6,7 @@ import styles from '../../styles/ShopsPage.module.scss';
 export const dynamic = 'force-dynamic';
 
 export const metadata = {
-  title: { default: 'golokal | Discover local vendors' },
+  title: { default: 'Golokal | Discover local vendors' },
   description:
     'At golokal, we are passionate about supporting artisans, craftsmen, and local businesses, and our platform serves as a virtual marketplace to showcase their unique creations.',
 };
@@ -20,7 +20,6 @@ export default async function ShopsPage() {
         <h1>Discover local vendors on our site</h1>
       </div>
       <div className={styles.shopListContainer}>
-        {' '}
         {shops.map((shop) => {
           return (
             <div
@@ -42,7 +41,7 @@ export default async function ShopsPage() {
                 href={`/shops/${shop.username}`}
                 className={styles.visitShopLink}
               >
-                visit vendor profile
+                Visit Shop Page
               </Link>
             </div>
           );

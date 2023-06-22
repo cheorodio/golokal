@@ -2,6 +2,7 @@
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { AiOutlineCamera } from 'react-icons/ai';
+import { VscLocation } from 'react-icons/vsc';
 import { getShopByUsername } from '../../../../database/shops';
 import styles from '../../../styles/SingleShopPage.module.scss';
 
@@ -42,6 +43,9 @@ export default async function VendorProfilePage(props: Props) {
               <button className={styles.followButton}>follow</button>
             </div>
             <p className={styles.shopBio}>{singleShop.description}</p>
+            <p>
+              <VscLocation /> {singleShop.location}
+            </p>
           </div>
         </div>
         {/*
