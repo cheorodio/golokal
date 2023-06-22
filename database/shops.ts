@@ -4,28 +4,36 @@ import { sql } from './connect';
 
 type CreateShop = {
   id: number;
-  name: string;
-  description: string;
-  location: string;
+  username: string;
 };
 
 // CREATE SHOP //////////////////////////////
-export const createShop = cache(
-  async (name: string, description: string, location: string) => {
-    const [shop] = await sql<CreateShop[]>`
+// 1. first verify if the unique shop username is taken
+export const verifyShopByShopUsername = cache(async (username: string) => {
+  const [user] = await sql<CreateShop[]>`
+SELECT
+  id,
+  username
+FROM
+  users
+WHERE
+  users.username = ${username.toLowerCase()}`;
+  return user;
+});
+
+// 2. create the shop
+export const createShop = cache(async (username: string) => {
+  const [shop] = await sql<CreateShop[]>`
     INSERT INTO shops
-      (name, description, location)
+      (username)
     VALUES
-      (${name}, ${description}, ${location})
+      (${username})
     RETURNING
       id,
-      name,
-      description,
-      location
+      username
  `;
-    return shop;
-  },
-);
+  return shop;
+});
 
 // GETTING SHOP ///////////////////////////////////////////////
 export async function getShopById(id: number) {
@@ -45,6 +53,7 @@ export async function getShopById(id: number) {
 export const updateShopById = cache(
   async (
     id: number,
+    username: string,
     name: string,
     description: string,
     websiteUrl: string,
@@ -54,6 +63,7 @@ export const updateShopById = cache(
     const [shop] = await sql<Shop[]>`
       UPDATE shops
       SET
+        username = ${username},
         name = ${name},
         description = ${description},
         website_url = ${websiteUrl || null},
