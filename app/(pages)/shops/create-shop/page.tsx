@@ -1,28 +1,34 @@
 import { cookies } from 'next/headers';
 import { redirect } from 'next/navigation';
 import { getValidSessionByToken } from '../../../../database/sessions';
-// import { getShopByUsername } from '../../../../database/shops';
+import { getUserBySessionToken } from '../../../../database/users';
+import styles from '../../../styles/CreateShopForm.module.scss';
 import CreateShop from './CreateShop';
 
-// type Props = { params: { username: string } };
-
 export default async function CreateShopPage() {
-  // const shop = await getShopByUsername(params.username);
-  // if (!shop) {
-  //   notFound();
-  // }
-
   // allowing access to only authorised user
-  const sessionTokenCookie = cookies().get('sessionToken');
+  const sessionToken = cookies().get('sessionToken');
   const session =
-    sessionTokenCookie &&
-    (await getValidSessionByToken(sessionTokenCookie.value));
+    sessionToken && (await getValidSessionByToken(sessionToken.value));
 
   if (!session) redirect(`/login?returnTo=/shops/create-shop`);
 
+  const user = !sessionToken.value
+    ? undefined
+    : await getUserBySessionToken(sessionToken.value);
+
   return (
-    <main>
-      <CreateShop />
+    <main className={styles.createShopPage}>
+      <div className={styles.pageTitle}>
+        <h1>Hello {user?.username}</h1>
+        <h4>
+          Create an account now to showcase your amazing creations to our
+          golokal community
+        </h4>
+      </div>
+      <div className={styles.createShopFormContainer}>
+        <CreateShop />
+      </div>
     </main>
   );
 }

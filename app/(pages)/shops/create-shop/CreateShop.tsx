@@ -8,6 +8,9 @@ import styles from '../../../styles/CreateShopForm.module.scss';
 export default function CreateShop() {
   const [username, setUsername] = useState('');
   const [name, setName] = useState('');
+  const [description, setDescription] = useState('');
+  const [websiteUrl, setWebsiteUrl] = useState('');
+  const [location, setLocation] = useState('');
   const [error, setError] = useState<string>();
   const router = useRouter();
 
@@ -17,6 +20,9 @@ export default function CreateShop() {
       body: JSON.stringify({
         username,
         name,
+        description,
+        websiteUrl,
+        location,
       }),
     });
 
@@ -32,27 +38,50 @@ export default function CreateShop() {
   }
 
   return (
-    <div className={styles.createShopFormContainer}>
-      <form onSubmit={(event) => event.preventDefault()}>
-        <div>
-          <label htmlFor="username">Shop username</label>
-          <input
-            id="username"
-            value={username}
-            onChange={(event) => setUsername(event.currentTarget.value)}
-          />
-        </div>
-        <div>
-          <label htmlFor="name">Shopname</label>
-          <input
-            id="name"
-            value={name}
-            onChange={(event) => setName(event.currentTarget.value)}
-          />
-        </div>
+    <form
+      onSubmit={(event) => event.preventDefault()}
+      className={styles.createShopForm}
+    >
+      <label>
+        <input
+          value={username}
+          placeholder="Shop Username"
+          onChange={(event) => setUsername(event.currentTarget.value)}
+        />
+      </label>
+      <label>
+        <input
+          placeholder="Shop Name"
+          value={name}
+          onChange={(event) => setName(event.currentTarget.value)}
+        />
+      </label>
+      <label>
+        <textarea
+          placeholder="Shop Description"
+          maxLength={500}
+          value={description}
+          onChange={(event) => setDescription(event.currentTarget.value)}
+        />
+      </label>
+      <label>
+        <input
+          placeholder="Website url"
+          value={websiteUrl}
+          onChange={(event) => setWebsiteUrl(event.currentTarget.value)}
+        />
+      </label>
+      <label>
+        <input
+          placeholder="City"
+          value={location}
+          onChange={(event) => setLocation(event.currentTarget.value)}
+        />
+      </label>
+      <div>
         <button onClick={async () => await createShop()}>Create shop</button>
-        {error !== '' && <div>{error}</div>}
-      </form>
-    </div>
+      </div>
+      {error !== '' && <div>{error}</div>}
+    </form>
   );
 }

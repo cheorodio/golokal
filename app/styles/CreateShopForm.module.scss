@@ -1,12 +1,84 @@
-.createShopFormContainer {
+.createShopPage {
   height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;
 
-  form {
+  .pageTitle {
     display: flex;
     flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    width: 40%;
+    height: 100%;
     gap: 20px;
+    background-color: var(--main-color);
+
+    h1 {
+      font-size: 3.5rem;
+      color: var(--secondary-text-color);
+      font-family: var(--title-text);
+    }
+
+    h4 {
+      font-size: 1.5rem;
+      font-family: var(--body-text);
+      padding: 0px 50px;
+      line-height: 1.25;
+    }
+  }
+
+  .createShopFormContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    width: 60%;
+    height: 100%;
+    background-color: white;
+  }
+}
+
+.createShopForm {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  width: 100%;
+  padding: 0px 200px;
+
+  label {
+    display: flex;
+    flex-direction: column;
+
+    input,
+    textarea {
+      width: 100%;
+      height: 30px;
+      padding-left: 8px;
+      background-color: var(--bg-color);
+      border: none;
+    }
+
+    textarea {
+      height: 100px;
+    }
+  }
+
+  div {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+
+    button {
+      padding: 8px 30px;
+      border-radius: 10px;
+      border: none;
+      background-color: var(--main-color);
+      color: var(--secondary-text-color);
+      cursor: pointer;
+    }
   }
 }
