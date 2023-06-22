@@ -21,8 +21,8 @@ export type CreateShopResponseBodyPost =
   | Error;
 
 const shopSchema = z.object({
-  username: z.string(),
-  name: z.string(),
+  username: z.string().min(1),
+  name: z.string().min(1),
 });
 
 export async function POST(
@@ -95,5 +95,5 @@ export async function POST(
     ...secureCookieOptions,
   });
 
-  return NextResponse.json({ user: newShop });
+  return NextResponse.json({ shop: newShop });
 }
