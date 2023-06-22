@@ -2,6 +2,9 @@ import './globals.scss';
 import { Inter } from 'next/font/google';
 import { cookies } from 'next/headers';
 import Link from 'next/link';
+import { BsFillPersonFill } from 'react-icons/bs';
+import { CgLogOut } from 'react-icons/cg';
+import { MdShoppingBasket } from 'react-icons/md';
 import { RiAccountPinCircleLine } from 'react-icons/ri';
 import { getUserBySessionToken } from '../database/users';
 import { logout } from './(auth)/logout/actions';
@@ -46,16 +49,30 @@ export default async function RootLayout({ children }: LayoutProps) {
               <RiAccountPinCircleLine />
             </Link>
             <div className={styles.dropdownOptions}>
-              <div>
+              <div className={styles.dropdownLink}>
                 {user ? (
                   <>
-                    <div>{user.username}</div>
-                    <LogoutButton logout={logout} />
+                    <div className={styles.profile}>
+                      <div className={styles.username}>
+                        <BsFillPersonFill />
+                        <p>
+                          Hello <span>{user.username}</span>
+                        </p>
+                      </div>
+                      <div className={styles.createShop}>
+                        <MdShoppingBasket />
+                        <Link href="/shops/create-shop">Create a shop</Link>
+                      </div>
+                    </div>
+                    <div className={styles.logoutLink}>
+                      <CgLogOut />
+                      <LogoutButton logout={logout} />
+                    </div>
                   </>
                 ) : (
                   <>
-                    <Link href="/login">login</Link>
-                    <Link href="/register">register</Link>
+                    <Link href="/login">Login</Link>
+                    <Link href="/register">Register</Link>
                   </>
                 )}
               </div>

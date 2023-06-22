@@ -6,7 +6,7 @@ import { CgClose } from 'react-icons/cg';
 import { RxHamburgerMenu } from 'react-icons/rx';
 import styles from '../styles/navFooter.module.scss';
 
-const links = [
+export const links = [
   { id: 1, title: 'Home', link: '/' },
   { id: 2, title: 'Shops', link: '/shops' },
   { id: 3, title: 'About', link: '/about' },

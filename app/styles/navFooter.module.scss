@@ -97,51 +97,47 @@
       position: absolute;
       top: 100%;
       right: 0;
-      width: 100px;
-
+      width: 150px;
       border-radius: 5px;
       box-shadow: 1px 1px 10px 6px rgba(0, 0, 0, 0.1);
       z-index: 6;
 
-      div {
+      .dropdownLink {
         display: flex;
         flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        gap: 16px;
+
         width: 100%;
         z-index: 3;
+        padding-left: 8px;
+        gap: 30px;
 
-        .loginButton {
-          cursor: pointer;
+        .profile {
+          display: flex;
+          flex-direction: column;
 
-          .loginDropdown {
-            z-index: 3;
-          }
-          .loginOptions {
-            display: none;
-            position: absolute;
-            top: -100%;
-            right: 50%;
-            width: 180px;
-
-            div {
-              display: flex;
-              flex-direction: column;
-              // padding-right: 50px;
-              // align-items: center;
-              // justify-content: center;
-              gap: 16px;
-              width: 100%;
-              cursor: pointer;
+          .username {
+            display: flex;
+            gap: 8px;
+            align-items: center;
+            // justify-content: center;
+            p {
+              span {
+                text-transform: uppercase;
+              }
             }
           }
 
-          &:hover .loginOptions {
-            display: block;
-            padding: 20px 0px;
+          .createShop {
+            display: flex;
+            gap: 8px;
+            align-items: center;
           }
-          // }
+        }
+
+        .logoutLink {
+          display: flex;
+          align-items: center;
+          gap: 8px;
         }
       }
     }
@@ -184,12 +180,23 @@
   height: 150px;
   margin: 0px 80px;
   display: flex;
-  align-items: center;
-  justify-content: space-between;
+  // align-items: center;
+  // justify-content: space-between;
   border-top: 1px solid black;
 
-  div {
+  .logoContainer {
+    width: 60%;
+  }
+
+  .linksContainer {
+    width: 40%;
     display: flex;
-    gap: 30px;
+    justify-content: space-between;
+    gap: 16px;
+
+    div {
+      display: flex;
+      flex-direction: column;
+    }
   }
 }

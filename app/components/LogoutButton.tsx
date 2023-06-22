@@ -20,7 +20,7 @@ export function LogoutButton(props: Props) {
         }}
         className={styles.logoutButton}
       >
-        logout
+        Logout
       </button>
     </form>
   );
