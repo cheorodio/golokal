@@ -33,8 +33,8 @@ export default async function ShopsPage() {
                 {/* <Image href={shop.image} alt="shop" /> */}
               </div>
               <div className={styles.shopNameContainer}>
-                <p className={styles.shopName}>{shop.username}</p>
-                <p className={styles.name}>{shop.name}</p>
+                <p className={styles.shopName}>{shop.name}</p>
+                {/* <p className={styles.name}>{shop.name}</p> */}
               </div>
               <div className={styles.shopBio}>
                 <p>{shop.description}</p>
