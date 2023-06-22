@@ -108,11 +108,11 @@ export const updateShopById = cache(
       UPDATE shops
       SET
         username = ${username},
-        name = ${name || null},
-        description = ${description || null},
-        website_url = ${websiteUrl || null},
+        name = ${name},
+        description = ${description},
+        website_url = ${websiteUrl},
         location = ${location},
-        shop_image_id = ${shopImageId || null}
+        shop_image_id = ${shopImageId}
       WHERE
         id = ${id}
         RETURNING *
