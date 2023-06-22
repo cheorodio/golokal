@@ -18,7 +18,6 @@ export default async function ShopsPage() {
     <main className={styles.shopsPageContainer}>
       <div className={styles.shopsPageTitle}>
         <h1>Discover local vendors on our site</h1>
-        <Link href="/shops/create-shop">Create shop</Link>
       </div>
       <div className={styles.shopListContainer}>
         {' '}
