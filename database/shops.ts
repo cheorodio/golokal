@@ -5,32 +5,43 @@ import { sql } from './connect';
 type CreateShop = {
   id: number;
   username: string;
+  name: string;
 };
+
+type ShopName = {
+  id: number;
+  username: string;
+};
+
+// GET ALL SHOPS FOR SHOPS PAGE ///////////////////////////
+export const getShops = cache(async () => {
+  const shops = await sql<Shop[]>`
+    SELECT
+      *
+    FROM
+      shops
+ `;
+  return shops;
+});
 
 // GET SHOP ///////////////////////////////////////////////
 export const getShopByUsername = cache(async (username: string) => {
-  const [shop] = await sql<Shop[]>`
+  const shops = await sql<Shop[]>`
     SELECT
-      id,
-      username,
-      name,
-      description,
-      website_url,
-      location,
-      shop_image_id
+      *
     FROM
       shops
     WHERE
-      shops.username = ${username.toLowerCase()}
+      username = ${username}
  `;
 
-  return shop;
+  return shops[0];
 });
 
 // CREATE SHOP //////////////////////////////
 // 1. first verify if the unique shop username is taken
 export const verifyShopByShopUsername = cache(async (username: string) => {
-  const [user] = await sql<CreateShop[]>`
+  const [shop] = await sql<ShopName[]>`
 SELECT
   id,
   username
@@ -38,25 +49,26 @@ FROM
   users
 WHERE
   users.username = ${username.toLowerCase()}`;
-  return user;
+  return shop;
 });
 
 // 2. create the shop
-export const createShop = cache(async (username: string) => {
+export const createShop = cache(async (username: string, name: string) => {
   const [shop] = await sql<CreateShop[]>`
     INSERT INTO shops
-      (username)
+      (username, name)
     VALUES
-      (${username})
+      (${username}, ${name})
     RETURNING
       id,
-      username
+      username,
+      name
  `;
   return shop;
 });
 
 // GETTING SHOP ///////////////////////////////////////////////
-export async function getShopById(id: number) {
+export const getShopById = cache(async (id: number) => {
   const shops = await sql<Shop[]>`
     SELECT
       *
@@ -65,8 +77,9 @@ export async function getShopById(id: number) {
     WHERE
       id = ${id}
   `;
-  return shops;
-}
+
+  return shops[0];
+});
 
 // UPDATE SHOP //////////////////////////////////////////////////////////
 // updating shop page
@@ -84,8 +97,8 @@ export const updateShopById = cache(
       UPDATE shops
       SET
         username = ${username},
-        name = ${name},
-        description = ${description},
+        name = ${name || null},
+        description = ${description || null},
         website_url = ${websiteUrl || null},
         location = ${location},
         shop_image_id = ${shopImageId || null}

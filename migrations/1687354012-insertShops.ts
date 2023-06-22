@@ -7,7 +7,7 @@ export const shops = [
     name: 'vida',
     description:
       'Welcome to Vida, where passion and artistry come together to create exquisite handmade jewelry. At Vida, we believe that jewelry is more than just an accessory—it is an expression of individuality, a reflection of style, and a symbol of cherished moments.',
-    websiteUrl: null,
+    websiteUrl: 'www.vidajewellery.com',
     location: 'Vienna',
     shopImageId: null,
   },
@@ -17,7 +17,7 @@ export const shops = [
     name: 'luluShop',
     description:
       'Welcome to luluShop, your haven for exquisite handmade candles! Nestled in the heart of our community, we take great pride in offering you a diverse collection of artisanal candles that will illuminate your world with warmth and beauty.',
-    websiteUrl: 'www.luluShop.co',
+    websiteUrl: 'www.luluShop.com',
     location: 'Vienna',
     shopImageId: null,
   },

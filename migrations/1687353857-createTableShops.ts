@@ -4,10 +4,10 @@ export type Shop = {
   id: number;
   username: string;
   name: string;
-  description: string | null;
-  websiteUrl: string | null;
-  location: string | null;
-  shopImageId: number | null;
+  description: string;
+  websiteUrl: string;
+  location: string;
+  shopImageId: number;
 };
 
 export async function up(sql: Sql) {
@@ -15,7 +15,7 @@ export async function up(sql: Sql) {
     CREATE TABLE shops (
       id integer PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
       username varchar(30) NOT NULL UNIQUE,
-      name varchar(30) NOT NULL,
+      name varchar(30),
       description varchar(500),
       website_url varchar(80),
       location varchar(40),
