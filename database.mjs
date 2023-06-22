@@ -5,7 +5,7 @@ config();
 
 // to run sql query in the application
 // sql is by default an async function, therefore needs to await this operation
-// first define the database that we want to connect to, otherwise you'll get a PostgresError, this lives inside the (...). If this is not done, the database is going to connect to my system 'michelle'
+// first define the database that we want to connect to, otherwise you'll get a PostgresError, this lives inside the (...). If this is not done, the database is going to connect to my system
 const sql = postgres(); // postgres run as a function
 
 // first query
