@@ -7,6 +7,26 @@ type CreateShop = {
   username: string;
 };
 
+// GET SHOP ///////////////////////////////////////////////
+export const getShopByUsername = cache(async (username: string) => {
+  const [shop] = await sql<Shop[]>`
+    SELECT
+      id,
+      username,
+      name,
+      description,
+      website_url,
+      location,
+      shop_image_id
+    FROM
+      shops
+    WHERE
+      shops.username = ${username.toLowerCase()}
+ `;
+
+  return shop;
+});
+
 // CREATE SHOP //////////////////////////////
 // 1. first verify if the unique shop username is taken
 export const verifyShopByShopUsername = cache(async (username: string) => {
