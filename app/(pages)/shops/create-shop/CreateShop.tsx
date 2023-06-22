@@ -26,8 +26,8 @@ export default function CreateShop() {
       setError(data.error);
       return;
     }
-
-    router.push(`/shop/${data.shops.username}`);
+    console.log(data.shop);
+    router.push(`/shops/${data.shop?.username}`);
     router.refresh();
   }
 
