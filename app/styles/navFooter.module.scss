@@ -38,7 +38,7 @@
     @media screen and (max-width: $tablet) {
       position: fixed;
       flex-direction: column;
-      background: linear-gradient(to right, white, rgba(255, 255, 255, 0.732));
+      background-color: white;
       left: -200%;
       top: 0%;
       height: 100vh;
@@ -197,8 +197,6 @@
   height: 150px;
   margin: 0px 80px;
   display: flex;
-  // align-items: center;
-  // justify-content: space-between;
   border-top: 1px solid black;
 
   .logoContainer {
