@@ -3,8 +3,12 @@ import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { AiOutlineCamera } from 'react-icons/ai';
 import { VscLocation } from 'react-icons/vsc';
+import { getProducts } from '../../../../database/products';
 import { getShopByUsername } from '../../../../database/shops';
+// import { products } from '../../../../migrations/1687506172-insertTableProducts';
 import styles from '../../../styles/SingleShopPage.module.scss';
+
+// import CreateProductsForm from './myShopProducts';
 
 export const dynamic = 'force-dynamic';
 
@@ -26,7 +30,7 @@ export default async function VendorProfilePage(props: Props) {
   if (!singleShop) {
     notFound();
   }
-  // const shops = await getShops();
+  const getProductsList = await getProducts();
 
   return (
     <main>
@@ -48,27 +52,33 @@ export default async function VendorProfilePage(props: Props) {
             </p>
           </div>
         </div>
-        {/*
+
         <div className={styles.productsFeed}>
           <h2>Products Feed</h2>
           <div className={styles.productsContainer}>
-            {/* <DisplayProducts products={products} /> */}
-        {/* <div className={styles.productCardsContainer}>
-              {shops.map((shop) => {
+            <div className={styles.productCardsContainer}>
+              {getProductsList.map((product) => {
                 return (
                   <div
-                    key={`product-div-${shop.id}`}
+                    key={`product-div-${product.id}`}
                     className={styles.productCard}
                   >
-                    <h1>{shop.name}</h1>
-                    <p>{shop.description}</p>
+                    <div className={styles.imageBox}>
+                      <AiOutlineCamera />
+                    </div>
+                    <h1>{product.name}</h1>
+                    <p>{product.description}</p>
                   </div>
                 );
               })}
             </div>
           </div>
-        </div> */}
+        </div>
       </div>
+      {/*
+      <div className={styles.adminAddProductsSection}>
+        <CreateProductsForm products={products} />
+      </div> */}
     </main>
   );
 }
