@@ -10,11 +10,11 @@ import { getValidSessionByToken } from '../../../database/sessions';
 // import { getValidSessionByToken } from '../../../database/sessions';
 import { Product } from '../../../migrations/1687505841-createTableProducts';
 
-export type Error = {
+type Error = {
   error: string;
 };
 
-type ProductsResponseBodyGet = { product: Product[] } | Error;
+type ProductsResponseBodyGet = { product: Product } | Error;
 type ProductsResponseBodyPost = { product: Product } | Error;
 
 const productSchema = z.object({
@@ -47,21 +47,19 @@ export async function GET(
 
   if (!limit || !offset) {
     return NextResponse.json(
-      {
-        error: 'Limit and Offset need to be passed as params',
-      },
+      { error: 'Limit and Offset need to be passed as params' },
       { status: 400 },
     );
   }
 
   // query the database to get all the products only if a valid session token is passed
-  const products = await getProductsWithLimitAndOffsetBySessionToken(
+  const allProducts = await getProductsWithLimitAndOffsetBySessionToken(
     limit,
     offset,
     sessionTokenCookie.value,
   );
 
-  return NextResponse.json({ products: products });
+  return NextResponse.json({ product: allProducts });
 }
 
 // CREATING PRODUCTS //////////////////////////////////

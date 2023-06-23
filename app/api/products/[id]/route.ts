@@ -7,6 +7,10 @@ import {
 } from '../../../../database/products';
 import { Product } from '../../../../migrations/1687505841-createTableProducts';
 
+export type Error = {
+  error: string;
+};
+
 type ProductResponseBodyGet = { product: Product } | Error;
 type ProductResponseBodyPut = { product: Product } | Error;
 type ProductResponseBodyDelete = { product: Product } | Error;
@@ -59,7 +63,7 @@ export async function PUT(
     );
   }
   // query the database to update the product
-  const product = await updateProductById(
+  const productToUpdate = await updateProductById(
     productId,
     result.data.name,
     result.data.category,
@@ -67,12 +71,12 @@ export async function PUT(
     // result.data.productImageId,
   );
 
-  if (!product) {
+  if (!productToUpdate) {
     return NextResponse.json({ error: 'Product Not Found' }, { status: 404 });
   }
 
   return NextResponse.json({
-    product: product,
+    product: productToUpdate,
   });
 }
 
@@ -86,10 +90,10 @@ export async function DELETE(
     return NextResponse.json({ error: 'Invalid product id' }, { status: 400 });
   }
   // query the database to get all the products
-  const product = await deleteProductsById(productId);
-  if (!product) {
+  const allProducts = await deleteProductsById(productId);
+  if (!allProducts) {
     return NextResponse.json({ error: 'Product Not Found' }, { status: 404 });
   }
 
-  return NextResponse.json({ product: product });
+  return NextResponse.json({ product: allProducts });
 }
