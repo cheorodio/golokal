@@ -33,7 +33,7 @@ export default function CreateShop() {
       return;
     }
     console.log(data.shop);
-    router.push(`/shops/${data.shop?.username}`);
+    router.push(`/shops/admin/${data.shop?.username}`);
     router.refresh();
   }
 
@@ -45,7 +45,7 @@ export default function CreateShop() {
       <label>
         <input
           value={username}
-          placeholder="Shop Username"
+          placeholder="Username"
           onChange={(event) => setUsername(event.currentTarget.value)}
         />
       </label>

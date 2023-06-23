@@ -2,19 +2,40 @@ import { NextRequest, NextResponse } from 'next/server';
 import { z } from 'zod';
 import {
   deleteProductsById,
+  getProductsById,
   updateProductById,
 } from '../../../../database/products';
 import { Product } from '../../../../migrations/1687505841-createTableProducts';
 
+type ProductResponseBodyGet = { product: Product } | Error;
 type ProductResponseBodyPut = { product: Product } | Error;
 type ProductResponseBodyDelete = { product: Product } | Error;
 
 const productSchema = z.object({
-  name: z.string(),
-  categoryId: z.number(),
-  description: z.string(),
-  productImageId: z.number(),
+  name: z.string().min(1),
+  category: z.string().min(1),
+  description: z.string().min(1),
+  // productImageId: z.number(),
 });
+
+export async function GET(
+  request: NextRequest,
+  { params }: { params: Record<string, string | string[]> },
+): Promise<NextResponse<ProductResponseBodyGet>> {
+  const productId = Number(params.productId);
+
+  if (!productId) {
+    return NextResponse.json({ error: 'Invalid product id' }, { status: 400 });
+  }
+  // query the database to get all the products
+  const product = await getProductsById(productId);
+
+  if (!product) {
+    return NextResponse.json({ error: 'Product Not Found' }, { status: 404 });
+  }
+
+  return NextResponse.json({ product: product });
+}
 
 export async function PUT(
   request: NextRequest,
@@ -41,9 +62,9 @@ export async function PUT(
   const product = await updateProductById(
     productId,
     result.data.name,
-    result.data.categoryId,
+    result.data.category,
     result.data.description,
-    result.data.productImageId,
+    // result.data.productImageId,
   );
 
   if (!product) {

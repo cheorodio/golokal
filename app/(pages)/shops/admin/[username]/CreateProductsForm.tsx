@@ -64,13 +64,13 @@ export default function CreateProductsForm({ products }: Props) {
           />
         </label>
 
-        <label>
+        {/* <label>
           <input
             type="file"
             value={productImageId}
             onChange={(event) => setProductImageId(event.currentTarget.value)}
           />
-        </label>
+        </label> */}
 
         <button
           className={styles.createProductButton}
