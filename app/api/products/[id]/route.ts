@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import { z } from 'zod';
 import {
   deleteProductsById,
-  getProductsById,
+  getProductById,
   updateProductById,
 } from '../../../../database/products';
 import { Product } from '../../../../migrations/1687505841-createTableProducts';
@@ -32,7 +32,7 @@ export async function GET(
     return NextResponse.json({ error: 'Invalid product id' }, { status: 400 });
   }
   // query the database to get all the products
-  const product = await getProductsById(productId);
+  const product = await getProductById(productId);
 
   if (!product) {
     return NextResponse.json({ error: 'Product Not Found' }, { status: 404 });

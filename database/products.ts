@@ -108,3 +108,25 @@ export const deleteProductsById = cache(async (id: number) => {
   `;
   return productsToDelete;
 });
+
+// GETTING ONE PRODUCT ///////////////
+export const products: Product[] = [
+  {
+    id: 1,
+    name: 'Ocean',
+    category: 'Candles',
+    description:
+      'Introducing our exquisite hand-poured ocean-scented candles, crafted to bring the refreshing essence of the sea into your living space. Immerse yourself in the tranquil atmosphere of coastal serenity with every flicker of our artisanal candles.',
+  },
+  {
+    id: 2,
+    name: 'Christmas',
+    category: 'Candles',
+    description:
+      'Introducing our enchanting hand-poured Christmas-scented candles, meticulously crafted to infuse your home with the nostalgic and heartwarming aromas of the holiday season. Immerse yourself in the magical ambiance of Christmas with every flicker of our artisanal candles.',
+  },
+];
+
+export function getProductById(id: number) {
+  return products.find((product) => product.id === id);
+}
