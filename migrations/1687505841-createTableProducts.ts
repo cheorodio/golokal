@@ -3,9 +3,9 @@ import { Sql } from 'postgres';
 export type Product = {
   id: number;
   name: string;
-  categoryId: number;
+  category: string;
   description: string;
-  productImageId: number;
+  // productImageId: number;
 };
 
 export async function up(sql: Sql) {
@@ -13,9 +13,9 @@ export async function up(sql: Sql) {
     CREATE TABLE products (
       id integer PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
       name varchar(30) NOT NULL,
-      category_id integer NOT NULL,
-      description varchar(500) NOT NULL,
-      product_image_id integer NOT NULL
+      category varchar(30) NOT NULL,
+      description varchar(500) NOT NULL
+      -- product_image_id integer NOT NULL
     )
   `;
 }

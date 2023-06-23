@@ -63,15 +63,15 @@ export const getProductsById = cache(async (id: number) => {
 export const createProduct = cache(
   async (
     name: string,
-    categoryId: number,
+    category: string,
     description: string,
-    productImageId: number,
+    // productImageId: number,
   ) => {
     const [productToCreate] = await sql<Product[]>`
       INSERT INTO products
-        (name, category_id, description, product_image_id)
+        (name, category, description)
       VALUES
-        (${name}, ${categoryId}, ${description}, ${productImageId})
+        (${name}, ${category}, ${description})
       RETURNING *
     `;
 
@@ -81,20 +81,13 @@ export const createProduct = cache(
 
 // EDITING PRODUCTS /////////////////////
 export const updateProductById = cache(
-  async (
-    id: number,
-    name: string,
-    categoryId: number,
-    description: string,
-    productImageId: number,
-  ) => {
+  async (id: number, name: string, category: string, description: string) => {
     const [productToEdit] = await sql<Product[]>`
       UPDATE products
       SET
         name = ${name},
-        category_id = ${categoryId},
-        description = ${description},
-        product_image_id = ${productImageId}
+        category = ${category},
+        description = ${description}
       WHERE
         id = ${id}
         RETURNING *
