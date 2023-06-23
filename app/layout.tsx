@@ -34,6 +34,10 @@ export default async function RootLayout({ children }: LayoutProps) {
     ? undefined
     : await getUserBySessionToken(sessionToken.value);
 
+  const shop = !sessionToken?.value
+    ? undefined
+    : await getUserBySessionToken(sessionToken.value);
+
   return (
     <html lang="en">
       <head>
@@ -64,6 +68,12 @@ export default async function RootLayout({ children }: LayoutProps) {
                       <div className={styles.username}>
                         <BsFillPersonFill />
                         <Link href={`/${user.username}`}>My profile</Link>
+                      </div>
+                      <div className={styles.username}>
+                        <BsFillPersonFill />
+                        <Link href={`/shops/admin/${shop?.username}`}>
+                          My shop
+                        </Link>
                       </div>
                       <div className={styles.createShop}>
                         <MdShoppingBasket />
