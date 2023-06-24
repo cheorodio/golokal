@@ -3,7 +3,7 @@ import Link from 'next/link';
 import { notFound, redirect } from 'next/navigation';
 import { AiOutlineCamera } from 'react-icons/ai';
 import { getProducts } from '../../../../../database/products';
-import { getValidSessionByToken } from '../../../../../database/sessions';
+import { getUserBySessionToken } from '../../../../../database/sessions';
 import { getShopByUsername } from '../../../../../database/shops';
 import styles from '../../../../styles/SingleShopPage.module.scss';
 import CreateProductsForm from './CreateProductsForm';
@@ -22,9 +22,14 @@ export default async function ShopProfilePage({ params }: Props) {
   const sessionTokenCookie = cookies().get('sessionToken');
   const session =
     sessionTokenCookie &&
-    (await getValidSessionByToken(sessionTokenCookie.value));
+    (await getUserBySessionToken(sessionTokenCookie.value));
+
+  // if (!session === params.username)
+  //   redirect(`/login?returnTo=/shop/${shop.username}`);
 
   if (!session) redirect(`/login?returnTo=/shop/${shop.username}`);
+
+  // check if i am the user of this shop
 
   const products = await getProducts();
 
@@ -56,7 +61,7 @@ export default async function ShopProfilePage({ params }: Props) {
                     className={styles.productCard}
                   >
                     <h1>{product.name}</h1>
-                    <p>{product.categoryId}</p>
+                    <p>{product.category}</p>
                     <p>{product.description}</p>
                   </div>
                 );

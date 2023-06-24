@@ -47,7 +47,6 @@ export async function POST(
   }
 
   // verify if the user is already taken
-  // console.log(await getUserByUsername(result.data.username));
   if (await getShopByUsername(result.data.username)) {
     return NextResponse.json(
       {
