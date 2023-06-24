@@ -118,12 +118,13 @@
             display: flex;
             gap: 8px;
             align-items: center;
-            // justify-content: center;
-            p {
-              span {
-                text-transform: uppercase;
-              }
-            }
+            text-transform: uppercase;
+          }
+
+          .myshop {
+            display: flex;
+            gap: 8px;
+            align-items: center;
           }
 
           .createShop {
@@ -177,16 +178,6 @@
       font-size: 1.5rem;
       width: 30%;
       align-items: flex-start;
-    }
-
-    div {
-      @media screen and (max-width: $tablet) {
-        width: 20px;
-        height: 2px;
-        background: black;
-        margin: 4px;
-        transition: 0.3s ease-in;
-      }
     }
   }
 }

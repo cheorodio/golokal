@@ -67,9 +67,9 @@ export default async function RootLayout({ children }: LayoutProps) {
                     <div className={styles.profile}>
                       <div className={styles.username}>
                         <BsFillPersonFill />
-                        <Link href={`/${user.username}`}>My profile</Link>
+                        <Link href={`/${user.username}`}>{user.username}</Link>
                       </div>
-                      <div className={styles.username}>
+                      <div className={styles.myshop}>
                         <BsFillPersonFill />
                         <Link href={`/shops/admin/${shop?.username}`}>
                           My shop
