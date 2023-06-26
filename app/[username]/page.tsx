@@ -1,6 +1,8 @@
+import { cookies } from 'next/headers';
 import { notFound } from 'next/navigation';
 import { AiOutlineCamera } from 'react-icons/ai';
-import { getUserByUsername } from '../../database/users';
+// import { getUserBySessionToken } from '../../database/sessions';
+import { getUserBySessionToken, getUserByUsername } from '../../database/users';
 import styles from '../styles/profilePage.module.scss';
 
 type Props = {
@@ -8,11 +10,23 @@ type Props = {
 };
 
 export default async function UserProfilePage({ params }: Props) {
-  const user = await getUserByUsername(params.username);
+  const cookieStore = cookies();
+  const sessionToken = cookieStore.get('sessionToken');
+
+  const user = !sessionToken?.value
+    ? undefined
+    : await getUserBySessionToken(sessionToken.value);
 
   if (!user) {
     notFound();
   }
+
+  const singleUser = await getUserByUsername(params.username);
+
+  if (!singleUser) {
+    notFound();
+  }
+
   return (
     <main className={styles.profilePage}>
       <div className={styles.profileInfo}>

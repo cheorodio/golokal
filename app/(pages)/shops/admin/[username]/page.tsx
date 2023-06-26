@@ -24,8 +24,7 @@ export default async function ShopProfilePage({ params }: Props) {
     sessionTokenCookie &&
     (await getUserBySessionToken(sessionTokenCookie.value));
 
-  // if (!session === params.username)
-  //   redirect(`/login?returnTo=/shop/${shop.username}`);
+  // if (!session.userId === params.username)redirect(`/login?returnTo=/shop/${shop.username}`);
 
   if (!session) redirect(`/login?returnTo=/shop/${shop.username}`);
 
