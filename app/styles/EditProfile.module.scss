@@ -7,7 +7,7 @@
   justify-content: center;
   height: 100vh;
   width: 100%;
-  padding: 100px 20px 80px;
+  padding: 100px 20px 20px;
 
   @media screen and (min-width: $tablet) {
     display: flex;
@@ -145,11 +145,71 @@
     height: 100%;
     box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px,
       rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    padding: 16px;
+    overflow: scroll;
 
     @media screen and (min-width: $tablet) {
       width: 70%;
       box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px,
         rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      padding: 24px;
+    }
+
+    .favouriteShopCard {
+      width: 100%;
+      display: flex;
+      gap: 20px;
+      border-bottom: 0.1px solid var(--secondary-text-color);
+      padding: 30px 0px;
+
+      .imageSection {
+        width: 30%;
+        height: 100%;
+        background-color: azure;
+      }
+
+      .infoSection {
+        width: 70%;
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+
+        div {
+          display: flex;
+          flex-direction: column;
+
+          h1 {
+            text-transform: capitalize;
+            font-family: var(--title-text);
+          }
+
+          h4 {
+            font-weight: 300;
+            font-style: italic;
+          }
+        }
+
+        .bio {
+          line-height: 1.5;
+        }
+
+        .location {
+          display: flex;
+          align-items: center;
+
+          span {
+            text-transform: uppercase;
+            font-size: 0.8rem;
+          }
+        }
+      }
     }
   }
 }
