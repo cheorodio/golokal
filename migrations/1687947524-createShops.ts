@@ -19,7 +19,7 @@ export async function up(sql: Sql) {
       description varchar(500),
       website_url varchar(80),
       location varchar(40),
-      shop_image_id integer
+      shop_image varchar(80)
     )
   `;
 }

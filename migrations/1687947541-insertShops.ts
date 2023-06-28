@@ -9,7 +9,7 @@ export const shops = [
       'Welcome to Vida, where passion and artistry come together to create exquisite handmade jewelry. At Vida, we believe that jewelry is more than just an accessory—it is an expression of individuality, a reflection of style, and a symbol of cherished moments.',
     websiteUrl: 'www.vidajewellery.com',
     location: 'Vienna',
-    shopImageId: null,
+    shopImage: '/images/shop.png',
   },
   {
     id: 2,
@@ -19,7 +19,7 @@ export const shops = [
       'Welcome to luluShop, your haven for exquisite handmade candles! Nestled in the heart of our community, we take great pride in offering you a diverse collection of artisanal candles that will illuminate your world with warmth and beauty.',
     websiteUrl: 'www.luluShop.com',
     location: 'Vienna',
-    shopImageId: null,
+    shopImage: '/images/shop.png',
   },
 ];
 
@@ -27,9 +27,9 @@ export async function up(sql: Sql) {
   for (const shop of shops) {
     await sql`
     INSERT INTO shops
-      (username, name, description, website_url, location, shop_image_id)
+      (username, name, description, website_url, location, shop_image)
     VALUES
-      (${shop.username}, ${shop.name}, ${shop.description}, ${shop.websiteUrl}, ${shop.location}, ${shop.shopImageId})
+      (${shop.username}, ${shop.name}, ${shop.description}, ${shop.websiteUrl}, ${shop.location}, ${shop.shopImage})
   `;
   }
 }
