@@ -7,6 +7,7 @@
   justify-content: center;
   height: 100vh;
   width: 100%;
+  padding: 100px 20px 80px;
 
   @media screen and (min-width: $tablet) {
     display: flex;
@@ -14,13 +15,14 @@
     align-items: center;
     justify-content: center;
     height: 100vh;
+    padding: 100px 80px;
   }
 
   .profilePageContainer {
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 100px 20px 20px;
+    padding: 0px 20px 20px;
     width: 100%;
 
     @media screen and (min-width: $tablet) {
@@ -141,11 +143,13 @@
   .favouritesContainer {
     width: 100%;
     height: 100%;
-    box-shadow: rgba(17, 12, 46, 0.15) 0px 48px 100px 0px;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px,
+      rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
 
     @media screen and (min-width: $tablet) {
       width: 70%;
-      box-shadow: rgba(17, 12, 46, 0.15) 0px 48px 100px 0px;
+      box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px,
+        rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
     }
   }
 }
