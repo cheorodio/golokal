@@ -9,7 +9,7 @@ export const users = [
     profileName: 'Michelle',
     bio: 'Hi my name is Michelle and I like all things handmade. I am here to connect with like-minded individuals and discover amazing local vendors near me.',
     shopId: null,
-    profileImageId: null,
+    profileImage: '/images/avatar.png',
   },
   {
     id: 2,
@@ -19,7 +19,7 @@ export const users = [
     profileName: 'Anna',
     bio: 'Hi my name is Anna and I like all things handmade. I am here to connect with like-minded individuals and discover amazing local vendors near me.',
     shopId: 1,
-    profileImageId: null,
+    profileImage: '/images/avatar.png',
   },
   {
     id: 3,
@@ -29,7 +29,7 @@ export const users = [
     profileName: 'Sina',
     bio: 'Hi my name is Sina and I like all things handmade. I am here to connect with like-minded individuals and discover amazing local vendors near me.',
     shopId: 2,
-    profileImageId: null,
+    profileImage: '/images/avatar.png',
   },
 ];
 
@@ -37,9 +37,9 @@ export async function up(sql: Sql) {
   for (const user of users) {
     await sql`
     INSERT INTO users
-      (username, email, password_hash, profile_name, bio, shop_id, profile_image_id)
+      (username, email, password_hash, profile_name, bio, shop_id, profile_image)
     VALUES
-      (${user.username}, ${user.email},${user.passwordHash}, ${user.profileName}, ${user.bio}, ${user.shopId}, ${user.profileImageId})
+      (${user.username}, ${user.email},${user.passwordHash}, ${user.profileName}, ${user.bio}, ${user.shopId}, ${user.profileImage})
   `;
   }
 }
