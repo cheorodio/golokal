@@ -1,14 +1,13 @@
+import { cookies } from 'next/headers';
 // import Image from 'next/image';
 import Link from 'next/link';
-import { notFound } from 'next/navigation';
+import { notFound, redirect } from 'next/navigation';
 import { AiOutlineCamera } from 'react-icons/ai';
 import { VscLocation } from 'react-icons/vsc';
 import { getProducts } from '../../../../database/products';
 import { getShopByUsername } from '../../../../database/shops';
-// import { products } from '../../../../migrations/1687506172-insertTableProducts';
+import { getUserBySessionToken } from '../../../../database/users';
 import styles from '../../../styles/SingleShopPage.module.scss';
-
-// import CreateProductsForm from './myShopProducts';
 
 export const dynamic = 'force-dynamic';
 
@@ -23,21 +22,29 @@ type Props = {
 };
 
 export default async function VendorProfilePage(props: Props) {
+  const sessionToken = cookies().get('sessionToken');
+  const user = !sessionToken?.value
+    ? undefined
+    : await getUserBySessionToken(sessionToken.value);
+
+  const shopOwner = user?.id;
+  if (!shopOwner) {
+    return redirect(`/login?returnTo=/${props.params.username}`);
+  }
+
   const singleShop = await getShopByUsername(props.params.username);
   console.log({ singleShop });
 
-  // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
   if (!singleShop) {
     notFound();
   }
-  const getProductsList = await getProducts();
+  // const getProductsList = await getProducts();
 
   return (
     <main>
       <div className={styles.shopPage}>
         <div className={styles.shopInfo}>
           <div className={styles.imageBox}>
-            {/* <Image src={allShop.shopImageId} alt="vendor" /> */}
             <AiOutlineCamera />
           </div>
           <div className={styles.moreInfo}>
@@ -53,7 +60,7 @@ export default async function VendorProfilePage(props: Props) {
           </div>
         </div>
 
-        <div className={styles.productsFeed}>
+        {/* <div className={styles.productsFeed}>
           <h2>Products Feed</h2>
           <div className={styles.productsContainer}>
             <div className={styles.productCardsContainer}>
@@ -73,12 +80,8 @@ export default async function VendorProfilePage(props: Props) {
               })}
             </div>
           </div>
-        </div>
+        </div> */}
       </div>
-      {/*
-      <div className={styles.adminAddProductsSection}>
-        <CreateProductsForm products={products} />
-      </div> */}
     </main>
   );
 }

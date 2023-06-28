@@ -9,7 +9,10 @@ import styles from '../../../../styles/SingleShopPage.module.scss';
 import CreateProductsForm from './CreateProductsForm';
 
 type Props = {
-  params: { username: string };
+  params: {
+    username: string;
+    shopId: number;
+  };
 };
 
 export default async function ShopProfilePage({ params }: Props) {
@@ -24,9 +27,11 @@ export default async function ShopProfilePage({ params }: Props) {
     sessionTokenCookie &&
     (await getUserBySessionToken(sessionTokenCookie.value));
 
-  // if (!session.userId === params.username)redirect(`/login?returnTo=/shop/${shop.username}`);
+  if (session?.id === params.shopId) {
+    redirect(`/login?returnTo=/shop/${shop.username}`);
+  }
 
-  if (!session) redirect(`/login?returnTo=/shop/${shop.username}`);
+  // if (!session) redirect(`/login?returnTo=/shop/${shop.username}`);
 
   // check if i am the user of this shop
 
