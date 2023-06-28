@@ -1,5 +1,5 @@
 import { cache } from 'react';
-import { Shop } from '../migrations/1687353857-createTableShops';
+import { Shop } from '../migrations/1687947524-createShops';
 import { sql } from './connect';
 
 type CreateShop = {
