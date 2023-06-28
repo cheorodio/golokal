@@ -37,6 +37,31 @@ export default function EditProfile(props: Props) {
 
   const [error, setError] = useState<string>();
 
+  async function updateProfile(
+    username: string,
+    profileName: string,
+    bio: string,
+  ) {
+    const response = await fetch(`/api/users/${props.user.id}`, {
+      method: 'PUT',
+      body: JSON.stringify({
+        username,
+        profileName,
+        bio,
+      }),
+    });
+
+    const data = await response.json();
+
+    if ('error' in data) {
+      setError(data.error);
+      return;
+    }
+    setOnEditInput(undefined);
+    setUsers([...users, data.user]);
+    router.refresh();
+  }
+
   return (
     <div className={styles.profilePageContainer}>
       <div className={styles.editForm}>
@@ -46,16 +71,16 @@ export default function EditProfile(props: Props) {
               {!props.user.profileImage ? (
                 <Image
                   src="/images/avatar.png"
-                  width={200}
-                  height={200}
+                  width={300}
+                  height={300}
                   alt="Profile avatar"
                   className={styles.profileAvatar}
                 />
               ) : (
                 <Image
                   src={props.user.profileImage}
-                  width={200}
-                  height={200}
+                  width={300}
+                  height={300}
                   alt="Profile avatar"
                   className={styles.profileAvatar}
                 />
@@ -66,9 +91,8 @@ export default function EditProfile(props: Props) {
           {/* Edit profile info*/}
           {props.currentUser.username === props.user.username &&
           onEditInput !== props.user.username ? (
-            <form>
+            <form className={styles.editButton}>
               <button
-                className={styles.editButton}
                 onClick={() => {
                   setOnEditInput(props.user.username);
                   setOnEditUsername(props.user.username);
@@ -95,11 +119,12 @@ export default function EditProfile(props: Props) {
           {onEditInput !== props.user.username ? (
             <>
               <h1>{props.user.profileName}</h1>
-              <h5>{props.user.username}</h5>
-              <p className={styles.bioContainer}>{props.user.bio}</p>
+              <div className={styles.bioContainer}>
+                <p>{props.user.bio}</p>
+              </div>
             </>
           ) : (
-            <>
+            <form className={styles.formContainer}>
               <div>
                 <label htmlFor="username">Username</label>
                 <input
@@ -122,50 +147,27 @@ export default function EditProfile(props: Props) {
               </div>
               <div>
                 <label htmlFor="bio">Bio</label>
-                <input
+                <textarea
                   id="bio"
                   value={onEditBio}
                   onChange={(event) => setOnEditBio(event.currentTarget.value)}
                 />
               </div>
-            </>
-          )}
-        </div>
-
-        {props.currentUser.username === props.user.username ? (
-          onEditInput === props.user.username ? (
-            <form>
               <button
                 onClick={async () => {
-                  const response = await fetch(`/api/users/${props.user.id}`, {
-                    method: 'PUT',
-                    body: JSON.stringify({
-                      username: onEditUsername || props.user.username,
-                      profileName: onEditProfileName || props.user.profileName,
-                      bio: onEditBio || props.user.bio,
-                    }),
-                  });
-
-                  const data = await response.json();
-
-                  if ('error' in data) {
-                    setError(data.error);
-                    return;
-                  }
-                  setOnEditInput(undefined);
-                  setUsers([...users, data.user]);
-                  router.refresh();
+                  await updateProfile(
+                    onEditUsername,
+                    onEditProfileName,
+                    onEditBio,
+                  );
                 }}
               >
                 Save
               </button>
+              {error !== '' && <div>{error}</div>}
             </form>
-          ) : (
-            ''
-          )
-        ) : (
-          <div>message</div>
-        )}
+          )}
+        </div>
       </div>
     </div>
   );

@@ -5,7 +5,7 @@ import {
   getUserById,
   updateUserById,
 } from '../../../../database/users';
-import { User } from '../../../../migrations/1687352892-createTableUsers';
+import { User } from '../../../../migrations/1687947560-createUsers';
 import { Error } from '../route';
 
 type UserResponseBodyGet = { user: User } | Error;
@@ -18,7 +18,7 @@ const userSchema = z.object({
   profileName: z.string(),
   bio: z.string(),
   shopId: z.number(),
-  profileImageId: z.number(),
+  profileImage: z.string(),
 });
 
 export async function GET(
@@ -112,7 +112,7 @@ export async function PUT(
     result.data.profileName,
     result.data.bio,
     result.data.shopId,
-    result.data.profileImageId,
+    result.data.profileImage,
   );
 
   if (!user) {
