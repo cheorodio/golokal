@@ -43,20 +43,29 @@
         justify-content: space-between;
         align-items: center;
 
-        .followButton {
-          background-color: var(--secondary-text-color);
-          color: white;
+        button {
           border: none;
-          padding: 6px 16px;
-          border-radius: 5px;
-          text-transform: uppercase;
-          letter-spacing: 1.5px;
-          cursor: pointer;
 
-          &:hover {
-            background-color: transparent;
-            border: 1px solid var(--secondary-text-color);
-            color: var(--secondary-text-color);
+          .followButton {
+            background-color: var(--secondary-text-color);
+            color: white;
+            border: none;
+            padding: 6px 16px;
+            border-radius: 5px;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            cursor: pointer;
+          }
+
+          .followedButton {
+            background-color: rgb(85, 141, 3);
+            color: black;
+            border: none;
+            padding: 6px 16px;
+            border-radius: 5px;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            cursor: pointer;
           }
         }
       }
