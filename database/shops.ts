@@ -102,7 +102,7 @@ export const updateShopById = cache(
     description: string,
     websiteUrl: string,
     location: string,
-    shopImageId: number,
+    shopImage: string,
   ) => {
     const [shop] = await sql<Shop[]>`
       UPDATE shops
@@ -112,7 +112,7 @@ export const updateShopById = cache(
         description = ${description},
         website_url = ${websiteUrl},
         location = ${location},
-        shop_image_id = ${shopImageId}
+        shop_image = ${shopImage}
       WHERE
         id = ${id}
         RETURNING *
