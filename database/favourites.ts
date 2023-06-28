@@ -3,8 +3,8 @@ import { Favourite } from '../migrations/1687958140-createFavourites';
 import { sql } from './connect';
 
 type FavouritedShop = {
-  favouritesId: number;
-  userdId: number;
+  favouriteId: number;
+  userId: number;
   shopId: number;
   shopUsername: string;
   shopName: string | null;
@@ -47,9 +47,8 @@ export const getFavouritedShopByUser = cache(
 );
 
 // Add favourite shop for the follow option
-export const createFavourites = cache(
-  async (userId: number, shopId: number) => {
-    const [favouriteShop] = await sql<Favourite[]>`
+export const createFavourite = cache(async (userId: number, shopId: number) => {
+  const [favourite] = await sql<Favourite[]>`
       INSERT INTO favourites
         (user_id, shop_id)
       VALUES
@@ -59,9 +58,8 @@ export const createFavourites = cache(
       user_id,
       shop_id
     `;
-    return favouriteShop;
-  },
-);
+  return favourite;
+});
 
 // display favourited shop on profile
 export const getFavouriteByUserId = cache(async (userId: number) => {
