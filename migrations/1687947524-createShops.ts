@@ -3,11 +3,11 @@ import { Sql } from 'postgres';
 export type Shop = {
   id: number;
   username: string;
-  name: string;
-  description: string;
-  websiteUrl: string;
-  location: string;
-  shopImageId: number;
+  name: string | null;
+  description: string | null;
+  websiteUrl: string | null;
+  location: string | null;
+  shopImage: string | null;
 };
 
 export async function up(sql: Sql) {
