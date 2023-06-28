@@ -34,32 +34,44 @@ export default function EditProfile(props: Props) {
   const [onEditProfileName, setOnEditProfileName] = useState<string>('');
   const [onEditBio, setOnEditBio] = useState<string>('');
   const [onEditProfileAvatar, setOnEditProfileAvatar] = useState<string>('');
-
   const [error, setError] = useState<string>();
 
   async function updateProfile(
+    userId: number,
     username: string,
     profileName: string,
     bio: string,
   ) {
-    const response = await fetch(`/api/users/${props.user.id}`, {
+    const response = await fetch(`/api/users/${userId}`, {
       method: 'PUT',
       body: JSON.stringify({
+        userId,
         username,
         profileName,
         bio,
       }),
     });
 
+    // const data = await response.json();
+
+    // if ('error' in data) {
+    //   setError(data.error);
+    //   return;
+    // }
+    // setOnEditInput(undefined);
+    // setUsers([...users, data.user]);
+    // router.refresh();
+
     const data = await response.json();
 
-    if ('error' in data) {
-      setError(data.error);
-      return;
-    }
-    setOnEditInput(undefined);
-    setUsers([...users, data.user]);
-    router.refresh();
+    setUsers(
+      users.map((user) => {
+        if (user.id === data.user.id) {
+          return data.user;
+        }
+        return user;
+      }),
+    );
   }
 
   return (
@@ -156,6 +168,7 @@ export default function EditProfile(props: Props) {
               <button
                 onClick={async () => {
                   await updateProfile(
+                    userId,
                     onEditUsername,
                     onEditProfileName,
                     onEditBio,

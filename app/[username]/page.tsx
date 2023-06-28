@@ -1,18 +1,29 @@
 import { cookies } from 'next/headers';
 import { notFound, redirect } from 'next/navigation';
+import { getFavouriteByUserId } from '../../database/favourites';
+import { getShopById } from '../../database/shops';
 import {
+  getUserById,
   getUserBySessionToken,
   getUserByUsername,
   getUsers,
 } from '../../database/users';
 import styles from '../styles/EditProfile.module.scss';
 import EditProfile from './EditProfile';
+import MyFavourites from './MyFavourites';
 
-type Props = { params: { username: string; userId: number } };
+type Props = {
+  params: {
+    username: string;
+    userId: number;
+    shopId: number;
+    favourites: any;
+  };
+};
 
-export default async function UserProfilePage({ params }: Props) {
-  const user = await getUserByUsername(params.username);
-  const users = await getUsers();
+export default async function UserProfilePage(props: Props) {
+  const user = await getUserByUsername(props.params.username);
+  const myUsers = await getUsers();
   if (!user) {
     notFound();
   }
@@ -26,10 +37,17 @@ export default async function UserProfilePage({ params }: Props) {
     return redirect(`/login?returnTo=/${user.username}`);
   }
 
+  const favourites = await getFavouriteByUserId(user.id);
+  const users = await getUserById(user.id);
+  const shops = await getShopById(user.id);
+
   return (
     <section className={styles.profileContainerBox}>
-      <EditProfile user={user} users={users} currentUser={currentUser} />
-      <div className={styles.favouritesContainer} />
+      <EditProfile user={user} myUsers={myUsers} currentUser={currentUser} />
+      <div className={styles.favouritesContainer}>
+        <h1>{user.profileName}'s favourite shops</h1>
+        <MyFavourites favourites={favourites} users={users} shops={shops} />
+      </div>
     </section>
   );
 }

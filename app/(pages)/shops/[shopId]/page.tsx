@@ -4,10 +4,15 @@ import Link from 'next/link';
 import { notFound, redirect } from 'next/navigation';
 import { AiOutlineCamera } from 'react-icons/ai';
 import { VscLocation } from 'react-icons/vsc';
-import { getProducts } from '../../../../database/products';
-import { getShopByUsername } from '../../../../database/shops';
-import { getUserBySessionToken } from '../../../../database/users';
+import {
+  getFavouriteByUserId,
+  getFavourites,
+} from '../../../../database/favourites';
+// import { getProducts } from '../../../../database/products';
+import { getShopById } from '../../../../database/shops';
+import { getUserById, getUserBySessionToken } from '../../../../database/users';
 import styles from '../../../styles/SingleShopPage.module.scss';
+import AddFavourites from './AddFavourites';
 
 export const dynamic = 'force-dynamic';
 
@@ -18,28 +23,39 @@ export const metadata = {
 };
 
 type Props = {
-  params: { username: string };
+  params: {
+    userId: string;
+    shopId: string;
+  };
 };
 
 export default async function VendorProfilePage(props: Props) {
-  const sessionToken = cookies().get('sessionToken');
-  const user = !sessionToken?.value
-    ? undefined
-    : await getUserBySessionToken(sessionToken.value);
+  const cookieStore = cookies();
+  const sessionToken = cookieStore.get('sessionToken');
 
-  const shopOwner = user?.id;
-  if (!shopOwner) {
-    return redirect(`/login?returnTo=/${props.params.username}`);
+  const user =
+    sessionToken && (await getUserBySessionToken(sessionToken.value));
+
+  const singleShop = await getShopById(Number(props.params.shopId));
+
+  if (!user) {
+    return redirect(`/login?returnTo=/shops/${props.params.shopId}`);
   }
-
-  const singleShop = await getShopByUsername(props.params.username);
-  console.log({ singleShop });
 
   if (!singleShop) {
     notFound();
   }
-  // const getProductsList = await getProducts();
+  // const favouritedUser =
+  //   sessionToken && (await getUserBySessionToken(sessionToken.value));
 
+  // const favouritedShop = await getShopByUsername(props.params.username);
+
+  // const favourites = await getFavourites(singleShop.id);
+  const favourites = await getFavourites(singleShop.id);
+  // const users = await getUserById(user.id);
+  // const shops = await getShopById(user.id);
+
+  // const getProductsList = await getProducts();
   return (
     <main>
       <div className={styles.shopPage}>
@@ -51,7 +67,11 @@ export default async function VendorProfilePage(props: Props) {
             <h1>{singleShop.name}</h1>
             <div>
               <Link href="/">{singleShop.websiteUrl}</Link>
-              <button className={styles.followButton}>follow</button>
+              <AddFavourites
+                favourites={favourites}
+                singleShop={singleShop}
+                user={user}
+              />
             </div>
             <p className={styles.shopBio}>{singleShop.description}</p>
             <p>

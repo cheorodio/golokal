@@ -22,10 +22,7 @@ export default async function ShopsPage() {
       <div className={styles.shopListContainer}>
         {shops.map((shop) => {
           return (
-            <div
-              key={`shop-div-${shop.username}`}
-              className={styles.shopContainer}
-            >
+            <div key={`shop-div-${shop.id}`} className={styles.shopContainer}>
               <div className={styles.imageBox}>
                 <AiOutlineCamera />
                 {/* <Image href={shop.image} alt="shop" /> */}
@@ -37,10 +34,7 @@ export default async function ShopsPage() {
               <div className={styles.shopBio}>
                 <p>{shop.description}</p>
               </div>
-              <Link
-                href={`/shops/${shop.username}`}
-                className={styles.visitShopLink}
-              >
+              <Link href={`/shops/${shop.id}`} className={styles.visitShopLink}>
                 Visit Shop Page
               </Link>
             </div>
