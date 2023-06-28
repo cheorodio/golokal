@@ -12,6 +12,8 @@ export default function RegisterForm() {
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [profileName, setProfileName] = useState('');
+  const [bio, setBio] = useState('');
   const [passwordShown, setPasswordShown] = useState(false);
   const [error, setError] = useState<string>();
   const router = useRouter();
@@ -27,6 +29,8 @@ export default function RegisterForm() {
         username,
         email,
         password,
+        profileName,
+        bio,
       }),
     });
 
@@ -70,6 +74,17 @@ export default function RegisterForm() {
             </div>
 
             <div>
+              <label htmlFor="profileName">
+                Profile name <span>*</span>
+              </label>
+              <input
+                id="profileName"
+                value={profileName}
+                onChange={(event) => setProfileName(event.currentTarget.value)}
+              />
+            </div>
+
+            <div>
               <label htmlFor="email">
                 Email <span>*</span>
               </label>
@@ -77,6 +92,18 @@ export default function RegisterForm() {
                 id="email"
                 value={email}
                 onChange={(event) => setEmail(event.currentTarget.value)}
+              />
+            </div>
+
+            <div>
+              <label htmlFor="bio">
+                Bio <span>*</span>
+              </label>
+              <textarea
+                id="bio"
+                placeholder="Write a little something about yourself"
+                value={bio}
+                onChange={(event) => setBio(event.currentTarget.value)}
               />
             </div>
 

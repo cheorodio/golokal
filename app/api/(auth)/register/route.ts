@@ -22,6 +22,8 @@ const userSchema = z.object({
   username: z.string().min(1),
   password: z.string().min(1),
   email: z.string().min(1),
+  profileName: z.string().min(1),
+  bio: z.string().min(1),
 });
 
 export async function POST(
@@ -37,7 +39,7 @@ export async function POST(
   if (!result.success) {
     return NextResponse.json(
       {
-        error: 'Username, password or email is missing',
+        error: 'Required informarion is incomplete',
       },
       { status: 400 },
     );
@@ -62,11 +64,12 @@ export async function POST(
     result.data.username,
     result.data.email,
     passwordHash,
+    result.data.profileName,
+    result.data.bio,
   );
 
   if (!newUser) {
     // zod send you details about the error
-    // console.log(result.error);
     return NextResponse.json(
       {
         error: 'Error creating the new user',
