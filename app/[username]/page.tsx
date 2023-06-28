@@ -1,63 +1,34 @@
 import { cookies } from 'next/headers';
-import { notFound } from 'next/navigation';
-import { AiOutlineCamera } from 'react-icons/ai';
-// import { getUserBySessionToken } from '../../database/sessions';
-import { getUserBySessionToken, getUserByUsername } from '../../database/users';
+import { notFound, redirect } from 'next/navigation';
+import {
+  getUserBySessionToken,
+  getUserByUsername,
+  getUsers,
+} from '../../database/users';
 import styles from '../styles/profilePage.module.scss';
+import EditProfile from './EditProfile';
 
-type Props = {
-  params: { username: string };
-};
+type Props = { params: { username: string; userId: number } };
 
 export default async function UserProfilePage({ params }: Props) {
-  const cookieStore = cookies();
-  const sessionToken = cookieStore.get('sessionToken');
-
-  const user = !sessionToken?.value
-    ? undefined
-    : await getUserBySessionToken(sessionToken.value);
-
+  const user = await getUserByUsername(params.username);
+  const users = await getUsers();
   if (!user) {
     notFound();
   }
 
-  const singleUser = await getUserByUsername(params.username);
+  const sessionToken = cookies().get('sessionToken');
+  const currentUser = !sessionToken?.value
+    ? undefined
+    : await getUserBySessionToken(sessionToken.value);
 
-  if (!singleUser) {
-    notFound();
+  if (!currentUser) {
+    return redirect(`/login?returnTo=/${user.username}`);
   }
 
   return (
-    <main className={styles.profilePage}>
-      <div className={styles.profileInfo}>
-        <div className={styles.imageBox}>
-          <AiOutlineCamera />
-        </div>
-        <div className={styles.moreInfo}>
-          <h1>{user.username}</h1>
-          <p>
-            Bio from this person. Bio from this person. Bio from this person.
-            Bio from this person. Bio from this person. Bio from this person.
-            Bio from this person. Bio from this person. Bio from this person.
-            Bio from this person. Bio from this person. Bio from this person.
-            Bio from this person. Bio from this person.
-          </p>
-        </div>
-      </div>
-      <div className={styles.followingVendors}>
-        <h2>Favourite vendors</h2>
-        <div className={styles.favouriteContainer}>
-          <div />
-          <div />
-          <div />
-          <div />
-          <div />
-          <div />
-          <div />
-          <div />
-          <div />
-        </div>
-      </div>
-    </main>
+    <section className={styles.profilePageContainer}>
+      <EditProfile user={user} users={users} currentUser={currentUser} />
+    </section>
   );
 }

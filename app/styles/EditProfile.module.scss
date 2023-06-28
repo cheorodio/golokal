@@ -1,0 +1,62 @@
+.profilePageContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 100px 20px 80px;
+
+  .profileInfoCard {
+    width: 100%;
+    height: 100%;
+
+    div {
+      display: flex;
+      width: 100%;
+      gap: 30px;
+
+      .avatarAndEdit {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        width: 200px;
+
+        .imageContainer {
+          height: 200px;
+          width: 200px;
+
+          border-radius: 50%;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+
+          .profileAvatar {
+            height: 200px;
+            width: 200px;
+          }
+        }
+
+        .editButton {
+          border: 0.5px solid var(--secondary-text-color);
+          width: 90px;
+          height: 25px;
+          color: black;
+        }
+      }
+
+      .userInfoContainer {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+
+        h1 {
+          text-transform: capitalize;
+        }
+
+        .bioContainer {
+          border: 1px solid saddlebrown;
+          height: 150px;
+        }
+      }
+    }
+  }
+}
