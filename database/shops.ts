@@ -5,9 +5,9 @@ import { sql } from './connect';
 type CreateShop = {
   id: number;
   username: string;
-  name: string;
-  description: string;
-  location: string;
+  name: string | null;
+  description: string | null;
+  location: string | null;
 };
 
 type ShopName = {
