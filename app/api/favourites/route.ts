@@ -1,9 +1,7 @@
 import { cookies } from 'next/headers';
 import { NextRequest, NextResponse } from 'next/server';
 import { z } from 'zod';
-import { createFavourites } from '../../../database/favourites';
-import { getProductsWithLimitAndOffsetBySessionToken } from '../../../database/products';
-import { getValidSessionByToken } from '../../../database/sessions';
+import { createFavourite } from '../../../database/favourites';
 import { getUserBySessionToken } from '../../../database/users';
 import { Favourite } from '../../../migrations/1687958140-createFavourites';
 
@@ -16,40 +14,7 @@ export type Error = {
   error: string;
 };
 
-type FavouritesResponseBodyGet = { favourites: Favourite } | Error;
-type FavouritesResponseBodyPost = { favourites: Favourite } | Error;
-
-export async function GET(
-  request: NextRequest,
-): Promise<NextResponse<FavouritesResponseBodyGet>> {
-  const { searchParams } = new URL(request.url);
-  const sessionTokenCookie = cookies().get('sessionToken');
-  const session =
-    sessionTokenCookie &&
-    (await getValidSessionByToken(sessionTokenCookie.value));
-
-  if (!session) {
-    return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
-  }
-
-  const limit = Number(searchParams.get('limit'));
-  const offset = Number(searchParams.get('offset'));
-
-  if (!limit || !offset) {
-    return NextResponse.json(
-      { error: 'Limit and Offset need to be passed as params' },
-      { status: 400 },
-    );
-  }
-
-  const allFavourites = await getProductsWithLimitAndOffsetBySessionToken(
-    limit,
-    offset,
-    sessionTokenCookie.value,
-  );
-
-  return NextResponse.json({ product: allFavourites });
-}
+export type FavouritesResponseBodyPost = { favourites: Favourite[] } | Error;
 
 export async function POST(
   request: NextRequest,
@@ -74,11 +39,14 @@ export async function POST(
     );
   }
 
-  const newFavouriteShop = await createFavourites(user.id, result.data.shopId);
+  const newFavouriteShop = await createFavourite(
+    result.data.userId,
+    result.data.shopId,
+  );
 
   if (!newFavouriteShop) {
     return NextResponse.json(
-      { errors: [{ message: 'Attendance not created!' }] },
+      { errors: [{ message: 'Favourite not created!' }] },
       { status: 500 },
     );
   }
