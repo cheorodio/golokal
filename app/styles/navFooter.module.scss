@@ -185,24 +185,33 @@
 // FOOTER /////////////////////
 
 .footer {
-  height: 150px;
+  padding: 20px 0px;
   margin: 0px 80px;
   display: flex;
   border-top: 1px solid black;
+  justify-content: space-between;
 
-  .logoContainer {
-    width: 60%;
+  // .logoContainer {
+  // width: 60%;
+
+  .logo {
+    font-family: var(--title-text);
   }
+  // }
 
-  .linksContainer {
-    width: 40%;
+  div {
     display: flex;
-    justify-content: space-between;
     gap: 16px;
-
-    div {
-      display: flex;
-      flex-direction: column;
-    }
   }
+  // .linksContainer {
+  //   width: 40%;
+  //   display: flex;
+  //   justify-content: space-between;
+  //   gap: 16px;
+
+  //   div {
+  //     display: flex;
+  //     flex-direction: column;
+  //   }
+  // }
 }
