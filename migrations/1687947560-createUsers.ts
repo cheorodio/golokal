@@ -19,7 +19,7 @@ export async function up(sql: Sql) {
       password_hash varchar(80) NOT NULL,
       profile_name varchar(40),
       bio varchar(500),
-      shop_id integer NOT NULL REFERENCES shops (id) ON DELETE CASCADE,
+      shop_id integer REFERENCES shops (id) ON DELETE CASCADE,
       profile_image_id integer
     )
   `;
