@@ -1,5 +1,5 @@
 import { cache } from 'react';
-import { User } from '../migrations/1687947560-createUsers';
+import { User } from '../migrations/1687352892-createTableUsers';
 import { sql } from './connect';
 
 type UserWithPasswordHash = User & {
@@ -10,41 +10,40 @@ type CreateUser = {
   id: number;
   username: string;
   email: string;
+  profileName: string;
+  bio: string;
 };
 
-type UserSession = {
-  id: number;
-  username: string;
-};
-
-// REGISTERING A NEW USER //////////////////////////////////////////////////////////
-// 1. verify if the username is already taken when registering
-export const verifyUserByUsername = cache(async (username: string) => {
-  const [user] = await sql<CreateUser[]>`
-SELECT
-  id,
-  username,
-  email
-FROM
-  users
-WHERE
-  users.username = ${username.toLowerCase()}`;
-  return user;
+export const getUsers = cache(async () => {
+  const users = await sql<UserWithPasswordHash[]>`
+  SELECT
+    *
+  FROM
+    users
+  `;
+  return users;
 });
 
-// 2. when verified that the username is not already taken, proceed to creating a new user
+// creating a new user
 export const createUser = cache(
-  async (username: string, email: string, passwordHash: string) => {
-    console.log(passwordHash);
+  async (
+    username: string,
+    email: string,
+    passwordHash: string,
+    profileName: string,
+    bio: string,
+  ) => {
     const [user] = await sql<CreateUser[]>`
     INSERT INTO users
-      (username, email, password_hash)
+      (username, email, password_hash, profile_name, bio)
     VALUES
-      (${username.toLowerCase()}, ${email}, ${passwordHash})
+      (${username.toLowerCase()}, ${email}, ${passwordHash}, ${profileName}, ${bio})
     RETURNING
       id,
       username,
-      email
+      email,
+      profile_name,
+      bio
  `;
     return user;
   },
@@ -67,15 +66,9 @@ export const getUserWithPasswordHashByUsername = cache(
 
 // GET USER ///////////////////////////////////////////////
 export const getUserByUsername = cache(async (username: string) => {
-  const [user] = await sql<User[]>`
+  const [user] = await sql<UserWithPasswordHash[]>`
     SELECT
-      id,
-      username,
-      email,
-      profile_name,
-      bio,
-      shop_id,
-      profile_image_id
+      *
     FROM
       users
     WHERE
@@ -121,7 +114,7 @@ export const getUsersWithLimitAndOffsetBySessionToken = cache(
 );
 
 export const getUserBySessionToken = cache(async (token: string) => {
-  const [user] = await sql<UserSession[]>`
+  const [user] = await sql<{ id: number; username: string }[]>`
   SELECT
     users.id,
     users.username
@@ -134,7 +127,6 @@ export const getUserBySessionToken = cache(async (token: string) => {
       sessions.expiry_timestamp > now()
     )
   `;
-
   return user;
 });
 
@@ -147,18 +139,16 @@ export const updateUserById = cache(
     email: string,
     profileName: string,
     bio: string,
-    shopId: number,
-    profileImageId: number,
+    profileImage: string,
   ) => {
     const [user] = await sql<UserWithPasswordHash[]>`
       UPDATE users
       SET
         username = ${username},
         email = ${email},
-        profile_name = ${profileName || null},
-        bio = ${bio || null},
-        shop_id = ${shopId || null},
-        profile_image_id = ${profileImageId || null}
+        profile_name = ${profileName},
+        bio = ${bio},
+        profile_image = ${profileImage}
       WHERE
         id = ${id}
         RETURNING *
