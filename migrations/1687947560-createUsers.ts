@@ -7,7 +7,7 @@ export type User = {
   profileName: string | null;
   bio: string | null;
   shopId: number | null;
-  profileImage: string | null;
+  imageUrl: string | null;
 };
 
 export async function up(sql: Sql) {
@@ -20,7 +20,7 @@ export async function up(sql: Sql) {
       profile_name varchar(40),
       bio varchar(500),
       shop_id integer REFERENCES shops (id) ON DELETE CASCADE,
-      profile_image varchar(80)
+      image_url varchar(500)
     )
   `;
 }

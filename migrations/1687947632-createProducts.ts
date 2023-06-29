@@ -5,7 +5,7 @@ export type Product = {
   name: string;
   category: string;
   description: string;
-  // productImageId: number;
+  imageUrl: string | null;
 };
 
 export async function up(sql: Sql) {
@@ -14,8 +14,8 @@ export async function up(sql: Sql) {
       id integer PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
       name varchar(30) NOT NULL,
       category varchar(30) NOT NULL,
-      description varchar(500) NOT NULL
-      -- product_image_id integer NOT NULL
+      description varchar(500) NOT NULL,
+      image_url varchar(500)
     )
   `;
 }
