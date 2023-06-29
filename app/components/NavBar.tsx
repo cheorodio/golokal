@@ -11,6 +11,7 @@ export const links = [
   { id: 2, title: 'Shops', link: '/shops' },
   { id: 3, title: 'About', link: '/about' },
   { id: 4, title: 'Blog', link: '/blog' },
+  { id: 4, title: 'Community', link: '/community' },
 ];
 
 export default function NavBar() {
