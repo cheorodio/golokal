@@ -7,6 +7,7 @@ type CreateShop = {
   username: string;
   name: string | null;
   description: string | null;
+  websiteUrl: string | null;
   location: string | null;
 };
 
@@ -60,18 +61,20 @@ export const createShop = cache(
     username: string,
     name: string,
     description: string,
+    websiteUrl: string,
     location: string,
   ) => {
     const [shop] = await sql<CreateShop[]>`
     INSERT INTO shops
-      (username, name, description, location)
+      (username, name, description, website_url, location)
     VALUES
-      (${username}, ${name}, ${description}, ${location})
+      (${username}, ${name}, ${description}, ${websiteUrl}, ${location})
     RETURNING
       id,
       username,
       name,
       description,
+      website_url,
       location
  `;
     return shop;
