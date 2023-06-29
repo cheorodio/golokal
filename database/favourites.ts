@@ -11,7 +11,7 @@ type FavouritedShop = {
   shopDescription: string | null;
   shopWebsiteUrl: string | null;
   shopLocation: string | null;
-  shopShopImage: string | null;
+  shopImageUrl: string | null;
 };
 
 // get favourites from user
@@ -54,7 +54,7 @@ export const getFavouriteByUserId = cache(async (userId: number) => {
     shops.description AS shop_description,
     shops.website_url AS shop_website_url,
     shops.location AS shop_location,
-    shops.shop_image AS shop_shop_image
+    shops.image_url AS shop_image_url
   FROM
     favourites
   INNER JOIN

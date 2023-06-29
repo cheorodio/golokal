@@ -140,7 +140,7 @@ export const updateUserById = cache(
     profileName: string,
     bio: string,
     shopId: number,
-    profileImage: string,
+    imageUrl: string,
   ) => {
     const [user] = await sql<UserWithPasswordHash[]>`
       UPDATE users
@@ -150,7 +150,7 @@ export const updateUserById = cache(
         profile_name = ${profileName},
         bio = ${bio},
         shop_id = ${shopId},
-        profile_image = ${profileImage}
+        image_url = ${imageUrl}
       WHERE
         id = ${id}
         RETURNING *

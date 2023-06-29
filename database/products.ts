@@ -65,13 +65,13 @@ export const createProduct = cache(
     name: string,
     category: string,
     description: string,
-    // productImageId: number,
+    imageUrl: string,
   ) => {
     const [productToCreate] = await sql<Product[]>`
       INSERT INTO products
-        (name, category, description)
+        (name, category, description, image_url)
       VALUES
-        (${name}, ${category}, ${description})
+        (${name}, ${category}, ${description}, ${imageUrl})
       RETURNING *
     `;
 
@@ -81,13 +81,20 @@ export const createProduct = cache(
 
 // EDITING PRODUCTS /////////////////////
 export const updateProductById = cache(
-  async (id: number, name: string, category: string, description: string) => {
+  async (
+    id: number,
+    name: string,
+    category: string,
+    description: string,
+    imageUrl: string,
+  ) => {
     const [productToEdit] = await sql<Product[]>`
       UPDATE products
       SET
         name = ${name},
         category = ${category},
-        description = ${description}
+        description = ${description},
+        image_url = ${imageUrl}
       WHERE
         id = ${id}
         RETURNING *
@@ -117,6 +124,7 @@ export const products: Product[] = [
     category: 'Candles',
     description:
       'Introducing our exquisite hand-poured ocean-scented candles, crafted to bring the refreshing essence of the sea into your living space. Immerse yourself in the tranquil atmosphere of coastal serenity with every flicker of our artisanal candles.',
+    imageUrl: '/images/shop.png',
   },
   {
     id: 2,
@@ -124,6 +132,7 @@ export const products: Product[] = [
     category: 'Candles',
     description:
       'Introducing our enchanting hand-poured Christmas-scented candles, meticulously crafted to infuse your home with the nostalgic and heartwarming aromas of the holiday season. Immerse yourself in the magical ambiance of Christmas with every flicker of our artisanal candles.',
+    imageUrl: '/images/shop.png',
   },
 ];
 

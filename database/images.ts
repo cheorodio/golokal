@@ -14,7 +14,7 @@ type ImagesFromUser = {
   imageUrl: string;
   userId: number;
   username: string;
-  userProfileImage: string | null;
+  imageUrl: string | null;
 };
 
 // Upload a new image
@@ -51,7 +51,7 @@ export const getImagesFromUser = cache(async (userId: number) => {
     images.image_url AS image_url,
     users.id AS user_id,
     users.username AS user_name,
-    users.profile_image AS user_profile_image
+    users.image_url AS user_image_url
   FROM
     images
   INNER JOIN
