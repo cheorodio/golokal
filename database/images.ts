@@ -1,4 +1,5 @@
 import { cache } from 'react';
+import { Image } from '../migrations/1688032335-createImages';
 import { sql } from './connect';
 
 export type ImageNotNull = {
@@ -9,18 +10,17 @@ export type ImageNotNull = {
 };
 
 type ImagesFromUser = {
-  id: number;
   imageId: number;
-  imageUrl: string;
-  userId: number;
-  username: string;
   imageUrl: string | null;
+  userId: number;
+  userUsername: string;
+  userImageUrl: string | null;
 };
 
 // Upload a new image
 export const createImage = cache(
   async (userId: number, shopId: number, imageUrl: string) => {
-    const [image] = await sql<ImageNotNull[]>`
+    const [image] = await sql<Image[]>`
       INSERT INTO images
         (user_id, shop_id, image_url)
       VALUES
@@ -33,7 +33,7 @@ export const createImage = cache(
 
 // Get images by user
 export const getImagesByUserId = cache(async (userId: number) => {
-  const images = await sql<ImageNotNull[]>`
+  const images = await sql<Image[]>`
     SELECT
       *
     FROM
@@ -50,7 +50,7 @@ export const getImagesFromUser = cache(async (userId: number) => {
     images.id AS image_id,
     images.image_url AS image_url,
     users.id AS user_id,
-    users.username AS user_name,
+    users.username AS user_username,
     users.image_url AS user_image_url
   FROM
     images
