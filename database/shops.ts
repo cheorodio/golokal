@@ -2,24 +2,24 @@ import { cache } from 'react';
 import { Shop } from '../migrations/1687947524-createShops';
 import { sql } from './connect';
 
-type CreateShop = {
-  id: number;
-  username: string;
-  name: string | null;
-  description: string | null;
-  websiteUrl: string | null;
-  location: string | null;
-  imageUrl: string | null;
-};
-
 type ShopName = {
   id: number;
   username: string;
 };
 
+export type ShopNotNull = {
+  id: number;
+  username: string;
+  name: string;
+  description: string;
+  websiteUrl: string;
+  location: string;
+  imageUrl: string;
+};
+
 // GET ALL SHOPS FOR SHOPS PAGE ///////////////////////////
 export const getShops = cache(async () => {
-  const shops = await sql<Shop[]>`
+  const shops = await sql<ShopNotNull[]>`
     SELECT
       *
     FROM
@@ -30,7 +30,7 @@ export const getShops = cache(async () => {
 
 // GET SHOP ///////////////////////////////////////////////
 export const getShopByUsername = cache(async (username: string) => {
-  const shops = await sql<Shop[]>`
+  const shops = await sql<ShopNotNull[]>`
     SELECT
       *
     FROM
@@ -66,7 +66,7 @@ export const createShop = cache(
     location: string,
     imageUrl: string,
   ) => {
-    const [shop] = await sql<CreateShop[]>`
+    const [shop] = await sql<ShopNotNull[]>`
     INSERT INTO shops
       (username, name, description, website_url, location, image_url)
     VALUES
@@ -86,7 +86,7 @@ export const createShop = cache(
 
 // GETTING SHOP ///////////////////////////////////////////////
 export const getShopById = cache(async (id: number) => {
-  const shops = await sql<Shop[]>`
+  const shops = await sql<ShopNotNull[]>`
     SELECT
       *
     FROM
@@ -110,7 +110,7 @@ export const updateShopById = cache(
     location: string,
     imageUrl: string,
   ) => {
-    const [shop] = await sql<Shop[]>`
+    const [shop] = await sql<ShopNotNull[]>`
       UPDATE shops
       SET
         username = ${username},
@@ -129,7 +129,7 @@ export const updateShopById = cache(
 
 // DELETE SHOP /////////////////////////////////
 export const deleteShopById = cache(async (id: number) => {
-  const [shop] = await sql<Shop[]>`
+  const [shop] = await sql<ShopNotNull[]>`
       DELETE FROM
         shops
       WHERE
