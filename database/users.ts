@@ -10,8 +10,8 @@ type CreateUser = {
   id: number;
   username: string;
   email: string;
-  profileName: string;
-  bio: string;
+  profileName: string | null;
+  bio: string | null;
 };
 
 export const getUsers = cache(async () => {
