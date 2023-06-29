@@ -183,7 +183,12 @@
         .imageSection {
           width: 30%;
           height: 100%;
-          background-color: azure;
+          border: 0.5px solid var(--secondary-text-color);
+
+          .shopImageUrl {
+            height: 100%;
+            width: 100%;
+          }
         }
 
         .infoSection {

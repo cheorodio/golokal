@@ -30,6 +30,11 @@
       justify-content: center;
       font-size: 1.5rem;
       border: 0.1px solid var(--main-color);
+
+      .singleShopImage {
+        height: 100%;
+        width: 100%;
+      }
     }
 
     .moreInfo {
