@@ -1,17 +1,14 @@
 import { cookies } from 'next/headers';
-// import Image from 'next/image';
+import Image from 'next/image';
 import Link from 'next/link';
 import { notFound, redirect } from 'next/navigation';
-import { AiOutlineCamera } from 'react-icons/ai';
 import { VscLocation } from 'react-icons/vsc';
-import {
-  getFavouriteByUserId,
-  getFavourites,
-} from '../../../../database/favourites';
-// import { getProducts } from '../../../../database/products';
+import { getCommentsWithUserInfo } from '../../../../database/comments';
+import { getFavourites } from '../../../../database/favourites';
 import { getShopById } from '../../../../database/shops';
-import { getUserById, getUserBySessionToken } from '../../../../database/users';
+import { getUserBySessionToken } from '../../../../database/users';
 import styles from '../../../styles/SingleShopPage.module.scss';
+import AddComments from './AddComments';
 import AddFavourites from './AddFavourites';
 
 export const dynamic = 'force-dynamic';
@@ -20,23 +17,27 @@ export const metadata = {
   title: { default: 'golokal | Discover local vendors' },
   description:
     'At golokal, we are passionate about supporting artisans, craftsmen, and local businesses, and our platform serves as a virtual marketplace to showcase their unique creations.',
+  shortcut: '/favicon.ico',
 };
 
 type Props = {
   params: {
-    userId: string;
-    shopId: string;
+    userId: number;
+    shopId: number;
+    content: string;
   };
+  comment: { id: number };
 };
 
-export default async function VendorProfilePage(props: Props) {
+export default async function SingleShopPage(props: Props) {
+  const singleShop = await getShopById(Number(props.params.shopId));
+
   const cookieStore = cookies();
   const sessionToken = cookieStore.get('sessionToken');
 
-  const user =
-    sessionToken && (await getUserBySessionToken(sessionToken.value));
-
-  const singleShop = await getShopById(Number(props.params.shopId));
+  const user = !sessionToken?.value
+    ? undefined
+    : await getUserBySessionToken(sessionToken.value);
 
   if (!user) {
     return redirect(`/login?returnTo=/shops/${props.params.shopId}`);
@@ -45,23 +46,25 @@ export default async function VendorProfilePage(props: Props) {
   if (!singleShop) {
     notFound();
   }
-  // const favouritedUser =
-  //   sessionToken && (await getUserBySessionToken(sessionToken.value));
 
-  // const favouritedShop = await getShopByUsername(props.params.username);
+  // to allow users to favourite this shop
+  const favourites = await getFavourites(user.id);
 
-  // const favourites = await getFavourites(singleShop.id);
-  const favourites = await getFavourites(singleShop.id);
-  // const users = await getUserById(user.id);
-  // const shops = await getShopById(user.id);
+  // to get comments from users
+  const userComments = await getCommentsWithUserInfo(singleShop.id);
 
-  // const getProductsList = await getProducts();
   return (
-    <main>
+    <main className={styles.topSection}>
       <div className={styles.shopPage}>
         <div className={styles.shopInfo}>
           <div className={styles.imageBox}>
-            <AiOutlineCamera />
+            <Image
+              src={singleShop.imageUrl}
+              width={300}
+              height={300}
+              alt="Shop avatar"
+              className={styles.singleShopImage}
+            />
           </div>
           <div className={styles.moreInfo}>
             <h1>{singleShop.name}</h1>
@@ -80,9 +83,10 @@ export default async function VendorProfilePage(props: Props) {
           </div>
         </div>
 
-        {/* <div className={styles.productsFeed}>
+        {/* ************* PROOOOOODUCTS SECTION ************* */}
+        <div className={styles.productsFeed}>
           <h2>Products Feed</h2>
-          <div className={styles.productsContainer}>
+          {/* <div className={styles.productsContainer}>
             <div className={styles.productCardsContainer}>
               {getProductsList.map((product) => {
                 return (
@@ -99,8 +103,39 @@ export default async function VendorProfilePage(props: Props) {
                 );
               })}
             </div>
-          </div>
-        </div> */}
+          </div> */}
+        </div>
+      </div>
+
+      {/* ************* COOOOOOMMENTS SECTION ************* */}
+      <div className={styles.commentsSection}>
+        <h2>What other users have been saying</h2>
+        <div className={styles.commentInput}>
+          <AddComments
+            shop={singleShop}
+            user={user}
+            userComments={userComments}
+          />
+        </div>
+
+        <div className={styles.commentsContainer}>
+          {userComments.map((comment) => {
+            return (
+              <div
+                key={`comment-div-${comment.commentId}`}
+                className={styles.singleCommentCard}
+              >
+                <div className={styles.userImage}>
+                  <div>{comment.userName.charAt(0)}</div>
+                </div>
+                <div className={styles.comments}>
+                  <h5>{comment.userName}</h5>
+                  <p>{comment.commentContent}</p>
+                </div>
+              </div>
+            );
+          })}
+        </div>
       </div>
     </main>
   );

@@ -25,8 +25,8 @@ export default function AddFavourites(props: Props) {
     const response = await fetch('/api/favourites', {
       method: 'POST',
       body: JSON.stringify({
-        userId: props.user?.id,
-        shopId: props.singleShop?.id,
+        userId: props.user.id,
+        shopId: props.singleShop.id,
       }),
     });
 
@@ -52,7 +52,7 @@ export default function AddFavourites(props: Props) {
           <p className={styles.followButton}>Follow</p>
         )}
       </button>
-      {error !== '' && <div>{error}</div>}
+      <div>{error}</div>
     </div>
   );
 }

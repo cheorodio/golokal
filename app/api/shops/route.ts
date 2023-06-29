@@ -16,6 +16,7 @@ export type CreateShopResponseBodyPost =
         username: string;
         name: string;
         description: string;
+        websiteUrl: string;
         location: string;
       };
     }
@@ -25,6 +26,7 @@ const shopSchema = z.object({
   username: z.string().min(1),
   name: z.string().min(1),
   description: z.string().min(1),
+  websiteUrl: z.string().min(1),
   location: z.string().min(1),
 });
 
@@ -61,6 +63,7 @@ export async function POST(
     result.data.username,
     result.data.name,
     result.data.description,
+    result.data.websiteUrl,
     result.data.location,
   );
 

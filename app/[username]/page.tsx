@@ -46,7 +46,11 @@ export default async function UserProfilePage(props: Props) {
       <EditProfile user={user} myUsers={myUsers} currentUser={currentUser} />
       <div className={styles.favouritesContainer}>
         <h1>{user.profileName}'s favourite shops</h1>
-        <MyFavourites favourites={favourites} users={users} shops={shops} />
+        {favourites.length === 0 ? (
+          <p>Favourite is empty</p>
+        ) : (
+          <MyFavourites favourites={favourites} users={users} shops={shops} />
+        )}
       </div>
     </section>
   );

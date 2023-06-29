@@ -7,7 +7,7 @@ import styles from '../styles/EditProfile.module.scss';
 
 export default function MyFavourites(props: any) {
   return (
-    <>
+    <div className={styles.allCards}>
       {props.favourites.map((favourite: any) => {
         return (
           <div
@@ -18,7 +18,13 @@ export default function MyFavourites(props: any) {
               href={`/shops/${favourite.shopId}`}
               className={styles.imageSection}
             >
-              <Image src={favourite.shopImage} alt="Shop image" />
+              <Image
+                src={favourite.shopImageUrl}
+                width={100}
+                height={100}
+                alt="Shop image"
+                className={styles.shopImageUrl}
+              />
             </Link>
             <div className={styles.infoSection}>
               <div>
@@ -36,6 +42,6 @@ export default function MyFavourites(props: any) {
           </div>
         );
       })}
-    </>
+    </div>
   );
 }

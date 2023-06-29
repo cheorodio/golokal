@@ -8,7 +8,7 @@ import {
 } from '../../../database/products';
 import { getValidSessionByToken } from '../../../database/sessions';
 // import { getValidSessionByToken } from '../../../database/sessions';
-import { Product } from '../../../migrations/1687505841-createTableProducts';
+import { Product } from '../../../migrations/1687947632-createProducts';
 
 type Error = {
   error: string;
@@ -21,7 +21,7 @@ const productSchema = z.object({
   name: z.string().min(1),
   category: z.string().min(1),
   description: z.string().min(1),
-  // productImageId: z.number(),
+  imageUrl: z.string().min(1),
 });
 
 // get all the products
@@ -83,7 +83,7 @@ export async function POST(
     result.data.name,
     result.data.category,
     result.data.description,
-    // result.data.productImageId,
+    result.data.imageUrl,
   );
 
   if (!newProduct) {

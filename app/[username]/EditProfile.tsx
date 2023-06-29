@@ -36,6 +36,10 @@ export default function EditProfile(props: Props) {
   const [onEditProfileAvatar, setOnEditProfileAvatar] = useState<string>('');
   const [error, setError] = useState<string>();
 
+  // for image upload
+  const [imageSrc, setImageSrc] = useState();
+  const [uploadData, setUploadData] = useState();
+
   async function updateProfile(
     userId: number,
     username: string,
@@ -52,16 +56,6 @@ export default function EditProfile(props: Props) {
       }),
     });
 
-    // const data = await response.json();
-
-    // if ('error' in data) {
-    //   setError(data.error);
-    //   return;
-    // }
-    // setOnEditInput(undefined);
-    // setUsers([...users, data.user]);
-    // router.refresh();
-
     const data = await response.json();
 
     setUsers(
@@ -72,6 +66,54 @@ export default function EditProfile(props: Props) {
         return user;
       }),
     );
+  }
+
+  // upload image to cloudinary
+  function handleOnChange(changeEvent: React.ChangeEvent<HTMLInputElement>) {
+    const files = changeEvent.target.files!;
+
+    const reader = new FileReader();
+
+    reader.onload = function (onLoadEvent: ProgressEvent<FileReader>) {
+      setImageSrc(onLoadEvent.target.result);
+      setUploadData(undefined);
+    };
+
+    reader.readAsDataURL(files[0]!);
+  }
+
+  async function handleOnSubmit(event: React.FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+
+    const form = event.currentTarget;
+    const fileInput = (Array.from(form.elements) as HTMLInputElement[]).find(
+      ({ name }) => name === 'file',
+    );
+
+    if (!fileInput) {
+      setError([{ message: 'No file found!' }]);
+      return;
+    }
+
+    const formData = new FormData();
+
+    for (const file of fileInput.files as FileList) {
+      formData.append('file', file);
+    }
+
+    formData.append('upload_preset', 'golokal-uploads');
+
+    const data = await fetch(
+      `https://api.cloudinary.com/v1_1/${process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME}/image/upload`,
+      {
+        method: 'POST',
+        body: formData,
+      },
+    ).then((r) => r.json());
+
+    setImageSrc(data.secure_url);
+    setUploadData(data);
+    // await updateImage();
   }
 
   return (
@@ -113,20 +155,13 @@ export default function EditProfile(props: Props) {
                   setOnEditProfileAvatar(props.user.profileImage || '');
                 }}
               >
-                Edit profile
+                add profile image
               </button>
             </form>
           ) : null}
         </div>
 
-        {/* Other user's
-        {props.currentUser.username !== props.user.username ? (
-          <div className={styles.othersProfile}>
-            <div>{props.user.profileName}'s favourites</div>
-          </div>
-        ) : null} */}
-
-        {/* USER INFO CONTAINER */}
+        {/* USER INFO CONTAINER ADN ADD IMAGE */}
         <div className={styles.userInfoContainer}>
           {onEditInput !== props.user.username ? (
             <>
@@ -136,49 +171,100 @@ export default function EditProfile(props: Props) {
               </div>
             </>
           ) : (
-            <form className={styles.formContainer}>
-              <div>
-                <label htmlFor="username">Username</label>
-                <input
-                  id="username"
-                  value={onEditUsername}
-                  onChange={(event) =>
-                    setOnEditUsername(event.currentTarget.value)
+            <>
+              {/* upload image to cloudinary */}
+              <form
+                method="post"
+                onChange={handleOnChange}
+                onSubmit={handleOnSubmit}
+              >
+                <input type="file" name="file" />
+                <img
+                  src={imageSrc}
+                  height={300}
+                  width={300}
+                  style={{ borderRadius: '50%' }}
+                  alt="profile avatar uploaded by user"
+                />
+                <button>Upload</button>
+              </form>
+
+              {/* submit to image api */}
+              <form
+                onSubmit={async (event) => {
+                  event.preventDefault();
+                  const response = await fetch('api/images', {
+                    method: 'POST',
+                    body: JSON.stringify({
+                      userId: props.user.id,
+                      imageUrl: imageSrc,
+                    }),
+                  });
+
+                  const data = await response.json();
+
+                  if ('error' in data) {
+                    setError(data.error);
+                    return;
                   }
-                />
-              </div>
-              <div>
-                <label htmlFor="profileName">Profile Name</label>
-                <input
-                  id="profileName"
-                  value={onEditProfileName}
-                  onChange={(event) =>
-                    setOnEditProfileName(event.currentTarget.value)
-                  }
-                />
-              </div>
-              <div>
-                <label htmlFor="bio">Bio</label>
-                <textarea
-                  id="bio"
-                  value={onEditBio}
-                  onChange={(event) => setOnEditBio(event.currentTarget.value)}
-                />
-              </div>
-              <button
-                onClick={async () => {
-                  await updateProfile(
-                    userId,
-                    onEditUsername,
-                    onEditProfileName,
-                    onEditBio,
-                  );
+                  router.refresh();
                 }}
               >
-                Save
-              </button>
-              {error !== '' && <div>{error}</div>}
-            </form>
+                <button
+                  onClick={() => {
+                    router.refresh();
+                  }}
+                >
+                  Update profile image
+                </button>
+              </form>
+
+              <form className={styles.formContainer}>
+                <div>
+                  <label htmlFor="username">Username</label>
+                  <input
+                    id="username"
+                    value={onEditUsername}
+                    onChange={(event) =>
+                      setOnEditUsername(event.currentTarget.value)
+                    }
+                  />
+                </div>
+                <div>
+                  <label htmlFor="profileName">Profile Name</label>
+                  <input
+                    id="profileName"
+                    value={onEditProfileName}
+                    onChange={(event) =>
+                      setOnEditProfileName(event.currentTarget.value)
+                    }
+                  />
+                </div>
+                <div>
+                  <label htmlFor="bio">Bio</label>
+                  <textarea
+                    id="bio"
+                    value={onEditBio}
+                    onChange={(event) =>
+                      setOnEditBio(event.currentTarget.value)
+                    }
+                  />
+                </div>
+                <button
+                  onClick={async () => {
+                    await updateProfile(
+                      userId,
+                      onEditUsername,
+                      onEditProfileName,
+                      onEditBio,
+                    );
+                  }}
+                >
+                  Save
+                </button>
+                {error !== '' && <div>{error}</div>}
+              </form>
+            </>
           )}
         </div>
       </div>

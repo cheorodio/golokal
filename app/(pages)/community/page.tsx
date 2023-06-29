@@ -1,18 +1,10 @@
 import Image from 'next/image';
 import Link from 'next/link';
-import { getShops } from '../../../database/shops';
+import { getUsers } from '../../../database/users';
 import styles from '../../styles/ShopsPage.module.scss';
 
-export const dynamic = 'force-dynamic';
-
-export const metadata = {
-  title: { default: 'Golokal | Discover local vendors' },
-  description:
-    'At golokal, we are passionate about supporting artisans, craftsmen, and local businesses, and our platform serves as a virtual marketplace to showcase their unique creations.',
-};
-
 export default async function ShopsPage() {
-  const shops = await getShops();
+  const users = await getUsers();
 
   return (
     <main className={styles.shopsPageContainer}>
@@ -20,31 +12,34 @@ export default async function ShopsPage() {
         <h1>Discover local vendors on our site</h1>
       </div>
       <div className={styles.shopListContainer}>
-        {shops.map((shop) => {
+        {users.map((user) => {
           return (
-            <div key={`shop-div-${shop.id}`} className={styles.shopContainer}>
+            <div
+              key={`shop-div-${user.username}`}
+              className={styles.shopContainer}
+            >
               <div className={styles.top}>
                 <div className={styles.imageBox}>
                   <Image
-                    src={shop.imageUrl}
+                    src="/images/avatar.png"
                     width={300}
                     height={300}
-                    alt="Shop avatar"
+                    alt="User avatar"
                     className={styles.shopImage}
                   />
                 </div>
 
                 <div className={styles.shopNameContainer}>
-                  <p className={styles.shopName}>{shop.name}</p>
+                  <p className={styles.shopName}>{user.profileName}</p>
                   {/* <p className={styles.name}>{shop.name}</p> */}
                 </div>
 
                 <div className={styles.shopBio}>
-                  <p>{shop.description}</p>
+                  <p>{user.bio}</p>
                 </div>
               </div>
-              <Link href={`/shops/${shop.id}`} className={styles.visitShopLink}>
-                Visit Shop Page
+              <Link href={`/${user.username}`} className={styles.visitShopLink}>
+                Visit User Page
               </Link>
             </div>
           );

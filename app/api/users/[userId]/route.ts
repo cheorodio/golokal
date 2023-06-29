@@ -18,7 +18,7 @@ const userSchema = z.object({
   profileName: z.string(),
   bio: z.string(),
   shopId: z.number(),
-  profileImage: z.string(),
+  imageUrl: z.string(),
 });
 
 export async function GET(
@@ -112,7 +112,7 @@ export async function PUT(
     result.data.profileName,
     result.data.bio,
     result.data.shopId,
-    result.data.profileImage,
+    result.data.imageUrl,
   );
 
   if (!user) {

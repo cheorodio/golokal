@@ -5,7 +5,7 @@ import {
   getProductById,
   updateProductById,
 } from '../../../../database/products';
-import { Product } from '../../../../migrations/1687505841-createTableProducts';
+import { Product } from '../../../../migrations/1687947632-createProducts';
 
 export type Error = {
   error: string;
@@ -19,7 +19,7 @@ const productSchema = z.object({
   name: z.string().min(1),
   category: z.string().min(1),
   description: z.string().min(1),
-  // productImageId: z.number(),
+  imageUrl: z.string().min(1),
 });
 
 export async function GET(
@@ -68,7 +68,7 @@ export async function PUT(
     result.data.name,
     result.data.category,
     result.data.description,
-    // result.data.productImageId,
+    result.data.imageUrl,
   );
 
   if (!productToUpdate) {
