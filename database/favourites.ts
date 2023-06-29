@@ -27,25 +27,6 @@ export const getFavourites = cache(async (userId: number) => {
   return favourites;
 });
 
-// get favourited shop by user
-export const getFavouritedShopByUser = cache(
-  async (userId: number, shopId: number) => {
-    const favourites = await sql<
-      { userId: number | null; shopId: number | null }[]
-    >`
-    SELECT
-      user_id,
-      shop_id
-    FROM
-    favourites
-    WHERE
-      user_id = ${userId} AND
-      shop_id = ${shopId}
-`;
-    return favourites;
-  },
-);
-
 // Add favourite shop for the follow option
 export const createFavourite = cache(async (userId: number, shopId: number) => {
   const [favourite] = await sql<Favourite[]>`
@@ -64,7 +45,7 @@ export const createFavourite = cache(async (userId: number, shopId: number) => {
 // display favourited shop on profile
 export const getFavouriteByUserId = cache(async (userId: number) => {
   const favouritedShop = await sql<FavouritedShop[]>`
-  SELECT
+  SELECT distinct
     favourites.id AS favourite_id,
     users.id AS user_id,
     shops.id AS shop_id,
@@ -84,4 +65,16 @@ export const getFavouriteByUserId = cache(async (userId: number) => {
     favourites.user_id = ${userId}`;
 
   return favouritedShop;
+});
+
+// Delete favourited shop from profile
+export const deleteFavouriteById = cache(async (id: number) => {
+  const [favourite] = await sql<Favourite[]>`
+    DELETE FROM
+      favourites
+    WHERE
+      id = ${id}
+    RETURNING *
+  `;
+  return favourite;
 });
