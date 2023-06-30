@@ -2,7 +2,7 @@
 
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
-import { Favourite } from '../../../../migrations/1687958140-createTableFavourites';
+import { Favourite } from '../../../../migrations/1688108322-createFavourites';
 import styles from '../../../styles/SingleShopPage.module.scss';
 
 type Props = {
