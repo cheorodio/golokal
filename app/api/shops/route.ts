@@ -1,10 +1,11 @@
-import crypto from 'node:crypto';
-import { cookies } from 'next/headers';
+// import crypto from 'node:crypto';
+// import { cookies } from 'next/headers';
 import { NextRequest, NextResponse } from 'next/server';
 import { z } from 'zod';
-import { createSession } from '../../../database/sessions';
-import { createShop, getShopByUsername } from '../../../database/shops';
-import { secureCookieOptions } from '../../util/cookies';
+// import { createSession } from '../../../database/sessions';
+import { createShop } from '../../../database/shops';
+
+// import { secureCookieOptions } from '../../util/cookies';
 
 export type Error = {
   error: string;
@@ -13,7 +14,6 @@ export type Error = {
 export type CreateShopResponseBodyPost =
   | {
       shop: {
-        // username: string;
         name: string;
         description: string;
         websiteUrl: string;
@@ -25,13 +25,12 @@ export type CreateShopResponseBodyPost =
   | Error;
 
 const shopSchema = z.object({
-  // username: z.string().min(1),
-  name: z.string().min(1),
-  description: z.string().min(1),
-  websiteUrl: z.string().min(1),
-  location: z.string().min(1),
-  imageUrl: z.string().min(1),
-  userId: z.number().min(1),
+  name: z.string(),
+  description: z.string(),
+  websiteUrl: z.string(),
+  location: z.string(),
+  imageUrl: z.string().optional(),
+  userId: z.number(),
 });
 
 export async function POST(
@@ -52,19 +51,18 @@ export async function POST(
     );
   }
 
-  // verify if the user is already taken
-  if (await getShopByUsername(result.data.username)) {
-    return NextResponse.json(
-      {
-        error: 'shop username is taken',
-      },
-      { status: 406 },
-    );
-  }
+  // // verify if the user is already taken
+  // if (await getShopByUsername(result.data.username)) {
+  //   return NextResponse.json(
+  //     {
+  //       error: 'shop username is taken',
+  //     },
+  //     { status: 406 },
+  //   );
+  // }
 
   // store credentials in the DB
   const newShop = await createShop(
-    // result.data.username,
     result.data.name,
     result.data.description,
     result.data.websiteUrl,

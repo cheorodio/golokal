@@ -8,6 +8,7 @@ type ShopResponseBodyDelete = { shop: Shop } | Error;
 type ShopResponseBodyPut = { shop: Shop } | Error;
 
 const shopSchema = z.object({
+  id: z.number()
   name: z.string(),
   // username: z.string(),
   description: z.string(),

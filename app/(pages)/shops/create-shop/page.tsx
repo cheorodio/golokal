@@ -1,11 +1,16 @@
 import { cookies } from 'next/headers';
 import { redirect } from 'next/navigation';
 import { getValidSessionByToken } from '../../../../database/sessions';
+import { getShopById } from '../../../../database/shops';
 import { getUserBySessionToken } from '../../../../database/users';
 import styles from '../../../styles/CreateShopForm.module.scss';
 import CreateShop from './CreateShop';
 
-export default async function CreateShopPage() {
+type Props = {
+  params: { id: number };
+};
+export default async function CreateShopPage(props: Props) {
+  const shops = await getShopById(Number(props.params.id));
   // allowing access to only authorised user
   const sessionToken = cookies().get('sessionToken');
   const session =
@@ -27,7 +32,7 @@ export default async function CreateShopPage() {
         </h4>
       </div>
       <div className={styles.createShopFormContainer}>
-        <CreateShop />
+        <CreateShop shops={shops} user={user} />
       </div>
     </main>
   );

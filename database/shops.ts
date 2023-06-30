@@ -71,13 +71,7 @@ export const createShop = cache(
     VALUES
       (${name}, ${description}, ${websiteUrl}, ${location}, ${imageUrl}, ${userId})
     RETURNING
-      id,
-      name,
-      description,
-      website_url,
-      location,
-      image_url,
-      user_id
+      *
  `;
     return shop;
   },

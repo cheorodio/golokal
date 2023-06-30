@@ -6,7 +6,7 @@ type FavouritedShop = {
   favouriteId: number;
   userId: number;
   shopId: number;
-  shopUsername: string;
+  // shopUsername: string;
   shopName: string | null;
   shopDescription: string | null;
   shopWebsiteUrl: string | null;
@@ -49,7 +49,7 @@ export const getFavouriteByUserId = cache(async (userId: number) => {
     favourites.id AS favourite_id,
     users.id AS user_id,
     shops.id AS shop_id,
-    shops.username AS shop_username,
+    -- shops.username AS shop_username,
     shops.name AS shop_name,
     shops.description AS shop_description,
     shops.website_url AS shop_website_url,

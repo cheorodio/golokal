@@ -2,21 +2,20 @@ import { cookies } from 'next/headers';
 import Link from 'next/link';
 import { notFound, redirect } from 'next/navigation';
 import { AiOutlineCamera } from 'react-icons/ai';
-import { getProducts } from '../../../../../database/products';
+// import { getProducts } from '../../../../../database/products';
 import { getUserBySessionToken } from '../../../../../database/sessions';
-import { getShopByUsername } from '../../../../../database/shops';
+import { getShopById, getShopByUsername } from '../../../../../database/shops';
 import styles from '../../../../styles/SingleShopPage.module.scss';
 import CreateProductsForm from './CreateProductsForm';
 
 type Props = {
   params: {
-    username: string;
     shopId: number;
   };
 };
 
 export default async function ShopProfilePage({ params }: Props) {
-  const shop = await getShopByUsername(params.username);
+  const shop = await getShopById(Number(params.shopId));
   if (!shop) {
     notFound();
   }
@@ -28,14 +27,14 @@ export default async function ShopProfilePage({ params }: Props) {
     (await getUserBySessionToken(sessionTokenCookie.value));
 
   if (session?.id === params.shopId) {
-    redirect(`/login?returnTo=/shop/${shop.username}`);
+    redirect(`/login?returnTo=/shop/${shop.shopId}`);
   }
 
   // if (!session) redirect(`/login?returnTo=/shop/${shop.username}`);
 
   // check if i am the user of this shop
 
-  const products = await getProducts();
+  // const products = await getProducts();
 
   return (
     <main>

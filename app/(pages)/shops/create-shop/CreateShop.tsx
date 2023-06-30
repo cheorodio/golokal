@@ -5,12 +5,17 @@ import { useState } from 'react';
 import { CreateShopResponseBodyPost } from '../../../api/shops/route';
 import styles from '../../../styles/CreateShopForm.module.scss';
 
-export default function CreateShop() {
-  const [username, setUsername] = useState('');
+type Props = {
+  user: { id: number };
+};
+
+export default function CreateShop(props: Props) {
+  // const [userId, setUserId] = useState();
   const [name, setName] = useState('');
   const [description, setDescription] = useState('');
   const [websiteUrl, setWebsiteUrl] = useState('');
   const [location, setLocation] = useState('');
+  const [imageUrl, setImageUrl] = useState('');
   const [error, setError] = useState<string>();
   const router = useRouter();
 
@@ -18,11 +23,12 @@ export default function CreateShop() {
     const response = await fetch('/api/shops', {
       method: 'POST',
       body: JSON.stringify({
-        username,
         name,
         description,
         websiteUrl,
         location,
+        imageUrl,
+        userId: props.user?.id,
       }),
     });
 
@@ -33,7 +39,7 @@ export default function CreateShop() {
       return;
     }
     console.log(data.shop);
-    router.push(`/shops/admin/${data.shop?.username}`);
+    router.push(`/shops/${data.shop.id}`);
     router.refresh();
   }
 
@@ -44,9 +50,9 @@ export default function CreateShop() {
     >
       <label>
         <input
-          value={username}
-          placeholder="Username"
-          onChange={(event) => setUsername(event.currentTarget.value)}
+          type="file"
+          value={imageUrl}
+          onChange={(event) => setImageUrl(event.currentTarget.value)}
         />
       </label>
       <label>
