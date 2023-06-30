@@ -13,23 +13,25 @@ export type Error = {
 export type CreateShopResponseBodyPost =
   | {
       shop: {
-        username: string;
+        // username: string;
         name: string;
         description: string;
         websiteUrl: string;
         location: string;
         imageUrl: string;
+        userId: number;
       };
     }
   | Error;
 
 const shopSchema = z.object({
-  username: z.string().min(1),
+  // username: z.string().min(1),
   name: z.string().min(1),
   description: z.string().min(1),
   websiteUrl: z.string().min(1),
   location: z.string().min(1),
   imageUrl: z.string().min(1),
+  userId: z.number().min(1),
 });
 
 export async function POST(
@@ -44,7 +46,7 @@ export async function POST(
   if (!result.success) {
     return NextResponse.json(
       {
-        error: 'shop username or name is missing',
+        error: 'Some information are missing, please complete form',
       },
       { status: 400 },
     );
@@ -62,12 +64,13 @@ export async function POST(
 
   // store credentials in the DB
   const newShop = await createShop(
-    result.data.username,
+    // result.data.username,
     result.data.name,
     result.data.description,
     result.data.websiteUrl,
     result.data.location,
     result.data.imageUrl,
+    result.data.userId,
   );
 
   if (!newShop) {
@@ -80,28 +83,28 @@ export async function POST(
     );
   }
 
-  // We are sure the user is authenticated
-  // 5. Create a token
-  const token = crypto.randomBytes(100).toString('base64');
-  // 6. Create the session record
+  // // We are sure the user is authenticated
+  // // 5. Create a token
+  // const token = crypto.randomBytes(100).toString('base64');
+  // // 6. Create the session record
 
-  const session = await createSession(token, newShop.id);
+  // const session = await createSession(token, newShop.id);
 
-  if (!session) {
-    return NextResponse.json(
-      {
-        error: 'Error creating the new session',
-      },
-      { status: 500 },
-    );
-  }
+  // if (!session) {
+  //   return NextResponse.json(
+  //     {
+  //       error: 'Error creating the new session',
+  //     },
+  //     { status: 500 },
+  //   );
+  // }
 
-  // 7. Send the new cookie in the headers
-  cookies().set({
-    name: 'sessionToken',
-    value: session.token,
-    ...secureCookieOptions,
-  });
+  // // 7. Send the new cookie in the headers
+  // cookies().set({
+  //   name: 'sessionToken',
+  //   value: session.token,
+  //   ...secureCookieOptions,
+  // });
 
   return NextResponse.json({ shop: newShop });
 }

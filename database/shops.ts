@@ -1,14 +1,13 @@
 import { cache } from 'react';
 import { sql } from './connect';
 
-type ShopName = {
-  id: number;
-  username: string;
-};
+// type ShopName = {
+//   id: number;
+//   username: string;
+// };
 
 export type ShopNotNull = {
   id: number;
-  username: string;
   name: string | null;
   description: string | null;
   websiteUrl: string | null;
@@ -28,38 +27,37 @@ export const getShops = cache(async () => {
   return shops;
 });
 
-// GET SHOP ///////////////////////////////////////////////
-export const getShopByUsername = cache(async (username: string) => {
-  const shops = await sql<ShopNotNull[]>`
-    SELECT
-      *
-    FROM
-      shops
-    WHERE
-      username = ${username}
- `;
+// // GET SHOP ///////////////////////////////////////////////
+// export const getShopByUsername = cache(async (username: string) => {
+//   const shops = await sql<ShopNotNull[]>`
+//     SELECT
+//       *
+//     FROM
+//       shops
+//     WHERE
+//       username = ${username}
+//  `;
 
-  return shops[0];
-});
+//   return shops[0];
+// });
 
-// CREATE SHOP //////////////////////////////
-// 1. first verify if the unique shop username is taken
-export const verifyShopByShopUsername = cache(async (username: string) => {
-  const [shop] = await sql<ShopName[]>`
-SELECT
-  id,
-  username
-FROM
-  users
-WHERE
-  users.username = ${username.toLowerCase()}`;
-  return shop;
-});
+// // CREATE SHOP //////////////////////////////
+// // 1. first verify if the unique shop username is taken
+// export const verifyShopByShopUsername = cache(async (username: string) => {
+//   const [shop] = await sql<ShopName[]>`
+// SELECT
+//   id,
+//   username
+// FROM
+//   users
+// WHERE
+//   users.username = ${username.toLowerCase()}`;
+//   return shop;
+// });
 
 // 2. create the shop
 export const createShop = cache(
   async (
-    username: string,
     name: string,
     description: string,
     websiteUrl: string,
@@ -69,12 +67,12 @@ export const createShop = cache(
   ) => {
     const [shop] = await sql<ShopNotNull[]>`
     INSERT INTO shops
-      (username, name, description, website_url, location, image_url, user_id)
+      (name, description, website_url, location, image_url, user_id)
     VALUES
-      (${username}, ${name}, ${description}, ${websiteUrl}, ${location}, ${imageUrl}, ${userId})
+      (${name}, ${description}, ${websiteUrl}, ${location}, ${imageUrl}, ${userId})
     RETURNING
       id,
-      username,
+      -- username,
       name,
       description,
       website_url,
@@ -100,12 +98,25 @@ export const getShopById = cache(async (id: number) => {
   return shops[0];
 });
 
+export const getShopByUserId = cache(async (userId: number) => {
+  const shops = await sql<ShopNotNull[]>`
+    SELECT
+      *
+    FROM
+      shops
+    WHERE
+      shops.user_id = ${userId}
+    `;
+
+  return shops;
+});
+
 // UPDATE SHOP //////////////////////////////////////////////////////////
 // updating shop page
 export const updateShopById = cache(
   async (
     id: number,
-    username: string,
+    // username: string,
     name: string,
     description: string,
     websiteUrl: string,
@@ -116,7 +127,6 @@ export const updateShopById = cache(
     const [shop] = await sql<ShopNotNull[]>`
       UPDATE shops
       SET
-        username = ${username},
         name = ${name},
         description = ${description},
         website_url = ${websiteUrl},

@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { z } from 'zod';
 import { deleteShopById, updateShopById } from '../../../../database/shops';
-import { Shop } from '../../../../migrations/1687947524-createTableShops';
+import { Shop } from '../../../../migrations/1688108237-createShops';
 import { Error } from '../../users/route';
 
 type ShopResponseBodyDelete = { shop: Shop } | Error;
@@ -9,11 +9,12 @@ type ShopResponseBodyPut = { shop: Shop } | Error;
 
 const shopSchema = z.object({
   name: z.string(),
-  username: z.string(),
+  // username: z.string(),
   description: z.string(),
   websiteUrl: z.string(),
   location: z.string(),
   imageUrl: z.string(),
+  shopId: z.number(),
 });
 
 export async function DELETE(
@@ -77,11 +78,12 @@ export async function PUT(
   const shop = await updateShopById(
     shopId,
     result.data.name,
-    result.data.username,
+    // result.data.username,
     result.data.description,
     result.data.websiteUrl,
     result.data.location,
     result.data.imageUrl,
+    result.data.shopId,
   );
 
   if (!shop) {
