@@ -147,7 +147,7 @@ export const updateUserById = cache(
         username = ${username},
         email = ${email},
         profile_name = ${profileName},
-        bio = ${bio},        shop_id = ${shopId},
+        bio = ${bio},
         image_url = ${imageUrl}
       WHERE
         id = ${id}
