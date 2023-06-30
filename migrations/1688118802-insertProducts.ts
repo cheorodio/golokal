@@ -3,6 +3,7 @@ import { Sql } from 'postgres';
 export const products = [
   {
     id: 1,
+    userId: 2,
     shopId: 2,
     name: 'Ocean',
     category: 'Candles',
@@ -12,6 +13,7 @@ export const products = [
   },
   {
     id: 2,
+    userId: 2,
     shopId: 2,
     name: 'Christmas',
     category: 'Candles',
@@ -21,6 +23,7 @@ export const products = [
   },
   {
     id: 3,
+    userId: 1,
     shopId: 1,
     name: 'Lana',
     category: 'Earrings',
@@ -30,6 +33,7 @@ export const products = [
   },
   {
     id: 4,
+    userId: 3,
     shopId: 3,
     name: 'Kyut',
     category: 'Cups',
@@ -39,7 +43,8 @@ export const products = [
   },
   {
     id: 5,
-    shopId: 3,
+    userId: 4,
+    shopId: 4,
     name: 'Lavender',
     category: 'Soap',
     description:
@@ -52,9 +57,9 @@ export async function up(sql: Sql) {
   for (const product of products) {
     await sql`
     INSERT INTO products
-      (name, shop_id, category, description, image_url)
+      (name, user_id, shop_id, category, description, image_url)
     VALUES
-      (${product.name}, ${product.shopId}, ${product.category}, ${product.description}, ${product.imageUrl})
+      (${product.name}, ${product.userId}, ${product.shopId}, ${product.category}, ${product.description}, ${product.imageUrl})
   `;
   }
 }
