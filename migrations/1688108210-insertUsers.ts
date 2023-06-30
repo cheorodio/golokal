@@ -3,7 +3,7 @@ import { Sql } from 'postgres';
 export const users = [
   {
     id: 1,
-    username: 'Tay',
+    username: 'tay',
     email: 'Tay@email.com',
     passwordHash: 'fsakldja;sjdpaijfalknfcas;kd',
     profileName: 'Tay',
@@ -17,7 +17,7 @@ export const users = [
     email: 'sina@email.com',
     passwordHash: 'daslkjhdlaskjdlkasjd',
     profileName: 'Sina',
-    bio: 'Hi my name is Sina and I made handpoured scented candles using soy wax and organic essential oils. I am here to connect with like-minded individuals and discover amazing local vendors near me.',
+    bio: 'Hi my name is Sina and I make handpoured scented candles using soy wax and organic essential oils. I am here to connect with like-minded individuals and discover amazing local vendors near me.',
     imageUrl: '/images/avatar.png',
   },
   {

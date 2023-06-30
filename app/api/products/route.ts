@@ -1,5 +1,4 @@
 import { cookies } from 'next/headers';
-// import { cookies } from 'next/headers';
 import { NextRequest, NextResponse } from 'next/server';
 import { z } from 'zod';
 import {
@@ -7,14 +6,13 @@ import {
   getProductsWithLimitAndOffsetBySessionToken,
 } from '../../../database/products';
 import { getValidSessionByToken } from '../../../database/sessions';
-// import { getValidSessionByToken } from '../../../database/sessions';
 import { Product } from '../../../migrations/1688118721-createProducts';
 
 type Error = {
   error: string;
 };
 
-// type ProductsResponseBodyGet = { product: Product } | Error;
+type ProductsResponseBodyGet = { product: Product } | Error;
 type ProductsResponseBodyPost = { product: Product } | Error;
 
 const productSchema = z.object({
@@ -63,39 +61,39 @@ export async function POST(
 }
 
 // // get all the products
-// export async function GET(
-//   request: NextRequest,
-// ): Promise<NextResponse<ProductsResponseBodyGet>> {
-//   const { searchParams } = new URL(request.url);
+export async function GET(
+  request: NextRequest,
+): Promise<NextResponse<ProductsResponseBodyGet>> {
+  const { searchParams } = new URL(request.url);
 
-//   // 1. get the token from the cookie
-//   const sessionTokenCookie = cookies().get('sessionToken');
+  // 1. get the token from the cookie
+  const sessionTokenCookie = cookies().get('sessionToken');
 
-//   // 2. check if the token has a valid session
-//   const session =
-//     sessionTokenCookie &&
-//     (await getValidSessionByToken(sessionTokenCookie.value));
+  // 2. check if the token has a valid session
+  const session =
+    sessionTokenCookie &&
+    (await getValidSessionByToken(sessionTokenCookie.value));
 
-//   if (!session) {
-//     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
-//   }
+  if (!session) {
+    return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+  }
 
-//   const limit = Number(searchParams.get('limit'));
-//   const offset = Number(searchParams.get('offset'));
+  const limit = Number(searchParams.get('limit'));
+  const offset = Number(searchParams.get('offset'));
 
-//   if (!limit || !offset) {
-//     return NextResponse.json(
-//       { error: 'Limit and Offset need to be passed as params' },
-//       { status: 400 },
-//     );
-//   }
+  if (!limit || !offset) {
+    return NextResponse.json(
+      { error: 'Limit and Offset need to be passed as params' },
+      { status: 400 },
+    );
+  }
 
-//   // query the database to get all the products only if a valid session token is passed
-//   const allProducts = await getProductsWithLimitAndOffsetBySessionToken(
-//     limit,
-//     offset,
-//     sessionTokenCookie.value,
-//   );
+  // query the database to get all the products only if a valid session token is passed
+  const allProducts = await getProductsWithLimitAndOffsetBySessionToken(
+    limit,
+    offset,
+    sessionTokenCookie.value,
+  );
 
-//   return NextResponse.json({ product: allProducts });
-// }
+  return NextResponse.json({ product: allProducts });
+}

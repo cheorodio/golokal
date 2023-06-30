@@ -2,15 +2,16 @@
 
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
-import { AiOutlineSend } from 'react-icons/ai';
+
+// import { AiOutlineSend } from 'react-icons/ai';
 
 type Props = {
-  user: { id: number };
   shop: { id: number };
+  product: { id: number };
 };
 
-export default function AddCommentsToShop(props: Props) {
-  const [comment, setComment] = useState('');
+export default function AddProductsToShop(props: Props) {
+  const [product, setProduct] = useState('');
   const [error, setError] = useState();
   const router = useRouter();
 
@@ -19,12 +20,11 @@ export default function AddCommentsToShop(props: Props) {
       <form
         onSubmit={async (event) => {
           event.preventDefault();
-          const response = await fetch('/api/comments', {
+          const response = await fetch('/api/productsInShop', {
             method: 'POST',
             body: JSON.stringify({
-              content: comment,
-              userId: props.user.id,
-              shopId: props.shop.id,
+              shopId: props.shop?.id,
+              productId: props.product?.id,
             }),
           });
           const data = await response.json();
@@ -40,9 +40,9 @@ export default function AddCommentsToShop(props: Props) {
         <label>
           <input
             maxLength={1000}
-            value={comment}
-            onChange={(event) => setComment(event.currentTarget.value)}
-            placeholder="Write something about this shop..."
+            value={product}
+            onChange={(event) => setProduct(event.currentTarget.value)}
+            placeholder="Add name of product for now..."
           />
         </label>
 
@@ -51,7 +51,7 @@ export default function AddCommentsToShop(props: Props) {
             router.refresh();
           }}
         >
-          <AiOutlineSend />
+          Add
         </button>
       </form>
       <div>{error}</div>

@@ -5,11 +5,14 @@ import { notFound, redirect } from 'next/navigation';
 import { VscLocation } from 'react-icons/vsc';
 import { getCommentsWithUserInfo } from '../../../../database/comments';
 import { getFavourites } from '../../../../database/favourites';
+import { getProductByShopId } from '../../../../database/products';
+import { getProductsInShopByShopId } from '../../../../database/productsInShop';
 import { getShopById } from '../../../../database/shops';
 import { getUserBySessionToken } from '../../../../database/users';
 import styles from '../../../styles/SingleShopPage.module.scss';
 import AddComments from './AddComments';
 import AddFavourites from './AddFavourites';
+import AddProductsToShop from './AddProducts';
 
 export const dynamic = 'force-dynamic';
 
@@ -53,6 +56,10 @@ export default async function SingleShopPage(props: Props) {
   // to get comments from users
   const userComments = await getCommentsWithUserInfo(singleShop.id);
 
+  // display products from this shop
+  const productsInShop = await getProductsInShopByShopId(singleShop.id);
+  const products = await getProductByShopId(singleShop.id);
+
   return (
     <main className={styles.topSection}>
       <div className={styles.shopPage}>
@@ -86,24 +93,20 @@ export default async function SingleShopPage(props: Props) {
         {/* ************* PROOOOOODUCTS SECTION ************* */}
         <div className={styles.productsFeed}>
           <h2>Products Feed</h2>
-          {/* <div className={styles.productsContainer}>
-            <div className={styles.productCardsContainer}>
-              {getProductsList.map((product) => {
-                return (
-                  <div
-                    key={`product-div-${product.id}`}
-                    className={styles.productCard}
-                  >
-                    <div className={styles.imageBox}>
-                      <AiOutlineCamera />
-                    </div>
-                    <h1>{product.name}</h1>
-                    <p>{product.description}</p>
-                  </div>
-                );
-              })}
-            </div>
-          </div> */}
+          <AddProductsToShop
+            productsInShop={productsInShop}
+            shop={singleShop}
+            user={user}
+          />
+          <div>
+            {productsInShop.map((product) => {
+              return (
+                <div key={`productsInShop-div${product.productId}`}>
+                  <p>{product.productId}</p>
+                </div>
+              );
+            })}
+          </div>
         </div>
       </div>
 
