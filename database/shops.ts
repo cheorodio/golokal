@@ -9,11 +9,12 @@ type ShopName = {
 export type ShopNotNull = {
   id: number;
   username: string;
-  name: string;
-  description: string;
-  websiteUrl: string;
-  location: string;
-  imageUrl: string;
+  name: string | null;
+  description: string | null;
+  websiteUrl: string | null;
+  location: string | null;
+  imageUrl: string | null;
+  userId: number | null;
 };
 
 // GET ALL SHOPS FOR SHOPS PAGE ///////////////////////////
@@ -64,12 +65,13 @@ export const createShop = cache(
     websiteUrl: string,
     location: string,
     imageUrl: string,
+    userId: number,
   ) => {
     const [shop] = await sql<ShopNotNull[]>`
     INSERT INTO shops
-      (username, name, description, website_url, location, image_url)
+      (username, name, description, website_url, location, image_url, user_id)
     VALUES
-      (${username}, ${name}, ${description}, ${websiteUrl}, ${location}, ${imageUrl})
+      (${username}, ${name}, ${description}, ${websiteUrl}, ${location}, ${imageUrl}, ${userId})
     RETURNING
       id,
       username,
@@ -77,7 +79,8 @@ export const createShop = cache(
       description,
       website_url,
       location,
-      image_url
+      image_url,
+      user_id
  `;
     return shop;
   },
@@ -108,6 +111,7 @@ export const updateShopById = cache(
     websiteUrl: string,
     location: string,
     imageUrl: string,
+    userId: number,
   ) => {
     const [shop] = await sql<ShopNotNull[]>`
       UPDATE shops
@@ -117,7 +121,8 @@ export const updateShopById = cache(
         description = ${description},
         website_url = ${websiteUrl},
         location = ${location},
-        image_url = ${imageUrl}
+        image_url = ${imageUrl},
+        user_id = ${userId}
       WHERE
         id = ${id}
         RETURNING *

@@ -3,7 +3,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import { z } from 'zod';
 import { createComment } from '../../../database/comments';
 import { getUserBySessionToken } from '../../../database/users';
-import { Comment } from '../../../migrations/1687987297-createComments';
+import { Comment } from '../../../migrations/1687987297-createTableComments';
 
 const commentsSchema = z.object({
   content: z.string(),

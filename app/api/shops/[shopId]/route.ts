@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { z } from 'zod';
 import { deleteShopById, updateShopById } from '../../../../database/shops';
-import { Shop } from '../../../../migrations/1687947524-createShops';
+import { Shop } from '../../../../migrations/1687947524-createTableShops';
 import { Error } from '../../users/route';
 
 type ShopResponseBodyDelete = { shop: Shop } | Error;

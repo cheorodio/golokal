@@ -1,13 +1,13 @@
 import { cache } from 'react';
-import { Comment } from '../migrations/1687987297-createComments';
+import { Comment } from '../migrations/1688108341-createComments';
 import { sql } from './connect';
 
 type CommentsFromUsersInShops = {
   commentId: number;
-  commentContent: string;
+  commentContent: string | null;
   userId: number;
   userName: string;
-  userImageUrl: string;
+  userImageUrl: string | null;
   shopId: number;
 };
 

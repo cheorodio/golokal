@@ -3,7 +3,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import { z } from 'zod';
 import { createImage } from '../../../database/images';
 import { getUserBySessionToken } from '../../../database/users';
-import { Image } from '../../../migrations/1688032335-createImages';
+import { Image } from '../../../migrations/1688032335-createTableImages';
 
 const favouritesSchema = z.object({
   userId: z.number(),

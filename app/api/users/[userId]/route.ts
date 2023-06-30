@@ -5,7 +5,7 @@ import {
   getUserById,
   updateUserById,
 } from '../../../../database/users';
-import { User } from '../../../../migrations/1687947560-createUsers';
+import { User } from '../../../../migrations/1687947560-createTableUsers';
 import { Error } from '../route';
 
 type UserResponseBodyGet = { user: User } | Error;

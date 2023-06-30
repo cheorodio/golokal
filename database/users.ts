@@ -1,5 +1,5 @@
 import { cache } from 'react';
-import { User } from '../migrations/1687947560-createUsers';
+import { User } from '../migrations/1688108187-createUsers';
 import { sql } from './connect';
 
 type UserWithPasswordHash = User & {
@@ -139,7 +139,6 @@ export const updateUserById = cache(
     email: string,
     profileName: string,
     bio: string,
-    shopId: number,
     imageUrl: string,
   ) => {
     const [user] = await sql<UserWithPasswordHash[]>`
@@ -148,8 +147,7 @@ export const updateUserById = cache(
         username = ${username},
         email = ${email},
         profile_name = ${profileName},
-        bio = ${bio},
-        shop_id = ${shopId},
+        bio = ${bio},        shop_id = ${shopId},
         image_url = ${imageUrl}
       WHERE
         id = ${id}

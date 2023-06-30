@@ -1,5 +1,5 @@
 import { cache } from 'react';
-import { Favourite } from '../migrations/1687958140-createFavourites';
+import { Favourite } from '../migrations/1688108322-createFavourites';
 import { sql } from './connect';
 
 type FavouritedShop = {

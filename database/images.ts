@@ -1,5 +1,5 @@
 import { cache } from 'react';
-import { Image } from '../migrations/1688032335-createImages';
+import { Image } from '../migrations/1688108371-createImages';
 import { sql } from './connect';
 
 export type ImageNotNull = {

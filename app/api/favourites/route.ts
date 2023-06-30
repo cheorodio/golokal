@@ -3,7 +3,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import { z } from 'zod';
 import { createFavourite } from '../../../database/favourites';
 import { getUserBySessionToken } from '../../../database/users';
-import { Favourite } from '../../../migrations/1687958140-createFavourites';
+import { Favourite } from '../../../migrations/1687958140-createTableFavourites';
 
 const favouritesSchema = z.object({
   userId: z.number(),
