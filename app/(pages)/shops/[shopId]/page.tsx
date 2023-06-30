@@ -13,6 +13,7 @@ import { getUserBySessionToken } from '../../../../database/users';
 import styles from '../../../styles/SingleShopPage.module.scss';
 import AddComments from './AddComments';
 import AddFavourites from './AddFavourites';
+import LikeProduct from './LikeProduct';
 
 export const dynamic = 'force-dynamic';
 
@@ -103,9 +104,7 @@ export default async function SingleShopPage(props: Props) {
                 >
                   <div className={styles.titleSection}>
                     <p className={styles.productTitle}>{product.productName}</p>
-                    <p>
-                      <AiOutlineHeart />
-                    </p>
+                    <LikeProduct />
                   </div>
                   <Image
                     src={product.productImageUrl}

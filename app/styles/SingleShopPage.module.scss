@@ -269,3 +269,17 @@
   align-items: center;
   justify-content: center;
 }
+
+.loveButton {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+
+  .heartButton {
+    font-size: 0.9rem;
+  }
+
+  .heartButtonRed {
+    color: red;
+  }
+}
