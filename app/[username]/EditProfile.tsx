@@ -3,7 +3,7 @@
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
-import { User } from '../../migrations/1687947560-createTableUsers';
+import { User } from '../../migrations/1688108187-createUsers';
 import styles from '../styles/EditProfile.module.scss';
 
 type Props = {

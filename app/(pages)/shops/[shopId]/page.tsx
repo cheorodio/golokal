@@ -8,7 +8,10 @@ import { getFavourites } from '../../../../database/favourites';
 import { getProductByShopId } from '../../../../database/products';
 import { getProductsInShopByShopId } from '../../../../database/productsInShop';
 import { getShopById } from '../../../../database/shops';
-import { getUserBySessionToken } from '../../../../database/users';
+import {
+  getUserBySessionToken,
+  getUserByUsername,
+} from '../../../../database/users';
 import styles from '../../../styles/SingleShopPage.module.scss';
 import AddComments from './AddComments';
 import AddFavourites from './AddFavourites';
@@ -28,21 +31,24 @@ type Props = {
     userId: number;
     shopId: number;
     content: string;
+    username: string;
   };
   comment: { id: number };
+  user: { username: string };
 };
 
 export default async function SingleShopPage(props: Props) {
   const singleShop = await getShopById(Number(props.params.shopId));
+  const user = await getUserByUsername(props.params.username);
 
   const cookieStore = cookies();
   const sessionToken = cookieStore.get('sessionToken');
 
-  const user = !sessionToken?.value
+  const shopOwner = !sessionToken?.value
     ? undefined
     : await getUserBySessionToken(sessionToken.value);
 
-  if (!user) {
+  if (!shopOwner) {
     return redirect(`/login?returnTo=/shops/${props.params.shopId}`);
   }
 
@@ -51,7 +57,7 @@ export default async function SingleShopPage(props: Props) {
   }
 
   // to allow users to favourite this shop
-  const favourites = await getFavourites(user.id);
+  const favourites = await getFavourites(shopOwner.id);
 
   // to get comments from users
   const userComments = await getCommentsWithUserInfo(singleShop.id);
@@ -80,7 +86,7 @@ export default async function SingleShopPage(props: Props) {
               <AddFavourites
                 favourites={favourites}
                 singleShop={singleShop}
-                user={user}
+                user={shopOwner}
               />
             </div>
             <p className={styles.shopBio}>{singleShop.description}</p>
@@ -93,11 +99,6 @@ export default async function SingleShopPage(props: Props) {
         {/* ************* PROOOOOODUCTS SECTION ************* */}
         <div className={styles.productsFeed}>
           <h2>Products Feed</h2>
-          <AddProductsToShop
-            productsInShop={productsInShop}
-            shop={singleShop}
-            user={user}
-          />
           <div>
             {productsInShop.map((product) => {
               return (
@@ -107,6 +108,13 @@ export default async function SingleShopPage(props: Props) {
               );
             })}
           </div>
+          {shopOwner.username !== user?.username ? (
+            <AddProductsToShop
+              productsInShop={productsInShop}
+              shop={singleShop}
+              user={shopOwner}
+            />
+          ) : null}
         </div>
       </div>
 
@@ -116,7 +124,7 @@ export default async function SingleShopPage(props: Props) {
         <div className={styles.commentInput}>
           <AddComments
             shop={singleShop}
-            user={user}
+            user={shopOwner}
             userComments={userComments}
           />
         </div>

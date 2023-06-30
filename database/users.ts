@@ -72,7 +72,7 @@ export const getUserByUsername = cache(async (username: string) => {
     FROM
       users
     WHERE
-      users.username = ${username.toLowerCase()}
+      users.username = ${username}
  `;
 
   return user;
