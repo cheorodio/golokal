@@ -75,16 +75,16 @@ export const getProductByShopId = cache(async (shopId: number) => {
 export const createProduct = cache(
   async (
     name: string,
+    shopId: number,
     category: string,
     description: string,
-    imageUrl: string,
-    shopId: number,
+    imageUrl?: string,
   ) => {
     const [productToCreate] = await sql<Product[]>`
       INSERT INTO products
-        (name, category, description, image_url, shop_id)
+        (name, shop_id, category, description,  image_url)
       VALUES
-        (${name}, ${category}, ${description}, ${imageUrl}, ${shopId})
+        (${name}, ${shopId}, ${category}, ${description}, ${imageUrl || null})
       RETURNING *
     `;
 
