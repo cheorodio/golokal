@@ -8,6 +8,7 @@ export type Shop = {
   websiteUrl: string | null;
   location: string | null;
   imageUrl: string | null;
+  userId: number | null;
 };
 
 export async function up(sql: Sql) {
@@ -19,7 +20,8 @@ export async function up(sql: Sql) {
       description varchar(500),
       website_url varchar(80),
       location varchar(40),
-      image_url varchar(500)
+      image_url varchar(500),
+      user_id integer REFERENCES users (id)
     )
   `;
 }
