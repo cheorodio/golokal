@@ -219,7 +219,7 @@ export default function EditProfile(props: Props) {
                 </button>
               </form>
 
-              <form className={styles.formContainer}>
+              {/* <form className={styles.formContainer}>
                 <div>
                   <label htmlFor="username">Username</label>
                   <input
@@ -263,7 +263,7 @@ export default function EditProfile(props: Props) {
                   Save
                 </button>
                 {error !== '' && <div>{error}</div>}
-              </form>
+              </form> */}
             </>
           )}
         </div>
