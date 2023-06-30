@@ -18,6 +18,7 @@ export type CreateShopResponseBodyPost =
         description: string;
         websiteUrl: string;
         location: string;
+        imageUrl: string;
       };
     }
   | Error;
@@ -28,6 +29,7 @@ const shopSchema = z.object({
   description: z.string().min(1),
   websiteUrl: z.string().min(1),
   location: z.string().min(1),
+  imageUrl: z.string().min(1),
 });
 
 export async function POST(
@@ -65,6 +67,7 @@ export async function POST(
     result.data.description,
     result.data.websiteUrl,
     result.data.location,
+    result.data.imageUrl,
   );
 
   if (!newShop) {
