@@ -6,6 +6,7 @@ import {
   getProductsWithLimitAndOffsetBySessionToken,
 } from '../../../database/products';
 import { getValidSessionByToken } from '../../../database/sessions';
+import { getUserBySessionToken } from '../../../database/users';
 import { Product } from '../../../migrations/1688118721-createProducts';
 
 type Error = {
@@ -16,8 +17,9 @@ type ProductsResponseBodyGet = { product: Product } | Error;
 type ProductsResponseBodyPost = { product: Product } | Error;
 
 const productSchema = z.object({
-  name: z.string().min(1),
+  userId: z.number(),
   shopId: z.number(),
+  name: z.string().min(1),
   category: z.string().min(1),
   description: z.string().min(1),
   imageUrl: z.string().optional(),
@@ -27,22 +29,29 @@ const productSchema = z.object({
 export async function POST(
   request: NextRequest,
 ): Promise<NextResponse<ProductsResponseBodyPost>> {
-  const body = await request.json();
+  const token = cookies().get('sessionToken');
+  const user = token && (await getUserBySessionToken(token.value));
 
-  // zod please verify the body matches my schema
+  if (!user) {
+    return NextResponse.json({
+      errors: [{ message: 'Invalid session token' }],
+    });
+  }
+
+  const body = await request.json();
   const result = productSchema.safeParse(body);
 
   if (!result.success) {
-    // zod send you details about the error
     return NextResponse.json(
-      { error: 'The data is incomplete' },
+      { errors: [{ message: 'Invalid' }] },
       { status: 400 },
     );
   }
   // query the database to get all the products
   const newProduct = await createProduct(
-    result.data.name,
+    result.data.userId,
     result.data.shopId,
+    result.data.name,
     result.data.category,
     result.data.description,
     result.data.imageUrl,

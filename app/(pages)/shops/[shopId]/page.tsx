@@ -5,15 +5,12 @@ import { notFound, redirect } from 'next/navigation';
 import { VscLocation } from 'react-icons/vsc';
 import { getCommentsWithUserInfo } from '../../../../database/comments';
 import { getFavourites } from '../../../../database/favourites';
-// import { getProductByShopId } from '../../../../database/products';
-// import { getProductsInShopByShopId } from '../../../../database/productsInShop';
+import { getProductsWithInfo } from '../../../../database/products';
 import { getShopById } from '../../../../database/shops';
 import { getUserBySessionToken } from '../../../../database/users';
 import styles from '../../../styles/SingleShopPage.module.scss';
 import AddComments from './AddComments';
 import AddFavourites from './AddFavourites';
-
-// import AddProductsToShop from './AddProducts';
 
 export const dynamic = 'force-dynamic';
 
@@ -37,7 +34,6 @@ type Props = {
 
 export default async function SingleShopPage(props: Props) {
   const singleShop = await getShopById(Number(props.params.shopId));
-  // const user = await getUserByUsername(props.params.username);
 
   const cookieStore = cookies();
   const sessionToken = cookieStore.get('sessionToken');
@@ -61,6 +57,7 @@ export default async function SingleShopPage(props: Props) {
   const userComments = await getCommentsWithUserInfo(singleShop.id);
 
   // display products from this shop
+  const shopProducts = await getProductsWithInfo(singleShop.id);
   // const productsInShop = await getProductsInShopByShopId(singleShop.id);
   // const products = await getProductByShopId(singleShop.id);
 
@@ -97,15 +94,23 @@ export default async function SingleShopPage(props: Props) {
         {/* ************* PROOOOOODUCTS SECTION ************* */}
         <div className={styles.productsFeed}>
           <h2>Products Feed</h2>
-          {/* <div>
-            {productsInShop.map((product) => {
+          <div>
+            {shopProducts.map((product) => {
               return (
-                <div key={`productsInShop-div${product.productId}`}>
-                  <p>{product.productId}</p>
+                <div key={`product-div-${product.productId}`}>
+                  <p>{product.productName}</p>
+                  <p>{product.productDescription}</p>
+                  <img
+                    src={product.productImageUrl}
+                    width={100}
+                    height={100}
+                    alt="product"
+                  />
                 </div>
               );
             })}
           </div>
+          {/*
           {shopOwner.username !== user?.username ? (
             <AddProductsToShop
               productsInShop={productsInShop}
