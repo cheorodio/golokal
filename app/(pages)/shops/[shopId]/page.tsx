@@ -129,7 +129,9 @@ export default async function SingleShopPage(props: Props) {
                   <div>{comment.userName.charAt(0)}</div>
                 </div>
                 <div className={styles.comments}>
-                  <h5>{comment.userName}</h5>
+                  <Link href={`/${comment.userName}`}>
+                    <h5> {comment.userName} </h5>
+                  </Link>
                   <p>{comment.commentContent}</p>
                 </div>
               </div>

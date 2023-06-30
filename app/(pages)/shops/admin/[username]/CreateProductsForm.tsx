@@ -2,7 +2,7 @@
 
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
-import { Product } from '../../../../../migrations/1687505841-createTableProducts';
+import { Product } from '../../../../../migrations/1687947632-createProducts';
 import styles from '../../../../styles/ProductsForm.module.scss';
 
 type Props = {
@@ -64,13 +64,13 @@ export default function CreateProductsForm({ products }: Props) {
           />
         </label>
 
-        {/* <label>
+        <label>
           <input
             type="file"
             value={productImageId}
             onChange={(event) => setProductImageId(event.currentTarget.value)}
           />
-        </label> */}
+        </label>
 
         <button
           className={styles.createProductButton}

@@ -135,12 +135,22 @@
   .commentsSection {
     display: flex;
     flex-direction: column;
-    padding: 0px 50px;
     gap: 20px;
+    margin-top: 20px;
+
+    @media screen and (min-width: $tablet) {
+      padding: 0px 50px;
+      gap: 20px;
+    }
 
     h2 {
       font-family: var(--title-text);
-      font-size: 2rem;
+      font-size: 1.5rem;
+      text-align: center;
+
+      @media screen and (min-width: $tablet) {
+        font-size: 2rem;
+      }
     }
 
     .commentInput {
@@ -161,6 +171,7 @@
             width: 100%;
             height: 50px;
             padding-left: 16px;
+            padding-right: 50px;
             border-radius: 80px;
             border: none;
             box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
