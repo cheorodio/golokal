@@ -72,7 +72,6 @@ export const createShop = cache(
       (${name}, ${description}, ${websiteUrl}, ${location}, ${imageUrl}, ${userId})
     RETURNING
       id,
-      -- username,
       name,
       description,
       website_url,
@@ -116,7 +115,6 @@ export const getShopByUserId = cache(async (userId: number) => {
 export const updateShopById = cache(
   async (
     id: number,
-    // username: string,
     name: string,
     description: string,
     websiteUrl: string,
