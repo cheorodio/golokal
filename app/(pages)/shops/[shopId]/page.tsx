@@ -58,8 +58,6 @@ export default async function SingleShopPage(props: Props) {
 
   // display products from this shop
   const shopProducts = await getProductsWithInfo(singleShop.id);
-  // const productsInShop = await getProductsInShopByShopId(singleShop.id);
-  // const products = await getProductByShopId(singleShop.id);
 
   return (
     <main className={styles.topSection}>
@@ -100,7 +98,7 @@ export default async function SingleShopPage(props: Props) {
                 <div key={`product-div-${product.productId}`}>
                   <p>{product.productName}</p>
                   <p>{product.productDescription}</p>
-                  <img
+                  <Image
                     src={product.productImageUrl}
                     width={100}
                     height={100}
