@@ -2,6 +2,8 @@ import { cookies } from 'next/headers';
 import Image from 'next/image';
 import Link from 'next/link';
 import { notFound, redirect } from 'next/navigation';
+import { AiOutlineHeart } from 'react-icons/ai';
+import { MdOutlineCategory } from 'react-icons/md';
 import { VscLocation } from 'react-icons/vsc';
 import { getCommentsWithUserInfo } from '../../../../database/comments';
 import { getFavourites } from '../../../../database/favourites';
@@ -92,18 +94,32 @@ export default async function SingleShopPage(props: Props) {
         {/* ************* PROOOOOODUCTS SECTION ************* */}
         <div className={styles.productsFeed}>
           <h2>Products Feed</h2>
-          <div>
+          <div className={styles.productsContainer}>
             {shopProducts.map((product) => {
               return (
-                <div key={`product-div-${product.productId}`}>
-                  <p>{product.productName}</p>
-                  <p>{product.productDescription}</p>
+                <div
+                  key={`product-div-${product.productId}`}
+                  className={styles.productCard}
+                >
+                  <div className={styles.titleSection}>
+                    <p className={styles.productTitle}>{product.productName}</p>
+                    <p>
+                      <AiOutlineHeart />
+                    </p>
+                  </div>
                   <Image
                     src={product.productImageUrl}
                     width={100}
                     height={100}
                     alt="product"
+                    className={styles.productImage}
                   />
+                  <p className={styles.productDescription}>
+                    {product.productDescription}
+                  </p>
+                  <p className={styles.productCategory}>
+                    <MdOutlineCategory /> {product.productCategory}
+                  </p>
                 </div>
               );
             })}
