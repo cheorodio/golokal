@@ -119,7 +119,9 @@
         }
 
         .productCard {
-          background-color: red;
+          border: 0.5px solid var(--main-color);
+          border-radius: 10px;
+          background-color: white;
 
           @media screen and (min-width: $tablet) {
             background-color: white;
