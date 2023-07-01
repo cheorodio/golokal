@@ -1,11 +1,11 @@
-// import crypto from 'node:crypto';
-// import { cookies } from 'next/headers';
+import crypto from 'node:crypto';
+import { cookies } from 'next/headers';
 import { NextRequest, NextResponse } from 'next/server';
 import { z } from 'zod';
-// import { createSession } from '../../../database/sessions';
+import { createSession } from '../../../database/sessions';
 import { createShop } from '../../../database/shops';
-
-// import { secureCookieOptions } from '../../util/cookies';
+import { getUserBySessionToken } from '../../../database/users';
+import { secureCookieOptions } from '../../util/cookies';
 
 export type Error = {
   error: string;
@@ -29,13 +29,21 @@ const shopSchema = z.object({
   description: z.string(),
   websiteUrl: z.string(),
   location: z.string(),
-  imageUrl: z.string().optional(),
+  imageUrl: z.string(),
   userId: z.number(),
 });
 
 export async function POST(
   request: NextRequest,
 ): Promise<NextResponse<CreateShopResponseBodyPost>> {
+  const cookieStore = cookies();
+  const token = cookieStore.get('sessionToken');
+
+  const user = token && (await getUserBySessionToken(token.value));
+  if (!user) {
+    return NextResponse.json({ error: 'User not found' });
+  }
+
   const body = await request.json();
 
   // get credentials from the body
@@ -50,16 +58,6 @@ export async function POST(
       { status: 400 },
     );
   }
-
-  // // verify if the user is already taken
-  // if (await getShopByUsername(result.data.username)) {
-  //   return NextResponse.json(
-  //     {
-  //       error: 'shop username is taken',
-  //     },
-  //     { status: 406 },
-  //   );
-  // }
 
   // store credentials in the DB
   const newShop = await createShop(
@@ -80,29 +78,6 @@ export async function POST(
       { status: 500 },
     );
   }
-
-  // // We are sure the user is authenticated
-  // // 5. Create a token
-  // const token = crypto.randomBytes(100).toString('base64');
-  // // 6. Create the session record
-
-  // const session = await createSession(token, newShop.id);
-
-  // if (!session) {
-  //   return NextResponse.json(
-  //     {
-  //       error: 'Error creating the new session',
-  //     },
-  //     { status: 500 },
-  //   );
-  // }
-
-  // // 7. Send the new cookie in the headers
-  // cookies().set({
-  //   name: 'sessionToken',
-  //   value: session.token,
-  //   ...secureCookieOptions,
-  // });
 
   return NextResponse.json({ shop: newShop });
 }
