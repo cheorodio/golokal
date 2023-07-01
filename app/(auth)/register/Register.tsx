@@ -75,7 +75,7 @@ export default function RegisterForm() {
           password,
           profileName,
           bio,
-          imageUrl: profilePic,
+          imageUrl: profilePic.secure_url,
         }),
       });
 
