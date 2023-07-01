@@ -1,24 +1,10 @@
 import { cache } from 'react';
+import { Shop } from '../migrations/1688217209-createTableShops';
 import { sql } from './connect';
-
-// type ShopName = {
-//   id: number;
-//   username: string;
-// };
-
-export type ShopNotNull = {
-  id: number;
-  name: string | null;
-  description: string | null;
-  websiteUrl: string | null;
-  location: string | null;
-  imageUrl: string | null;
-  userId: number | null;
-};
 
 // GET ALL SHOPS FOR SHOPS PAGE ///////////////////////////
 export const getShops = cache(async () => {
-  const shops = await sql<ShopNotNull[]>`
+  const shops = await sql<Shop[]>`
     SELECT
       *
     FROM
@@ -65,7 +51,7 @@ export const createShop = cache(
     imageUrl: string,
     userId: number,
   ) => {
-    const [shop] = await sql<ShopNotNull[]>`
+    const [shop] = await sql<Shop[]>`
     INSERT INTO shops
       (name, description, website_url, location, image_url, user_id)
     VALUES
@@ -79,7 +65,7 @@ export const createShop = cache(
 
 // GETTING SHOP ///////////////////////////////////////////////
 export const getShopById = cache(async (id: number) => {
-  const shops = await sql<ShopNotNull[]>`
+  const shops = await sql<Shop[]>`
     SELECT
       *
     FROM
@@ -92,7 +78,7 @@ export const getShopById = cache(async (id: number) => {
 });
 
 export const getShopByUserId = cache(async (userId: number) => {
-  const shops = await sql<ShopNotNull[]>`
+  const shops = await sql<Shop[]>`
     SELECT
       *
     FROM
@@ -116,7 +102,7 @@ export const updateShopById = cache(
     imageUrl: string,
     userId: number,
   ) => {
-    const [shop] = await sql<ShopNotNull[]>`
+    const [shop] = await sql<Shop[]>`
       UPDATE shops
       SET
         name = ${name},
@@ -135,7 +121,7 @@ export const updateShopById = cache(
 
 // DELETE SHOP /////////////////////////////////
 export const deleteShopById = cache(async (id: number) => {
-  const [shop] = await sql<ShopNotNull[]>`
+  const [shop] = await sql<Shop[]>`
       DELETE FROM
         shops
       WHERE

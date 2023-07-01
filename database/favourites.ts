@@ -6,7 +6,6 @@ type FavouritedShop = {
   favouriteId: number;
   userId: number;
   shopId: number;
-  // shopUsername: string;
   shopName: string | null;
   shopDescription: string | null;
   shopWebsiteUrl: string | null;
