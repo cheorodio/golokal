@@ -5,7 +5,7 @@ import {
   getUserById,
   updateUserById,
 } from '../../../../database/users';
-import { User } from '../../../../migrations/1687947560-createTableUsers';
+import { User } from '../../../../migrations/1688108187-createUsers';
 import { Error } from '../route';
 
 type UserResponseBodyGet = { user: User } | Error;
@@ -17,7 +17,6 @@ const userSchema = z.object({
   email: z.string(),
   profileName: z.string(),
   bio: z.string(),
-  shopId: z.number(),
   imageUrl: z.string(),
 });
 
@@ -111,7 +110,6 @@ export async function PUT(
     result.data.email,
     result.data.profileName,
     result.data.bio,
-    result.data.shopId,
     result.data.imageUrl,
   );
 

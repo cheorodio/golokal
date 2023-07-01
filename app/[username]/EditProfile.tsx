@@ -1,6 +1,5 @@
 'use client';
 
-import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { User } from '../../migrations/1688108187-createUsers';
@@ -13,7 +12,7 @@ type Props = {
     email: string;
     profileName: string;
     bio: string;
-    profileImage: string;
+    imageUrl: string;
   };
   user: {
     id: number;
@@ -21,7 +20,7 @@ type Props = {
     email: string;
     profileName: string;
     bio: string;
-    profileImage: string;
+    imageUrl: string;
   };
   users: User[];
 };
@@ -33,7 +32,7 @@ export default function EditProfile(props: Props) {
   const [onEditUsername, setOnEditUsername] = useState<string>('');
   const [onEditProfileName, setOnEditProfileName] = useState<string>('');
   const [onEditBio, setOnEditBio] = useState<string>('');
-  const [onEditProfileAvatar, setOnEditProfileAvatar] = useState<string>('');
+  const [onEditImageUrl, setOnEditImageUrl] = useState<string>('');
   const [error, setError] = useState<string>();
 
   // for image upload
@@ -45,6 +44,7 @@ export default function EditProfile(props: Props) {
     username: string,
     profileName: string,
     bio: string,
+    imageUrl: string,
   ) {
     const response = await fetch(`/api/users/${userId}`, {
       method: 'PUT',
@@ -53,6 +53,7 @@ export default function EditProfile(props: Props) {
         username,
         profileName,
         bio,
+        imageUrl,
       }),
     });
 
@@ -122,8 +123,8 @@ export default function EditProfile(props: Props) {
         <div className={styles.profileInfoCard}>
           {onEditInput !== props.user.username ? (
             <div className={styles.imageContainer}>
-              {!props.user.profileImage ? (
-                <Image
+              {!props.user.imageUrl ? (
+                <img
                   src="/images/avatar.png"
                   width={300}
                   height={300}
@@ -131,8 +132,8 @@ export default function EditProfile(props: Props) {
                   className={styles.profileAvatar}
                 />
               ) : (
-                <Image
-                  src={props.user.profileImage}
+                <img
+                  src={props.user.imageUrl}
                   width={300}
                   height={300}
                   alt="Profile avatar"
@@ -152,7 +153,7 @@ export default function EditProfile(props: Props) {
                   setOnEditUsername(props.user.username);
                   setOnEditProfileName(props.user.profileName || '');
                   setOnEditBio(props.user.bio || '');
-                  setOnEditProfileAvatar(props.user.profileImage || '');
+                  setOnEditImageUrl(props.user.imageUrl || '');
                 }}
               >
                 add profile image

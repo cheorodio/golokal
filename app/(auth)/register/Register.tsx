@@ -1,8 +1,9 @@
 'use client';
+
 import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import { RxEyeClosed, RxEyeOpen } from 'react-icons/rx';
 import loginImage from '../../../public/images/login.jpg';
 import { RegisterResponseBodyPost } from '../../api/(auth)/register/route';
@@ -14,36 +15,82 @@ export default function RegisterForm() {
   const [password, setPassword] = useState('');
   const [profileName, setProfileName] = useState('');
   const [bio, setBio] = useState('');
+  const [imageUrl, setImageUrl] = useState<string | null>(null);
   const [passwordShown, setPasswordShown] = useState(false);
+
   const [error, setError] = useState<string>();
+  const [success, setSuccess] = useState(false);
+  const fileInputRef = useRef<HTMLInputElement | null>(null);
   const router = useRouter();
 
   const togglePassword = () => {
     setPasswordShown(!passwordShown);
   };
 
-  async function register() {
-    const response = await fetch('/api/register', {
-      method: 'POST',
-      body: JSON.stringify({
-        username,
-        email,
-        password,
-        profileName,
-        bio,
-      }),
-    });
-
-    const data: RegisterResponseBodyPost = await response.json();
-
-    if ('error' in data) {
-      setError(data.error);
-      return;
+  // change image
+  const handleOnChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    if (event.target.files && event.target.files[0]) {
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        setImageUrl(e.target?.result as string);
+      };
+      reader.readAsDataURL(event.target.files[0]);
+    } else {
+      setImageUrl(null);
     }
-    console.log(data.user);
-    router.push(`/${data.user.username}`);
-    router.refresh();
-  }
+  };
+
+  // upload image
+  const handleOnSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    const form = event.currentTarget;
+    const fileInput = Array.from(form.elements)
+      .filter(
+        (element) =>
+          element instanceof HTMLInputElement && element.type === 'file',
+      )
+      .pop() as HTMLInputElement | undefined;
+    if (fileInput) {
+      const formData = new FormData();
+      if (fileInput.files !== null) {
+        for (const file of fileInput.files) {
+          formData.append('file', file);
+        }
+      }
+      formData.append('upload_preset', 'golokal-uploads');
+
+      const profilePic = await fetch(
+        `https://api.cloudinary.com/v1_1/${process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME}/image/upload`,
+        {
+          method: 'POST',
+          body: formData,
+        },
+      ).then((r) => r.json());
+
+      const response = await fetch('/api/register', {
+        method: 'POST',
+        body: JSON.stringify({
+          username,
+          email,
+          password,
+          profileName,
+          bio,
+          imageUrl: profilePic,
+        }),
+      });
+
+      const data: RegisterResponseBodyPost = await response.json();
+
+      if ('error' in data) {
+        setError(data.error);
+        return;
+      }
+      setSuccess(true);
+      console.log(data.user);
+      router.push(`/${data.user.username}`);
+      router.refresh();
+    }
+  };
 
   return (
     <div className={styles.loginContainer}>
@@ -56,12 +103,34 @@ export default function RegisterForm() {
               account to get started.
             </p>
           </div>
-
           <form
-            onSubmit={(event) => event.preventDefault()}
+            onSubmit={handleOnSubmit}
             id="login"
             className={styles.loginForm}
           >
+            <div>
+              <label htmlFor="profilePic">
+                Profile picture <span>*</span>
+              </label>
+              <input
+                id="profilePic"
+                type="file"
+                name="file"
+                ref={fileInputRef}
+                onChange={handleOnChange}
+              />
+            </div>
+            <div>
+              {!!imageUrl && (
+                <Image
+                  src={imageUrl}
+                  height={100}
+                  width={100}
+                  alt="User profile avatar"
+                />
+              )}
+            </div>
+
             <div>
               <label htmlFor="username">
                 Username <span>*</span>
@@ -126,13 +195,14 @@ export default function RegisterForm() {
                 </button>
               </div>
             </div>
-            <button
-              className={styles.loginSubmit}
-              onClick={async () => await register()}
-            >
-              Register
-            </button>
+            <button className={styles.loginSubmit}>Register</button>
             {error !== '' && <div className={styles.error}>{error}</div>}
+            {success && (
+              <p>
+                Succesfull registration! Please wait to be directed to your
+                profile 😄
+              </p>
+            )}
           </form>
         </div>
 
