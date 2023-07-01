@@ -1,5 +1,5 @@
 import { cache } from 'react';
-import { Session } from '../migrations/1687947607-createSessions';
+import { Session } from '../migrations/1688214477-createSessions';
 import { sql } from './connect';
 
 export const deleteExpiredSessions = cache(async () => {
@@ -58,23 +58,4 @@ export const getValidSessionByToken = cache(async (token: string) => {
   `;
 
   return session;
-});
-
-export const getUserBySessionToken = cache(async (token: string) => {
-  const [user] = await sql<{ id: number; shopId: number | null }[]>`
-  SELECT
-    users.id,
-    users.shop_id
-  FROM
-    users,
-    shops
-  INNER JOIN
-    sessions ON (
-      sessions.token = ${token} AND
-      sessions.user_id = shops.id AND
-      sessions.expiry_timestamp > now()
-    )
-  `;
-
-  return user;
 });

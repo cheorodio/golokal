@@ -2,9 +2,9 @@ import { Sql } from 'postgres';
 
 export type Comment = {
   id: number;
-  content: string;
-  userId: number;
-  shopId: number;
+  content: string | null;
+  userId: number | null;
+  shopId: number | null;
 };
 
 export async function up(sql: Sql) {

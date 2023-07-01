@@ -1,5 +1,5 @@
 import { cache } from 'react';
-import { User } from '../migrations/1687947560-createUsers';
+import { User } from '../migrations/1688214379-createUsers';
 import { sql } from './connect';
 
 type UserWithPasswordHash = User & {
@@ -12,6 +12,7 @@ type CreateUser = {
   email: string;
   profileName: string | null;
   bio: string | null;
+  imageUrl: string | null;
 };
 
 export const getUsers = cache(async () => {
@@ -32,18 +33,20 @@ export const createUser = cache(
     passwordHash: string,
     profileName: string,
     bio: string,
+    imageUrl: string | null,
   ) => {
     const [user] = await sql<CreateUser[]>`
     INSERT INTO users
-      (username, email, password_hash, profile_name, bio)
+      (username, email, password_hash, profile_name, bio, image_url)
     VALUES
-      (${username.toLowerCase()}, ${email}, ${passwordHash}, ${profileName}, ${bio})
+      (${username.toLowerCase()}, ${email}, ${passwordHash}, ${profileName}, ${bio}, ${imageUrl})
     RETURNING
       id,
       username,
       email,
       profile_name,
-      bio
+      bio,
+      image_url
  `;
     return user;
   },
@@ -72,7 +75,7 @@ export const getUserByUsername = cache(async (username: string) => {
     FROM
       users
     WHERE
-      users.username = ${username.toLowerCase()}
+      users.username = ${username}
  `;
 
   return user;
@@ -139,7 +142,6 @@ export const updateUserById = cache(
     email: string,
     profileName: string,
     bio: string,
-    shopId: number,
     imageUrl: string,
   ) => {
     const [user] = await sql<UserWithPasswordHash[]>`
@@ -149,7 +151,6 @@ export const updateUserById = cache(
         email = ${email},
         profile_name = ${profileName},
         bio = ${bio},
-        shop_id = ${shopId},
         image_url = ${imageUrl}
       WHERE
         id = ${id}
