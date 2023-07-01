@@ -12,6 +12,7 @@ type CreateUser = {
   email: string;
   profileName: string | null;
   bio: string | null;
+  imageUrl: string | null;
 };
 
 export const getUsers = cache(async () => {
@@ -32,18 +33,20 @@ export const createUser = cache(
     passwordHash: string,
     profileName: string,
     bio: string,
+    imageUrl: string,
   ) => {
     const [user] = await sql<CreateUser[]>`
     INSERT INTO users
-      (username, email, password_hash, profile_name, bio)
+      (username, email, password_hash, profile_name, bio, image_url)
     VALUES
-      (${username.toLowerCase()}, ${email}, ${passwordHash}, ${profileName}, ${bio})
+      (${username.toLowerCase()}, ${email}, ${passwordHash}, ${profileName}, ${bio}, ${imageUrl})
     RETURNING
       id,
       username,
       email,
       profile_name,
-      bio
+      bio,
+      image_url
  `;
     return user;
   },
