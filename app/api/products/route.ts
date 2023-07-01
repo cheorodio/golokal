@@ -8,7 +8,7 @@ import {
 } from '../../../database/products';
 import { getValidSessionByToken } from '../../../database/sessions';
 // import { getValidSessionByToken } from '../../../database/sessions';
-import { Product } from '../../../migrations/1687947632-createProducts';
+import { Product } from '../../../migrations/1688217286-createTableProducts';
 
 type Error = {
   error: string;

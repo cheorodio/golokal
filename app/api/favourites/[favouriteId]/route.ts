@@ -2,7 +2,7 @@ import { cookies } from 'next/headers';
 import { NextRequest, NextResponse } from 'next/server';
 import { deleteFavouriteById } from '../../../../database/favourites';
 import { getUserBySessionToken } from '../../../../database/users';
-import { Favourite } from '../../../../migrations/1687958140-createFavourites';
+import { Favourite } from '../../../../migrations/1688217261-createTableFavourites';
 import { Error } from '../route';
 
 type FavouritesResponseBodyDelete = { favourite: Favourite } | Error;

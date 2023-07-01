@@ -5,7 +5,7 @@ import {
   getProductById,
   updateProductById,
 } from '../../../../database/products';
-import { Product } from '../../../../migrations/1687947632-createProducts';
+import { Product } from '../../../../migrations/1688217286-createTableProducts';
 
 export type Error = {
   error: string;

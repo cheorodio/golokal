@@ -1,6 +1,16 @@
 import { cache } from 'react';
-import { Product } from '../migrations/1687947632-createProducts';
+import { Product } from '../migrations/1688217286-createTableProducts';
 import { sql } from './connect';
+
+type ShopProduct = {
+  productId: number;
+  shopId: number;
+  userId: number;
+  productName: string | null;
+  productCategory: string | null;
+  productDescription: string | null;
+  productImageUrl: string | null;
+};
 
 export const getProducts = cache(async () => {
   const products = await sql<Product[]>`
@@ -36,7 +46,6 @@ export const getProductsWithLimitAndOffsetBySessionToken = cache(
         sessions ON (
           sessions.token = ${token} AND
           sessions.expiry_timestamp > now()
-          -- sessions.vendor_id = products.vendor_id
         )
       LIMIT ${limit}
       OFFSET ${offset}
@@ -59,19 +68,36 @@ export const getProductsById = cache(async (id: number) => {
   return product;
 });
 
+export const getProductByShopId = cache(async (shopId: number) => {
+  const productsInShop = await sql<Product[]>`
+    SELECT
+      *
+    FROM
+      products
+    WHERE
+      products.shop_id = ${shopId}
+  `;
+
+  return productsInShop;
+});
+
 // CREATING PRODUCTS /////////////////////
 export const createProduct = cache(
   async (
+    userId: number,
+    shopId: number,
     name: string,
     category: string,
     description: string,
-    imageUrl: string,
+    imageUrl?: string,
   ) => {
     const [productToCreate] = await sql<Product[]>`
       INSERT INTO products
-        (name, category, description, image_url)
+        (user_id, shop_id, name, category, description,  image_url)
       VALUES
-        (${name}, ${category}, ${description}, ${imageUrl})
+        (${userId}, ${shopId}, ${name}, ${category}, ${description}, ${
+      imageUrl || null
+    })
       RETURNING *
     `;
 
@@ -79,63 +105,26 @@ export const createProduct = cache(
   },
 );
 
-// EDITING PRODUCTS /////////////////////
-export const updateProductById = cache(
-  async (
-    id: number,
-    name: string,
-    category: string,
-    description: string,
-    imageUrl: string,
-  ) => {
-    const [productToEdit] = await sql<Product[]>`
-      UPDATE products
-      SET
-        name = ${name},
-        category = ${category},
-        description = ${description},
-        image_url = ${imageUrl}
-      WHERE
-        id = ${id}
-        RETURNING *
-    `;
-
-    return productToEdit;
-  },
-);
-
-// DELETING PRODUCTS ////////////////
-export const deleteProductsById = cache(async (id: number) => {
-  const [productsToDelete] = await sql<Product[]>`
-    DELETE FROM
-      products
-    WHERE
-      id = ${id}
-    RETURNING *
+// Get all info form products
+export const getProductsWithInfo = cache(async (shopId: number) => {
+  const productsInShop = await sql<ShopProduct[]>`
+  SELECT distinct
+    products.id AS product_id,
+    users.id AS user_id,
+    shops.id AS shop_id,
+    products.name AS product_name,
+    products.category AS product_category,
+    products.description AS product_description,
+    products.image_url AS product_image_url
+  FROM
+    products
+  INNER JOIN
+    shops ON products.shop_id = shops.id
+  INNER JOIN
+    users ON products.user_id = users.id
+  WHERE
+    products.shop_id = ${shopId}
   `;
-  return productsToDelete;
+
+  return productsInShop;
 });
-
-// GETTING ONE PRODUCT ///////////////
-export const products: Product[] = [
-  {
-    id: 1,
-    name: 'Ocean',
-    category: 'Candles',
-    description:
-      'Introducing our exquisite hand-poured ocean-scented candles, crafted to bring the refreshing essence of the sea into your living space. Immerse yourself in the tranquil atmosphere of coastal serenity with every flicker of our artisanal candles.',
-    imageUrl: '/images/shop.png',
-  },
-  {
-    id: 2,
-    name: 'Christmas',
-    category: 'Candles',
-    description:
-      'Introducing our enchanting hand-poured Christmas-scented candles, meticulously crafted to infuse your home with the nostalgic and heartwarming aromas of the holiday season. Immerse yourself in the magical ambiance of Christmas with every flicker of our artisanal candles.',
-    imageUrl: '/images/shop.png',
-  },
-];
-
-export function getProductById(id: number) {
-  return products.find((product) => product.id === id);
-}

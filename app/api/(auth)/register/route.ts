@@ -24,6 +24,7 @@ const userSchema = z.object({
   email: z.string().min(1),
   profileName: z.string().min(1),
   bio: z.string().min(1),
+  imageUrl: z.string().min(1),
 });
 
 export async function POST(
@@ -66,6 +67,7 @@ export async function POST(
     passwordHash,
     result.data.profileName,
     result.data.bio,
+    result.data.imageUrl,
   );
 
   if (!newUser) {

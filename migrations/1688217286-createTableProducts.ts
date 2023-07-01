@@ -1,24 +1,24 @@
 import { Sql } from 'postgres';
 
-export type Shop = {
+export type Product = {
   id: number;
-  username: string;
+  userId: number | null;
+  shopId: number | null;
   name: string | null;
+  category: string | null;
   description: string | null;
-  websiteUrl: string | null;
-  location: string | null;
   imageUrl: string | null;
 };
 
 export async function up(sql: Sql) {
   await sql`
-    CREATE TABLE shops (
+    CREATE TABLE products (
       id integer PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
-      username varchar(30) NOT NULL UNIQUE,
+      user_id integer REFERENCES users (id),
+      shop_id integer REFERENCES shops (id),
       name varchar(30),
+      category varchar(30),
       description varchar(500),
-      website_url varchar(80),
-      location varchar(40),
       image_url varchar(500)
     )
   `;
@@ -26,6 +26,6 @@ export async function up(sql: Sql) {
 
 export async function down(sql: Sql) {
   await sql`
-    DROP TABLE shops
+    DROP TABLE products
   `;
 }

@@ -2,14 +2,18 @@ import { cookies } from 'next/headers';
 import Image from 'next/image';
 import Link from 'next/link';
 import { notFound, redirect } from 'next/navigation';
+import { AiOutlineHeart } from 'react-icons/ai';
+import { MdOutlineCategory } from 'react-icons/md';
 import { VscLocation } from 'react-icons/vsc';
 import { getCommentsWithUserInfo } from '../../../../database/comments';
 import { getFavourites } from '../../../../database/favourites';
+import { getProductsWithInfo } from '../../../../database/products';
 import { getShopById } from '../../../../database/shops';
 import { getUserBySessionToken } from '../../../../database/users';
 import styles from '../../../styles/SingleShopPage.module.scss';
 import AddComments from './AddComments';
 import AddFavourites from './AddFavourites';
+import LikeProduct from './LikeProducts';
 
 export const dynamic = 'force-dynamic';
 
@@ -25,8 +29,10 @@ type Props = {
     userId: number;
     shopId: number;
     content: string;
+    username: string;
   };
   comment: { id: number };
+  user: { username: string };
 };
 
 export default async function SingleShopPage(props: Props) {
@@ -35,11 +41,11 @@ export default async function SingleShopPage(props: Props) {
   const cookieStore = cookies();
   const sessionToken = cookieStore.get('sessionToken');
 
-  const user = !sessionToken?.value
+  const shopOwner = !sessionToken?.value
     ? undefined
     : await getUserBySessionToken(sessionToken.value);
 
-  if (!user) {
+  if (!shopOwner) {
     return redirect(`/login?returnTo=/shops/${props.params.shopId}`);
   }
 
@@ -48,10 +54,13 @@ export default async function SingleShopPage(props: Props) {
   }
 
   // to allow users to favourite this shop
-  const favourites = await getFavourites(user.id);
+  const favourites = await getFavourites(shopOwner.id);
 
   // to get comments from users
   const userComments = await getCommentsWithUserInfo(singleShop.id);
+
+  // display products from this shop
+  const shopProducts = await getProductsWithInfo(singleShop.id);
 
   return (
     <main className={styles.topSection}>
@@ -73,7 +82,7 @@ export default async function SingleShopPage(props: Props) {
               <AddFavourites
                 favourites={favourites}
                 singleShop={singleShop}
-                user={user}
+                user={shopOwner}
               />
             </div>
             <p className={styles.shopBio}>{singleShop.description}</p>
@@ -86,24 +95,42 @@ export default async function SingleShopPage(props: Props) {
         {/* ************* PROOOOOODUCTS SECTION ************* */}
         <div className={styles.productsFeed}>
           <h2>Products Feed</h2>
-          {/* <div className={styles.productsContainer}>
-            <div className={styles.productCardsContainer}>
-              {getProductsList.map((product) => {
-                return (
-                  <div
-                    key={`product-div-${product.id}`}
-                    className={styles.productCard}
-                  >
-                    <div className={styles.imageBox}>
-                      <AiOutlineCamera />
-                    </div>
-                    <h1>{product.name}</h1>
-                    <p>{product.description}</p>
+          <div className={styles.productsContainer}>
+            {shopProducts.map((product) => {
+              return (
+                <div
+                  key={`product-div-${product.productId}`}
+                  className={styles.productCard}
+                >
+                  <div className={styles.titleSection}>
+                    <p className={styles.productTitle}>{product.productName}</p>
+                    <LikeProduct />
                   </div>
-                );
-              })}
-            </div>
-          </div> */}
+                  <Image
+                    src={product.productImageUrl}
+                    width={100}
+                    height={100}
+                    alt="product"
+                    className={styles.productImage}
+                  />
+                  <p className={styles.productDescription}>
+                    {product.productDescription}
+                  </p>
+                  <p className={styles.productCategory}>
+                    <MdOutlineCategory /> {product.productCategory}
+                  </p>
+                </div>
+              );
+            })}
+          </div>
+          {/*
+          {shopOwner.username !== user?.username ? (
+            <AddProductsToShop
+              productsInShop={productsInShop}
+              shop={singleShop}
+              user={shopOwner}
+            />
+          ) : null} */}
         </div>
       </div>
 
@@ -113,7 +140,7 @@ export default async function SingleShopPage(props: Props) {
         <div className={styles.commentInput}>
           <AddComments
             shop={singleShop}
-            user={user}
+            user={shopOwner}
             userComments={userComments}
           />
         </div>

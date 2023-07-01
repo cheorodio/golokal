@@ -9,7 +9,7 @@ type Props = {
   shop: { id: number };
 };
 
-export default function AddImageToEvent(props: Props) {
+export default function AddCommentsToShop(props: Props) {
   const [comment, setComment] = useState('');
   const [error, setError] = useState();
   const router = useRouter();
