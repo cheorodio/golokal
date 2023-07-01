@@ -9,7 +9,7 @@ export const users = [
     profileName: 'Tay',
     bio: 'Hi my name is Tay and I make handmade earrings using polymer clay. I am here to connect with like-minded individuals and discover amazing local vendors near me.',
     shopId: null,
-    imageUrl: '/images/avatar.png',
+    imageUrl: '/images/vendors/Kate.jpg',
   },
   {
     id: 2,
@@ -18,7 +18,7 @@ export const users = [
     passwordHash: 'daslkjhdlaskjdlkasjd',
     profileName: 'Sina',
     bio: 'Hi my name is Sina and I make handpoured scented candles using soy wax and organic essential oils. I am here to connect with like-minded individuals and discover amazing local vendors near me.',
-    imageUrl: '/images/avatar.png',
+    imageUrl: '/images/vendors/Lisa.jpg',
   },
   {
     id: 3,
@@ -27,7 +27,7 @@ export const users = [
     passwordHash: 'ifjdiqjdclkandvladjk',
     profileName: 'Tony',
     bio: 'Hi my name is Tony and I am the owner of keramiks. I am here to connect with like-minded individuals and discover amazing local vendors near me.',
-    imageUrl: '/images/avatar.png',
+    imageUrl: '/images/vendors/Tony.jpg',
   },
   {
     id: 4,
@@ -36,7 +36,7 @@ export const users = [
     passwordHash: 'daslkjhdlaskjdlkasjd',
     profileName: 'Lana',
     bio: 'Hi my name is Lana, owner of the soap compnay and I make handmade soap. I am here to connect with like-minded individuals and discover amazing local vendors near me.',
-    imageUrl: '/images/avatar.png',
+    imageUrl: '/images/vendors/Liz.jpg',
   },
 ];
 
