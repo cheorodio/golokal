@@ -7,7 +7,6 @@ import { CgLogOut } from 'react-icons/cg';
 import { CiLogin } from 'react-icons/ci';
 import { MdShoppingBasket } from 'react-icons/md';
 import { RiAccountPinCircleLine } from 'react-icons/ri';
-import { getShops } from '../database/shops';
 import { getUserBySessionToken } from '../database/users';
 import { logout } from './(auth)/logout/actions';
 import Footer from './components/Footer';
@@ -34,13 +33,6 @@ export default async function RootLayout({ children }: LayoutProps) {
   const user = !sessionToken?.value
     ? undefined
     : await getUserBySessionToken(sessionToken.value);
-
-  // const shop = !sessionToken?.value
-  //   ? undefined
-  //   : await getUserBySessionToken(sessionToken.value);
-
-  // const allShops = await getShops();
-  // const myShop = allShops.filter((shop) => shop.userId === user?.id);
 
   return (
     <html lang="en">

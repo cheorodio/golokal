@@ -36,8 +36,6 @@ export default function CreateShop(props: Props) {
     } else {
       setImageUrl(null);
     }
-
-    // console.log(uploadData);
   };
 
   // upload image

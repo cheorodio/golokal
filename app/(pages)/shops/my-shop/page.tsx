@@ -7,8 +7,6 @@ import { getUserBySessionToken } from '../../../../database/users';
 export const dynamic = 'force-dynamic';
 
 export default async function MyShopPage() {
-  // const shops = await getShops();
-
   const cookieStore = cookies();
   const sessionToken = cookieStore.get('sessionToken');
   const user = !sessionToken?.value
@@ -36,8 +34,6 @@ export default async function MyShopPage() {
           })}
         </div>
       )}
-
-      {/* <MyShop myShop={myShop} user={user} /> */}
     </div>
   );
 }

@@ -1,7 +1,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { getUsers } from '../../../database/users';
-import styles from '../../styles/ShopsPage.module.scss';
+import styles from '../../styles/shopsPage.module.scss';
 
 export default async function ShopsPage() {
   const users = await getUsers();
