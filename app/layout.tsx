@@ -2,9 +2,9 @@ import './globals.scss';
 import { Inter } from 'next/font/google';
 import { cookies } from 'next/headers';
 import Link from 'next/link';
-import { BiLogIn } from 'react-icons/bi';
 import { BsFillPersonFill, BsPersonPlus } from 'react-icons/bs';
 import { CgLogOut } from 'react-icons/cg';
+import { CiLogin } from 'react-icons/ci';
 import { MdShoppingBasket } from 'react-icons/md';
 import { RiAccountPinCircleLine } from 'react-icons/ri';
 import { getUserBySessionToken } from '../database/users';
@@ -12,7 +12,7 @@ import { logout } from './(auth)/logout/actions';
 import Footer from './components/Footer';
 import { LogoutButton } from './components/LogoutButton';
 import NavBar from './components/NavBar';
-import styles from './styles/navFooter.module.scss';
+import styles from './styles/NavFooter.module.scss';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -86,7 +86,7 @@ export default async function RootLayout({ children }: LayoutProps) {
                 ) : (
                   <div className={styles.loginButtons}>
                     <div className={styles.loginButton}>
-                      <BiLogIn />
+                      <CiLogin />
                       <Link href="/login">Login</Link>
                     </div>
                     <div className={styles.registerButton}>

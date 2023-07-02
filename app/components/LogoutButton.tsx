@@ -2,7 +2,7 @@
 
 import { Route } from 'next';
 import { useRouter } from 'next/navigation';
-import styles from '../styles/navFooter.module.scss';
+import styles from '../styles/NavFooter.module.scss';
 
 type Props = {
   logout: () => void;

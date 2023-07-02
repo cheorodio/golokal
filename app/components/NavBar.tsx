@@ -4,7 +4,7 @@ import Link from 'next/link';
 import { useState } from 'react';
 import { CgClose } from 'react-icons/cg';
 import { RxHamburgerMenu } from 'react-icons/rx';
-import styles from '../styles/navFooter.module.scss';
+import styles from '../styles/NavFooter.module.scss';
 
 export const links = [
   { id: 1, title: 'Home', link: '/' },
@@ -24,7 +24,7 @@ export default function NavBar() {
         <ul className={styles.navLinks}>
           {links.map(({ id, title, link }) => (
             <Link href={link} key={`key-${id}`}>
-              <li>{title}</li>
+              <li className={styles.navList}>{title}</li>
             </Link>
           ))}
         </ul>

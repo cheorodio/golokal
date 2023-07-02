@@ -65,6 +65,13 @@ export default async function SingleShopPage(props: Props) {
   return (
     <main className={styles.topSection}>
       <div className={styles.shopPage}>
+        <Image
+          src="/images/shoppage-border.png"
+          alt="border color"
+          height={100}
+          width={1000}
+          className={styles.border}
+        />
         <div className={styles.shopInfo}>
           <div className={styles.imageBox}>
             <Image
@@ -123,6 +130,7 @@ export default async function SingleShopPage(props: Props) {
               );
             })}
           </div>
+
           {/*
           {shopOwner.username !== user?.username ? (
             <AddProductsToShop
@@ -137,13 +145,13 @@ export default async function SingleShopPage(props: Props) {
       {/* ************* COOOOOOMMENTS SECTION ************* */}
       <div className={styles.commentsSection}>
         <h2>What other users have been saying</h2>
-        <div className={styles.commentInput}>
-          <AddComments
-            shop={singleShop}
-            user={shopOwner}
-            userComments={userComments}
-          />
-        </div>
+        {/* <Image
+          src="/images/chat-bg.png"
+          width={300}
+          height={300}
+          alt="shape background"
+          className={styles.chatBg}
+        /> */}
 
         <div className={styles.commentsContainer}>
           {userComments.map((comment) => {
@@ -153,17 +161,34 @@ export default async function SingleShopPage(props: Props) {
                 className={styles.singleCommentCard}
               >
                 <div className={styles.userImage}>
-                  <div>{comment.userName.charAt(0)}</div>
+                  {/* <div>{comment.userName.charAt(0)}</div> */}
+                  <img
+                    src={comment.userImageUrl}
+                    height={60}
+                    width={60}
+                    style={{ borderRadius: '50%' }}
+                    alt="user avatar"
+                  />
                 </div>
                 <div className={styles.comments}>
                   <Link href={`/${comment.userName}`}>
                     <h5> {comment.userName} </h5>
                   </Link>
-                  <p>{comment.commentContent}</p>
+                  <p className={styles.commentContent}>
+                    {comment.commentContent}
+                  </p>
                 </div>
               </div>
             );
           })}
+        </div>
+
+        <div className={styles.commentInput}>
+          <AddComments
+            shop={singleShop}
+            user={shopOwner}
+            userComments={userComments}
+          />
         </div>
       </div>
     </main>

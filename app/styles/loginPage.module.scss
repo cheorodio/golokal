@@ -23,28 +23,29 @@
       gap: 20px;
     }
 
+    .greeting {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+
+      .returnLink {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        font-size: 0.8rem;
+        text-transform: lowercase;
+      }
+
+      h1 {
+        font-family: var(--title-text);
+      }
+    }
+
     .form {
       display: flex;
       flex-direction: column;
       gap: 40px;
-
-      .greeting {
-        display: flex;
-        flex-direction: column;
-        gap: 12px;
-
-        .returnLink {
-          display: flex;
-          align-items: center;
-          gap: 8px;
-          font-size: 0.8rem;
-          text-transform: lowercase;
-        }
-
-        h1 {
-          font-family: var(--title-text);
-        }
-      }
+      overflow: scroll;
 
       .loginForm {
         display: flex;
@@ -113,21 +114,21 @@
           font-size: 0.8rem;
         }
       }
-    }
 
-    .signupContainer {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: flex-end;
-      font-size: 0.8rem;
+      .signupContainer {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: flex-end;
+        font-size: 0.8rem;
 
-      .registerLink {
-        background-color: transparent;
-        border: none;
-        padding-left: 8px;
-        text-decoration: underline;
-        cursor: pointer;
+        .registerLink {
+          background-color: transparent;
+          border: none;
+          padding-left: 8px;
+          text-decoration: underline;
+          cursor: pointer;
+        }
       }
     }
   }
