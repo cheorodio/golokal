@@ -69,8 +69,8 @@ export default function AddProductsForm(props: Props) {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          userId: props.user?.id,
-          shopId: props.shop?.id,
+          userId: props.user.id,
+          shopId: props.shop.id,
           name,
           category,
           description,

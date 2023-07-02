@@ -9,7 +9,6 @@ import { getFavourites } from '../../../../database/favourites';
 import { getProductsWithInfo } from '../../../../database/products';
 import { getShopById } from '../../../../database/shops';
 import { getUserBySessionToken } from '../../../../database/users';
-import { Shop } from '../../../../migrations/1688217209-createTableShops';
 import styles from '../../../styles/singleShopPage.module.scss';
 import AddComments from './AddComments';
 import AddFavourites from './AddFavourites';
@@ -35,7 +34,6 @@ type Props = {
   comment: { id: number };
   user: { username: string };
   currentUser: { id: number };
-  // shop: Shop;
 };
 
 export default async function SingleShopPage(props: Props) {
@@ -63,8 +61,6 @@ export default async function SingleShopPage(props: Props) {
 
   // display products from this shop
   const shopProducts = await getProductsWithInfo(singleShop.id);
-
-  // const shopOwner = await getShopByUserId(props.params.userId);
 
   return (
     <main className={styles.topSection}>

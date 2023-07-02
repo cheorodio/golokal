@@ -16,7 +16,7 @@ export default function DeleteFavourites(props: Props) {
       <button
         onClick={async () => {
           const response = await fetch(
-            `/api/favourites/${props.favourite?.id}`,
+            `/api/favourites/${props.favourite.id}`,
             {
               method: 'DELETE',
             },

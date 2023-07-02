@@ -5,7 +5,6 @@ import Link from 'next/link';
 import { BsFillPersonFill, BsPersonPlus } from 'react-icons/bs';
 import { CgLogOut } from 'react-icons/cg';
 import { CiLogin } from 'react-icons/ci';
-import { MdShoppingBasket } from 'react-icons/md';
 import { RiAccountPinCircleLine } from 'react-icons/ri';
 import { getUserBySessionToken } from '../database/users';
 import { logout } from './(auth)/logout/actions';

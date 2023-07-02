@@ -22,14 +22,14 @@ export default async function CreateShopPage() {
     redirect('/login');
   }
 
-  const userId = user?.id;
+  const userId = user.id;
   const shops = await getShops();
   const shop = shops.find((singleShop) => singleShop.userId === userId);
 
   return (
     <main className={styles.createShopPage}>
       <div className={styles.pageTitle}>
-        <h1>Hello {user?.username}</h1>
+        <h1>Hello {user.username}</h1>
         <h4>
           Create an account now to showcase your amazing creations to our
           golokal community
