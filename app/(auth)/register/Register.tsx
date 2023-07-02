@@ -5,7 +5,6 @@ import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useRef, useState } from 'react';
 import { RxEyeClosed, RxEyeOpen } from 'react-icons/rx';
-import loginImage from '../../../public/images/login.jpg';
 import { RegisterResponseBodyPost } from '../../api/(auth)/register/route';
 import styles from '../../styles/loginPage.module.scss';
 
@@ -110,29 +109,6 @@ export default function RegisterForm() {
             className={styles.loginForm}
           >
             <div>
-              <label htmlFor="profilePic">
-                Profile picture <span>*</span>
-              </label>
-              <input
-                id="profilePic"
-                type="file"
-                name="file"
-                ref={fileInputRef}
-                onChange={handleOnChange}
-              />
-            </div>
-            <div>
-              {!!imageUrl && (
-                <Image
-                  src={imageUrl}
-                  height={100}
-                  width={100}
-                  alt="User profile avatar"
-                />
-              )}
-            </div>
-
-            <div>
               <label htmlFor="username">
                 Username <span>*</span>
               </label>
@@ -196,6 +172,33 @@ export default function RegisterForm() {
                 </button>
               </div>
             </div>
+
+            <div className={styles.profilePicDiv}>
+              <label htmlFor="profilePic">
+                Profile picture <span>*</span>
+              </label>
+              <input
+                id="profilePic"
+                type="file"
+                name="file"
+                ref={fileInputRef}
+                onChange={handleOnChange}
+                className={styles.profilePicInput}
+              />
+            </div>
+
+            <div className={styles.imageContainer}>
+              {!!imageUrl && (
+                <Image
+                  src={imageUrl}
+                  height={100}
+                  width={100}
+                  alt="User profile avatar"
+                  className={styles.image}
+                />
+              )}
+            </div>
+
             <button className={styles.loginSubmit}>Register</button>
             {error !== '' && <div className={styles.error}>{error}</div>}
             {success && (
@@ -204,24 +207,17 @@ export default function RegisterForm() {
                 profile 😄
               </p>
             )}
-          </form>
-          <div className={styles.signupContainer}>
-            <p>
-              Already have an account?
-              <Link href="/login" className={styles.registerLink}>
-                Login here
-              </Link>
-            </p>
-          </div>
-        </div>
-      </div>
 
-      <div className={styles.imageSide}>
-        <Image
-          src={loginImage}
-          alt="Image of handmade pottery"
-          className={styles.loginImage}
-        />
+            <div className={styles.signupContainer}>
+              <p>
+                Already have an account?
+                <Link href="/login" className={styles.registerLink}>
+                  Login here
+                </Link>
+              </p>
+            </div>
+          </form>
+        </div>
       </div>
     </div>
   );

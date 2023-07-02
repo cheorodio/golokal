@@ -1,12 +1,10 @@
 'use client';
 
 import { Route } from 'next';
-import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { RxEyeClosed, RxEyeOpen } from 'react-icons/rx';
-import loginImage from '../../../public/images/login.jpg';
 import { LoginResponseBodyPost } from '../../api/(auth)/login/route';
 import styles from '../../styles/loginPage.module.scss';
 import { getSafeReturnToPath } from '../../util/validation';
@@ -101,25 +99,16 @@ export default function LoginForm(props: Props) {
               Log in
             </button>
             {error !== '' && <div className={styles.error}>{error}</div>}
+            <div className={styles.signupContainer}>
+              <p>
+                Don't have an account yet?
+                <Link href="/register" className={styles.registerLink}>
+                  Register here
+                </Link>
+              </p>
+            </div>
           </form>
         </div>
-
-        <div className={styles.signupContainer}>
-          <p>
-            Don't have an account yet?
-            <Link href="/register" className={styles.registerLink}>
-              Register here
-            </Link>
-          </p>
-        </div>
-      </div>
-
-      <div className={styles.imageSide}>
-        <Image
-          src={loginImage}
-          alt="Image of handmade pottery"
-          className={styles.loginImage}
-        />
       </div>
     </div>
   );

@@ -1,22 +1,23 @@
 @import './queries.module';
 
 .loginContainer {
-  height: 100vh;
   display: flex;
+  min-height: 100vh;
   flex-direction: column;
-  padding: 100px 20px;
+  align-items: center;
+  // padding: 100px 20px;
 
   @media screen and (min-width: $tablet) {
-    height: 100vh;
     display: flex;
-    flex-direction: row;
-    padding: 0px;
+    min-height: 100vh;
+    align-items: center;
+    justify-content: center;
   }
 
   .loginFormSide {
     @media screen and (min-width: $tablet) {
       width: 40%;
-      padding: 100px 80px 80px;
+      padding: 80px;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
@@ -26,6 +27,7 @@
     .greeting {
       display: flex;
       flex-direction: column;
+      text-align: center;
       gap: 12px;
 
       .returnLink {
@@ -45,12 +47,50 @@
       display: flex;
       flex-direction: column;
       gap: 40px;
-      overflow: scroll;
 
       .loginForm {
         display: flex;
         flex-direction: column;
         gap: 16px;
+        padding: 24px;
+        border-radius: 16px;
+        box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px,
+          rgba(0, 0, 0, 0.23) 0px 3px 6px;
+        width: 100%;
+
+        .profilePicDiv {
+          display: flex;
+          flex-direction: column;
+          width: 100%;
+
+          .profilePicInput[type='file'] {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+          }
+
+          .profilePicInput::file-selector-button {
+            background-color: var(--main-color);
+            border: none;
+            height: 100%;
+            width: 30%;
+            cursor: pointer;
+          }
+        }
+
+        .imageContainer {
+          width: 100%;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+
+          .image {
+            height: 100%;
+            width: 100%;
+            border-radius: 8px;
+          }
+        }
 
         div {
           display: flex;
@@ -68,11 +108,15 @@
           input {
             width: 100%;
             height: 40px;
+            border: 0.5px solid var(--main-color);
+            border-radius: 8px;
           }
 
           textarea {
             width: 100%;
             height: 80px;
+            border: 0.5px solid var(--main-color);
+            border-radius: 8px;
           }
 
           div {
@@ -113,40 +157,22 @@
           color: rgb(207, 55, 55);
           font-size: 0.8rem;
         }
-      }
 
-      .signupContainer {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: flex-end;
-        font-size: 0.8rem;
+        .signupContainer {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: flex-end;
+          font-size: 0.8rem;
 
-        .registerLink {
-          background-color: transparent;
-          border: none;
-          padding-left: 8px;
-          text-decoration: underline;
-          cursor: pointer;
+          .registerLink {
+            background-color: transparent;
+            border: none;
+            padding-left: 8px;
+            text-decoration: underline;
+            cursor: pointer;
+          }
         }
-      }
-    }
-  }
-
-  .imageSide {
-    display: none;
-    width: 0%;
-
-    @media screen and (min-width: $tablet) {
-      width: 60%;
-      display: flex;
-    }
-
-    .loginImage {
-      @media screen and (min-width: $tablet) {
-        z-index: 10;
-        width: 100%;
-        height: 100%;
       }
     }
   }
@@ -170,12 +196,4 @@
     justify-content: center;
     gap: 50px;
   }
-}
-
-.vendorLoginOptionPage {
-  height: 100vh;
-  display: flex;
-  gap: 50px;
-  align-items: center;
-  justify-content: center;
 }
