@@ -2,7 +2,6 @@ import { cache } from 'react';
 import { Shop } from '../migrations/1688217209-createTableShops';
 import { sql } from './connect';
 
-// GET ALL SHOPS FOR SHOPS PAGE ///////////////////////////
 export const getShops = cache(async () => {
   const shops = await sql<Shop[]>`
     SELECT
@@ -13,35 +12,6 @@ export const getShops = cache(async () => {
   return shops;
 });
 
-// // GET SHOP ///////////////////////////////////////////////
-// export const getShopByUsername = cache(async (username: string) => {
-//   const shops = await sql<ShopNotNull[]>`
-//     SELECT
-//       *
-//     FROM
-//       shops
-//     WHERE
-//       username = ${username}
-//  `;
-
-//   return shops[0];
-// });
-
-// // CREATE SHOP //////////////////////////////
-// // 1. first verify if the unique shop username is taken
-// export const verifyShopByShopUsername = cache(async (username: string) => {
-//   const [shop] = await sql<ShopName[]>`
-// SELECT
-//   id,
-//   username
-// FROM
-//   users
-// WHERE
-//   users.username = ${username.toLowerCase()}`;
-//   return shop;
-// });
-
-// 2. create the shop
 export const createShop = cache(
   async (
     name: string,

@@ -2,7 +2,6 @@ import { cookies } from 'next/headers';
 import Image from 'next/image';
 import Link from 'next/link';
 import { notFound, redirect } from 'next/navigation';
-import { AiOutlineHeart } from 'react-icons/ai';
 import { MdOutlineCategory } from 'react-icons/md';
 import { VscLocation } from 'react-icons/vsc';
 import { getCommentsWithUserInfo } from '../../../../database/comments';
@@ -41,11 +40,11 @@ export default async function SingleShopPage(props: Props) {
   const cookieStore = cookies();
   const sessionToken = cookieStore.get('sessionToken');
 
-  const shopOwner = !sessionToken?.value
+  const user = !sessionToken?.value
     ? undefined
     : await getUserBySessionToken(sessionToken.value);
 
-  if (!shopOwner) {
+  if (!user) {
     return redirect(`/login?returnTo=/shops/${props.params.shopId}`);
   }
 
@@ -54,7 +53,7 @@ export default async function SingleShopPage(props: Props) {
   }
 
   // to allow users to favourite this shop
-  const favourites = await getFavourites(shopOwner.id);
+  const favourites = await getFavourites(user.id);
 
   // to get comments from users
   const userComments = await getCommentsWithUserInfo(singleShop.id);
@@ -65,6 +64,13 @@ export default async function SingleShopPage(props: Props) {
   return (
     <main className={styles.topSection}>
       <div className={styles.shopPage}>
+        <Image
+          src="/images/shoppage-border.png"
+          alt="border color"
+          height={100}
+          width={1000}
+          className={styles.border}
+        />
         <div className={styles.shopInfo}>
           <div className={styles.imageBox}>
             <Image
@@ -82,7 +88,7 @@ export default async function SingleShopPage(props: Props) {
               <AddFavourites
                 favourites={favourites}
                 singleShop={singleShop}
-                user={shopOwner}
+                user={user}
               />
             </div>
             <p className={styles.shopBio}>{singleShop.description}</p>
@@ -123,28 +129,12 @@ export default async function SingleShopPage(props: Props) {
               );
             })}
           </div>
-          {/*
-          {shopOwner.username !== user?.username ? (
-            <AddProductsToShop
-              productsInShop={productsInShop}
-              shop={singleShop}
-              user={shopOwner}
-            />
-          ) : null} */}
         </div>
       </div>
 
       {/* ************* COOOOOOMMENTS SECTION ************* */}
       <div className={styles.commentsSection}>
         <h2>What other users have been saying</h2>
-        <div className={styles.commentInput}>
-          <AddComments
-            shop={singleShop}
-            user={shopOwner}
-            userComments={userComments}
-          />
-        </div>
-
         <div className={styles.commentsContainer}>
           {userComments.map((comment) => {
             return (
@@ -153,17 +143,33 @@ export default async function SingleShopPage(props: Props) {
                 className={styles.singleCommentCard}
               >
                 <div className={styles.userImage}>
-                  <div>{comment.userName.charAt(0)}</div>
+                  <img
+                    src={comment.userImageUrl}
+                    height={60}
+                    width={60}
+                    style={{ borderRadius: '50%' }}
+                    alt="user avatar"
+                  />
                 </div>
                 <div className={styles.comments}>
                   <Link href={`/${comment.userName}`}>
                     <h5> {comment.userName} </h5>
                   </Link>
-                  <p>{comment.commentContent}</p>
+                  <p className={styles.commentContent}>
+                    {comment.commentContent}
+                  </p>
                 </div>
               </div>
             );
           })}
+        </div>
+
+        <div className={styles.commentInput}>
+          <AddComments
+            shop={singleShop}
+            user={user}
+            userComments={userComments}
+          />
         </div>
       </div>
     </main>

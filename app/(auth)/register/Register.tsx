@@ -95,14 +95,15 @@ export default function RegisterForm() {
   return (
     <div className={styles.loginContainer}>
       <div className={styles.loginFormSide}>
+        <div className={styles.greeting}>
+          <h1>Welcome</h1>
+          <p>
+            GoLokal is a platform connecting you with local vendors. Create an
+            account to get started.
+          </p>
+        </div>
+
         <div className={styles.form}>
-          <div className={styles.greeting}>
-            <h1>Welcome</h1>
-            <p>
-              GoLokal is a platform connecting you with local vendors. Create an
-              account to get started.
-            </p>
-          </div>
           <form
             onSubmit={handleOnSubmit}
             id="login"
@@ -204,15 +205,14 @@ export default function RegisterForm() {
               </p>
             )}
           </form>
-        </div>
-
-        <div className={styles.signupContainer}>
-          <p>
-            Already have an account?
-            <Link href="/login" className={styles.registerLink}>
-              Login here
-            </Link>
-          </p>
+          <div className={styles.signupContainer}>
+            <p>
+              Already have an account?
+              <Link href="/login" className={styles.registerLink}>
+                Login here
+              </Link>
+            </p>
+          </div>
         </div>
       </div>
 
