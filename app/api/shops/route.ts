@@ -1,28 +1,15 @@
-import crypto from 'node:crypto';
 import { cookies } from 'next/headers';
 import { NextRequest, NextResponse } from 'next/server';
 import { z } from 'zod';
-import { createSession } from '../../../database/sessions';
 import { createShop } from '../../../database/shops';
 import { getUserBySessionToken } from '../../../database/users';
-import { secureCookieOptions } from '../../util/cookies';
+import { Shop } from '../../../migrations/1688217209-createTableShops';
 
 export type Error = {
   error: string;
 };
 
-export type CreateShopResponseBodyPost =
-  | {
-      shop: {
-        name: string;
-        description: string;
-        websiteUrl: string;
-        location: string;
-        imageUrl: string;
-        userId: number;
-      };
-    }
-  | Error;
+export type CreateShopResponseBodyPost = { shop: Shop } | Error;
 
 const shopSchema = z.object({
   name: z.string(),
@@ -70,7 +57,6 @@ export async function POST(
   );
 
   if (!newShop) {
-    // zod send you details about the error
     return NextResponse.json(
       {
         error: 'Error creating the new shop',
@@ -79,5 +65,7 @@ export async function POST(
     );
   }
 
-  return NextResponse.json({ shop: newShop });
+  return NextResponse.json({
+    shop: newShop,
+  });
 }

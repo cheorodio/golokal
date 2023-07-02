@@ -7,6 +7,7 @@ import { CgLogOut } from 'react-icons/cg';
 import { CiLogin } from 'react-icons/ci';
 import { MdShoppingBasket } from 'react-icons/md';
 import { RiAccountPinCircleLine } from 'react-icons/ri';
+import { getShops } from '../database/shops';
 import { getUserBySessionToken } from '../database/users';
 import { logout } from './(auth)/logout/actions';
 import Footer from './components/Footer';
@@ -34,9 +35,12 @@ export default async function RootLayout({ children }: LayoutProps) {
     ? undefined
     : await getUserBySessionToken(sessionToken.value);
 
-  const shop = !sessionToken?.value
-    ? undefined
-    : await getUserBySessionToken(sessionToken.value);
+  // const shop = !sessionToken?.value
+  //   ? undefined
+  //   : await getUserBySessionToken(sessionToken.value);
+
+  // const allShops = await getShops();
+  // const myShop = allShops.filter((shop) => shop.userId === user?.id);
 
   return (
     <html lang="en">
@@ -71,7 +75,7 @@ export default async function RootLayout({ children }: LayoutProps) {
                       </div>
                       <div className={styles.myshop}>
                         <BsFillPersonFill />
-                        <Link href={`/shops/${shop?.id}`}>My shop</Link>
+                        <Link href="/shops/my-shop">My shop</Link>
                       </div>
                       <div className={styles.createShop}>
                         <MdShoppingBasket />

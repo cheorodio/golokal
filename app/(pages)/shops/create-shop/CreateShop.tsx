@@ -3,21 +3,23 @@
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import { useRef, useState } from 'react';
+import { Shop } from '../../../../migrations/1688217209-createTableShops';
 import { CreateShopResponseBodyPost } from '../../../api/shops/route';
 import styles from '../../../styles/CreateShopForm.module.scss';
 
 type Props = {
-  user: { id: number };
+  userId: number;
+  shops: Shop[];
 };
 
 export default function CreateShop(props: Props) {
+  const [shops, setShops] = useState(props.shops);
   const [name, setName] = useState('');
   const [description, setDescription] = useState('');
   const [websiteUrl, setWebsiteUrl] = useState('');
   const [location, setLocation] = useState('');
   const [imageUrl, setImageUrl] = useState<string | null>(null);
 
-  const [uploadData, setUploadData] = useState();
   const [error, setError] = useState<string>();
   const [success, setSuccess] = useState(false);
   const fileInputRef = useRef<HTMLInputElement | null>(null);
@@ -35,7 +37,7 @@ export default function CreateShop(props: Props) {
       setImageUrl(null);
     }
 
-    console.log(uploadData);
+    // console.log(uploadData);
   };
 
   // upload image
@@ -65,148 +67,95 @@ export default function CreateShop(props: Props) {
         },
       ).then((r) => r.json());
 
-      setUploadData(shopPic.secure_url);
+      const response = await fetch('/api/shops', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          name: name,
+          description: description,
+          websiteUrl: websiteUrl,
+          location: location,
+          imageUrl: shopPic.secure_url,
+          userId: props.userId,
+        }),
+      });
 
-      // const response = await fetch('/api/shops', {
-      //   method: 'POST',
-      //   body: JSON.stringify({
-      //     name: name,
-      //     description: description,
-      //     websiteUrl: websiteUrl,
-      //     location: location,
-      //     imageUrl: imageUrl,
-      //     userId: props.user?.id,
-      //   }),
-      // });
+      const data: CreateShopResponseBodyPost = await response.json();
+      console.log({ data });
 
-      // const data: CreateShopResponseBodyPost = await response.json();
+      if ('error' in data) {
+        setError(data.error);
+        return;
+      }
 
-      // if ('error' in data) {
-      //   setError(data.error);
-      //   return;
-      // }
-      // setSuccess(true);
-      // router.push(`/shops/${data.shop?.id}`);
-      // router.refresh();
+      setShops([...shops, data.shop]);
+
+      setSuccess(true);
+      router.push(`/shops/${data.shop?.id}`);
+      router.refresh();
     }
   };
 
-  // async function createShop() {
-  //   const response = await fetch('/api/shops', {
-  //     method: 'POST',
-  //     body: JSON.stringify({
-  //       name: name,
-  //       description: description,
-  //       websiteUrl: websiteUrl,
-  //       location: location,
-  //       imageUrl: imageUrl,
-  //       userId: props.user?.id,
-  //     }),
-  //   });
-
-  //   const data: CreateShopResponseBodyPost = await response.json();
-
-  //   if ('error' in data) {
-  //     setError(data.error);
-  //     return;
-  //   }
-  //   setSuccess(true);
-  //   router.push(`/shops/${data.shop?.id}`);
-  //   router.refresh();
-  // }
-
   return (
-    <>
-      <form
-        method="post"
-        onSubmit={handleOnSubmit}
-        onChange={handleOnChange}
-        className={styles.createShopForm}
-      >
-        <div>
-          <label htmlFor="profilePic">
-            Shop picture <span>*</span>
-          </label>
-          <input id="profilePic" type="file" name="file" ref={fileInputRef} />
-        </div>
-        <div>
-          {!!imageUrl && (
-            <Image
-              src={imageUrl}
-              height={100}
-              width={100}
-              alt="User profile avatar"
-            />
-          )}
-        </div>
-      </form>
-
-      <form
-        className={styles.createShopForm}
-        onSubmit={async (event) => {
-          event.preventDefault();
-          const response = await fetch('/api/shops', {
-            method: 'POST',
-            body: JSON.stringify({
-              name: name,
-              description: description,
-              websiteUrl: websiteUrl,
-              location: location,
-              imageUrl: imageUrl,
-              userId: props.user?.id,
-            }),
-          });
-
-          const data: CreateShopResponseBodyPost = await response.json();
-
-          if ('error' in data) {
-            setError(data.error);
-            return;
-          }
-          setSuccess(true);
-          router.push(`/shops/${data.shop?.id}`);
-          router.refresh();
-        }}
-      >
-        <label>
-          <input
-            placeholder="Shop Name"
-            value={name}
-            onChange={(event) => setName(event.currentTarget.value)}
-          />
+    <form className={styles.createShopForm} onSubmit={handleOnSubmit}>
+      <div>
+        <label htmlFor="profilePic">
+          Shop picture <span>*</span>
         </label>
+        <input
+          id="profilePic"
+          type="file"
+          name="file"
+          ref={fileInputRef}
+          onChange={handleOnChange}
+        />
+      </div>
+      <div>
+        {!!imageUrl && (
+          <Image src={imageUrl} height={100} width={100} alt="Shop avatar" />
+        )}
+      </div>
 
-        <label>
-          <textarea
-            placeholder="Shop Description"
-            maxLength={500}
-            value={description}
-            onChange={(event) => setDescription(event.currentTarget.value)}
-          />
-        </label>
+      <label>
+        <input
+          placeholder="Shop Name"
+          value={name}
+          onChange={(event) => setName(event.currentTarget.value)}
+        />
+      </label>
 
-        <label>
-          <input
-            placeholder="Website url"
-            value={websiteUrl}
-            onChange={(event) => setWebsiteUrl(event.currentTarget.value)}
-          />
-        </label>
+      <label>
+        <textarea
+          placeholder="Shop Description"
+          maxLength={500}
+          value={description}
+          onChange={(event) => setDescription(event.currentTarget.value)}
+        />
+      </label>
 
-        <label>
-          <input
-            placeholder="City"
-            value={location}
-            onChange={(event) => setLocation(event.currentTarget.value)}
-          />
-        </label>
+      <label>
+        <input
+          placeholder="Website url"
+          value={websiteUrl}
+          onChange={(event) => setWebsiteUrl(event.currentTarget.value)}
+        />
+      </label>
 
-        <div>
-          <button>Create shop</button>
-        </div>
-        <div style={{ color: 'red' }}>{error}</div>
-        {success && <p>Shop created 😄</p>}
-      </form>
-    </>
+      <label>
+        <input
+          placeholder="City"
+          value={location}
+          onChange={(event) => setLocation(event.currentTarget.value)}
+        />
+      </label>
+
+      <div>
+        <button>Create shop</button>
+      </div>
+      <div style={{ color: 'red' }}>{error}</div>
+      {success && <p>Shop created 😄</p>}
+    </form>
   );
 }
