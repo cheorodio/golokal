@@ -185,7 +185,11 @@ export default async function SingleShopPage(props: Props) {
 
       {/* ************* PRODUCTS FORM SECTION ************* */}
       <div>
-        <AddProductsForm singleShop={singleShop} user={user} />
+        <AddProductsForm
+          singleShop={singleShop}
+          user={user}
+          shop={singleShop}
+        />
       </div>
     </main>
   );

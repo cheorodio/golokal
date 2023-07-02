@@ -1,6 +1,8 @@
+import { cookies } from 'next/headers';
 import { NextRequest, NextResponse } from 'next/server';
 import { z } from 'zod';
 import { createProduct } from '../../../database/products';
+import { getUserBySessionToken } from '../../../database/users';
 import { Product } from '../../../migrations/1688217286-createTableProducts';
 
 type Error = {
@@ -22,8 +24,15 @@ const productSchema = z.object({
 export async function POST(
   request: NextRequest,
 ): Promise<NextResponse<ProductsResponseBodyPost>> {
-  const body = await request.json();
+  const token = cookies().get('sessionToken');
+  const user = token && (await getUserBySessionToken(token.value));
 
+  if (!user) {
+    return NextResponse.json({
+      errors: [{ message: 'Invalid session token' }],
+    });
+  }
+  const body = await request.json();
   const result = productSchema.safeParse(body);
 
   if (!result.success) {
