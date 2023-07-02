@@ -2,7 +2,7 @@
 
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
-import { Product } from '../../../../../migrations/1687947632-createProducts';
+import { Product } from '../../../../../migrations/1688217286-createTableProducts';
 import styles from '../../../../styles/ProductsForm.module.scss';
 
 type Props = {

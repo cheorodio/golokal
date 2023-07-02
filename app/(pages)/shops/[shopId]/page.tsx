@@ -9,9 +9,11 @@ import { getFavourites } from '../../../../database/favourites';
 import { getProductsWithInfo } from '../../../../database/products';
 import { getShopById } from '../../../../database/shops';
 import { getUserBySessionToken } from '../../../../database/users';
+import { Shop } from '../../../../migrations/1688217209-createTableShops';
 import styles from '../../../styles/singleShopPage.module.scss';
 import AddComments from './AddComments';
 import AddFavourites from './AddFavourites';
+import AddProductsForm from './AddProducts';
 import LikeProduct from './LikeProducts';
 
 export const dynamic = 'force-dynamic';
@@ -32,6 +34,8 @@ type Props = {
   };
   comment: { id: number };
   user: { username: string };
+  currentUser: { id: number };
+  // shop: Shop;
 };
 
 export default async function SingleShopPage(props: Props) {
@@ -40,9 +44,8 @@ export default async function SingleShopPage(props: Props) {
   const cookieStore = cookies();
   const sessionToken = cookieStore.get('sessionToken');
 
-  const user = !sessionToken?.value
-    ? undefined
-    : await getUserBySessionToken(sessionToken.value);
+  const user =
+    sessionToken && (await getUserBySessionToken(sessionToken.value));
 
   if (!user) {
     return redirect(`/login?returnTo=/shops/${props.params.shopId}`);
@@ -60,6 +63,8 @@ export default async function SingleShopPage(props: Props) {
 
   // display products from this shop
   const shopProducts = await getProductsWithInfo(singleShop.id);
+
+  // const shopOwner = await getShopByUserId(props.params.userId);
 
   return (
     <main className={styles.topSection}>
@@ -129,6 +134,11 @@ export default async function SingleShopPage(props: Props) {
               );
             })}
           </div>
+          {/* <AddProductsForm
+            shopProducts={shopProducts}
+            user={user}
+            singShop={singleShop}
+          /> */}
         </div>
       </div>
 
@@ -171,6 +181,11 @@ export default async function SingleShopPage(props: Props) {
             userComments={userComments}
           />
         </div>
+      </div>
+
+      {/* ************* PRODUCTS FORM SECTION ************* */}
+      <div>
+        <AddProductsForm singleShop={singleShop} user={user} />
       </div>
     </main>
   );
