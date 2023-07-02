@@ -5,7 +5,7 @@ export const shops = [
     id: 1,
     name: 'vida',
     description:
-      'Welcome to Vida, where passion and artistry come together to create exquisite handmade jewelry. At Vida, we believe that jewelry is more than just an accessory—it is an expression of individuality, a reflection of style, and a symbol of cherished moments.',
+      'Hi, welcome to Vida. My name is Taylor and I make jewellery using polymer clay',
     websiteUrl: 'www.vidajewellery.com',
     location: 'Vienna',
     imageUrl: '/images/vida.jpg',
@@ -15,7 +15,7 @@ export const shops = [
     id: 2,
     name: 'luluShop',
     description:
-      'Welcome to luluShop, your haven for exquisite handmade candles! Nestled in the heart of our community, we take great pride in offering you a diverse collection of artisanal candles that will illuminate your world with warmth and beauty.',
+      'Hello there! My name is Sina and this is my shop, luluShop. I make handpoured candles using only soy wax and 100% essential oils',
     websiteUrl: 'www.luluShop.com',
     location: 'Vienna',
     imageUrl: '/images/lulushop.jpg',
@@ -25,7 +25,7 @@ export const shops = [
     id: 3,
     name: 'keramiks',
     description:
-      'Welcome to Keramiks, your online haven for exquisite handmade ceramics that blend artistry and functionality! At Keramiks, we are passionate about the beauty and craftsmanship of handmade ceramics, and we take great pride in curating a collection that will add a touch of elegance to your home.',
+      "Hi, I'm Tony. This is my shop, keramiks. I make cute and stylish cups",
     websiteUrl: 'www.keramiks.com',
     location: 'Vienna',
     imageUrl: '/images/keramiks.jpg',
@@ -35,7 +35,7 @@ export const shops = [
     id: 4,
     name: 'The Soap Company',
     description:
-      'Welcome to The Soap Company, your ultimate online destination for luxurious, handcrafted soaps that transform your daily bathing ritual into a pampering experience! At The Soap Company, we are dedicated to crafting exceptional soaps that are not only gentle on your skin but also a feast for the senses. ',
+      "Hi there, I'm Lana. This is my shop, the soap company. I make organic body soap.",
     websiteUrl: 'www.thesoapcompany.com',
     location: 'Vienna',
     imageUrl: '/images/thesoapcompany.jpg',

@@ -19,6 +19,7 @@
   justify-content: space-between;
   padding: 20px 80px;
   flex: 1;
+  z-index: 9;
 
   div {
     display: flex;
@@ -100,6 +101,7 @@
       width: 150px;
       border-radius: 5px;
       box-shadow: 1px 1px 10px 6px rgba(0, 0, 0, 0.1);
+      background-color: white;
       z-index: 6;
 
       .dropdownLink {
@@ -191,27 +193,12 @@
   border-top: 1px solid black;
   justify-content: space-between;
 
-  // .logoContainer {
-  // width: 60%;
-
   .logo {
     font-family: var(--title-text);
   }
-  // }
 
   div {
     display: flex;
     gap: 16px;
   }
-  // .linksContainer {
-  //   width: 40%;
-  //   display: flex;
-  //   justify-content: space-between;
-  //   gap: 16px;
-
-  //   div {
-  //     display: flex;
-  //     flex-direction: column;
-  //   }
-  // }
 }

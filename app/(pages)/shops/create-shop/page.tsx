@@ -1,6 +1,7 @@
 import { cookies } from 'next/headers';
 import { redirect } from 'next/navigation';
 import { getValidSessionByToken } from '../../../../database/sessions';
+import { getShops } from '../../../../database/shops';
 import { getUserBySessionToken } from '../../../../database/users';
 import styles from '../../../styles/CreateShopForm.module.scss';
 import CreateShop from './CreateShop';
@@ -17,6 +18,14 @@ export default async function CreateShopPage() {
     ? undefined
     : await getUserBySessionToken(sessionToken.value);
 
+  if (!user) {
+    redirect('/login');
+  }
+
+  const userId = user?.id;
+  const shops = await getShops();
+  const shop = shops.find((singleShop) => singleShop.userId === userId);
+
   return (
     <main className={styles.createShopPage}>
       <div className={styles.pageTitle}>
@@ -27,7 +36,7 @@ export default async function CreateShopPage() {
         </h4>
       </div>
       <div className={styles.createShopFormContainer}>
-        <CreateShop />
+        <CreateShop shops={shops} userId={userId} shop={shop} />
       </div>
     </main>
   );
