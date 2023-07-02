@@ -69,10 +69,6 @@ export default async function RootLayout({ children }: LayoutProps) {
                         <BsFillPersonFill />
                         <Link href="/shops/my-shop">My shop</Link>
                       </div>
-                      <div className={styles.createShop}>
-                        <MdShoppingBasket />
-                        <Link href="/shops/create-shop">Create a shop</Link>
-                      </div>
                     </div>
                     <div className={styles.logoutLink}>
                       <CgLogOut />

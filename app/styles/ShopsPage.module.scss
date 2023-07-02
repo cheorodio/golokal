@@ -76,3 +76,17 @@
     }
   }
 }
+
+// my shop page styling
+.myShopContainer {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  .noShopFoundMessage {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+}
