@@ -122,8 +122,9 @@
         gap: 20px;
 
         @media screen and (min-width: $tablet) {
-          overflow: scroll;
+          overflow-x: scroll;
           grid-template-columns: repeat(3, 1fr);
+          grid-template-rows: repeat(1, 1fr);
         }
 
         .productCard {
