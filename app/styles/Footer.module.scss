@@ -1,0 +1,16 @@
+.footer {
+  padding: 20px 0px;
+  margin: 0px 80px;
+  display: flex;
+  border-top: 1px solid black;
+  justify-content: space-between;
+
+  .logo {
+    font-family: var(--title-text);
+  }
+
+  div {
+    display: flex;
+    gap: 16px;
+  }
+}
