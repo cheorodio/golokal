@@ -9,7 +9,7 @@ import { getFavourites } from '../../../../database/favourites';
 import { getProductsWithInfo } from '../../../../database/products';
 import { getShopById } from '../../../../database/shops';
 import { getUserBySessionToken } from '../../../../database/users';
-import styles from '../../../styles/singleShopPage.module.scss';
+import styles from '../../../styles/shopPage.module.scss';
 import AddComments from './AddComments';
 import AddFavourites from './AddFavourites';
 import AddProductsForm from './AddProducts';
