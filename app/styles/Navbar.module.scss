@@ -1,0 +1,185 @@
+@import './../styles/queries.module';
+
+.navigation {
+  display: flex;
+}
+
+.logoutButton {
+  background: transparent;
+  border: none;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+.navigationBar {
+  position: absolute;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 80px;
+  flex: 1;
+  z-index: 9;
+
+  div {
+    display: flex;
+    gap: 10px;
+  }
+
+  @media screen and (max-width: $tablet) {
+    padding: 20px;
+  }
+
+  .nav {
+    display: flex;
+    align-items: center;
+    background-color: transparent;
+    width: 30%;
+
+    @media screen and (max-width: $tablet) {
+      position: fixed;
+      flex-direction: column;
+      background-color: white;
+      left: -200%;
+      top: 0%;
+      height: 100vh;
+      width: 100vh;
+      z-index: 3;
+      display: flex;
+      align-items: flex-start;
+      justify-content: flex-start;
+      padding: 80px 0px 0px 50px;
+
+      &Open {
+        transition: 0.5s ease-in-out;
+        left: 0;
+      }
+    }
+
+    .navLinks {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+
+      @media screen and (max-width: $tablet) {
+        flex-direction: column;
+        border: none;
+        font-size: 1.5rem;
+      }
+    }
+  }
+
+  .logo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--title-text);
+    text-transform: uppercase;
+    width: 40%;
+    font-size: 1.25rem;
+  }
+
+  .loginButton {
+    width: 30%;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    position: relative;
+
+    .dropdownButton {
+      background: transparent;
+      border: none;
+      font-size: 1.25rem;
+      cursor: pointer;
+    }
+
+    .dropdownOptions {
+      display: none;
+      position: absolute;
+      top: 100%;
+      right: 0;
+      width: 150px;
+      border-radius: 5px;
+      box-shadow: 1px 1px 10px 6px rgba(0, 0, 0, 0.1);
+      background-color: white;
+      z-index: 6;
+
+      .dropdownLink {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        z-index: 3;
+        padding-left: 8px;
+        gap: 30px;
+
+        .profile {
+          display: flex;
+          flex-direction: column;
+
+          .username {
+            display: flex;
+            gap: 8px;
+            align-items: center;
+            text-transform: uppercase;
+          }
+
+          .myshop {
+            display: flex;
+            gap: 8px;
+            align-items: center;
+          }
+
+          .createShop {
+            display: flex;
+            gap: 8px;
+            align-items: center;
+          }
+        }
+
+        .logoutLink {
+          display: flex;
+          align-items: center;
+          gap: 8px;
+        }
+
+        .loginButtons {
+          display: flex;
+          flex-direction: column;
+          gap: 16px;
+
+          .loginButton {
+            display: flex;
+            gap: 8px;
+            align-items: center;
+          }
+
+          .registerButton {
+            display: flex;
+            gap: 8px;
+            align-items: center;
+          }
+        }
+      }
+    }
+    &:hover .dropdownOptions {
+      display: block;
+      padding: 20px 0px;
+    }
+  }
+
+  // mobile menu
+  .hamburgerIcon {
+    display: none;
+
+    @media screen and (max-width: $tablet) {
+      display: flex;
+      background: transparent;
+      border: none;
+      cursor: pointer;
+      z-index: 4;
+      font-size: 1.5rem;
+      width: 30%;
+      align-items: flex-start;
+    }
+  }
+}
