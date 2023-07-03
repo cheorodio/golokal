@@ -4,7 +4,7 @@ import { redirect } from 'next/navigation';
 import React from 'react';
 import { getShopByUserId } from '../../../../database/shops';
 import { getUserBySessionToken } from '../../../../database/users';
-import styles from '../../../styles/shopsPage.module.scss';
+import styles from '../../../styles/allShopsPage.module.scss';
 
 export const dynamic = 'force-dynamic';
 
