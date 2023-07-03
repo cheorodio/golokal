@@ -4,14 +4,13 @@ import Link from 'next/link';
 import { useState } from 'react';
 import { CgClose } from 'react-icons/cg';
 import { RxHamburgerMenu } from 'react-icons/rx';
-import styles from '../styles/NavFooter.module.scss';
+import styles from '../styles/Navbar.module.scss';
 
 export const links = [
   { id: 1, title: 'Home', link: '/' },
   { id: 2, title: 'Shops', link: '/shops' },
   { id: 3, title: 'About', link: '/about' },
   { id: 4, title: 'Blog', link: '/blog' },
-  { id: 4, title: 'Community', link: '/community' },
 ];
 
 export default function NavBar() {
