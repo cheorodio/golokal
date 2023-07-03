@@ -7,15 +7,13 @@
     "dev": "next dev",
     "ley-new": "f(){ touch migrations/$(date +%s)-$1.ts; }; f",
     "lint": "next lint",
-    "migrate": "dotenv -- ley --require tsm",
+    "migrate": "ley --require tsm",
     "start": "next start"
   },
   "dependencies": {
     "@types/node": "20.3.0",
     "bcrypt": "^5.1.0",
     "dotenv": "^16.3.1",
-    "dotenv-cli": "^7.2.1",
-    "dotenv-safe": "^ 8.2.0",
     "ley": "^0.8.1",
     "next": "13.4.5",
     "next-pwa": "^5.6.0",
@@ -33,7 +31,6 @@
   "devDependencies": {
     "@ts-safeql/eslint-plugin": "^1.1.4",
     "@types/bcrypt": "^5.0.0",
-    "@types/dotenv-safe": "^8.1.2",
     "@types/react": "18.2.11",
     "@types/react-dom": "18.2.4",
     "eslint-config-upleveled": "^5.0.0",
