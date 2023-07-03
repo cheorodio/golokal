@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import styles from '../styles/NavFooter.module.scss';
+import styles from '../styles/Footer.module.scss';
 
 // const links = [
 //   { id: 1, title: 'Home', link: '/' },
