@@ -130,11 +130,6 @@ export default async function SingleShopPage(props: Props) {
               );
             })}
           </div>
-          {/* <AddProductsForm
-            shopProducts={shopProducts}
-            user={user}
-            singShop={singleShop}
-          /> */}
         </div>
       </div>
 
