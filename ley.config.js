@@ -1,13 +1,9 @@
-const options = {};
+import { setEnvironmentVariables } from './util/config.mjs';
 
-if (process.env.POSTGRES_URL) {
-  options.ssl = true;
+setEnvironmentVariables();
 
-  // Set standard environment variables
-  process.env.PGHOST = process.env.POSTGRES_HOST;
-  process.env.PGDATABASE = process.env.POSTGRES_DATABASE;
-  process.env.PGUSERNAME = process.env.POSTGRES_USER;
-  process.env.PGPASSWORD = process.env.POSTGRES_PASSWORD;
-}
+const options = {
+  ssl: Boolean(process.env.POSTGRES_URL),
+};
 
-module.exports = options;
+export default options;
