@@ -3,7 +3,6 @@
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import { useRef, useState } from 'react';
-import { User } from '../../../../migrations/1688217161-createTableUsers';
 import { Shop } from '../../../../migrations/1688217209-createTableShops';
 import styles from '../../../styles/AddProductsForm.module.scss';
 

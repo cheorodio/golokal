@@ -3,7 +3,7 @@
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { Favourite } from '../../../../migrations/1688217261-createTableFavourites';
-import styles from '../../../styles/singleShopPage.module.scss';
+import styles from '../../../styles/shopPage.module.scss';
 
 type Props = {
   user: { id: number };

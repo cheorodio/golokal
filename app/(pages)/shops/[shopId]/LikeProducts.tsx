@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import { AiOutlineHeart, AiTwotoneHeart } from 'react-icons/ai';
-import styles from '../../../styles/singleShopPage.module.scss';
+import styles from '../../../styles/shopPage.module.scss';
 
 export default function LikeProduct() {
   const [like, setLike] = useState(false);
