@@ -11,7 +11,7 @@ import { logout } from './(auth)/logout/actions';
 import Footer from './components/Footer';
 import { LogoutButton } from './components/LogoutButton';
 import NavBar from './components/NavBar';
-import styles from './styles/NavFooter.module.scss';
+import styles from './styles/Navbar.module.scss';
 
 const inter = Inter({ subsets: ['latin'] });
 
