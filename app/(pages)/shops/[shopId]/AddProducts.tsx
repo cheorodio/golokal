@@ -8,7 +8,7 @@ import { Shop } from '../../../../migrations/1688217209-createTableShops';
 import styles from '../../../styles/AddProductsForm.module.scss';
 
 type Props = {
-  user: User;
+  user: { id: number };
   shop: Shop;
 };
 
