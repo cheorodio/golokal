@@ -21,7 +21,7 @@ type Props = {
   };
 };
 
-export default function EditProfile(props: Props) {
+export default function ProfilePage(props: Props) {
   return (
     <div className={styles.profilePageContainer}>
       <div className={styles.imageContainer}>

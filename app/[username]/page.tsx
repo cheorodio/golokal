@@ -9,8 +9,8 @@ import {
   getUsers,
 } from '../../database/users';
 import styles from '../styles/EditProfile.module.scss';
-import EditProfile from './EditProfile';
 import MyFavourites from './MyFavourites';
+import ProfilePage from './ProfilePage';
 
 type Props = {
   params: {
@@ -44,7 +44,7 @@ export default async function UserProfilePage(props: Props) {
 
   return (
     <section className={styles.profileContainerBox}>
-      <EditProfile user={user} myUsers={myUsers} currentUser={currentUser} />
+      <ProfilePage user={user} myUsers={myUsers} currentUser={currentUser} />
       <div className={styles.favouritesContainer}>
         <h1>{user.profileName}'s favourite shops</h1>
         {favourites.length === 0 ? (
