@@ -14,7 +14,7 @@ export type Error = {
   error: string;
 };
 
-export type FavouritesResponseBodyPost = { favourites: Favourite[] } | Error;
+export type FavouritesResponseBodyPost = { favourites: Favourite } | Error;
 
 export async function POST(
   request: NextRequest,
@@ -25,7 +25,7 @@ export async function POST(
 
   if (!user) {
     return NextResponse.json({
-      errors: [{ message: 'Invalid session token' }],
+      error: 'Invalid session token',
     });
   }
 
@@ -33,10 +33,7 @@ export async function POST(
   const result = favouritesSchema.safeParse(body);
 
   if (!result.success) {
-    return NextResponse.json(
-      { errors: [{ message: 'Invalid' }] },
-      { status: 400 },
-    );
+    return NextResponse.json({ error: 'Invalid' }, { status: 400 });
   }
 
   const newFavouriteShop = await createFavourite(
@@ -46,9 +43,9 @@ export async function POST(
 
   if (!newFavouriteShop) {
     return NextResponse.json(
-      { errors: [{ message: 'Favourite not created!' }] },
+      { error: 'Favourite not created!' },
       { status: 500 },
     );
   }
-  return NextResponse.json({ favourite: newFavouriteShop });
+  return NextResponse.json({ favourites: newFavouriteShop });
 }

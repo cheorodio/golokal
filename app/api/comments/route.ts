@@ -15,17 +15,17 @@ export type Error = {
   error: string;
 };
 
-export type FavouritesResponseBodyPost = { comments: Comment[] } | Error;
+export type CommentsResponseBodyPost = { comment: Comment } | Error;
 
 export async function POST(
   request: NextRequest,
-): Promise<NextResponse<FavouritesResponseBodyPost>> {
+): Promise<NextResponse<CommentsResponseBodyPost>> {
   const token = cookies().get('sessionToken');
   const user = token && (await getUserBySessionToken(token.value));
 
   if (!user) {
     return NextResponse.json({
-      errors: [{ message: 'Invalid session token' }],
+      error: 'Invalid session token',
     });
   }
 
@@ -33,10 +33,7 @@ export async function POST(
   const result = commentsSchema.safeParse(body);
 
   if (!result.success) {
-    return NextResponse.json(
-      { errors: [{ message: 'Invalid' }] },
-      { status: 400 },
-    );
+    return NextResponse.json({ error: 'Invalid' }, { status: 400 });
   }
 
   const newComment = await createComment(
@@ -47,7 +44,7 @@ export async function POST(
 
   if (!newComment) {
     return NextResponse.json(
-      { errors: [{ message: 'Comment not created!' }] },
+      { error: 'Comment not created!' },
       { status: 500 },
     );
   }

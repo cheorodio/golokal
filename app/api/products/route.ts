@@ -29,7 +29,7 @@ export async function POST(
 
   if (!user) {
     return NextResponse.json({
-      errors: [{ message: 'Invalid session token' }],
+      error: 'Invalid session token',
     });
   }
   const body = await request.json();
