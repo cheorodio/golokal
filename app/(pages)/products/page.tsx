@@ -1,7 +1,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { getProducts } from '../../../database/products';
-import styles from '../../styles/shopsPage.module.scss';
+import styles from '../../styles/allShopsPage.module.scss';
 
 export const dynamic = 'force-dynamic';
 
