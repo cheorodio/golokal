@@ -35,7 +35,7 @@ export default async function MyShopPage() {
           {myShop.map((shop) => {
             return (
               <div key={`shop-div-${shop.id}`}>
-                <Link href={`/shops/${shop?.id}`}>
+                <Link href={`/shops/${shop.id}`}>
                   <p>{shop.name}</p>
                 </Link>
               </div>

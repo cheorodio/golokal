@@ -12,17 +12,17 @@ import styles from '../styles/EditProfile.module.scss';
 import MyFavourites from './MyFavourites';
 import ProfilePage from './ProfilePage';
 
-type Props = {
-  params: {
-    username: string;
-    userId: number;
-    shopId: number;
-    favourites: any;
-  };
-};
+// type Props = {
+//   params: {
+//     username: string;
+//     userId: number;
+//     shopId: number;
+//     favourites: any;
+//   };
+// };
 
-export default async function UserProfilePage(props: Props) {
-  const user = await getUserByUsername(props.params.username);
+export default async function UserProfilePage(props) {
+  const user = await getUserByUsername(props.username);
 
   const myUsers = await getUsers();
   if (!user) {

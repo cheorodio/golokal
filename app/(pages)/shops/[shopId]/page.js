@@ -9,6 +9,7 @@ import { getFavourites } from '../../../../database/favourites';
 import { getProductsWithInfo } from '../../../../database/products';
 import { getShopById } from '../../../../database/shops';
 import { getUserBySessionToken } from '../../../../database/users';
+// import { Shop } from '../../../../migrations/1688217209-createTableShops';
 import styles from '../../../styles/shopPage.module.scss';
 import AddComments from './AddComments';
 import AddFavourites from './AddFavourites';
@@ -24,19 +25,21 @@ export const metadata = {
   shortcut: '/favicon.ico',
 };
 
-type Props = {
-  params: {
-    userId: number;
-    shopId: number;
-    content: string;
-    username: string;
-  };
-  comment: { id: number };
-  user: { username: string };
-  currentUser: { id: number };
-};
+// type Props = {
+//   params: {
+//     userId: number;
+//     shopId: number;
+//     content: string;
+//     username: string;
+//   };
+//   comment: { id: number };
+//   user: { id: number; username: string };
+//   currentUser: { id: number };
+//   singleShop: Shop;
+//   shop: Shop;
+// };
 
-export default async function SingleShopPage(props: Props) {
+export default async function SingleShopPage(props) {
   const singleShop = await getShopById(Number(props.params.shopId));
 
   const cookieStore = cookies();

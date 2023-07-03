@@ -91,7 +91,7 @@ export default function CreateShop(props: Props) {
       setShops([...shops, data.shop]);
 
       setSuccess(true);
-      router.push(`/shops/${data.shop?.id}`);
+      router.push(`/shops/${data.shop.id}`);
       router.refresh();
     }
   };
