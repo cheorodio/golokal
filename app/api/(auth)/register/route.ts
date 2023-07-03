@@ -40,7 +40,7 @@ export async function POST(
   if (!result.success) {
     return NextResponse.json(
       {
-        error: 'Required informarion is incomplete',
+        error: 'Required information is incomplete',
       },
       { status: 400 },
     );
