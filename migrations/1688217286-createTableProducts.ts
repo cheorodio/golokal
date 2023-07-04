@@ -2,8 +2,8 @@ import { Sql } from 'postgres';
 
 export type Product = {
   id: number;
-  userId: number;
-  shopId: number;
+  userId: number | null;
+  shopId: number | null;
   name: string;
   category: string;
   description: string;

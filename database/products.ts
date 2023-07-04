@@ -6,10 +6,10 @@ type ShopProduct = {
   productId: number;
   shopId: number;
   userId: number;
-  productName: string | null;
-  productCategory: string | null;
-  productDescription: string | null;
-  productImageUrl: string | null;
+  productName: string;
+  productCategory: string;
+  productDescription: string;
+  productImageUrl: string;
 };
 
 export const getProducts = cache(async () => {
@@ -89,15 +89,13 @@ export const createProduct = cache(
     name: string,
     category: string,
     description: string,
-    imageUrl?: string,
+    imageUrl: string,
   ) => {
     const [productToCreate] = await sql<Product[]>`
       INSERT INTO products
         (user_id, shop_id, name, category, description,  image_url)
       VALUES
-        (${userId}, ${shopId}, ${name}, ${category}, ${description}, ${
-      imageUrl || null
-    })
+        (${userId}, ${shopId}, ${name}, ${category}, ${description}, ${imageUrl})
       RETURNING *
     `;
 
