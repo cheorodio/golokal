@@ -1,9 +1,19 @@
+@import './queries.module';
+
 .footer {
   padding: 20px 0px;
-  margin: 0px 80px;
+  margin: 0px 20px;
   display: flex;
   border-top: 1px solid black;
   justify-content: space-between;
+
+  @media screen and (min-width: $tablet) {
+    padding: 20px 0px;
+    margin: 0px 80px;
+    display: flex;
+    border-top: 1px solid black;
+    justify-content: space-between;
+  }
 
   .logo {
     font-family: var(--title-text);
