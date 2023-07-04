@@ -21,7 +21,7 @@ jobs:
           sudo -u postgres psql --command="CREATE USER michelle1 PASSWORD 'fproject123'" --command="\du"
       - name: Create database and allow user
         run: |
-          sudo -u postgres createdb --owner=golokal_final_project fproject123
+          sudo -u postgres createdb --owner=michelle1 golokal_final_project
       - uses: actions/checkout@v3
       - uses: pnpm/action-setup@v2
         with:
