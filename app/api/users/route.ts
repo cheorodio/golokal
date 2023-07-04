@@ -1,12 +1,6 @@
-import { cookies } from 'next/headers';
 import { NextRequest, NextResponse } from 'next/server';
 import { z } from 'zod';
-import { getValidSessionByToken } from '../../../database/sessions';
-import {
-  deleteUserById,
-  getUsersWithLimitAndOffsetBySessionToken,
-  updateUserById,
-} from '../../../database/users';
+import { deleteUserById, updateUserById } from '../../../database/users';
 import { User } from '../../../migrations/1688217161-createTableUsers';
 
 export type Error = {
