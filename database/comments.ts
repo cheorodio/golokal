@@ -4,7 +4,7 @@ import { sql } from './connect';
 
 type CommentsFromUsersInShops = {
   commentId: number;
-  commentContent: string | null;
+  commentContent: string;
   userId: number;
   userName: string;
   userImageUrl: string;
