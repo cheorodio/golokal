@@ -7,7 +7,7 @@ type CommentsFromUsersInShops = {
   commentContent: string | null;
   userId: number;
   userName: string;
-  userImageUrl: string | null;
+  userImageUrl: string;
   shopId: number;
 };
 
