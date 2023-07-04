@@ -18,7 +18,6 @@ type Props = {
   userId: number;
   shopId: number;
   favourites: any;
-  myUsers: User[];
   currentUser: User[];
   user: User[];
 };
@@ -26,7 +25,7 @@ type Props = {
 export default async function UserProfilePage({ params }: Props) {
   const user = await getUserByUsername(params.username);
 
-  const myUsers = await getUsers();
+  // const myUsers = await getUsers();
 
   if (!user) {
     notFound();
@@ -47,7 +46,7 @@ export default async function UserProfilePage({ params }: Props) {
 
   return (
     <section className={styles.profileContainerBox}>
-      <ProfilePage user={user} myUsers={myUsers} currentUser={currentUser} />
+      <ProfilePage user={user} currentUser={currentUser} />
       <div className={styles.favouritesContainer}>
         <h1>{user.profileName}'s favourite shops</h1>
         {favourites.length === 0 ? (

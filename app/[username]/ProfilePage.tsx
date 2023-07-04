@@ -4,21 +4,21 @@ import styles from '../styles/EditProfile.module.scss';
 
 type Props = {
   currentUser: {
-    id: number,
-    username: string,
-    email: string,
-    profileName: string,
-    bio: string,
-    imageUrl: string,
-  },
+    id: number;
+    username: string;
+    email: string;
+    profileName: string;
+    bio: string;
+    imageUrl: string;
+  };
   user: {
-    id: number,
-    username: string,
-    email: string,
-    profileName: string,
-    bio: string,
-    imageUrl: string,
-  },
+    id: number;
+    username: string;
+    email: string;
+    profileName: string;
+    bio: string;
+    imageUrl: string;
+  };
 };
 
 export default function ProfilePage(props: Props) {

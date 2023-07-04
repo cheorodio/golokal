@@ -3,9 +3,7 @@ import { redirect } from 'next/navigation';
 import { getValidSessionByToken } from '../../../database/sessions';
 import RegisterForm from './Register';
 
-// type Props = { searchParams: { returnTo?: string | string[] } };
-
-export default async function RegisterPage(props) {
+export default async function RegisterPage() {
   // redirect if the user is logged in
   // 1. check if the sessionToken cookie exists
   const sessionTokenCookie = cookies().get('sessionToken');
@@ -16,9 +14,5 @@ export default async function RegisterPage(props) {
   // either redirect or render the login form
   if (session) redirect('/');
 
-  return (
-    <main>
-      <RegisterForm returnTo={props.searchParams.returnTo} />
-    </main>
-  );
+  return <RegisterForm />;
 }
