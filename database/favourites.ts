@@ -6,11 +6,11 @@ type FavouritedShop = {
   favouriteId: number;
   userId: number;
   shopId: number;
-  shopName: string | null;
-  shopDescription: string | null;
-  shopWebsiteUrl: string | null;
-  shopLocation: string | null;
-  shopImageUrl: string | null;
+  shopName: string;
+  shopDescription: string;
+  shopWebsiteUrl: string;
+  shopLocation: string;
+  shopImageUrl: string;
 };
 
 // get favourites from user
