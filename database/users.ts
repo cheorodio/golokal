@@ -2,14 +2,19 @@ import { cache } from 'react';
 import { User } from '../migrations/1688217161-createTableUsers';
 import { sql } from './connect';
 
-type UserWithPasswordHash = User & {
+export type UserWithPasswordHash = User & {
   passwordHash: string;
 };
 
 export const getUsers = cache(async () => {
-  const users = await sql<UserWithPasswordHash[]>`
+  const users = await sql<User[]>`
   SELECT
-    *
+    id,
+    username,
+    email,
+    profile_name,
+    bio,
+    image_url
   FROM
     users
   `;
@@ -108,10 +113,14 @@ export const getUsersWithLimitAndOffsetBySessionToken = cache(
 );
 
 export const getUserBySessionToken = cache(async (token: string) => {
-  const [user] = await sql<{ id: number; username: string }[]>`
+  const [user] = await sql<User[]>`
   SELECT
     users.id,
-    users.username
+    users.username,
+    users.email,
+    users.profile_name,
+    users.bio,
+    users.image_url
   FROM
     users
   INNER JOIN
@@ -138,7 +147,7 @@ export const updateUserById = cache(
     const [user] = await sql<UserWithPasswordHash[]>`
       UPDATE users
       SET
-        username = ${username},
+        username = ${username.toLowerCase()},
         email = ${email},
         profile_name = ${profileName},
         bio = ${bio},
