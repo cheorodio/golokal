@@ -93,7 +93,7 @@ export default function AddProductsForm(props: Props) {
 
   return (
     <div className={styles.formComtainer}>
-      {props.user?.id === props.shop?.userId && (
+      {props.user.id === props.shop.userId && (
         <div className={styles.innerContainer}>
           <h4>Upload a product</h4>
           <form onSubmit={handleOnSubmit} className={styles.uploadProductForm}>
