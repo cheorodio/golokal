@@ -8,23 +8,26 @@ import {
   getUserByUsername,
   getUsers,
 } from '../../database/users';
+import { User } from '../../migrations/1688217161-createTableUsers';
 import styles from '../styles/EditProfile.module.scss';
 import MyFavourites from './MyFavourites';
 import ProfilePage from './ProfilePage';
 
-// type Props = {
-//   params: {
-//     username: string;
-//     userId: number;
-//     shopId: number;
-//     favourites: any;
-//   };
-// };
+type Props = {
+  params: { username: string };
+  userId: number;
+  shopId: number;
+  favourites: any;
+  myUsers: User[];
+  currentUser: User[];
+  user: User[];
+};
 
-export default async function UserProfilePage(props) {
-  const user = await getUserByUsername(props.username);
+export default async function UserProfilePage({ params }: Props) {
+  const user = await getUserByUsername(params.username);
 
   const myUsers = await getUsers();
+
   if (!user) {
     notFound();
   }
