@@ -43,12 +43,12 @@
 
     @media screen and (min-width: $laptop) {
       font-size: 2.5rem;
-      width: 550px;
+      width: 650px;
     }
 
     @media screen and (min-width: $desktop) {
       font-size: 3rem;
-      width: 550px;
+      width: 650px;
     }
   }
 
@@ -100,6 +100,10 @@
     flex-direction: column;
     text-align: center;
     gap: 24px;
+
+    animation: floatup 2s ease-in-out;
+    visibility: hidden;
+    animation-fill-mode: forwards;
 
     @media screen and (min-width: $tablet) {
       grid-column: 1/2;
