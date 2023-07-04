@@ -25,20 +25,6 @@ export const metadata = {
   shortcut: '/favicon.ico',
 };
 
-// type Props = {
-//   params: {
-//     userId: number;
-//     shopId: number;
-//     content: string;
-//     username: string;
-//   };
-//   comment: { id: number };
-//   user: { id: number; username: string };
-//   currentUser: { id: number };
-//   singleShop: Shop;
-//   shop: Shop;
-// };
-
 export default async function SingleShopPage(props) {
   const singleShop = await getShopById(Number(props.params.shopId));
 
@@ -102,7 +88,7 @@ export default async function SingleShopPage(props) {
           </div>
         </div>
 
-        {/* ************* PROOOOOODUCTS SECTION ************* */}
+        {/* ************* PRODUCTS SECTION ************* */}
         <div className={styles.productsFeed}>
           <h2>Products Feed</h2>
           <div className={styles.productsContainer}>
@@ -136,7 +122,7 @@ export default async function SingleShopPage(props) {
         </div>
       </div>
 
-      {/* ************* COOOOOOMMENTS SECTION ************* */}
+      {/* ************* COMMENTS SECTION ************* */}
       <div className={styles.commentsSection}>
         <h2>What other users have been saying</h2>
         <div className={styles.commentsContainer}>
@@ -177,7 +163,7 @@ export default async function SingleShopPage(props) {
         </div>
       </div>
 
-      {/* ************* PRODUCTS FORM SECTION ************* */}
+      {/* ************* PRODUCTS FORM SECTION (for shop owner only)************* */}
       <div>
         <AddProductsForm
           singleShop={singleShop}
