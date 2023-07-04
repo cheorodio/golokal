@@ -7,18 +7,18 @@ import {
   getUserBySessionToken,
   getUserByUsername,
 } from '../../database/users';
-import { User } from '../../migrations/1688217161-createTableUsers';
+// import { User } from '../../migrations/1688217161-createTableUsers';
 import styles from '../styles/EditProfile.module.scss';
 import MyFavourites from './MyFavourites';
 import ProfilePage from './ProfilePage';
 
 export type ProfilePageProps = {
   params: { username: string };
-  userId: number;
-  shopId: number;
-  favourites: any;
-  currentUser: User[];
-  user: User[];
+  // userId: number;
+  // shopId: number;
+  // favourites: any;
+  // currentUser: User[];
+  // user: User[];
 };
 
 export default async function UserProfilePage({ params }: ProfilePageProps) {
