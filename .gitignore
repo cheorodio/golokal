@@ -45,6 +45,6 @@ next-env.d.ts
 **/public/workbox-*.js.map
 
 # Playwright
-/test-results/
-/playwright-report/
+playwright/test-results/
+playwright/report/
 /playwright/.cache/
