@@ -1,18 +1,18 @@
 import Image from 'next/image';
 import Link from 'next/link';
-import about from '../public/images/about.jpg';
 import connect from '../public/images/icons/connect.png';
 import discover from '../public/images/icons/discover.png';
 import explore from '../public/images/icons/explore.png';
+import about from '../public/images/vida.jpg';
 import styles from './styles/homepage.module.scss';
 
 export default function Home() {
   return (
     <main>
       <section className={styles.heroSection}>
-        <h1>Embrace the artistry of your community </h1>
-        <p>and support your local vendors and small businesses</p>
-        <Link href="/" className={styles.heroLink}>
+        <h1>Connecting Communities, Supporting Small Businesses</h1>
+        <p>Discover local vendors and hundreds of handmade products</p>
+        <Link href="/shops" className={styles.heroLink}>
           explore now
         </Link>
       </section>
