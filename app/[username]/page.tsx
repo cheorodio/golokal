@@ -21,7 +21,7 @@ export type ProfilePageProps = {
   user: User[];
 };
 
-export async function UserProfilePage({ params }: ProfilePageProps) {
+export default async function UserProfilePage({ params }: ProfilePageProps) {
   const user = await getUserByUsername(params.username);
 
   // const myUsers = await getUsers();
