@@ -6,7 +6,6 @@ import {
   getUserById,
   getUserBySessionToken,
   getUserByUsername,
-  getUsers,
 } from '../../database/users';
 import { User } from '../../migrations/1688217161-createTableUsers';
 import styles from '../styles/EditProfile.module.scss';
