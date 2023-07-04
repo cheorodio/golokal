@@ -113,6 +113,7 @@ export default function RegisterForm() {
                 Username <span>*</span>
               </label>
               <input
+                data-test-id="register-username"
                 id="username"
                 value={username}
                 onChange={(event) => setUsername(event.currentTarget.value)}
@@ -124,6 +125,7 @@ export default function RegisterForm() {
                 Profile name <span>*</span>
               </label>
               <input
+                data-test-id="register-profileName"
                 id="profileName"
                 value={profileName}
                 onChange={(event) => setProfileName(event.currentTarget.value)}
@@ -135,6 +137,7 @@ export default function RegisterForm() {
                 Email <span>*</span>
               </label>
               <input
+                data-test-id="register-email"
                 id="email"
                 value={email}
                 onChange={(event) => setEmail(event.currentTarget.value)}
@@ -147,6 +150,7 @@ export default function RegisterForm() {
               </label>
               <textarea
                 id="bio"
+                data-test-id="register-bio"
                 placeholder="Write a little something about yourself"
                 value={bio}
                 onChange={(event) => setBio(event.currentTarget.value)}
@@ -159,6 +163,7 @@ export default function RegisterForm() {
               </label>
               <div>
                 <input
+                  data-test-id="register-bio"
                   id="password"
                   type={passwordShown ? 'text' : 'password'}
                   value={password}
@@ -178,6 +183,7 @@ export default function RegisterForm() {
                 Profile picture <span>*</span>
               </label>
               <input
+                data-test-id="register-image"
                 id="profilePic"
                 type="file"
                 name="file"
