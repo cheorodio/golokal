@@ -12,7 +12,7 @@ import styles from '../styles/EditProfile.module.scss';
 import MyFavourites from './MyFavourites';
 import ProfilePage from './ProfilePage';
 
-type Props = {
+export type ProfilePageProps = {
   params: { username: string };
   userId: number;
   shopId: number;
@@ -21,7 +21,7 @@ type Props = {
   user: User[];
 };
 
-export default async function UserProfilePage({ params }: Props) {
+export async function UserProfilePage({ params }: ProfilePageProps) {
   const user = await getUserByUsername(params.username);
 
   // const myUsers = await getUsers();
