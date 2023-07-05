@@ -18,13 +18,6 @@
     background-color: var(--main-color);
     position: relative;
 
-    .border {
-      position: absolute;
-      bottom: -7%;
-      left: 0%;
-      width: 100%;
-    }
-
     @media screen and (min-width: $tablet) {
       padding: 100px 80px 50px;
       flex-direction: row;
@@ -186,6 +179,22 @@
         }
       }
     }
+
+    .border {
+      position: absolute;
+      bottom: -5%;
+      left: 0%;
+      width: 100%;
+      margin-bottom: 100px;
+
+      @media screen and (min-width: $tablet) {
+        position: absolute;
+        bottom: -7%;
+        left: 0%;
+        width: 100%;
+        margin-bottom: 0px;
+      }
+    }
   }
 
   .commentsSection {
@@ -193,21 +202,16 @@
     flex-direction: column;
     gap: 20px;
     margin-top: 10px;
+    padding: 20px;
 
     @media screen and (min-width: $tablet) {
       padding: 0px 50px;
       gap: 20px;
-      position: relative;
-
-      .chatBg {
-        position: absolute;
-        z-index: -1;
-      }
     }
 
     h2 {
       font-family: var(--title-text);
-      font-size: 1.5rem;
+      font-size: 1.25rem;
       text-align: center;
 
       @media screen and (min-width: $tablet) {
@@ -219,6 +223,12 @@
       display: flex;
       width: 100%;
       margin-bottom: 50px;
+
+      @media screen and (min-width: $tablet) {
+        display: flex;
+        width: 100%;
+        margin-bottom: 50px;
+      }
 
       form {
         display: flex;
