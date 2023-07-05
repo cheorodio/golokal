@@ -2,6 +2,8 @@
 
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
+import { RiDeleteBin6Line } from 'react-icons/ri';
+import styles from '../styles/EditProfile.module.scss';
 
 type Props = {
   favourites: {
@@ -17,7 +19,7 @@ export default function DeleteFavourites(props: Props) {
   const router = useRouter();
 
   return (
-    <div>
+    <div className={styles.deleteButton}>
       {props.currentUser.username === props.user.username && (
         <button
           onClick={async () => {
@@ -38,7 +40,7 @@ export default function DeleteFavourites(props: Props) {
             router.refresh();
           }}
         >
-          Delete
+          <RiDeleteBin6Line />
         </button>
       )}
     </div>
