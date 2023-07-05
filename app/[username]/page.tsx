@@ -20,8 +20,8 @@ export type ProfilePageProps = {
   favourites: Favourite;
 };
 
-export default async function UserProfilePage(props: ProfilePageProps) {
-  const user = await getUserByUsername(props.params.username);
+export default async function UserProfilePage({ params }: ProfilePageProps) {
+  const user = await getUserByUsername(params.username);
 
   if (!user) {
     notFound();
