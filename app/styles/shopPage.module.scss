@@ -122,20 +122,32 @@
         gap: 20px;
 
         @media screen and (min-width: $tablet) {
-          overflow-x: scroll;
-          grid-template-columns: repeat(3, 1fr);
-          grid-template-rows: repeat(1, 1fr);
+          overflow: scroll;
+          grid-template-columns: repeat(20, 1fr);
+        }
+
+        @media screen and (min-width: $laptop) {
+          overflow: scroll;
+          grid-template-columns: repeat(20, 1fr);
         }
 
         .productCard {
           border: 0.5px solid var(--main-color);
           border-radius: 10px;
           background-color: white;
+          width: 100%;
 
           @media screen and (min-width: $tablet) {
             background-color: white;
             border-radius: 10px;
-            width: 100%;
+            width: 300px;
+            border: 0.5px solid var(--main-color);
+          }
+
+          @media screen and (min-width: $laptop) {
+            background-color: white;
+            border-radius: 10px;
+            width: 300px;
             border: 0.5px solid var(--main-color);
           }
 
@@ -288,12 +300,6 @@
       }
     }
   }
-}
-
-.addProducts {
-  display: flex;
-  align-items: center;
-  justify-content: center;
 }
 
 .loveButton {
