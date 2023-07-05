@@ -113,11 +113,18 @@ export default function AddProductsForm(props: Props) {
                 value={category}
                 onChange={(event) => setCategory(event.currentTarget.value)}
               >
+                <option>Select a category</option>
+                <option>Accessories</option>
                 <option>Arts</option>
                 <option>Candles</option>
                 <option>Ceramics</option>
+                <option>Clothes</option>
                 <option>Crochet</option>
+                <option>Home Decor</option>
                 <option>Jewelleries</option>
+                <option>Pet Products</option>
+                <option>Soap</option>
+                <option>Toys</option>
               </select>
             </div>
 
