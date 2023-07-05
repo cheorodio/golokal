@@ -1,30 +1,27 @@
 import { cookies } from 'next/headers';
+import Image from 'next/image';
+import Link from 'next/link';
 import { notFound, redirect } from 'next/navigation';
+import { VscLocation } from 'react-icons/vsc';
 import { getFavouriteByUserId } from '../../database/favourites';
-import { getShopById } from '../../database/shops';
-import {
-  getUserById,
-  getUserBySessionToken,
-  getUserByUsername,
-} from '../../database/users';
-// import { User } from '../../migrations/1688217161-createTableUsers';
+import { getUserBySessionToken, getUserByUsername } from '../../database/users';
+import { User } from '../../migrations/1688217161-createTableUsers';
+import { Favourite } from '../../migrations/1688217261-createTableFavourites';
 import styles from '../styles/EditProfile.module.scss';
-import MyFavourites from './MyFavourites';
+import DeleteFavourites from './DeleteFavourites';
 import ProfilePage from './ProfilePage';
 
 export type ProfilePageProps = {
   params: { username: string };
-  // userId: number;
-  // shopId: number;
-  // favourites: any;
-  // currentUser: User[];
-  // user: User[];
+  currentUser: {
+    username: string;
+  };
+  user: User;
+  favourites: Favourite;
 };
 
-export default async function UserProfilePage({ params }: ProfilePageProps) {
-  const user = await getUserByUsername(params.username);
-
-  // const myUsers = await getUsers();
+export default async function UserProfilePage(props: ProfilePageProps) {
+  const user = await getUserByUsername(props.params.username);
 
   if (!user) {
     notFound();
@@ -40,8 +37,6 @@ export default async function UserProfilePage({ params }: ProfilePageProps) {
   }
 
   const favourites = await getFavouriteByUserId(user.id);
-  const users = await getUserById(user.id);
-  const shops = await getShopById(user.id);
 
   return (
     <section className={styles.profileContainerBox}>
@@ -51,7 +46,47 @@ export default async function UserProfilePage({ params }: ProfilePageProps) {
         {favourites.length === 0 ? (
           <p>Favourite is empty</p>
         ) : (
-          <MyFavourites favourites={favourites} users={users} shops={shops} />
+          <div className={styles.allCards}>
+            {favourites.map((favourite: any) => {
+              return (
+                <div
+                  key={`favourite-div-${favourite.shopId}`}
+                  className={styles.favouriteShopCard}
+                >
+                  <Link
+                    href={`/shops/${favourite.shopId}`}
+                    className={styles.imageSection}
+                  >
+                    <Image
+                      src={favourite.shopImageUrl}
+                      width={100}
+                      height={100}
+                      alt="Shop image"
+                      className={styles.shopImageUrl}
+                    />
+                  </Link>
+                  <div className={styles.infoSection}>
+                    <div>
+                      <h1>{favourite.shopName}</h1>
+                      <Link href="/">
+                        <h4>{favourite.shopWebsiteUrl}</h4>
+                      </Link>
+                    </div>
+                    <p className={styles.bio}>{favourite.shopDescription}</p>
+                    <p className={styles.location}>
+                      <VscLocation />
+                      <span>{favourite.shopLocation}</span>
+                    </p>
+                  </div>
+                  <DeleteFavourites
+                    favourites={favourite}
+                    currentUser={currentUser}
+                    user={user}
+                  />
+                </div>
+              );
+            })}
+          </div>
         )}
       </div>
     </section>
