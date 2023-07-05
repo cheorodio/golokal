@@ -1,16 +1,35 @@
+@import './queries.module';
+
 .formComtainer {
-  margin: 0px 250px;
+  // margin: 0px 250px;
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 20px;
-  padding-bottom: 80px;
+  padding: 0px 20px 80px;
+
+  @media screen and (min-width: $tablet) {
+    margin: 0px 250px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    padding-bottom: 80px;
+  }
 
   .innerContainer {
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: 20px;
+    width: 100%;
+
+    @media screen and (min-width: $tablet) {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 20px;
+    }
 
     h4 {
       font-size: 1.5rem;
@@ -18,15 +37,27 @@
     }
 
     .uploadProductForm {
-      width: 500px;
+      width: 100%;
       box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px,
         rgba(0, 0, 0, 0.23) 0px 3px 6px;
 
       display: flex;
       flex-direction: column;
-      padding: 30px;
+      padding: 20px;
       border-radius: 16px;
       gap: 16px;
+
+      @media screen and (min-width: $tablet) {
+        width: 500px;
+        box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px,
+          rgba(0, 0, 0, 0.23) 0px 3px 6px;
+
+        display: flex;
+        flex-direction: column;
+        padding: 30px;
+        border-radius: 16px;
+        gap: 16px;
+      }
 
       div {
         display: flex;
