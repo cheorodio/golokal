@@ -12,12 +12,14 @@ import DeleteFavourites from './DeleteFavourites';
 import ProfilePage from './ProfilePage';
 
 export type ProfilePageProps = {
-  params: { username: string };
-  currentUser: {
+  params: {
     username: string;
+    currentUser: {
+      username: string;
+    };
+    user: User;
+    favourites: Favourite;
   };
-  user: User;
-  favourites: Favourite;
 };
 
 export default async function UserProfilePage({ params }: ProfilePageProps) {
