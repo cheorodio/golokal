@@ -7,6 +7,7 @@
   justify-content: center;
   width: 100%;
   padding: 100px 20px 20px;
+  gap: 40px;
 
   @media screen and (min-width: $tablet) {
     display: flex;
@@ -61,8 +62,12 @@
     }
 
     .nameContainer {
-      display: flex;
-      margin-top: 16px;
+      padding-top: 20px;
+
+      @media screen and (min-width: $tablet) {
+        display: flex;
+        margin-top: 16px;
+      }
     }
 
     .bioContainer {
@@ -100,10 +105,14 @@
         border-bottom: 0.1px solid var(--secondary-text-color);
         padding: 30px 0px;
 
+        &:last-child {
+          border: none;
+        }
+
         .imageSection {
           width: 30%;
           height: 100%;
-          border: 0.5px solid var(--secondary-text-color);
+          // border: 0.5px solid var(--secondary-text-color);
 
           .shopImageUrl {
             height: 100%;
