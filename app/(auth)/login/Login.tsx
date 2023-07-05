@@ -47,68 +47,66 @@ export default function LoginForm(props: Props) {
 
   return (
     <div className={styles.loginContainer}>
-      <div className={styles.loginFormSide}>
-        <div className={styles.form}>
-          <div className={styles.greeting}>
-            <h1>Welcome back</h1>
-            <p>
-              Login to your account to connect with your favourite local vendors
-            </p>
+      <div className={styles.form}>
+        <div className={styles.greeting}>
+          <h1>Welcome back</h1>
+          <p className={styles.loginMessage}>
+            Login to your account to connect with your favourite local vendors
+          </p>
+        </div>
+
+        <form
+          onSubmit={(event) => event.preventDefault()}
+          id="login"
+          className={styles.loginForm}
+        >
+          <div>
+            <label htmlFor="username">
+              Username <span>*</span>
+            </label>
+            <input
+              id="username"
+              value={username}
+              onChange={(event) => setUsername(event.currentTarget.value)}
+            />
           </div>
 
-          <form
-            onSubmit={(event) => event.preventDefault()}
-            id="login"
-            className={styles.loginForm}
-          >
+          <div>
+            <label htmlFor="password">
+              Password <span>*</span>
+            </label>
+
             <div>
-              <label htmlFor="username">
-                Username <span>*</span>
-              </label>
               <input
-                id="username"
-                value={username}
-                onChange={(event) => setUsername(event.currentTarget.value)}
+                id="password"
+                type={passwordShown ? 'text' : 'password'}
+                value={password}
+                onChange={(event) => setPassword(event.currentTarget.value)}
               />
+              <button
+                onClick={togglePassword}
+                className={styles.showPasswordButton}
+              >
+                {passwordShown ? <RxEyeClosed /> : <RxEyeOpen />}
+              </button>
             </div>
-
-            <div>
-              <label htmlFor="password">
-                Password <span>*</span>
-              </label>
-
-              <div>
-                <input
-                  id="password"
-                  type={passwordShown ? 'text' : 'password'}
-                  value={password}
-                  onChange={(event) => setPassword(event.currentTarget.value)}
-                />
-                <button
-                  onClick={togglePassword}
-                  className={styles.showPasswordButton}
-                >
-                  {passwordShown ? <RxEyeClosed /> : <RxEyeOpen />}
-                </button>
-              </div>
-            </div>
-            <button
-              className={styles.loginSubmit}
-              onClick={async () => await login()}
-            >
-              Log in
-            </button>
-            {error !== '' && <div className={styles.error}>{error}</div>}
-            <div className={styles.signupContainer}>
-              <p>
-                Don't have an account yet?
-                <Link href="/register" className={styles.registerLink}>
-                  Register here
-                </Link>
-              </p>
-            </div>
-          </form>
-        </div>
+          </div>
+          <button
+            className={styles.loginSubmit}
+            onClick={async () => await login()}
+          >
+            Log in
+          </button>
+          {error !== '' && <div className={styles.error}>{error}</div>}
+          <div className={styles.signupContainer}>
+            <p>
+              Don't have an account yet?
+              <Link href="/register" className={styles.registerLink}>
+                Register here
+              </Link>
+            </p>
+          </div>
+        </form>
       </div>
     </div>
   );
