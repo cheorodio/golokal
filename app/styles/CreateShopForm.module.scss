@@ -1,8 +1,11 @@
+@import './queries.module';
+
 .createShopPage {
   height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;
+  width: 100%;
 
   .pageTitle {
     display: flex;
@@ -15,10 +18,18 @@
     gap: 20px;
     background-color: var(--main-color);
 
+    @media screen and (max-width: $tablet) {
+      display: none;
+    }
+
     h1 {
       font-size: 3.5rem;
       color: var(--secondary-text-color);
       font-family: var(--title-text);
+
+      span {
+        text-transform: capitalize;
+      }
     }
 
     h4 {
@@ -38,47 +49,93 @@
     width: 60%;
     height: 100%;
     background-color: white;
+
+    @media screen and (max-width: $tablet) {
+      width: 100%;
+    }
   }
-}
 
-.createShopForm {
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-  width: 100%;
-  padding: 0px 200px;
-
-  label {
+  .createShopForm {
     display: flex;
     flex-direction: column;
-
-    input,
-    textarea {
-      width: 100%;
-      height: 30px;
-      padding-left: 8px;
-      background-color: var(--bg-color);
-      border: none;
-    }
-
-    textarea {
-      height: 100px;
-    }
-  }
-
-  div {
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    gap: 16px;
     width: 100%;
+    padding: 0px 200px;
 
-    button {
-      padding: 8px 30px;
-      border-radius: 10px;
-      border: none;
-      background-color: var(--main-color);
-      color: var(--secondary-text-color);
-      cursor: pointer;
+    @media screen and (max-width: $tablet) {
+      padding: 0px 20px;
+    }
+
+    label {
+      display: flex;
+      flex-direction: column;
+
+      input,
+      textarea {
+        width: 100%;
+        height: 40px;
+        padding-left: 8px;
+        background-color: var(--bg-color);
+        border-radius: 8px;
+        border: none;
+      }
+
+      textarea {
+        height: 100px;
+      }
+    }
+
+    // image inout
+    .shopPicDiv {
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+
+      .shopPicInput[type='file'] {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        gap: 16px;
+        padding-left: 0px;
+      }
+
+      .shopPicInput::file-selector-button {
+        background-color: var(--main-color);
+        border: none;
+        height: 100%;
+        width: 30%;
+        cursor: pointer;
+      }
+    }
+
+    .imageContainer {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      .image {
+        height: 100%;
+        width: 100%;
+        border-radius: 8px;
+      }
+    }
+
+    div {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+
+      button {
+        padding: 8px 30px;
+        border-radius: 10px;
+        border: none;
+        background-color: var(--main-color);
+        color: var(--secondary-text-color);
+        cursor: pointer;
+        width: 100%;
+      }
     }
   }
 }

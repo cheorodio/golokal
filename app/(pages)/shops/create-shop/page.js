@@ -29,7 +29,9 @@ export default async function CreateShopPage() {
   return (
     <main className={styles.createShopPage}>
       <div className={styles.pageTitle}>
-        <h1>Hello {user.username}</h1>
+        <h1>
+          Hello <span>{user.profileName}</span>
+        </h1>
         <h4>
           Create an account now to showcase your amazing creations to our
           golokal community

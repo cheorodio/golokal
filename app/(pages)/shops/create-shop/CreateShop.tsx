@@ -98,24 +98,6 @@ export default function CreateShop(props: Props) {
 
   return (
     <form className={styles.createShopForm} onSubmit={handleOnSubmit}>
-      <div>
-        <label htmlFor="profilePic">
-          Shop picture <span>*</span>
-        </label>
-        <input
-          id="profilePic"
-          type="file"
-          name="file"
-          ref={fileInputRef}
-          onChange={handleOnChange}
-        />
-      </div>
-      <div>
-        {!!imageUrl && (
-          <Image src={imageUrl} height={100} width={100} alt="Shop avatar" />
-        )}
-      </div>
-
       <label>
         <input
           placeholder="Shop Name"
@@ -148,6 +130,22 @@ export default function CreateShop(props: Props) {
           onChange={(event) => setLocation(event.currentTarget.value)}
         />
       </label>
+
+      <label className={styles.shopPicDiv}>
+        <input
+          type="file"
+          name="file"
+          ref={fileInputRef}
+          onChange={handleOnChange}
+          className={styles.shopPicInput}
+        />
+      </label>
+
+      <div className={styles.imageContainer}>
+        {!!imageUrl && (
+          <Image src={imageUrl} height={100} width={100} alt="Shop avatar" />
+        )}
+      </div>
 
       <div>
         <button>Create shop</button>
