@@ -2,9 +2,11 @@ import './globals.scss';
 import { Inter } from 'next/font/google';
 import { cookies } from 'next/headers';
 import Link from 'next/link';
+import { AiFillShop } from 'react-icons/ai';
 import { BsFillPersonFill, BsPersonPlus } from 'react-icons/bs';
-import { CgLogOut } from 'react-icons/cg';
+// import { CgLogOut } from 'react-icons/cg';
 import { CiLogin } from 'react-icons/ci';
+import { FiArrowUpRight } from 'react-icons/fi';
 import { RiAccountPinCircleLine } from 'react-icons/ri';
 import { getUserBySessionToken } from '../database/users';
 import { logout } from './(auth)/logout/actions';
@@ -44,6 +46,25 @@ export default async function RootLayout({ children }: LayoutProps) {
           <div className={styles.logo}>
             <Link href="/">golokal</Link>
           </div>
+          {/* desktop */}
+          <div className={styles.desktopLoginButtons}>
+            {user ? (
+              <div className={styles.loggedIn}>
+                <Link href={`/${user.username}`}>{user.profileName}</Link> |
+                <Link href="/shops/my-shop">My shop</Link>
+                <LogoutButton logout={logout} />
+              </div>
+            ) : (
+              <div className={styles.desktopLoggedOut}>
+                <Link href="/login">Login</Link>|
+                <Link href="/register" className={styles.desktopRegisterButton}>
+                  Register
+                  <FiArrowUpRight />
+                </Link>
+              </div>
+            )}
+          </div>
+          {/* mobile */}
           <div className={styles.loginButton}>
             {user ? (
               <Link
@@ -65,12 +86,11 @@ export default async function RootLayout({ children }: LayoutProps) {
                         <Link href={`/${user.username}`}>{user.username}</Link>
                       </div>
                       <div className={styles.myshop}>
-                        <BsFillPersonFill />
+                        <AiFillShop />
                         <Link href="/shops/my-shop">My shop</Link>
                       </div>
                     </div>
                     <div className={styles.logoutLink}>
-                      <CgLogOut />
                       <LogoutButton logout={logout} />
                     </div>
                   </>
