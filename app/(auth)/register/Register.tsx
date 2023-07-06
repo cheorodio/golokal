@@ -203,10 +203,13 @@ export default function RegisterForm() {
           <button className={styles.loginSubmit}>Register</button>
           {error !== '' && <div className={styles.error}>{error}</div>}
           {success && (
-            <p>
-              Succesfull registration! Please wait to be directed to your
-              profile 😄
-            </p>
+            <figure className={styles.notification}>
+              <div className={styles.notificationBody}>
+                Succesfull registration! Please wait to be directed to your
+                profile
+              </div>
+              <div className={styles.notificationProgress} />
+            </figure>
           )}
 
           <div className={styles.signupContainer}>
