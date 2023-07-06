@@ -90,3 +90,37 @@
     align-items: center;
   }
 }
+
+.shopContainer {
+  display: flex;
+
+  .shopCard {
+    width: 300px;
+    border: 1px solid var(--secondary-text-color);
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    padding: 16px;
+    gap: 12px;
+
+    .shopName {
+      font-size: 2rem;
+      text-align: center;
+    }
+
+    .shopImage {
+      width: 100%;
+      height: 200px;
+      border-radius: 5px;
+    }
+
+    .shopLink {
+      text-align: center;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      cursor: pointer;
+    }
+  }
+}
