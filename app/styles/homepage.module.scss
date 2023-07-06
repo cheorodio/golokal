@@ -43,12 +43,12 @@
 
     @media screen and (min-width: $laptop) {
       font-size: 2.5rem;
-      width: 650px;
+      width: 700px;
     }
 
     @media screen and (min-width: $desktop) {
       font-size: 3rem;
-      width: 650px;
+      width: 700px;
     }
   }
 
@@ -63,6 +63,7 @@
     padding: 10px 80px;
     border-radius: 40px;
     border: 1px solid var(--secondary-text-color);
+    background-color: var(--main-color);
   }
 }
 
