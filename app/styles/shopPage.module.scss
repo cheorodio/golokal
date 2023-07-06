@@ -28,25 +28,30 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 16px;
+      gap: 6px;
 
       @media screen and (min-width: $tablet) {
         width: 30%;
       }
 
+      .shopHeader {
+        text-align: center;
+      }
+
       .imageBox {
         height: 300px;
         width: 100%;
-        background-color: white;
         display: flex;
         align-items: center;
         justify-content: center;
         font-size: 1.5rem;
-        border: 0.1px solid var(--main-color);
+        border: 1px solid var(--bg-color);
+        border-radius: 10px;
 
         .singleShopImage {
           height: 100%;
           width: 100%;
+          border-radius: 10px;
         }
       }
 
@@ -54,36 +59,47 @@
         display: flex;
         flex-direction: column;
         gap: 10px;
-        padding: 8px;
+        padding: 8px 0px;
+        width: 100%;
 
-        div {
+        .linkAndFollow {
           display: flex;
+          width: 100%;
           justify-content: space-between;
           align-items: center;
 
-          button {
-            border: none;
+          .followButtonContainer {
+            display: flex;
+            justify-content: end;
 
-            .followButton {
-              background-color: var(--secondary-text-color);
-              color: white;
+            button {
               border: none;
-              padding: 6px 16px;
-              border-radius: 5px;
-              text-transform: uppercase;
-              letter-spacing: 1.5px;
-              cursor: pointer;
+
+              .followButton {
+                background-color: var(--secondary-text-color);
+                color: white;
+                border: none;
+                padding: 6px 16px;
+                border-radius: 5px;
+                text-transform: uppercase;
+                letter-spacing: 1.5px;
+                cursor: pointer;
+              }
+
+              .followedButton {
+                background-color: rgb(85, 141, 3);
+                color: black;
+                border: none;
+                padding: 6px 16px;
+                border-radius: 5px;
+                text-transform: uppercase;
+                letter-spacing: 1.5px;
+                cursor: pointer;
+              }
             }
 
-            .followedButton {
-              background-color: rgb(85, 141, 3);
-              color: black;
-              border: none;
-              padding: 6px 16px;
-              border-radius: 5px;
-              text-transform: uppercase;
-              letter-spacing: 1.5px;
-              cursor: pointer;
+            .followError {
+              color: red;
             }
           }
         }
@@ -198,7 +214,7 @@
   }
 
   .commentsSection {
-    margin-top: 120px;
+    margin-top: 100px;
     display: flex;
     flex-direction: column;
     gap: 20px;

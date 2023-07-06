@@ -61,7 +61,9 @@ export default async function SingleShopPage(props) {
           width={1000}
           className={styles.border}
         />
+
         <div className={styles.shopInfo}>
+          <h1 className={styles.shopHeader}>{singleShop.name}</h1>
           <div className={styles.imageBox}>
             <Image
               src={singleShop.imageUrl}
@@ -72,8 +74,7 @@ export default async function SingleShopPage(props) {
             />
           </div>
           <div className={styles.moreInfo}>
-            <h1>{singleShop.name}</h1>
-            <div>
+            <div className={styles.linkAndFollow}>
               <Link href="/">{singleShop.websiteUrl}</Link>
               <AddFavourites
                 favourites={favourites}
