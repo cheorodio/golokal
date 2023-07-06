@@ -214,14 +214,14 @@
   }
 
   .commentsSection {
-    margin-top: 100px;
+    margin-top: 60px;
     display: flex;
     flex-direction: column;
     gap: 20px;
     padding: 20px;
 
     @media screen and (min-width: $tablet) {
-      padding: 0px 50px;
+      padding: 0px 80px;
       gap: 20px;
     }
 
