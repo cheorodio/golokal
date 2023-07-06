@@ -2,6 +2,7 @@
 
 import { Route } from 'next';
 import { useRouter } from 'next/navigation';
+import { HiOutlineLogout } from 'react-icons/hi';
 import styles from '../styles/Navbar.module.scss';
 
 type Props = {
@@ -20,7 +21,10 @@ export function LogoutButton(props: Props) {
         }}
         className={styles.logoutButton}
       >
-        Logout
+        <div className={styles.logoutButtons}>
+          <p className={styles.logoutMobile}>Logout</p>
+          <HiOutlineLogout className={styles.logoutDesktop} />
+        </div>
       </button>
     </form>
   );
