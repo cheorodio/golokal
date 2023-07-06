@@ -24,7 +24,7 @@ export default function DeleteFavourites(props: Props) {
         <button
           onClick={async () => {
             const response = await fetch(
-              `/api/favourites/${props.favourites.id}`,
+              `/api/favourites/${props.favourites}`,
               {
                 method: 'DELETE',
               },
@@ -35,6 +35,7 @@ export default function DeleteFavourites(props: Props) {
             if (data.error) {
               setError(data.error);
               console.log(error);
+              router.refresh();
               return;
             }
             router.refresh();

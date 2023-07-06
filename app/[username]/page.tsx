@@ -40,6 +40,8 @@ export default async function UserProfilePage({ params }: ProfilePageProps) {
 
   const favourites = await getFavouriteByUserId(user.id);
 
+  console.log({ favourites });
+
   return (
     <section className={styles.profileContainerBox}>
       <ProfilePage user={user} currentUser={currentUser} />
@@ -81,7 +83,7 @@ export default async function UserProfilePage({ params }: ProfilePageProps) {
                     </p>
                   </div>
                   <DeleteFavourites
-                    favourites={favourite}
+                    favourites={favourite.favouriteId}
                     currentUser={currentUser}
                     user={user}
                   />
