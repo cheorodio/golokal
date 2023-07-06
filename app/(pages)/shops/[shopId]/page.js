@@ -76,11 +76,14 @@ export default async function SingleShopPage(props) {
           <div className={styles.moreInfo}>
             <div className={styles.linkAndFollow}>
               <Link href="/">{singleShop.websiteUrl}</Link>
-              <AddFavourites
-                favourites={favourites}
-                singleShop={singleShop}
-                user={user}
-              />
+
+              {user.id !== singleShop.userId && (
+                <AddFavourites
+                  favourites={favourites}
+                  singleShop={singleShop}
+                  user={user}
+                />
+              )}
             </div>
             <p className={styles.shopBio}>{singleShop.description}</p>
             <p>
