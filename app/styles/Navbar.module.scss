@@ -79,12 +79,79 @@
     font-size: 1.25rem;
   }
 
-  .loginButton {
-    width: 30%;
+  // desktop buttons
+  .desktopLoginButtons {
     display: flex;
     justify-content: flex-end;
-    align-items: center;
-    position: relative;
+    width: 30%;
+
+    @media screen and (max-width: $tablet) {
+      display: none;
+    }
+
+    .loggedIn {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+
+      .logoutButton {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 50%;
+        height: 30px;
+        width: 30px;
+        background-color: var(--main-color);
+
+        @media screen and (max-width: $tablet) {
+          display: flex;
+          align-items: center;
+        }
+
+        .logoutButtons {
+          .logoutMobile {
+            display: none;
+
+            @media screen and (max-width: $tablet) {
+              display: flex;
+            }
+          }
+
+          .logoutDesktop {
+            display: flex;
+
+            @media screen and (max-width: $tablet) {
+              display: none;
+            }
+          }
+        }
+      }
+    }
+
+    .desktopLoggedOut {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+
+      .desktopRegisterButton {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+      }
+    }
+  }
+
+  // mobile buttons
+  .loginButton {
+    display: none;
+
+    @media screen and (max-width: $tablet) {
+      display: flex;
+      width: 30%;
+      justify-content: flex-end;
+      align-items: center;
+      position: relative;
+    }
 
     .dropdownButton {
       background: transparent;
