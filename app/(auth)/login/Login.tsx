@@ -15,6 +15,7 @@ export default function LoginForm(props: Props) {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [passwordShown, setPasswordShown] = useState(false);
+  const [success, setSuccess] = useState(false);
   const [error, setError] = useState<string>();
   const router = useRouter();
 
@@ -34,6 +35,7 @@ export default function LoginForm(props: Props) {
       console.log(data.error);
       return;
     }
+    setSuccess(true);
     router.push(
       getSafeReturnToPath(props.returnTo) ||
         (`/${data.user.username}` as Route),
@@ -98,6 +100,14 @@ export default function LoginForm(props: Props) {
             Log in
           </button>
           {error !== '' && <div className={styles.error}>{error}</div>}
+          {success && (
+            <figure className={styles.notification}>
+              <div className={styles.notificationBody}>
+                Succesfull login! Please wait to be directed to your profile
+              </div>
+              <div className={styles.notificationProgress} />
+            </figure>
+          )}
           <div className={styles.signupContainer}>
             <p>
               Don't have an account yet?
