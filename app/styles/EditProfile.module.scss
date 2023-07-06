@@ -97,6 +97,7 @@
       overflow: scroll;
 
       @media screen and (min-width: $tablet) {
+        width: 100%;
         overflow: auto;
       }
 
