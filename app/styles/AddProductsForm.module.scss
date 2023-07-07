@@ -48,32 +48,82 @@
       gap: 16px;
 
       @media screen and (min-width: $tablet) {
-        width: 500px;
+        width: 800px;
         box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px,
           rgba(0, 0, 0, 0.23) 0px 3px 6px;
 
         display: flex;
-        flex-direction: column;
+        flex-direction: row;
         padding: 30px;
         border-radius: 16px;
         gap: 16px;
       }
 
-      div {
+      .leftSide {
+        flex: 1;
+
+        div {
+          display: flex;
+          flex-direction: column;
+          gap: 8px;
+
+          input,
+          select,
+          textarea {
+            height: 40px;
+            border-radius: 8px;
+            border: 1px solid var(--main-color);
+          }
+
+          textarea {
+            height: 60px;
+          }
+        }
+
+        .productPic {
+          display: flex;
+          flex-direction: column;
+          width: 100%;
+
+          .productPicInput[type='file'] {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            height: 40px;
+            border-radius: 8px;
+            border: 1px solid var(--main-color);
+          }
+
+          .productPicInput::file-selector-button {
+            background-color: var(--main-color);
+            border: none;
+            height: 100%;
+            width: 30%;
+            cursor: pointer;
+          }
+        }
+      }
+
+      .rightSide {
         display: flex;
         flex-direction: column;
         gap: 8px;
 
-        input,
-        select,
-        textarea {
-          height: 40px;
-          border-radius: 8px;
+        .imageContainer {
+          width: 270px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
           border: 1px solid var(--main-color);
-        }
+          border-radius: 5px;
+          height: 200px;
 
-        textarea {
-          height: 60px;
+          .productImage {
+            height: 100%;
+            width: 100%;
+            border-radius: 8px;
+          }
         }
 
         button {
@@ -89,40 +139,6 @@
             border: 1px solid var(--secondary-text-color);
             color: var(--secondary-text-color);
           }
-        }
-      }
-
-      .productPic {
-        display: flex;
-        flex-direction: column;
-        width: 100%;
-
-        .productPicInput[type='file'] {
-          width: 100%;
-          display: flex;
-          align-items: center;
-          gap: 16px;
-        }
-
-        .productPicInput::file-selector-button {
-          background-color: var(--main-color);
-          border: none;
-          height: 100%;
-          width: 30%;
-          cursor: pointer;
-        }
-      }
-
-      .imageContainer {
-        width: 100%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-
-        .productImage {
-          height: 100%;
-          width: 100%;
-          border-radius: 8px;
         }
       }
     }
