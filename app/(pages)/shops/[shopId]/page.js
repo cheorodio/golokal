@@ -9,7 +9,6 @@ import { getFavourites } from '../../../../database/favourites';
 import { getProductsWithInfo } from '../../../../database/products';
 import { getShopById } from '../../../../database/shops';
 import { getUserBySessionToken } from '../../../../database/users';
-// import { Shop } from '../../../../migrations/1688217209-createTableShops';
 import styles from '../../../styles/shopPage.module.scss';
 import AddComments from './AddComments';
 import AddFavourites from './AddFavourites';
@@ -19,7 +18,7 @@ import LikeProduct from './LikeProducts';
 export const dynamic = 'force-dynamic';
 
 export const metadata = {
-  title: { default: 'golokal | Discover local vendors' },
+  title: { default: 'Golokal | Discover local vendors' },
   description:
     'At golokal, we are passionate about supporting artisans, craftsmen, and local businesses, and our platform serves as a virtual marketplace to showcase their unique creations.',
   shortcut: '/favicon.ico',

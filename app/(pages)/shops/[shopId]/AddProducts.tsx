@@ -97,77 +97,82 @@ export default function AddProductsForm(props: Props) {
         <div className={styles.innerContainer}>
           <h4>Upload a product</h4>
           <form onSubmit={handleOnSubmit} className={styles.uploadProductForm}>
-            <div>
-              <label htmlFor="name">Name</label>
-              <input
-                id="name"
-                value={name}
-                onChange={(event) => setName(event.currentTarget.value)}
-              />
-            </div>
-
-            <div>
-              <label htmlFor="category">Category</label>
-              <select
-                id="category"
-                value={category}
-                onChange={(event) => setCategory(event.currentTarget.value)}
-              >
-                <option>Select a category</option>
-                <option>Accessories</option>
-                <option>Arts</option>
-                <option>Candles</option>
-                <option>Ceramics</option>
-                <option>Clothes</option>
-                <option>Crochet</option>
-                <option>Home Decor</option>
-                <option>Jewelleries</option>
-                <option>Pet Products</option>
-                <option>Soap</option>
-                <option>Toys</option>
-              </select>
-            </div>
-
-            <div>
-              <label htmlFor="description">Description</label>
-              <textarea
-                id="decription"
-                maxLength={500}
-                value={description}
-                onChange={(event) => setDescription(event.currentTarget.value)}
-              />
-            </div>
-
-            <div className={styles.productPic}>
-              <label htmlFor="product">
-                Product picture <span>*</span>
-              </label>
-              <input
-                id="product"
-                type="file"
-                name="file"
-                ref={fileInputRef}
-                onChange={handleOnChange}
-                className={styles.productPicInput}
-              />
-            </div>
-            <div className={styles.imageContainer}>
-              {!!imageUrl && (
-                <Image
-                  src={imageUrl}
-                  height={100}
-                  width={100}
-                  alt="Product avatar"
-                  className={styles.productImage}
+            <div className={styles.leftSide}>
+              <div>
+                <label htmlFor="name">Name</label>
+                <input
+                  id="name"
+                  value={name}
+                  onChange={(event) => setName(event.currentTarget.value)}
                 />
-              )}
+              </div>
+
+              <div>
+                <label htmlFor="category">Category</label>
+                <select
+                  id="category"
+                  value={category}
+                  onChange={(event) => setCategory(event.currentTarget.value)}
+                >
+                  <option>Select a category</option>
+                  <option>Accessories</option>
+                  <option>Arts</option>
+                  <option>Candles</option>
+                  <option>Ceramics</option>
+                  <option>Clothes</option>
+                  <option>Crochet</option>
+                  <option>Home Decor</option>
+                  <option>Jewelleries</option>
+                  <option>Pet Products</option>
+                  <option>Soap</option>
+                  <option>Toys</option>
+                </select>
+              </div>
+
+              <div>
+                <label htmlFor="description">Description</label>
+                <textarea
+                  id="decription"
+                  maxLength={500}
+                  value={description}
+                  onChange={(event) =>
+                    setDescription(event.currentTarget.value)
+                  }
+                />
+              </div>
+
+              <div className={styles.productPic}>
+                <label htmlFor="product">Product picture</label>
+                <input
+                  id="product"
+                  type="file"
+                  name="file"
+                  ref={fileInputRef}
+                  onChange={handleOnChange}
+                  className={styles.productPicInput}
+                />
+              </div>
             </div>
 
-            <div>
+            <div className={styles.rightSide}>
+              <div className={styles.imageContainer}>
+                {!!imageUrl && (
+                  <Image
+                    src={imageUrl}
+                    height={100}
+                    width={100}
+                    alt="Product avatar"
+                    className={styles.productImage}
+                  />
+                )}
+              </div>
+
+              {/* <div> */}
               <button>Create product</button>
+              {/* </div> */}
+              <div style={{ color: 'red' }}>{error}</div>
+              {success && <p>Product created 😄</p>}
             </div>
-            <div style={{ color: 'red' }}>{error}</div>
-            {success && <p>Product created 😄</p>}
           </form>
         </div>
       )}
