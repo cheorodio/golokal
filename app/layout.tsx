@@ -18,7 +18,7 @@ import styles from './styles/Navbar.module.scss';
 const inter = Inter({ subsets: ['latin'] });
 
 export const metadata = {
-  title: 'GoLokal - handmade products',
+  title: 'GoLokal - Handmade Products',
   description: 'Supporting local vendors and small businesses',
   manifest: '/manifest.json',
 };
