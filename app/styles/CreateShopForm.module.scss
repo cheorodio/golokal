@@ -86,27 +86,27 @@
     }
 
     // image inout
-    .shopPicDiv {
-      display: flex;
-      flex-direction: column;
-      width: 100%;
+    // .shopPicDiv {
+    //   display: flex;
+    //   flex-direction: column;
+    //   width: 100%;
 
-      .shopPicInput[type='file'] {
-        width: 100%;
-        display: flex;
-        align-items: center;
-        gap: 16px;
-        padding-left: 0px;
-      }
+    //   .shopPicInput[type='file'] {
+    //     width: 100%;
+    //     display: flex;
+    //     align-items: center;
+    //     gap: 16px;
+    //     padding-left: 0px;
+    //   }
 
-      .shopPicInput::file-selector-button {
-        background-color: var(--main-color);
-        border: none;
-        height: 100%;
-        width: 30%;
-        cursor: pointer;
-      }
-    }
+    //   .shopPicInput::file-selector-button {
+    //     background-color: var(--main-color);
+    //     border: none;
+    //     height: 100%;
+    //     width: 30%;
+    //     cursor: pointer;
+    //   }
+    // }
 
     .imageContainer {
       width: 100%;

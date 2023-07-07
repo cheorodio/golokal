@@ -62,27 +62,27 @@
         rgba(0, 0, 0, 0.23) 0px 3px 6px;
       width: 100%;
 
-      .profilePicDiv {
-        display: flex;
-        flex-direction: column;
-        width: 100%;
+      // .profilePicDiv {
+      //   display: flex;
+      //   flex-direction: column;
+      //   width: 100%;
 
-        .profilePicInput[type='file'] {
-          width: 100%;
-          display: flex;
-          align-items: center;
-          gap: 16px;
-          padding: 0px;
-        }
+      //   .profilePicInput[type='file'] {
+      //     width: 100%;
+      //     display: flex;
+      //     align-items: center;
+      //     gap: 16px;
+      //     padding: 0px;
+      //   }
 
-        .profilePicInput::file-selector-button {
-          background-color: var(--main-color);
-          border: none;
-          height: 100%;
-          width: 30%;
-          cursor: pointer;
-        }
-      }
+      //   .profilePicInput::file-selector-button {
+      //     background-color: var(--main-color);
+      //     border: none;
+      //     height: 100%;
+      //     width: 30%;
+      //     cursor: pointer;
+      //   }
+      // }
 
       .imageContainer {
         width: 100%;
