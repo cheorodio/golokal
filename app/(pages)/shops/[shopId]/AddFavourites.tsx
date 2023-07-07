@@ -47,7 +47,7 @@ export default function AddFavourites(props: Props) {
     <div className={styles.followButtonContainer}>
       <button onClick={async () => await addToFavourite()}>
         {isFollowed ? (
-          <p className={styles.followedButton}>Followed</p>
+          <p className={styles.followedButton}>Following</p>
         ) : (
           <p className={styles.followButton}>Follow</p>
         )}
