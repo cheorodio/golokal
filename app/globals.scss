@@ -21,6 +21,7 @@
 body {
   background-color: var(--bg-color);
 }
+
 li {
   list-style: none;
   position: relative;
@@ -43,6 +44,15 @@ li {
   &:hover::before {
     transform-origin: left;
     transform: scaleX(1);
+  }
+
+  &:nth-child(2)::before {
+    background-color: transparent;
+  }
+
+  &:nth-child(2):hover::before {
+    transform-origin: left;
+    transform: scaleX(0);
   }
 }
 
