@@ -27,7 +27,7 @@ export default function NavBar() {
               <li>{title}</li>
             </Link>
           ))} */}
-          <li>
+          <li className={styles.navList}>
             <Link href="/">Home</Link>
           </li>
 
@@ -38,21 +38,21 @@ export default function NavBar() {
             </div>
 
             <div className={styles.discoverDropdownOptions}>
-              <ul>
-                <li>
+              <ul className={styles.discoverLink}>
+                <li className={styles.discoverList}>
                   <Link href="/shops">Shops</Link>
                 </li>
-                <li>
+                <li className={styles.discoverList}>
                   <Link href="/products">Products</Link>
                 </li>
               </ul>
             </div>
           </li>
 
-          <li>
+          <li className={styles.navList}>
             <Link href="/about">About</Link>
           </li>
-          <li>
+          <li className={styles.navList}>
             <Link href="/blog">Blog</Link>
           </li>
         </ul>
