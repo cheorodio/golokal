@@ -28,16 +28,16 @@ export default function ProfilePage(props: Props) {
         {!props.user.imageUrl ? (
           <img
             src="/images/avatar.png"
-            width={300}
-            height={300}
+            width={100}
+            height={100}
             alt="Profile avatar"
             className={styles.profileAvatar}
           />
         ) : (
           <img
             src={props.user.imageUrl}
-            width={300}
-            height={300}
+            width={100}
+            height={100}
             alt="Profile avatar"
             className={styles.profileAvatar}
           />
