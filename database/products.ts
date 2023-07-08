@@ -5,6 +5,7 @@ import { sql } from './connect';
 type ShopProduct = {
   productId: number;
   shopId: number;
+  shopShopname: string;
   userId: number;
   productName: string;
   productCategory: string;
@@ -110,6 +111,7 @@ export const getProductsWithInfo = cache(async (shopId: number) => {
     products.id AS product_id,
     users.id AS user_id,
     shops.id AS shop_id,
+    shops.name AS shop_shopName,
     products.name AS product_name,
     products.category AS product_category,
     products.description AS product_description,
