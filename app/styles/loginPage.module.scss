@@ -166,7 +166,7 @@
       }
 
       .notification {
-        width: max-content;
+        width: 100%;
         border-radius: 6px;
         background-color: #313e2c;
         color: #aaec8a;
@@ -174,7 +174,7 @@
         transform: translateY(30px);
         opacity: 0;
         visibility: hidden;
-        // animation: fade-in 3s ease-in-out;
+        animation: fade-in 3s linear;
 
         .notificationBody {
           display: flex;
@@ -190,7 +190,7 @@
           transform-origin: left;
           background: linear-gradient(to right, #313e2c, #aaec8a);
           border-radius: inherit;
-          // animation: progress 2.5s 0.3s liner;
+          animation: progress 2.5s 0.3s linear;
         }
 
         @keyframes fade-in {
