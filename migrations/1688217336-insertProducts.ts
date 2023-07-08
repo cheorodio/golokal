@@ -5,6 +5,7 @@ export const products = [
     id: 1,
     userId: 2,
     shopId: 2,
+    shopName: 'luluShop',
     name: 'Ocean',
     category: 'Candles',
     description:
@@ -15,6 +16,7 @@ export const products = [
     id: 2,
     userId: 2,
     shopId: 2,
+    shopName: 'luluShop',
     name: 'Christmas',
     category: 'Candles',
     description:
@@ -25,6 +27,7 @@ export const products = [
     id: 3,
     userId: 1,
     shopId: 1,
+    shopName: 'vida',
     name: 'Lana',
     category: 'Jewelleries',
     description:
@@ -35,6 +38,7 @@ export const products = [
     id: 4,
     userId: 3,
     shopId: 3,
+    shopName: 'keramiks',
     name: 'Kyut',
     category: 'Ceramics',
     description:
@@ -45,6 +49,7 @@ export const products = [
     id: 5,
     userId: 4,
     shopId: 4,
+    shopName: 'The Soap Company',
     name: 'Lavender',
     category: 'Soap',
     description:
@@ -55,6 +60,7 @@ export const products = [
     id: 6,
     userId: 1,
     shopId: 1,
+    shopName: 'vida',
     name: 'Sara',
     category: 'Jewelleries',
     description:
@@ -65,6 +71,7 @@ export const products = [
     id: 7,
     userId: 1,
     shopId: 1,
+    shopName: 'vida',
     name: 'helen',
     category: 'Jewelleries',
     description:
@@ -75,6 +82,7 @@ export const products = [
     id: 8,
     userId: 1,
     shopId: 1,
+    shopName: 'vida',
     name: 'kate',
     category: 'Jewelleries',
     description:
@@ -85,6 +93,7 @@ export const products = [
     id: 9,
     userId: 1,
     shopId: 1,
+    shopName: 'vida',
     name: 'lola',
     category: 'Jewelleries',
     description:
@@ -95,6 +104,7 @@ export const products = [
     id: 10,
     userId: 1,
     shopId: 1,
+    shopName: 'vida',
     name: 'tina',
     category: 'Jewelleries',
     description:
@@ -105,6 +115,7 @@ export const products = [
     id: 11,
     userId: 3,
     shopId: 3,
+    shopName: 'keramiks',
     name: 'Cups',
     category: 'Ceramics',
     description:
@@ -116,6 +127,7 @@ export const products = [
     userId: 4,
     shopId: 4,
     name: 'Lily',
+    shopName: 'The Soap Company',
     category: 'Soap',
     description:
       'Transform your daily bathing routine into a moment of indulgence with our exquisite Handmade Soap collection. Crafted with love and care, each soap is a work of art, designed to nourish your skin and elevate your senses.',
@@ -126,6 +138,7 @@ export const products = [
     userId: 4,
     shopId: 4,
     name: 'Rose',
+    shopName: 'The Soap Company',
     category: 'Soap',
     description:
       'Transform your daily bathing routine into a moment of indulgence with our exquisite Handmade Soap collection. Crafted with love and care, each soap is a work of art, designed to nourish your skin and elevate your senses.',
@@ -137,9 +150,9 @@ export async function up(sql: Sql) {
   for (const product of products) {
     await sql`
     INSERT INTO products
-      (name, user_id, shop_id, category, description, image_url)
+      (name, user_id, shop_id, shop_name, category, description, image_url)
     VALUES
-      (${product.name}, ${product.userId}, ${product.shopId}, ${product.category}, ${product.description}, ${product.imageUrl})
+      (${product.name}, ${product.userId}, ${product.shopId}, ${product.shopName}, ${product.category}, ${product.description}, ${product.imageUrl})
   `;
   }
 }

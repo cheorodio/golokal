@@ -4,6 +4,7 @@ export type Product = {
   id: number;
   userId: number | null;
   shopId: number | null;
+  shopName: string | null;
   name: string;
   category: string;
   description: string;
@@ -16,6 +17,7 @@ export async function up(sql: Sql) {
       id integer PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
       user_id integer REFERENCES users (id) ON DELETE CASCADE,
       shop_id integer REFERENCES shops (id) ON DELETE CASCADE,
+      shop_name varchar(40),
       name varchar(30) NOT NULL,
       category varchar(30) NOT NULL,
       description varchar(500) NOT NULL,
