@@ -7,12 +7,12 @@ import { CgClose } from 'react-icons/cg';
 import { RxHamburgerMenu } from 'react-icons/rx';
 import styles from '../styles/Navbar.module.scss';
 
-export const links = [
-  { id: 1, title: 'Home', link: '/' },
-  { id: 2, title: 'Shops', link: '/shops' },
-  { id: 3, title: 'About', link: '/about' },
-  { id: 4, title: 'Blog', link: '/blog' },
-];
+// export const links = [
+//   { id: 1, title: 'Home', link: '/' },
+//   { id: 2, title: 'Shops', link: '/shops' },
+//   { id: 3, title: 'About', link: '/about' },
+//   { id: 4, title: 'Blog', link: '/blog' },
+// ];
 
 export default function NavBar() {
   const [menuOpen, setMenuOpen] = useState(false);
