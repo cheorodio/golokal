@@ -1,5 +1,5 @@
 import './globals.scss';
-import { Inter } from 'next/font/google';
+import { Domine, Inter } from 'next/font/google';
 import { cookies } from 'next/headers';
 import Link from 'next/link';
 import { AiFillShop } from 'react-icons/ai';
@@ -16,6 +16,7 @@ import NavBar from './components/NavBar';
 import styles from './styles/Navbar.module.scss';
 
 const inter = Inter({ subsets: ['latin'] });
+const domine = Domine({ subsets: ['latin'] });
 
 export const metadata = {
   title: 'GoLokal - Handmade Products',
@@ -43,7 +44,7 @@ export default async function RootLayout({ children }: LayoutProps) {
       <body className={inter.className}>
         <nav className={styles.navigationBar}>
           <NavBar />
-          <div className={styles.logo}>
+          <div className={`${styles.logo} ${domine.className}`}>
             <Link href="/">golokal</Link>
           </div>
           {/* desktop */}
