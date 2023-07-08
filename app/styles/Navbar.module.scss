@@ -15,20 +15,20 @@
   position: absolute;
   width: 100%;
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: space-between;
   padding: 20px 80px;
   flex: 1;
   z-index: 9;
 
-  div {
-    display: flex;
-    gap: 10px;
-  }
+  // div {
+  //   display: flex;
+  //   gap: 10px;
+  // }
 
-  @media screen and (max-width: $tablet) {
-    padding: 20px;
-  }
+  // @media screen and (max-width: $tablet) {
+  //   padding: 20px;
+  // }
 
   .nav {
     display: flex;
@@ -65,6 +65,23 @@
         flex-direction: column;
         border: none;
         font-size: 1.5rem;
+      }
+
+      .discoverDropdown {
+        position: relative;
+
+        .discoverDropdownButton {
+          display: flex;
+        }
+
+        .discoverDropdownOptions {
+          display: none;
+        }
+
+        &:hover .discoverDropdownOptions {
+          display: flex;
+          flex-direction: column;
+        }
       }
     }
   }
