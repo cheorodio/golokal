@@ -51,8 +51,19 @@ export default async function RootLayout({ children }: LayoutProps) {
           <div className={styles.desktopLoginButtons}>
             {user ? (
               <div className={styles.loggedIn}>
-                <Link href={`/${user.username}`}>{user.profileName}</Link> |
-                <Link href="/shops/my-shop">My shop</Link>
+                <Link
+                  href={`/${user.username}`}
+                  className={styles.desktopLoggedInLink}
+                >
+                  {user.profileName}
+                </Link>{' '}
+                |
+                <Link
+                  href="/shops/my-shop"
+                  className={styles.desktopLoggedInLink}
+                >
+                  My shop
+                </Link>
                 <LogoutButton logout={logout} />
               </div>
             ) : (
