@@ -1,5 +1,5 @@
 import './globals.scss';
-import { Domine, Inter } from 'next/font/google';
+import { Domine, Questrial } from 'next/font/google';
 import { cookies } from 'next/headers';
 import Link from 'next/link';
 import { AiFillShop } from 'react-icons/ai';
@@ -14,7 +14,10 @@ import { LogoutButton } from './components/LogoutButton';
 import NavBar from './components/NavBar';
 import styles from './styles/Navbar.module.scss';
 
-const inter = Inter({ subsets: ['latin'] });
+const questrial = Questrial({
+  weight: '400',
+  subsets: ['latin'],
+});
 const domine = Domine({ subsets: ['latin'] });
 
 export const metadata = {
@@ -40,7 +43,7 @@ export default async function RootLayout({ children }: LayoutProps) {
       <head>
         <meta name="theme-color" content="#FFF" />
       </head>
-      <body className={inter.className}>
+      <body className={questrial.className}>
         <nav className={styles.navigationBar}>
           <NavBar />
           <div className={`${styles.logo} ${domine.className}`}>
