@@ -95,6 +95,11 @@
           background-color: transparent;
         }
 
+        &:active {
+          transform: scale(3);
+          transition: transform 0.5s ease-in-out;
+        }
+
         // &:nth-child(2):hover::before {
         //   transform-origin: left;
         //   transform: scaleX(0);
