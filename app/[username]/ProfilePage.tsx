@@ -1,5 +1,6 @@
 'use client';
 
+import { Domine } from 'next/font/google';
 import styles from '../styles/EditProfile.module.scss';
 
 type Props = {
@@ -20,6 +21,11 @@ type Props = {
     imageUrl: string;
   };
 };
+
+const domine = Domine({
+  subsets: ['latin'],
+  display: 'swap',
+});
 
 export default function ProfilePage(props: Props) {
   return (
@@ -50,7 +56,7 @@ export default function ProfilePage(props: Props) {
       )}
 
       <div className={styles.nameContainer}>
-        <h1>{props.user.profileName}</h1>
+        <h1 className={domine.className}>{props.user.profileName}</h1>
       </div>
       <div>
         <p>@{props.user.username}</p>

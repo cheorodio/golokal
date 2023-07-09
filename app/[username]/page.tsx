@@ -6,6 +6,7 @@ import { getFavouriteByUserId } from '../../database/favourites';
 import { getUserBySessionToken, getUserByUsername } from '../../database/users';
 import { User } from '../../migrations/1688217161-createTableUsers';
 import { Favourite } from '../../migrations/1688217261-createTableFavourites';
+import { domine } from '../layout';
 import styles from '../styles/EditProfile.module.scss';
 import DeleteFavourites from './DeleteFavourites';
 import ProfilePage from './ProfilePage';
@@ -51,7 +52,9 @@ export default async function UserProfilePage({ params }: ProfilePageProps) {
     <section className={styles.profileContainerBox}>
       <ProfilePage user={user} currentUser={currentUser} />
       <div className={styles.favouritesContainer}>
-        <h1>{user.profileName}'s favourite shops</h1>
+        <h1 className={domine.className}>
+          {user.profileName}'s favourite shops
+        </h1>
         {favourites.length === 0 ? (
           <p>Favourite is empty</p>
         ) : (
@@ -73,7 +76,7 @@ export default async function UserProfilePage({ params }: ProfilePageProps) {
                     <h1>{favourite.shopName}</h1>
                     <Link
                       href={`/shops/${favourite.shopId}`}
-                      className={styles.shopLink}
+                      className={`${styles.shopLink} ${domine.className}`}
                     >
                       View shop
                     </Link>
