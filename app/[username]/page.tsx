@@ -2,7 +2,6 @@ import { cookies } from 'next/headers';
 import Image from 'next/image';
 import Link from 'next/link';
 import { notFound, redirect } from 'next/navigation';
-import { VscLocation } from 'react-icons/vsc';
 import { getFavouriteByUserId } from '../../database/favourites';
 import { getUserBySessionToken, getUserByUsername } from '../../database/users';
 import { User } from '../../migrations/1688217161-createTableUsers';
@@ -57,36 +56,27 @@ export default async function UserProfilePage({ params }: ProfilePageProps) {
                   key={`favourite-div-${favourite.shopId}`}
                   className={styles.favouriteShopCard}
                 >
-                  <Link
-                    href={`/shops/${favourite.shopId}`}
-                    className={styles.imageSection}
-                  >
-                    <Image
-                      src={favourite.shopImageUrl}
-                      width={100}
-                      height={100}
-                      alt="Shop image"
-                      className={styles.shopImageUrl}
-                    />
-                  </Link>
-                  <div className={styles.infoSection}>
-                    <div>
-                      <h1>{favourite.shopName}</h1>
-                      <Link href="/">
-                        <h4>{favourite.shopWebsiteUrl}</h4>
-                      </Link>
-                    </div>
-                    <p className={styles.bio}>{favourite.shopDescription}</p>
-                    <p className={styles.location}>
-                      <VscLocation />
-                      <span>{favourite.shopLocation}</span>
-                    </p>
-                  </div>
-                  <DeleteFavourites
-                    favourites={favourite.favouriteId}
-                    currentUser={currentUser}
-                    user={user}
+                  <Image
+                    src={favourite.shopImageUrl}
+                    width={100}
+                    height={100}
+                    alt="Shop image"
+                    className={styles.shopImageUrl}
                   />
+                  <div className={styles.infoSection}>
+                    <h1>{favourite.shopName}</h1>
+                    <Link
+                      href={`/shops/${favourite.shopId}`}
+                      className={styles.shopLink}
+                    >
+                      View shop
+                    </Link>
+                    <DeleteFavourites
+                      favourites={favourite.favouriteId}
+                      currentUser={currentUser}
+                      user={user}
+                    />
+                  </div>
                 </div>
               );
             })}
