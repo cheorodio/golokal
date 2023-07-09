@@ -60,7 +60,6 @@
 
           .shopName {
             font-size: 1.5rem;
-            font-family: var(domine);
             text-align: center;
           }
 
@@ -112,7 +111,6 @@
       padding: 6px 12px;
       border: 1px solid var(--main-color);
       border-radius: 10px;
-      font-family: var(domine);
       cursor: pointer;
 
       &:active {
