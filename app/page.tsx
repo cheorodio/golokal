@@ -25,7 +25,7 @@ export default function Home() {
       <section className={styles.aboutSection}>
         <div className={styles.inBetween} />
         <div className={styles.aboutInfo}>
-          <h2 className={styles.aboutTitle}>
+          <h2 className={`${styles.aboutTitle} ${domine.className}`}>
             The ultimate destination for local and handmade products.
           </h2>
           <p className={styles.aboutDescription}>
