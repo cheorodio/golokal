@@ -36,8 +36,8 @@ export default async function ShopsPage() {
                     className={styles.shopImage}
                   />
                 </div>
-                <div>
-                  <p>{shop.description}</p>
+                <div className={styles.descriptionContianer}>
+                  <p className={styles.shopDescription}>{shop.description}</p>
                 </div>
               </Link>
             </div>

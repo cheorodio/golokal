@@ -79,6 +79,14 @@
             object-fit: cover;
           }
         }
+
+        .descriptionContianer {
+          display: flex;
+
+          .shopDescription {
+            line-height: 1.25;
+          }
+        }
       }
     }
   }
