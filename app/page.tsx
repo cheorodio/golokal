@@ -1,3 +1,4 @@
+import { Domine } from 'next/font/google';
 import Image from 'next/image';
 import Link from 'next/link';
 import connect from '../public/images/icons/connect.png';
@@ -6,11 +7,15 @@ import explore from '../public/images/icons/explore.png';
 import about from '../public/images/vida.jpg';
 import styles from './styles/homepage.module.scss';
 
+const domine = Domine({ subsets: ['latin'] });
+
 export default function Home() {
   return (
     <main>
       <section className={styles.heroSection}>
-        <h1>Connecting Communities, Supporting Small Businesses</h1>
+        <h1 className={domine.className}>
+          Connecting Communities, Supporting Small Businesses
+        </h1>
         <p>Discover local vendors and hundreds of handmade products</p>
         <Link href="/shops" className={styles.heroLink}>
           explore now
