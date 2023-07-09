@@ -12,7 +12,7 @@ type Props = {
 export function LogoutButton(props: Props) {
   const router = useRouter();
   return (
-    <form>
+    <form className={styles.logoutLink}>
       <button
         formAction={async () => {
           await props.logout();
@@ -21,10 +21,10 @@ export function LogoutButton(props: Props) {
         }}
         className={styles.logoutButton}
       >
-        <div className={styles.logoutButtons}>
-          <p className={styles.logoutMobile}>Logout</p>
-          <HiOutlineLogout className={styles.logoutDesktop} />
-        </div>
+        <span className={styles.logoutMobile}>Logout</span>
+        <span className={styles.logoutDesktop}>
+          <HiOutlineLogout />
+        </span>
       </button>
     </form>
   );
