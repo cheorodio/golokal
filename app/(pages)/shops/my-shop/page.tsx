@@ -6,6 +6,7 @@ import React from 'react';
 import { BsArrowRight } from 'react-icons/bs';
 import { getShopByUserId } from '../../../../database/shops';
 import { getUserBySessionToken } from '../../../../database/users';
+import { domine } from '../../../layout';
 import styles from '../../../styles/allShopsPage.module.scss';
 
 export const metadata = {
@@ -41,7 +42,9 @@ export default async function MyShopPage() {
           {myShop.map((shop) => {
             return (
               <div key={`shop-div-${shop.id}`} className={styles.shopCard}>
-                <p className={styles.shopName}>{shop.name}</p>
+                <p className={`${styles.shopName} ${domine.className}`}>
+                  {shop.name}
+                </p>
                 <Image
                   src={shop.imageUrl}
                   alt="Shop"
