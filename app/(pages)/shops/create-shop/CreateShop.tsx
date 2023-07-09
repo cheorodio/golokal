@@ -151,7 +151,14 @@ export default function CreateShop(props: Props) {
         <button>Create shop</button>
       </div>
       <div style={{ color: 'red' }}>{error}</div>
-      {success && <p>Shop created 😄</p>}
+      {success && (
+        <figure className={styles.notification}>
+          <div className={styles.notificationBody}>
+            Shop created! Please wait to be directed to your page
+          </div>
+          <div className={styles.notificationProgress} />
+        </figure>
+      )}
     </form>
   );
 }

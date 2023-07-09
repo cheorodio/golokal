@@ -171,7 +171,14 @@ export default function AddProductsForm(props: Props) {
               <button>Create product</button>
               {/* </div> */}
               <div style={{ color: 'red' }}>{error}</div>
-              {success && <p>Product created 😄</p>}
+              {success && (
+                <figure className={styles.notification}>
+                  <div className={styles.notificationBody}>
+                    Product created!✨
+                  </div>
+                  <div className={styles.notificationProgress} />
+                </figure>
+              )}
             </div>
           </form>
         </div>
