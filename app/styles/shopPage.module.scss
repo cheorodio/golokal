@@ -32,7 +32,6 @@
 
       @media screen and (min-width: $tablet) {
         width: 30%;
-        min-height: 70px;
       }
 
       .shopHeader {
@@ -63,6 +62,7 @@
         gap: 10px;
         padding: 8px 0px;
         width: 100%;
+        min-height: 70px;
 
         .linkAndFollow {
           display: flex;
