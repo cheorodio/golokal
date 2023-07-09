@@ -150,7 +150,7 @@ export default async function SingleShopPage(props) {
                 </div>
                 <div className={styles.comments}>
                   <Link href={`/${comment.userName}`}>
-                    <h5> {comment.userName} </h5>
+                    <h4 className={domine.className}> {comment.userName} </h4>
                   </Link>
                   <p className={styles.commentContent}>
                     {comment.commentContent}
