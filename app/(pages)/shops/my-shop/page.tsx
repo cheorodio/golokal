@@ -28,7 +28,7 @@ export default async function MyShopPage() {
       {myShop.length === 0 ? (
         <div className={styles.noShopFoundMessage}>
           <p>You don't have a shop yet</p>
-          <Link href="/shops/create-shop">
+          <Link href="/shops/create-shop" className={styles.createShopLink}>
             <p>Click here to create one</p>
           </Link>
         </div>
