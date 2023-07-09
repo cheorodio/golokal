@@ -51,16 +51,8 @@ export default async function SingleShopPage(props) {
   const shopProducts = await getProductsWithInfo(singleShop.id);
 
   return (
-    <main className={styles.topSection}>
+    <main className={styles.mainSection}>
       <div className={styles.shopPage}>
-        <Image
-          src="/images/shoppage-border.png"
-          alt="border color"
-          height={100}
-          width={1000}
-          className={styles.border}
-        />
-
         <div className={styles.shopInfo}>
           <h1 className={styles.shopHeader}>{singleShop.name}</h1>
           <div className={styles.imageBox}>
@@ -124,6 +116,14 @@ export default async function SingleShopPage(props) {
           </div>
         </div>
       </div>
+
+      <Image
+        src="/images/shoppage-border.png"
+        alt="border color"
+        height={100}
+        width={1000}
+        className={styles.borderImage}
+      />
 
       {/* ************* COMMENTS SECTION ************* */}
       <div className={styles.commentsSection}>

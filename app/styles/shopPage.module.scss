@@ -1,25 +1,22 @@
 @import './queries.module';
 
-.topSection {
+.mainSection {
   display: flex;
   flex-direction: column;
-  gap: 20px;
 
   @media screen and (min-width: $tablet) {
     flex-direction: column;
-    gap: 50px;
   }
 
   .shopPage {
-    padding: 100px 20px 80px;
+    padding: 100px 20px 0px;
     display: flex;
     flex-direction: column;
     gap: 20px;
     background-color: var(--main-color);
-    position: relative;
 
     @media screen and (min-width: $tablet) {
-      padding: 100px 80px 50px;
+      padding: 100px 80px 0px;
       flex-direction: row;
       gap: 50px;
     }
@@ -198,27 +195,22 @@
         }
       }
     }
+  }
 
-    .border {
-      position: absolute;
-      bottom: -5%;
-      left: 0%;
+  .borderImage {
+    width: 100%;
+    object-fit: cover;
+    margin: 0px;
+
+    @media screen and (min-width: $tablet) {
       width: 100%;
-      object-fit: cover;
-
-      @media screen and (min-width: $tablet) {
-        position: absolute;
-        bottom: -7%;
-        left: 0%;
-        width: 100%;
-        margin-bottom: 0px;
-        object-fit: fill;
-      }
+      margin: 0px;
+      object-fit: fill;
     }
   }
 
   .commentsSection {
-    margin-top: 60px;
+    margin-top: 30px;
     display: flex;
     flex-direction: column;
     gap: 20px;
