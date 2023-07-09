@@ -204,7 +204,7 @@
       bottom: -3%;
       left: 0%;
       width: 100%;
-      // margin-bottom: 100px;
+      object-fit: cover;
 
       @media screen and (min-width: $tablet) {
         position: absolute;
@@ -212,6 +212,7 @@
         left: 0%;
         width: 100%;
         margin-bottom: 0px;
+        object-fit: fill;
       }
     }
   }
@@ -230,7 +231,7 @@
 
     h2 {
       font-family: var(--title-text);
-      font-size: 1.25rem;
+      font-size: 1.15rem;
       text-align: center;
 
       @media screen and (min-width: $tablet) {
@@ -268,6 +269,10 @@
             border: none;
             box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
             font-size: 1.25rem;
+
+            @media screen and (max-width: $tablet) {
+              font-size: 0.8rem;
+            }
           }
         }
 
@@ -291,7 +296,7 @@
       background-color: rgba(255, 255, 255, 0.401);
       max-height: 500px;
       overflow: scroll;
-      padding: 0px 25px;
+      // padding: 0px 25px;
 
       .singleCommentCard {
         display: flex;
