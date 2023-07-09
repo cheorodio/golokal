@@ -2,7 +2,6 @@
 
 import { Domine } from 'next/font/google';
 import Image from 'next/image';
-import Link from 'next/link';
 import { useState } from 'react';
 import { MdOutlineCategory } from 'react-icons/md';
 import { Product } from '../../../migrations/1688217286-createTableProducts';
@@ -60,20 +59,16 @@ export default function FilterecProductsPage({ products }: Props) {
                   </p>
                   <LikeProduct />
                 </div>
-                <Link href={`/shops/${product.id}`}>
-                  <div className={styles.imageContainer}>
-                    <Image
-                      src={product.imageUrl}
-                      width={100}
-                      height={100}
-                      alt="Shop avatar"
-                      className={styles.productImage}
-                    />
-                  </div>
-                  <div>{/* <p>{product.description}</p> */}</div>
-                </Link>
+                <div className={styles.imageContainer}>
+                  <Image
+                    src={product.imageUrl}
+                    width={100}
+                    height={100}
+                    alt="Shop avatar"
+                    className={styles.productImage}
+                  />
+                </div>
               </div>
-
               <div className={styles.bottomSection}>
                 <p>
                   <MdOutlineCategory /> {product.category}
