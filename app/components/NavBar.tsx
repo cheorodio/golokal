@@ -39,11 +39,15 @@ export default function NavBar() {
 
             <div className={styles.discoverDropdownOptions}>
               <ul className={styles.discoverLink}>
-                <li className={styles.discoverList}>
-                  <Link href="/shops">Shops</Link>
+                <li>
+                  <Link href="/shops" className={styles.discoverList}>
+                    Shops
+                  </Link>
                 </li>
-                <li className={styles.discoverList}>
-                  <Link href="/products">Products</Link>
+                <li>
+                  <Link href="/products" className={styles.discoverList}>
+                    Products
+                  </Link>
                 </li>
               </ul>
             </div>
