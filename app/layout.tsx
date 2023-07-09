@@ -14,11 +14,16 @@ import { LogoutButton } from './components/LogoutButton';
 import NavBar from './components/NavBar';
 import styles from './styles/Navbar.module.scss';
 
-const questrial = Questrial({
+export const questrial = Questrial({
   weight: '400',
   subsets: ['latin'],
+  display: 'swap',
 });
-const domine = Domine({ subsets: ['latin'] });
+
+export const domine = Domine({
+  subsets: ['latin'],
+  display: 'swap',
+});
 
 export const metadata = {
   title: 'GoLokal | Connecting you with local vendors',
