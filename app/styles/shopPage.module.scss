@@ -120,10 +120,6 @@
         width: 70%;
       }
 
-      h2 {
-        font-family: var(--title-text);
-      }
-
       .productsContainer {
         width: 100%;
         display: grid;
@@ -168,7 +164,6 @@
 
             .productTitle {
               font-size: 1.15rem;
-              font-family: var(--title-text);
               letter-spacing: 1.5px;
               text-transform: uppercase;
             }
@@ -223,7 +218,6 @@
     }
 
     h2 {
-      font-family: var(--title-text);
       font-size: 1.15rem;
       text-align: center;
 
