@@ -10,6 +10,12 @@ import styles from '../styles/EditProfile.module.scss';
 import DeleteFavourites from './DeleteFavourites';
 import ProfilePage from './ProfilePage';
 
+export const metadata = {
+  title: { default: 'Golokal | Profile' },
+  description:
+    'At golokal, we are passionate about supporting artisans, craftsmen, and local businesses, and our platform serves as a virtual marketplace to showcase their unique creations.',
+};
+
 export type ProfilePageProps = {
   params: {
     username: string;

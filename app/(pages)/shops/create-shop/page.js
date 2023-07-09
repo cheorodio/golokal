@@ -6,6 +6,12 @@ import { getUserBySessionToken } from '../../../../database/users';
 import styles from '../../../styles/CreateShopForm.module.scss';
 import CreateShop from './CreateShop';
 
+export const metadata = {
+  title: { default: 'Golokal | Join hundreds of local vendors on our site' },
+  description:
+    'At golokal, we are passionate about supporting artisans, craftsmen, and local businesses, and our platform serves as a virtual marketplace to showcase their unique creations.',
+};
+
 export default async function CreateShopPage() {
   // allowing access to only authorised user
   const sessionToken = cookies().get('sessionToken');

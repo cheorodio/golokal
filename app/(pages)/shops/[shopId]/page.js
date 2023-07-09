@@ -18,10 +18,9 @@ import LikeProduct from './LikeProducts';
 export const dynamic = 'force-dynamic';
 
 export const metadata = {
-  title: { default: 'Golokal | Discover local vendors' },
+  title: { default: 'Golokal | Vendor page' },
   description:
     'At golokal, we are passionate about supporting artisans, craftsmen, and local businesses, and our platform serves as a virtual marketplace to showcase their unique creations.',
-  shortcut: '/favicon.ico',
 };
 
 export default async function SingleShopPage(props) {
