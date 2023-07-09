@@ -1,9 +1,11 @@
+import { Domine } from 'next/font/google';
 import Image from 'next/image';
 import Link from 'next/link';
 import { getShops } from '../../../database/shops';
 import styles from '../../styles/allShopsPage.module.scss';
 
 export const dynamic = 'force-dynamic';
+const domine = Domine({ subsets: ['latin'] });
 
 export const metadata = {
   title: { default: 'Golokal | Discover local vendors' },
@@ -22,7 +24,9 @@ export default async function ShopsPage() {
             <div key={`shop-div-${shop.id}`} className={styles.shopContainer}>
               <Link href={`/shops/${shop.id}`} className={styles.link}>
                 <div className={styles.titleContainer}>
-                  <p className={styles.shopName}>{shop.name}</p>
+                  <p className={`${styles.shopName} ${domine.className}`}>
+                    {shop.name}
+                  </p>
                   <p className={styles.shopLocation}>
                     Based in {shop.location}
                   </p>
