@@ -4,7 +4,6 @@ import { cookies } from 'next/headers';
 import Link from 'next/link';
 import { AiFillShop } from 'react-icons/ai';
 import { BsFillPersonFill, BsPersonPlus } from 'react-icons/bs';
-// import { CgLogOut } from 'react-icons/cg';
 import { CiLogin } from 'react-icons/ci';
 import { FiArrowUpRight } from 'react-icons/fi';
 import { RiAccountPinCircleLine } from 'react-icons/ri';
@@ -102,9 +101,8 @@ export default async function RootLayout({ children }: LayoutProps) {
                         <Link href="/shops/my-shop">My shop</Link>
                       </div>
                     </div>
-                    <div className={styles.logoutLink}>
-                      <LogoutButton logout={logout} />
-                    </div>
+
+                    <LogoutButton logout={logout} />
                   </>
                 ) : (
                   <div className={styles.loginButtons}>
