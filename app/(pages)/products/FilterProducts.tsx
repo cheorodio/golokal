@@ -1,5 +1,6 @@
 'use client';
 
+import { Domine } from 'next/font/google';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useState } from 'react';
@@ -11,6 +12,11 @@ import LikeProduct from '../shops/[shopId]/LikeProducts';
 type Props = {
   products: Product[];
 };
+
+const domine = Domine({
+  subsets: ['latin'],
+  display: 'swap',
+});
 
 export default function FilterecProductsPage({ products }: Props) {
   const [category, setCategory] = useState('');
@@ -49,7 +55,9 @@ export default function FilterecProductsPage({ products }: Props) {
             <div key={`shop-div-${product.id}`} className={styles.productCard}>
               <div className={styles.topCardSection}>
                 <div className={styles.cardHeader}>
-                  <p className={styles.productName}>{product.name}</p>
+                  <p className={`${styles.productName} ${domine.className}`}>
+                    {product.name}
+                  </p>
                   <LikeProduct />
                 </div>
                 <Link href={`/shops/${product.id}`}>
