@@ -18,7 +18,7 @@ const inter = Inter({ subsets: ['latin'] });
 const domine = Domine({ subsets: ['latin'] });
 
 export const metadata = {
-  title: 'GoLokal - Handmade Products',
+  title: 'GoLokal | Connecting you with local vendors',
   description: 'Supporting local vendors and small businesses',
   manifest: '/manifest.json',
 };
