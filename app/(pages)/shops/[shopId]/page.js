@@ -9,6 +9,7 @@ import { getFavourites } from '../../../../database/favourites';
 import { getProductsWithInfo } from '../../../../database/products';
 import { getShopById } from '../../../../database/shops';
 import { getUserBySessionToken } from '../../../../database/users';
+import { domine } from '../../../layout';
 import styles from '../../../styles/shopPage.module.scss';
 import AddComments from './AddComments';
 import AddFavourites from './AddFavourites';
@@ -53,7 +54,9 @@ export default async function SingleShopPage(props) {
     <main className={styles.mainSection}>
       <div className={styles.shopPage}>
         <div className={styles.shopInfo}>
-          <h1 className={styles.shopHeader}>{singleShop.name}</h1>
+          <h1 className={`${styles.shopHeader} ${domine.className}`}>
+            {singleShop.name}
+          </h1>
           <div className={styles.imageBox}>
             <Image
               src={singleShop.imageUrl}
@@ -84,7 +87,7 @@ export default async function SingleShopPage(props) {
 
         {/* ************* PRODUCTS SECTION ************* */}
         <div className={styles.productsFeed}>
-          <h2>Products Feed</h2>
+          <h2 className={domine.className}>Products Feed</h2>
           <div className={styles.productsContainer}>
             {shopProducts.map((product) => {
               return (
@@ -93,7 +96,9 @@ export default async function SingleShopPage(props) {
                   className={styles.productCard}
                 >
                   <div className={styles.titleSection}>
-                    <p className={styles.productTitle}>{product.productName}</p>
+                    <p className={`${styles.productTitle} ${domine.className}`}>
+                      {product.productName}
+                    </p>
                     <LikeProduct />
                   </div>
                   <Image
@@ -126,7 +131,7 @@ export default async function SingleShopPage(props) {
 
       {/* ************* COMMENTS SECTION ************* */}
       <div className={styles.commentsSection}>
-        <h2>What other users have been saying</h2>
+        <h2 className={domine.className}>What other users have been saying</h2>
         <div className={styles.commentsContainer}>
           {userComments.map((comment) => {
             return (
