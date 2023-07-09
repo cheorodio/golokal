@@ -3,6 +3,7 @@ import { redirect } from 'next/navigation';
 import { getValidSessionByToken } from '../../../../database/sessions';
 import { getShops } from '../../../../database/shops';
 import { getUserBySessionToken } from '../../../../database/users';
+import { domine } from '../../../layout';
 import styles from '../../../styles/CreateShopForm.module.scss';
 import CreateShop from './CreateShop';
 
@@ -35,7 +36,7 @@ export default async function CreateShopPage() {
   return (
     <main className={styles.createShopPage}>
       <div className={styles.pageTitle}>
-        <h1>
+        <h1 className={domine.className}>
           Hello <span>{user.profileName}</span>
         </h1>
         <h4>
