@@ -21,22 +21,22 @@
     padding: 0px 20px;
     grid-template-columns: 1fr;
 
+    @media screen and (min-width: $mobileL) {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px;
+      padding: 0px 20px;
+    }
+
     @media screen and (min-width: $tablet) {
       grid-template-columns: repeat(3, 1fr);
-      gap: 30px;
+      gap: 20px;
       padding: 0px 20px;
     }
 
     @media screen and (min-width: $laptop) {
-      grid-template-columns: repeat(3, 1fr);
-      gap: 30px;
-      padding: 0px 50px;
-    }
-
-    @media screen and (min-width: $desktop) {
       grid-template-columns: repeat(4, 1fr);
       gap: 30px;
-      padding: 0px 80px;
+      padding: 0px 50px;
     }
 
     .shopContainer {
