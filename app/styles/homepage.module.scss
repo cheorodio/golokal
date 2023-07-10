@@ -201,10 +201,6 @@
         text-align: center;
       }
 
-      &:nth-child(3) {
-        border: none;
-      }
-
       .icon {
         height: 40px;
         width: 40px;
@@ -216,6 +212,7 @@
 
       p {
         font-size: 0.9rem;
+        line-height: 1.5;
       }
     }
   }
