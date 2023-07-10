@@ -15,7 +15,7 @@
   position: absolute;
   width: 100%;
   display: flex;
-  align-items: flex-start;
+  align-items: center;
   justify-content: space-between;
   padding: 20px;
   flex: 1;
@@ -26,8 +26,12 @@
   }
 
   @media screen and (min-width: $laptop) {
+    padding: 20px 50px;
+  }
+
+  @media screen and (min-width: $desktop) {
     padding: 20px 80px;
-    align-items: flex-start;
+    align-items: center;
   }
 
   .nav {
