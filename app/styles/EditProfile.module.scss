@@ -20,13 +20,7 @@
   }
 
   @media screen and (min-width: $laptop) {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
-    min-height: 93vh;
-    padding: 100px 80px 20px;
-    gap: 40px;
+    padding: 80px 80px 20px;
   }
 
   // ABOUT SECTION ////////////////////////////
@@ -64,7 +58,7 @@
 
       @media screen and (min-width: $laptop) {
         border-radius: 10px;
-        width: 300px;
+        width: 100%;
         height: 300px;
         overflow: hidden;
       }
@@ -87,6 +81,7 @@
 
     .nameContainer {
       padding-top: 20px;
+
       @media screen and (min-width: $laptop) {
         display: flex;
         margin-top: 16px;
@@ -124,6 +119,7 @@
       display: flex;
       flex-direction: column;
       gap: 16px;
+      height: 100%;
       align-items: flex-start;
     }
 
@@ -143,6 +139,7 @@
         display: grid;
         grid-template-columns: repeat(3, 1fr);
         gap: 24px;
+        width: 100%;
       }
 
       .favouriteShopCard {
