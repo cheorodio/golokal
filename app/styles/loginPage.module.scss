@@ -80,7 +80,11 @@
       }
 
       @media screen and (min-width: $laptop) {
-        width: 60%;
+        width: 55%;
+      }
+
+      @media screen and (min-width: $desktop) {
+        width: 45%;
       }
 
       .profilePicDiv {
