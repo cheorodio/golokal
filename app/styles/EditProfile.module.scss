@@ -12,9 +12,19 @@
   @media screen and (min-width: $tablet) {
     display: flex;
     flex-direction: row;
+    align-items: flex-start;
+    justify-content: flex-start;
+    padding: 80px 20px 20px;
+    gap: 40px;
+    min-height: 93vh;
+  }
+
+  @media screen and (min-width: $laptop) {
+    display: flex;
+    flex-direction: row;
     align-items: center;
     justify-content: center;
-    height: 93vh;
+    min-height: 93vh;
     padding: 100px 80px 20px;
     gap: 40px;
   }
@@ -32,6 +42,13 @@
       height: 100%;
     }
 
+    @media screen and (min-width: $laptop) {
+      width: 25%;
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+    }
+
     .imageContainer {
       width: 100%;
       display: flex;
@@ -39,6 +56,13 @@
       align-items: center;
 
       @media screen and (min-width: $tablet) {
+        border-radius: 10px;
+        height: 200px;
+        width: 100%;
+        overflow: hidden;
+      }
+
+      @media screen and (min-width: $laptop) {
         border-radius: 10px;
         width: 300px;
         height: 300px;
@@ -63,8 +87,7 @@
 
     .nameContainer {
       padding-top: 20px;
-
-      @media screen and (min-width: $tablet) {
+      @media screen and (min-width: $laptop) {
         display: flex;
         margin-top: 16px;
       }
@@ -90,6 +113,16 @@
       width: 75%;
       display: flex;
       flex-direction: column;
+      align-items: flex-start;
+      justify-content: flex-start;
+      gap: 16px;
+      height: 100%;
+    }
+
+    @media screen and (min-width: $laptop) {
+      width: 75%;
+      display: flex;
+      flex-direction: column;
       gap: 16px;
       align-items: flex-start;
     }
@@ -101,6 +134,12 @@
 
       @media screen and (min-width: $tablet) {
         display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 24px;
+      }
+
+      @media screen and (min-width: $laptop) {
+        display: grid;
         grid-template-columns: repeat(3, 1fr);
         gap: 24px;
       }
@@ -110,6 +149,10 @@
         width: 100%;
         height: 200px;
         border-radius: 10px;
+
+        @media screen and (min-width: $tablet) {
+          height: 150px;
+        }
 
         .shopImageUrl {
           display: block;
@@ -138,6 +181,10 @@
           align-items: end;
           padding: 0px 40px;
 
+          @media screen and (min-width: $tablet) {
+            padding: 0px 30px;
+          }
+
           h1 {
             font-size: 1rem;
             text-transform: capitalize;
@@ -154,6 +201,10 @@
             text-transform: uppercase;
             letter-spacing: 1.5px;
             cursor: pointer;
+
+            @media screen and (min-width: $tablet) {
+              padding: 4px 6px;
+            }
           }
         }
 
