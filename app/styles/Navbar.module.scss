@@ -15,14 +15,18 @@
   position: absolute;
   width: 100%;
   display: flex;
-  align-items: flex-start;
+  align-items: center;
   justify-content: space-between;
-  padding: 20px 80px;
+  padding: 20px;
   flex: 1;
   z-index: 9;
 
-  @media screen and (max-width: $tablet) {
+  @media screen and (min-width: $tablet) {
     padding: 20px;
+  }
+
+  @media screen and (min-width: $laptop) {
+    padding: 20px 80px;
   }
 
   .nav {
