@@ -16,6 +16,12 @@
     background-color: var(--main-color);
 
     @media screen and (min-width: $tablet) {
+      padding: 100px 20px 0px;
+      flex-direction: row;
+      gap: 30px;
+    }
+
+    @media screen and (min-width: $laptop) {
       padding: 100px 80px 0px;
       flex-direction: row;
       gap: 50px;
@@ -45,6 +51,10 @@
         border: 1px solid var(--bg-color);
         border-radius: 10px;
 
+        @media screen and (min-width: $tablet) {
+          height: 200px;
+        }
+
         .singleShopImage {
           height: 100%;
           width: 100%;
@@ -67,12 +77,29 @@
           justify-content: space-between;
           align-items: center;
 
+          @media screen and (min-width: $tablet) {
+            flex-direction: column;
+            gap: 16px;
+          }
+
+          @media screen and (min-width: $laptop) {
+            flex-direction: row;
+          }
+
           .followButtonContainer {
             display: flex;
             justify-content: flex-end;
 
+            @media screen and (min-width: $tablet) {
+              width: 100%;
+            }
+
             button {
               border: none;
+
+              @media screen and (min-width: $tablet) {
+                width: 100%;
+              }
 
               .followButton {
                 background-color: var(--secondary-text-color);
@@ -83,6 +110,14 @@
                 text-transform: uppercase;
                 letter-spacing: 1.5px;
                 cursor: pointer;
+
+                @media screen and (min-width: $tablet) {
+                  padding: 4px 8px;
+                }
+
+                @media screen and (min-width: $tablet) {
+                  padding: 6px 16px;
+                }
               }
 
               .followedButton {
@@ -94,6 +129,14 @@
                 text-transform: uppercase;
                 letter-spacing: 1.5px;
                 cursor: pointer;
+
+                @media screen and (min-width: $tablet) {
+                  padding: 4px 8px;
+                }
+
+                @media screen and (min-width: $tablet) {
+                  padding: 6px 16px;
+                }
               }
             }
 
@@ -145,7 +188,7 @@
           @media screen and (min-width: $tablet) {
             background-color: white;
             border-radius: 10px;
-            width: 300px;
+            width: 250px;
             border: 0.5px solid var(--main-color);
           }
 
