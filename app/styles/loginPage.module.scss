@@ -87,9 +87,10 @@
         justify-content: center;
 
         .image {
-          height: 100%;
+          height: 400px;
           width: 100%;
           border-radius: 8px;
+          object-fit: cover;
         }
       }
 
