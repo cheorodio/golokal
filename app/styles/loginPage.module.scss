@@ -8,6 +8,12 @@
   @media screen and (min-width: $tablet) {
     display: flex;
     min-height: 93vh;
+    padding: 100px 100px 50px;
+  }
+
+  @media screen and (min-width: $laptop) {
+    display: flex;
+    min-height: 93vh;
     padding: 100px 450px 50px;
   }
 
