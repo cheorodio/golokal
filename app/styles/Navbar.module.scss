@@ -45,8 +45,8 @@
       background-color: white;
       top: -250%;
       left: 0%;
-      height: 300px;
-      width: 100vh;
+      height: 330px;
+      width: 100vw;
       z-index: 3;
       display: flex;
       align-items: flex-start;
@@ -64,6 +64,10 @@
       justify-content: center;
       align-items: center;
       gap: 20px;
+
+      @media screen and (max-width: $tablet) {
+        align-items: flex-start;
+      }
 
       @media screen and (max-width: $tablet) {
         flex-direction: column;
@@ -126,6 +130,10 @@
           position: absolute;
           padding-top: 16px;
           top: 100%;
+
+          @media screen and (max-width: $tablet) {
+            position: static;
+          }
 
           .discoverLink {
             display: flex;
