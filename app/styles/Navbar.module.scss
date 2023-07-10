@@ -15,7 +15,7 @@
   position: absolute;
   width: 100%;
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: space-between;
   padding: 20px;
   flex: 1;
@@ -27,11 +27,11 @@
 
   @media screen and (min-width: $laptop) {
     padding: 20px 80px;
+    align-items: flex-start;
   }
 
   .nav {
     display: flex;
-    align-items: center;
     background-color: transparent;
     width: 30%;
 
@@ -58,6 +58,7 @@
     .navLinks {
       display: flex;
       justify-content: center;
+      align-items: center;
       gap: 20px;
 
       @media screen and (max-width: $tablet) {
@@ -107,7 +108,7 @@
 
         .discoverDropdownButton {
           display: flex;
-          align-items: flex-end;
+          align-items: center;
           cursor: pointer;
         }
 
@@ -118,7 +119,9 @@
         &:hover .discoverDropdownOptions {
           display: flex;
           flex-direction: column;
-          margin-top: 8px;
+          position: absolute;
+          padding-top: 16px;
+          top: 100%;
 
           .discoverLink {
             display: flex;
