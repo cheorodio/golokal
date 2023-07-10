@@ -90,16 +90,11 @@
             display: flex;
             justify-content: flex-end;
 
-            @media screen and (min-width: $tablet) {
-              width: 100%;
-            }
-
             button {
               border: none;
-
-              @media screen and (min-width: $tablet) {
-                width: 100%;
-              }
+              display: flex;
+              justify-content: flex-end;
+              background-color: transparent;
 
               .followButton {
                 background-color: var(--secondary-text-color);
