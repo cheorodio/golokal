@@ -12,7 +12,16 @@
   }
 
   .filterOptions {
-    padding: 0px 20px;
+    // padding: 0px 20px;
+
+    @media screen and (min-width: $mobileS) {
+      padding: 0px 20px;
+    }
+
+    @media screen and (min-width: $laptop) {
+      padding: 0px 80px;
+    }
+
     select {
       border-radius: 5px;
       font-size: 1rem;
@@ -23,6 +32,10 @@
     display: grid;
     gap: 20px;
     grid-template-columns: 1fr;
+
+    @media screen and (min-width: $mobileS) {
+      padding: 0px 20px;
+    }
 
     @media screen and (min-width: $mobileL) {
       grid-template-columns: repeat(2, 1fr);
@@ -39,7 +52,13 @@
     @media screen and (min-width: $laptop) {
       grid-template-columns: repeat(4, 1fr);
       gap: 30px;
-      padding: 0px 50px;
+      padding: 0px 80px;
+    }
+
+    @media screen and (min-width: $desktop) {
+      grid-template-columns: repeat(4, 1fr);
+      gap: 30px;
+      padding: 0px;
     }
 
     .productCard {
