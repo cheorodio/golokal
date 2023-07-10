@@ -14,13 +14,14 @@
   @media screen and (min-width: $laptop) {
     display: flex;
     min-height: 93vh;
-    padding: 100px 450px 50px;
+    padding: 100px 100px 50px;
   }
 
   .greeting {
     display: flex;
     flex-direction: column;
     text-align: center;
+    align-items: center;
     gap: 12px;
 
     .returnLink {
@@ -36,6 +37,11 @@
 
       @media screen and (min-width: $tablet) {
         font-size: 1rem;
+        width: 70%;
+      }
+      @media screen and (min-width: $laptop) {
+        font-size: 1rem;
+        width: 60%;
       }
     }
 
@@ -44,7 +50,11 @@
 
       @media screen and (min-width: $tablet) {
         font-size: 1rem;
-        padding: 0px 50px;
+        width: 70%;
+      }
+      @media screen and (min-width: $laptop) {
+        font-size: 1rem;
+        width: 60%;
       }
     }
   }
@@ -52,6 +62,7 @@
   .form {
     display: flex;
     flex-direction: column;
+    align-items: center;
     gap: 40px;
 
     .loginForm {
@@ -63,6 +74,14 @@
       box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px,
         rgba(0, 0, 0, 0.23) 0px 3px 6px;
       width: 100%;
+
+      @media screen and (min-width: $tablet) {
+        width: 70%;
+      }
+
+      @media screen and (min-width: $laptop) {
+        width: 60%;
+      }
 
       .profilePicDiv {
         display: flex;
