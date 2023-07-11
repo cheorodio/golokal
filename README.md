@@ -14,7 +14,7 @@ Golokal is a PWA platform connecting you to local vendors and small businesses. 
 
 ### Planning:
 
-- Wireframing and prototyping using Figma
+- Wireframing and prototyping using [Figma](https://www.figma.com/file/KlSNdJK9rZZL9A9fiss7EZ/GoLokal?type=design&node-id=152%3A1170&mode=design&t=ASvR4h3bQ3khpw9B-1)
 - Database schema design using drawSQL
 
 ## Technologies ⚛️
