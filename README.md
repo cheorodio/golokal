@@ -2,8 +2,79 @@
 
 ## About the project 📚
 
-> GoLokal is a progressive web app allowing users to discover local vendors and small businesses with handmade and slow-made products. Users can interact with vendors and browse through a vendor's products page.
+Golokal is a PWA platform connecting you to local vendors and small businesses. The aim is to give local vendors the platform and spotlight to showcase their creations.
+
+### Features:
+
+- User authentication and authorisation
+- Users can follow shops which then gets displayed in the user's profile page
+- Users can like products
+- Users can create a shop
+- Users can upload products into their own shop page
+
+### Planning:
+
+- Wireframing and prototyping using Figma
+- Database schema design using drawSQL
 
 ## Technologies ⚛️
 
 <img height="25" src="https://img.shields.io/badge/JavaScript-323330?style=for-the-badge&logo=javascript&logoColor=F7DF1E" alt="javascript logo"/> <img height="25" src="https://img.shields.io/badge/Next-black?style=for-the-badge&logo=next.js&logoColor=white" alt="next js logo"/> <img height="25" src="https://img.shields.io/badge/react-%2320232a.svg?style=for-the-badge&logo=react&logoColor=%2361DAFB" alt="react logo"/> <img height="25" src="https://img.shields.io/badge/typescript-%23007ACC.svg?style=for-the-badge&logo=typescript&logoColor=white" alt="typescript logo"/> <img height="25" src="https://img.shields.io/badge/SASS-hotpink.svg?style=for-the-badge&logo=SASS&logoColor=white" alt="sass logo"/> <img height="25" src="https://img.shields.io/badge/postgres-%23316192.svg?style=for-the-badge&logo=postgresql&logoColor=white" alt="postgres logo"/> <img height="25" src="https://img.shields.io/badge/-jest-%23C21325?style=for-the-badge&logo=jest&logoColor=white" alt="jest logo"/> <img height="25" src="https://img.shields.io/badge/Playwright-2EAD33.svg?style=for-the-badge&logo=Playwright&logoColor=white" alt="Playwright logo"/>
+
+## Screenshots 📸
+
+<img src="https://github.com/cheorodio/golokal/assets/121162907/59429f99-6706-4f0a-923f-eff875fc6c28" alt="Golokal sreenshots" />
+
+## Setup 💻
+
+1. Clone the repository
+   ```
+   git clone https://github.com/cheorodio/golokal.git
+   cd golokal
+   ```
+2. Install dependencies using
+   ```
+   pnpm install
+   ```
+3. Setup postgres database
+4. Create a file called .env in the project root directory and paste the following, changing to your own username, password and database:
+
+   ```
+   PGHOST=localhost
+   PGUSERNAME=<your username>
+   PGPASSWORD=<your password>
+   PGDATABASE=<your database name>
+
+   NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME="<your cloudinary name>"
+   ```
+
+5. Then run the following queries, with a database name, username and password of your own.
+
+   ```
+   CREATE DATABASE <database name>;
+   CREATE USER <user name> WITH ENCRYPTED PASSWORD '<user password>';
+   GRANT ALL PRIVILEGES ON DATABASE <database name> TO <user name>;
+   \connect <database name>;
+   CREATE SCHEMA <user name> AUTHORIZATION <user name>;
+   ```
+
+6. Connect to postgres database and run either:
+
+   - `psql -U <user name> <database name>` on windows and macOS
+   - `sudo -u <user name> psql -U <user name> <database name>` on Linux
+
+7. Run application
+   ```
+   pnpm dev
+   ```
+   Open http://localhost:3000 on browser.
+
+## Deployment 🚀
+
+This project is deployed using vercel, in order to do so:
+
+1. Create an account on [vercel](https://vercel.com/dashboard)
+2. Create a postgres storage in vercel and select frankfurt
+3. Create a project in vercel and import your version of this repository
+4. Overwrite the install command (found in project general setting) with `pnpm install && pnpm migrate up`
+5. Connect storage with project in Project > Storage > Connect
