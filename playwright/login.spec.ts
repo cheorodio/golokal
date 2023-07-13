@@ -9,11 +9,4 @@ test('User login test', async ({ page }) => {
   await page.getByRole('button', { name: 'Log in' }).click();
 
   await expect(page).toHaveURL('http://localhost:3000/login');
-
-  // await expect(
-  //   page.getByRole('link', { name: 'Shop image' }).first(),
-  // ).toBeVisible();
-  // await expect(
-  //   page.getByRole('link', { name: 'Shop image' }).nth(1),
-  // ).toBeVisible();
 });
