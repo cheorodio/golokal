@@ -8,17 +8,14 @@
   justify-content: space-between;
 
   @media screen and (min-width: $tablet) {
-    padding: 20px 0px;
     margin: 0px 20px;
-    display: flex;
   }
 
   @media screen and (min-width: $laptop) {
-    padding: 20px 0px;
+    margin: 0px 50px;
+  }
+  @media screen and (min-width: $desktop) {
     margin: 0px 80px;
-    display: flex;
-    border-top: 1px solid black;
-    justify-content: space-between;
   }
 
   div {
