@@ -11,6 +11,7 @@ jobs:
       PGDATABASE: golokal_final_project
       PGUSERNAME: michelle1
       PGPASSWORD: fproject123
+      NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME: xxxxxx
     steps:
       - name: Start preinstalled PostgreSQL on Ubuntu
         run: |
