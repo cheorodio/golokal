@@ -36,6 +36,11 @@
       gap: 30px;
       padding: 0px 50px;
     }
+    @media screen and (min-width: $desktop) {
+      grid-template-columns: repeat(4, 1fr);
+      // gap: 30px;
+      // padding: 0px 50px;
+    }
 
     .shopContainer {
       display: flex;
