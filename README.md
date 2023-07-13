@@ -25,7 +25,7 @@ Golokal is a PWA platform connecting you to local vendors and small businesses. 
 
 #### Final Look
 
-<img width="900"  src="https://github.com/cheorodio/golokal/assets/121162907/59429f99-6706-4f0a-923f-eff875fc6c28" alt="Golokal sreenshots" />
+<img width="900" alt="Golokal final look screenshot" src="https://github.com/cheorodio/golokal/assets/121162907/df272307-fb29-4cf6-b852-c939c5d0fa37">
 
 #### Prototyping
 
