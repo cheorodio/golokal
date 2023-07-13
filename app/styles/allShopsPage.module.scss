@@ -8,6 +8,10 @@
   gap: 16px;
   min-height: 100vh;
 
+  @media screen and (min-width: $desktop) {
+    padding: 100px 30px;
+  }
+
   .shopsPageTitle {
     display: flex;
     align-items: center;
@@ -28,7 +32,7 @@
     }
 
     @media screen and (min-width: $laptop) {
-      grid-template-columns: repeat(4, 1fr);
+      grid-template-columns: repeat(3, 1fr);
       gap: 30px;
       padding: 0px 50px;
     }
