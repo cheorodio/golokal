@@ -60,10 +60,10 @@ export default async function RootLayout({ children }: LayoutProps) {
             {user ? (
               <div className={styles.loggedIn}>
                 <Link
-                  href={`/${capitaliseName(user.profileName)}`}
+                  href={`/${user.profileName}`}
                   className={styles.desktopLoggedInLink}
                 >
-                  {user.profileName}
+                  {capitaliseName(user.profileName)}
                 </Link>{' '}
                 |
                 <Link
