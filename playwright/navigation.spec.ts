@@ -8,5 +8,5 @@ test('nagivation test', async ({ page }) => {
       name: 'vida Based in Vienna Shop avatar Hi, welcome to Vida. My name is Taylor and I make jewellery using polymer clay',
     })
     .click();
-  await expect(page).toHaveURL('http://localhost:3000/shops/1');
+  await expect(page).toHaveURL('http://localhost:3000/login?returnTo=/shops/1');
 });
