@@ -1,7 +1,9 @@
 'use client';
 
 import { Domine } from 'next/font/google';
+import Image from 'next/image';
 import styles from '../styles/EditProfile.module.scss';
+import { capitaliseName } from './capitalisedName';
 
 type Props = {
   currentUser: {
@@ -32,7 +34,7 @@ export default function ProfilePage(props: Props) {
     <div className={styles.profilePageContainer}>
       <div className={styles.imageContainer}>
         {!props.user.imageUrl ? (
-          <img
+          <Image
             src="/images/avatar.png"
             width={100}
             height={100}
@@ -40,7 +42,7 @@ export default function ProfilePage(props: Props) {
             className={styles.profileAvatar}
           />
         ) : (
-          <img
+          <Image
             src={props.user.imageUrl}
             width={100}
             height={100}
@@ -56,7 +58,9 @@ export default function ProfilePage(props: Props) {
       )}
 
       <div className={styles.nameContainer}>
-        <h1 className={domine.className}>{props.user.profileName}</h1>
+        <h1 className={domine.className}>
+          {capitaliseName(props.user.profileName)}
+        </h1>
       </div>
       <div>
         <p>@{props.user.username}</p>

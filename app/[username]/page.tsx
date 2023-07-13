@@ -8,6 +8,7 @@ import { User } from '../../migrations/1688217161-createTableUsers';
 import { Favourite } from '../../migrations/1688217261-createTableFavourites';
 import { domine } from '../layout';
 import styles from '../styles/EditProfile.module.scss';
+import { capitaliseName } from './capitalisedName';
 import DeleteFavourites from './DeleteFavourites';
 import ProfilePage from './ProfilePage';
 
@@ -53,7 +54,7 @@ export default async function UserProfilePage({ params }: ProfilePageProps) {
       <ProfilePage user={user} currentUser={currentUser} />
       <div className={styles.favouritesContainer}>
         <h1 className={domine.className}>
-          {user.profileName}'s favourite shops
+          {capitaliseName(user.profileName)}'s favourite shops
         </h1>
         {favourites.length === 0 ? (
           <p>Favourite is empty</p>
