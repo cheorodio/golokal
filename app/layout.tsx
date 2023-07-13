@@ -9,6 +9,7 @@ import { FiArrowUpRight } from 'react-icons/fi';
 import { RiAccountPinCircleLine } from 'react-icons/ri';
 import { getUserBySessionToken } from '../database/users';
 import { logout } from './(auth)/logout/actions';
+import { capitaliseName } from './[username]/capitalisedName';
 import Footer from './components/Footer';
 import { LogoutButton } from './components/LogoutButton';
 import NavBar from './components/NavBar';
@@ -59,7 +60,7 @@ export default async function RootLayout({ children }: LayoutProps) {
             {user ? (
               <div className={styles.loggedIn}>
                 <Link
-                  href={`/${user.username}`}
+                  href={`/${capitaliseName(user.profileName)}`}
                   className={styles.desktopLoggedInLink}
                 >
                   {user.profileName}
