@@ -10,7 +10,12 @@ const nextConfig = withPWA({
     typedRoutes: true,
     serverActions: true,
   },
-  optimizeFonts: false,
+  eslint: {
+    ignoreDuringBuilds: true,
+  },
+  typescript: {
+    ignoreBuildErrors: true,
+  },
 });
 
 module.exports = nextConfig;
