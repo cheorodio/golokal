@@ -324,15 +324,16 @@
         width: 100%;
         z-index: 3;
         padding-left: 8px;
-        gap: 30px;
+        gap: 20px;
 
         .profile {
           display: flex;
           flex-direction: column;
+          gap: 8px;
 
           .username {
             display: flex;
-            gap: 8px;
+            gap: 12px;
             align-items: center;
             text-transform: uppercase;
           }
