@@ -9,7 +9,7 @@ import { getFavourites } from '../../../../database/favourites';
 import { getProductsWithInfo } from '../../../../database/products';
 import { getShopById } from '../../../../database/shops';
 import { getUserBySessionToken } from '../../../../database/users';
-import { capitaliseName } from '../../../[username]/capitalisedName';
+// import { capitaliseName } from '../../../[username]/capitalisedName';
 import { domine } from '../../../layout';
 import styles from '../../../styles/shopPage.module.scss';
 import AddComments from './AddComments';
