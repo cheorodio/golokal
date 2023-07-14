@@ -10,6 +10,7 @@ export const shops = [
     location: 'Vienna',
     imageUrl: '/images/vida.jpg',
     userId: 1,
+    username: 'tay',
   },
   {
     id: 2,
@@ -20,6 +21,7 @@ export const shops = [
     location: 'Vienna',
     imageUrl: '/images/lulushop.jpg',
     userId: 2,
+    username: 'sinalulu',
   },
   {
     id: 3,
@@ -30,6 +32,7 @@ export const shops = [
     location: 'Vienna',
     imageUrl: '/images/keramiks.jpg',
     userId: 3,
+    username: 'tonybee',
   },
   {
     id: 4,
@@ -40,6 +43,7 @@ export const shops = [
     location: 'Vienna',
     imageUrl: '/images/thesoapcompany.jpg',
     userId: 4,
+    username: 'lana',
   },
 ];
 
@@ -47,9 +51,9 @@ export async function up(sql: Sql) {
   for (const shop of shops) {
     await sql`
     INSERT INTO shops
-      (name, description, website_url, location, image_url, user_id)
+      (name, description, website_url, location, image_url, user_id, username)
     VALUES
-      (${shop.name}, ${shop.description}, ${shop.websiteUrl}, ${shop.location}, ${shop.imageUrl}, ${shop.userId})
+      (${shop.name}, ${shop.description}, ${shop.websiteUrl}, ${shop.location}, ${shop.imageUrl}, ${shop.userId}, ${shop.username})
   `;
   }
 }
