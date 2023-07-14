@@ -121,6 +121,7 @@ export default function AddProductsForm(props: Props) {
                   <option>Ceramics</option>
                   <option>Clothes</option>
                   <option>Crochet</option>
+                  <option>Food & Drinks</option>
                   <option>Home Decor</option>
                   <option>Jewelleries</option>
                   <option>Pet Products</option>

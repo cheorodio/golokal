@@ -41,6 +41,7 @@ export default function FilterecProductsPage({ products }: Props) {
           <option value="Ceramics">Ceramics</option>
           <option value="Clothes">Clothes</option>
           <option value="Crochet">Crochet</option>
+          <option value="Food & Drinks">Food & Drinks</option>
           <option value="Home Decor">Home Decor</option>
           <option value="Jewelleries">Jewelleries</option>
           <option value="Pet Products">Pet Products</option>
