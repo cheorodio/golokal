@@ -122,13 +122,26 @@
 
         .discoverDropdownOptions {
           display: none;
+          position: relative;
+
+          &::before {
+            position: absolute;
+            content: '';
+            height: 8px;
+            width: 8px;
+            background-color: white;
+            top: 5%;
+            right: 20%;
+            transform: translate(-50%) rotate(45deg);
+            transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+          }
         }
 
         &:hover .discoverDropdownOptions {
           display: flex;
           flex-direction: column;
           position: absolute;
-          padding-top: 16px;
+          padding-top: 8px;
           top: 100%;
 
           @media screen and (max-width: $tablet) {
@@ -139,6 +152,9 @@
             display: flex;
             flex-direction: column;
             gap: 8px;
+            background-color: white;
+            padding: 16px;
+            border-radius: 10px;
 
             .discoverList {
               position: relative;
