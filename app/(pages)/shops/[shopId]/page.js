@@ -9,6 +9,7 @@ import { getFavourites } from '../../../../database/favourites';
 import { getProductsWithInfo } from '../../../../database/products';
 import { getShopById } from '../../../../database/shops';
 import { getUserBySessionToken } from '../../../../database/users';
+import { capitaliseName } from '../../../[username]/capitalisedName';
 import { domine } from '../../../layout';
 import styles from '../../../styles/shopPage.module.scss';
 import AddComments from './AddComments';
@@ -79,9 +80,20 @@ export default async function SingleShopPage(props) {
               )}
             </div>
             <p className={styles.shopBio}>{singleShop.description}</p>
-            <p>
-              <VscLocation /> {singleShop.location}
-            </p>
+            <div className={styles.locationAndVendor}>
+              <p>
+                <VscLocation /> {singleShop.location}
+              </p>
+              <p className={styles.vendorName}>
+                by{' '}
+                <Link
+                  href={`/${singleShop.username}`}
+                  className={styles.vendorLink}
+                >
+                  {capitaliseName(singleShop.username)}
+                </Link>
+              </p>
+            </div>
           </div>
         </div>
 

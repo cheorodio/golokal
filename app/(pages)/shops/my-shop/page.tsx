@@ -39,7 +39,7 @@ export default async function MyShopPage() {
         </div>
       ) : (
         <div className={styles.shopContainer}>
-          {myShop.map((shop) => {
+          {myShop.map((shop: any) => {
             return (
               <div key={`shop-div-${shop.id}`} className={styles.shopCard}>
                 <p className={`${styles.shopName} ${domine.className}`}>
