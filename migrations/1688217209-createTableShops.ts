@@ -8,6 +8,7 @@ export type Shop = {
   location: string;
   imageUrl: string;
   userId: number | null;
+  username: string | null;
 };
 
 export async function up(sql: Sql) {
@@ -19,7 +20,8 @@ export async function up(sql: Sql) {
       website_url varchar(80) NOT NULL,
       location varchar(40) NOT NULL,
       image_url varchar(500) NOT NULL,
-      user_id integer REFERENCES users (id) ON DELETE CASCADE
+      user_id integer REFERENCES users (id) ON DELETE CASCADE,
+      username varchar(80) REFERENCES users (username)
     )
   `;
 }
