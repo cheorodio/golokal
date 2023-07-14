@@ -12,7 +12,7 @@ Golokal is a PWA platform connecting you to local vendors and small businesses. 
 - Users can create a shop
 - Users can upload products into their own shop page
 
-### Planning:g
+### Planning:
 
 - Wireframing and prototyping using [Figma](https://www.figma.com/file/KlSNdJK9rZZL9A9fiss7EZ/GoLokal?type=design&node-id=133%3A520&mode=design&t=ASvR4h3bQ3khpw9B-1)
 - Database schema design using [drawSQL](https://drawsql.app/teams/michelle-7/diagrams/golokal)
