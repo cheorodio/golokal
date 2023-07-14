@@ -84,7 +84,7 @@ export default async function SingleShopPage(props) {
               <p>
                 <VscLocation /> {singleShop.location}
               </p>
-              <p className={styles.vendorName}>
+              {/* <p className={styles.vendorName}>
                 by{' '}
                 <Link
                   href={`/${singleShop.username}`}
@@ -92,7 +92,7 @@ export default async function SingleShopPage(props) {
                 >
                   {capitaliseName(singleShop.username)}
                 </Link>
-              </p>
+              </p> */}
             </div>
           </div>
         </div>
