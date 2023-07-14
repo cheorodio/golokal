@@ -306,6 +306,18 @@
       background-color: white;
       z-index: 6;
 
+      &::before {
+        position: absolute;
+        content: '';
+        height: 8px;
+        width: 8px;
+        background-color: white;
+        top: -2.5%;
+        right: 1.5%;
+        transform: translate(-50%) rotate(45deg);
+        transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+      }
+
       .dropdownLink {
         display: flex;
         flex-direction: column;
