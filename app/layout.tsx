@@ -60,7 +60,7 @@ export default async function RootLayout({ children }: LayoutProps) {
             {user ? (
               <div className={styles.loggedIn}>
                 <Link
-                  href={`/${user.profileName}`}
+                  href={`/${user.profileName.toLowerCase()}`}
                   className={styles.desktopLoggedInLink}
                 >
                   {capitaliseName(user.profileName)}

@@ -38,7 +38,7 @@ export default function LoginForm(props: Props) {
     setSuccess(true);
     router.push(
       getSafeReturnToPath(props.returnTo) ||
-        (`/${data.user.username}` as Route),
+        (`/${data.user.username.toLowerCase()}` as Route),
     );
     router.refresh();
   }

@@ -86,7 +86,7 @@ export default function RegisterForm() {
       }
       setSuccess(true);
       console.log(data.user);
-      router.push(`/${data.user.username}`);
+      router.push(`/${data.user.username.toLowerCase()}`);
       router.refresh();
     }
   };
