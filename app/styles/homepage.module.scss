@@ -46,8 +46,8 @@
     }
 
     @media screen and (min-width: $desktop) {
-      font-size: 3rem;
-      width: 700px;
+      font-size: 3.5rem;
+      width: 1000px;
     }
   }
 
@@ -100,6 +100,14 @@
   gap: 40px;
 
   @media screen and (min-width: $laptop) {
+    padding: 50px;
+
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 2fr 1fr;
+  }
+
+  @media screen and (min-width: $desktop) {
     padding: 50px 80px;
     gap: 10px 70px;
 
@@ -130,7 +138,11 @@
     .aboutTitle {
       font-size: 1.35rem;
 
-      @media screen and (min-width: $tablet) {
+      @media screen and (min-width: $laptop) {
+        font-size: 2rem;
+      }
+
+      @media screen and (min-width: $desktop) {
         font-size: 2.75rem;
       }
     }
@@ -138,7 +150,12 @@
     .aboutDescription {
       font-size: 1rem;
 
-      @media screen and (min-width: $tablet) {
+      @media screen and (min-width: $laptop) {
+        font-size: 1rem;
+        line-height: 1.25;
+      }
+
+      @media screen and (min-width: $desktop) {
         font-size: 1.25rem;
         line-height: 1.25;
       }
@@ -164,8 +181,18 @@
       object-fit: cover;
 
       @media screen and (min-width: $tablet) {
-        height: 100%;
-        width: 100%;
+        height: 200px;
+        width: 200px;
+      }
+
+      @media screen and (min-width: $laptop) {
+        height: 300px;
+        width: 300px;
+      }
+
+      @media screen and (min-width: $desktop) {
+        height: 400px;
+        width: 400px;
       }
     }
   }
@@ -179,6 +206,12 @@
     @media screen and (min-width: $tablet) {
       display: flex;
       flex-direction: row;
+    }
+
+    @media screen and (min-width: $laptop) {
+      display: flex;
+      flex-direction: row;
+      gap: 20px;
     }
 
     .iconsSection {
@@ -226,5 +259,78 @@
     top: 0%;
     left: 50%;
     transform: translate(-50%, -50%);
+  }
+}
+
+// DISCOVER SECTION //////
+.discoverSection {
+  min-height: 50vh;
+  display: flex;
+  padding: 50px 20px;
+
+  @media screen and (min-width: $laptop) {
+    padding: 50px;
+    gap: 50px;
+  }
+
+  @media screen and (min-width: $desktop) {
+    padding: 80px;
+    gap: 70px;
+  }
+
+  .imageSection {
+    flex: 0.5;
+
+    .vendorImage {
+      border-radius: 450px 450px 0px 0px;
+
+      @media screen and (min-width: $laptop) {
+        height: 300px;
+        width: 300px;
+      }
+
+      @media screen and (min-width: $desktop) {
+        height: 400px;
+        width: 400px;
+      }
+    }
+  }
+
+  .infoSection {
+    flex: 1.5;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 20px;
+
+    .discoverTitle {
+      @media screen and (min-width: $laptop) {
+        font-size: 2rem;
+      }
+
+      @media screen and (min-width: $desktop) {
+        font-size: 2.75rem;
+      }
+    }
+
+    .discoverInfo {
+      font-size: 1.25rem;
+      line-height: 1.5;
+    }
+
+    .linkContainer {
+      margin-top: 20px;
+      width: 100%;
+
+      .exploreLink {
+        border: 1px solid var(--main-color);
+        border-radius: 20px;
+        padding: 8px 20px;
+
+        &:hover {
+          background-color: var(--main-color);
+        }
+      }
+    }
   }
 }
