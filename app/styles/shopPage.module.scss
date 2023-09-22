@@ -9,14 +9,14 @@
   }
 
   .shopPage {
-    padding: 100px 20px 0px;
     display: flex;
     flex-direction: column;
     gap: 20px;
     background-color: var(--main-color);
+    padding: 80px 20px;
 
     @media screen and (min-width: $tablet) {
-      padding: 100px 20px 0px;
+      padding: 100px 32px 0px;
       flex-direction: row;
       gap: 30px;
     }
@@ -25,6 +25,10 @@
       padding: 100px 80px 0px;
       flex-direction: row;
       gap: 50px;
+    }
+
+    @media screen and (min-width: $desktopL) {
+      padding: 100px 150px 80px;
     }
 
     .shopInfo {
@@ -284,19 +288,23 @@
   }
 
   .commentsSection {
-    margin-top: 30px;
     display: flex;
     flex-direction: column;
     gap: 20px;
-    padding: 20px;
+    padding: 0px 20px;
 
     @media screen and (min-width: $tablet) {
-      padding: 0px 20px;
+      padding: 0px 32px;
       gap: 20px;
     }
+
     @media screen and (min-width: $laptop) {
       padding: 0px 80px;
       gap: 20px;
+    }
+
+    @media screen and (min-width: $desktopL) {
+      padding: 0px 150px;
     }
 
     h2 {
@@ -311,12 +319,10 @@
     .commentInput {
       display: flex;
       width: 100%;
-      margin-bottom: 50px;
 
       @media screen and (min-width: $tablet) {
         display: flex;
         width: 100%;
-        margin-bottom: 50px;
       }
 
       form {
