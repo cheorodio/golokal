@@ -4,12 +4,24 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 100px 0px;
+  padding: 100px 20px;
   gap: 16px;
   min-height: 100vh;
 
+  @media screen and (min-width: $tablet) {
+    padding: 80px 32px 32px;
+  }
+
+  @media screen and (min-width: $laptop) {
+    padding: 80px 56px 56px;
+  }
+
   @media screen and (min-width: $desktop) {
-    padding: 100px 30px;
+    padding: 100px 80px 80px;
+  }
+
+  @media screen and (min-width: $desktopL) {
+    padding: 100px 150px 80px;
   }
 
   .shopsPageTitle {
@@ -22,24 +34,19 @@
   .shopListContainer {
     display: grid;
     gap: 20px;
-    padding: 0px 20px;
     grid-template-columns: 1fr;
 
     @media screen and (min-width: $tablet) {
       grid-template-columns: repeat(2, 1fr);
       gap: 20px;
-      padding: 0px 20px;
     }
 
     @media screen and (min-width: $laptop) {
       grid-template-columns: repeat(3, 1fr);
       gap: 30px;
-      padding: 0px 50px;
     }
     @media screen and (min-width: $desktop) {
       grid-template-columns: repeat(4, 1fr);
-      // gap: 30px;
-      // padding: 0px 50px;
     }
 
     .shopContainer {
