@@ -22,15 +22,20 @@
   z-index: 9;
 
   @media screen and (min-width: $tablet) {
-    padding: 20px;
+    padding: 20px 32px;
   }
 
   @media screen and (min-width: $laptop) {
-    padding: 20px 50px;
+    padding: 20px 56px;
   }
 
   @media screen and (min-width: $desktop) {
     padding: 20px 80px;
+    align-items: center;
+  }
+
+  @media screen and (min-width: $desktopL) {
+    padding: 20px 150px;
     align-items: center;
   }
 
@@ -73,6 +78,10 @@
         flex-direction: column;
         border: none;
         font-size: 1.5rem;
+      }
+
+      @media screen and (min-width: $desktopL) {
+        font-size: 1.25rem;
       }
 
       .navList {
@@ -191,6 +200,10 @@
     text-transform: uppercase;
     width: 40%;
     font-size: 1.25rem;
+
+    @media screen and (min-width: $desktopL) {
+      font-size: 1.5rem;
+    }
   }
 
   // desktop buttons
@@ -201,6 +214,10 @@
 
     @media screen and (max-width: $tablet) {
       display: none;
+    }
+
+    @media screen and (min-width: $desktopL) {
+      font-size: 1.25rem;
     }
 
     .loggedIn {

@@ -18,22 +18,52 @@ export default function Home() {
           Connecting Communities, Supporting Small Businesses
         </h1>
         {/* <p>Discover local vendors and hundreds of handmade products</p> */}
-        <Link href="/shops" className={styles.heroLink}>
-          explore now
+        <Link href="/shops">
+          <p className={styles.heroLink}>explore now</p>
         </Link>
+        <div className={styles.inBetween} />
       </section>
 
       <section className={styles.aboutSection}>
-        <div className={styles.inBetween} />
         <div className={styles.aboutInfo}>
-          <h2 className={`${styles.aboutTitle} ${domine.className}`}>
-            The ultimate destination for local and handmade products.
-          </h2>
-          <p className={styles.aboutDescription}>
-            At golokal, we are passionate about supporting artisans, craftsmen,
-            and local businesses, and our platform serves as a virtual
-            marketplace to showcase their unique creations.
-          </p>
+          <div className={styles.topLeftContainer}>
+            <h2 className={`${styles.aboutTitle} ${domine.className}`}>
+              The ultimate destination for local and handmade products.
+            </h2>
+            <p className={styles.aboutDescription}>
+              At golokal, we are passionate about supporting artisans,
+              craftsmen, and local businesses, and our platform serves as a
+              virtual marketplace to showcase their unique creations.
+            </p>
+          </div>
+
+          <div className={styles.topBottomContainer}>
+            <div className={styles.iconsSection}>
+              <Image className={styles.icon} src={explore} alt="explore icon" />
+              <p className={styles.iconInfo}>
+                Explore curated collection of local and handmade products.
+              </p>
+            </div>
+            <div className={styles.iconsSection}>
+              <Image
+                className={styles.icon}
+                src={discover}
+                alt="discover icon"
+              />
+
+              <p className={styles.iconInfo}>
+                Discover the stories and talents of local artisans and
+                craftsmen.
+              </p>
+            </div>
+            <div className={styles.iconsSection}>
+              <Image className={styles.icon} src={connect} alt="connect icon" />
+              <p className={styles.iconInfo}>
+                {' '}
+                Connect with a community of like-minded individuals.
+              </p>
+            </div>
+          </div>
         </div>
 
         <div className={styles.imageSection}>
@@ -44,25 +74,6 @@ export default function Home() {
             height={400}
             className={styles.aboutImage}
           />
-        </div>
-
-        <div className={styles.moreInfoSection}>
-          <div className={styles.iconsSection}>
-            <Image className={styles.icon} src={explore} alt="explore icon" />
-            <p>Explore curated collection of local and handmade products.</p>
-          </div>
-          <div className={styles.iconsSection}>
-            <Image className={styles.icon} src={discover} alt="discover icon" />
-
-            <p>
-              {' '}
-              Discover the stories and talents of local artisans and craftsmen.
-            </p>
-          </div>
-          <div className={styles.iconsSection}>
-            <Image className={styles.icon} src={connect} alt="connect icon" />
-            <p> Connect with a community of like-minded individuals.</p>
-          </div>
         </div>
       </section>
 
@@ -86,11 +97,10 @@ export default function Home() {
             part of a movement that promotes community empowerment, fosters
             creativity, and fuels economic growth at a grassroots level.
           </p>
-          <div className={styles.linkContainer}>
-            <Link href="/shops" className={styles.exploreLink}>
-              Explore now
-            </Link>
-          </div>
+
+          <Link href="/shops">
+            <p className={styles.exploreLink}>View all vendors</p>
+          </Link>
         </div>
       </section>
     </main>

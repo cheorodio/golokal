@@ -18,6 +18,10 @@
     margin: 0px 80px;
   }
 
+  @media screen and (min-width: $desktopL) {
+    margin: 0px 150px;
+  }
+
   div {
     display: flex;
     gap: 16px;
